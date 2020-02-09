@@ -11,8 +11,6 @@ firebase serve
 cd functions
 -> README.md in functions directory
 ```
-```
-```
 
 ## client
 ```
