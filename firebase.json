@@ -4,7 +4,7 @@
   },
   "hosting": {
     "site": "relint",
-    "public": "/client/dist",
+    "public": "./client/dist",
     "ignore": [
       "firebase.json",
       "**/.*",

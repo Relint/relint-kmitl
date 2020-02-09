@@ -22,7 +22,7 @@ import axios from "axios";
 import firebase from "firebase";
 const client = axios.create({
   baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
-  //baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net",
+  // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
 });
 export default {
   name: "HelloWorld",
