@@ -2,12 +2,11 @@
 Main Repository
 
 ## server
-```
-## Compiles and hot-reloads for development
-```
+### Compiles and hot-reloads for development
+`
 firebase serve
-```
-## Editing
+`
+### Editing
 ```
 cd functions
 -> README.md in functions directory
@@ -16,7 +15,6 @@ cd functions
 ## client
 ```
 cd client
-
 -> README.md in client directory
 ```
 
