@@ -34,7 +34,10 @@ body {
   -webkit-transition: $transition;
   transition:         $transition;
 }
-
+@keyframes rotate {
+  from { transform: rotate(0deg); }
+  from { transform: rotate(360deg); }
+}
 .from-login  {
   overflow: hidden;
   background-color: white;
@@ -59,10 +62,7 @@ body {
     border-bottom-right-radius: 40%;
     z-index: -1;
   }
-  @keyframes rotate {
-    from { transform: rotate(0deg); }
-    from { transform: rotate(360deg); }
-  }
+ 
   &::before {
     left: 40%;
     bottom: -130%;
@@ -130,6 +130,31 @@ button.btnSubmit:hover {
   left: 50%;
   width: 400px;
   box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 40%;
+    z-index: -1;
+  }
+ 
+  &::before {
+    left: 40%;
+    bottom: -130%;
+    background-color: rgba($blueQueen, 0.15);
+    animation: rotate 7000ms infinite linear;
+  }
+  
+  &::after {
+    left: 35%;
+    bottom: -125%;
+    background-color: rgba(white, 0.2);
+    animation: rotate 9000ms infinite linear;
+  }
   
 }
 //Accept
@@ -146,6 +171,31 @@ button.btnSubmit:hover {
     left: 50%;
     width: 400px;
     box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-top-left-radius: 40%;
+      border-top-right-radius: 45%;
+      border-bottom-left-radius: 35%;
+      border-bottom-right-radius: 40%;
+      z-index: -1;
+    }
+   
+    &::before {
+      left: 40%;
+      bottom: -130%;
+      background-color: rgba($blueQueen, 0.15);
+      animation: rotate 7000ms infinite linear;
+    }
+    
+    &::after {
+      left: 35%;
+      bottom: -125%;
+      background-color: rgba($greenSeaweed, 0.2);
+      animation: rotate 9000ms infinite linear;
+    }
     
   }
 .form-popupAC {
@@ -196,6 +246,31 @@ button.btnSubmit:hover {
     box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
     @include transform(translate(-50%, -50%));
     @include transition(transform 300ms, box-shadow 300ms);
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-top-left-radius: 40%;
+      border-top-right-radius: 45%;
+      border-bottom-left-radius: 35%;
+      border-bottom-right-radius: 40%;
+      z-index: -1;
+    }
+   
+    &::before {
+      left: 40%;
+      bottom: -130%;
+      background-color: rgba($blueQueen, 0.15);
+      animation: rotate 7000ms infinite linear;
+    }
+    
+    &::after {
+      left: 35%;
+      bottom: -125%;
+      background-color: rgba($greenSeaweed, 0.2);
+      animation: rotate 3000ms infinite linear;
+    }
   }
 .form-popupRE  {
     -webkit-animation: flip-2-hor-bottom-2 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) alternate-reverse both;
