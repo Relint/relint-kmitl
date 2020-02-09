@@ -3,7 +3,6 @@ Main Repository
 
 ## server
 ```
-```
 ### Compiles and hot-reloads for development
 ```
 firebase serve
