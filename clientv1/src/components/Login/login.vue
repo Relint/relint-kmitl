@@ -1,22 +1,25 @@
 <template>
-
 <!-- login -->
   <div class="mainGroup" id="login" >
-    <form @submit="loginWithEmail">
-      <div class="title">
-        <input class="input" v-model="username" type="text"   placeholder="UserName"  name="uname" required>
-      </div>
+    <div class="from-login">
+      <form @submit="loginWithEmail">
+        <div class="title">
+          <input class="input" v-model="username" type="text"   placeholder="UserName"  name="uname" required>
+        </div>
 
-      <div class="title">
-        <input class="input" v-model="email" type="text"   placeholder="Email"  name="umail" required>
-      </div>
+        <div class="title">
+          <input class="input" v-model="email" type="text"   placeholder="Email"  name="umail" required>
+        </div>
 
-      <div class="title">
-        <input class="input" v-model="password" type="password"  placeholder="Password" name="psw" required>
+        <div class="title">
+          <input class="input" v-model="password" type="password"  placeholder="Password" name="psw" required>
+        </div>
+        <button class="btnSubmit" type="submit" value="submit" v-on:click="addBoard">Login</button>
+        <button class="btnSubmit" type="submit" value="submit" v-on:click="openFormRE" >Register</button>
+        <span class="psw"  v-on:click="openFormFOR" style="padding-left:2em" > Forgot <a href="#">password?</a></span>
+        </form>
       </div>
-      <button class="btnSubmit" type="submit" value="submit" v-on:click="addBoard">Login</button>
-<!-- register -->
-      <button class="btnSubmit" type="submit" value="submit" v-on:click="openFormRE" >Register</button>
+    <!-- register -->
       <div class="form-popupRE" id="regis-from">
           <form  class="form-container">
             <h1>Register</h1>
@@ -35,8 +38,7 @@
             <button class="btnSubmit"  type="button" v-on:click="closeFormRE">Cancle</button>       
           </form>
       </div>
-<!-- forget password -->
-      <span class="psw"  v-on:click="openFormFOR" style="padding-left:2em" > Forgot <a href="#">password?</a></span>
+    <!-- forget password -->
       <div class="form-popup" id="forget-from">
         <form  class="form-container">
           <h1>Send Email</h1>
@@ -57,7 +59,7 @@
           <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancle</button>       
         </form>
       </div>
-    </form>
+    
   </div>
 </template>
 <script>

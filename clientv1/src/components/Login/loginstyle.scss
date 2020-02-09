@@ -7,17 +7,47 @@ body {
   background-color: $redFire;
   font-family: $fontAsap;
 }
-.mainGroup {
+// translate
+@mixin translate ($x, $y) {
+  @include transform(translate($x, $y));
+}
+
+//transform origin
+@mixin transform-origin ($origin) {
+  moz-transform-origin: $origin;
+     -o-transform-origin: $origin;
+    -ms-transform-origin: $origin;
+-webkit-transform-origin: $origin;
+        transform-origin: $origin;
+}
+// generic transform
+@mixin transform($transforms) {
+  -moz-transform: $transforms;
+    -o-transform: $transforms;
+   -ms-transform: $transforms;
+-webkit-transform: $transforms;
+       transform: $transforms;
+}
+@mixin transition($transition...) {
+  -moz-transition:    $transition;
+  -o-transition:      $transition;
+  -webkit-transition: $transition;
+  transition:         $transition;
+}
+
+.from-login  {
   overflow: hidden;
   background-color: white;
   padding: 40px 30px 30px 30px;
   border-radius: 10px;
-  position: absolute;
+  position: fixed;
   top: 50%;
   left: 50%;
   width: 400px;
   box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
   
+  @include transform(translate(-50%, -50%));
+  @include transition(transform 300ms, box-shadow 300ms);
   &::before, &::after {
     content: '';
     position: absolute;
@@ -29,49 +59,53 @@ body {
     border-bottom-right-radius: 40%;
     z-index: -1;
   }
-  
+  @keyframes rotate {
+    from { transform: rotate(0deg); }
+    from { transform: rotate(360deg); }
+  }
   &::before {
     left: 40%;
     bottom: -130%;
     background-color: rgba($blueQueen, 0.15);
+    animation: rotate 7000ms infinite linear;
   }
   
   &::after {
     left: 35%;
     bottom: -125%;
     background-color: rgba($greenSeaweed, 0.2);
-  }
-input {
-    font-family: $fontAsap;
-    display: block;
-    border-radius: 5px;
-    font-size: 16px;
-    background: white;
-    width: 100%;
-    border: 0;
-    padding: 10px 10px;
-    margin: 15px -10px;
-  }
-button.btnSubmit {
-    font-family: $fontAsap;
-    cursor: pointer;
-    color: #fff;
-    font-size: 16px;
-    text-transform: uppercase;
-    width: 100px;
-    border: 0;
-    padding: 10px 0;
-    margin-top: 10px;
-    margin-left: 10px;
-    border-radius: 5px;
-    background-color: $redFire;
-    
-    &:hover {
-      background-color: darken($redFire, 5%);
-    }
+    animation: rotate 3000ms infinite linear;
   }
 }
-
+input {
+  font-family: $fontAsap;
+  display: block;
+  border-radius: 5px;
+  font-size: 16px;
+  background: white;
+  width: 100%;
+  border: 0;
+  padding: 10px 10px;
+  margin: 15px -10px;
+}
+button.btnSubmit {
+  font-family: $fontAsap;
+  cursor: pointer;
+  color: #fff;
+  font-size: 16px;
+  text-transform: uppercase;
+  width: 100px;
+  border: 0;
+  padding: 10px 0;
+  margin-top: 10px;
+  margin-left: 10px;
+  border-radius: 5px;
+  background-color: $redFire;
+  
+  &:hover {
+    background-color: darken($redFire, 5%);
+  }
+}
 button.btnSubmit:hover {
   animation-name: random-color;
   animation-duration: 5s;
@@ -85,32 +119,35 @@ button.btnSubmit:hover {
 }
 //forget
 .form-popup {
+  position: fixed;
   width: 30%;
   display: none;
   overflow: hidden;
   background-color:pink;
   padding: 40px 30px 30px 30px;
   border-radius: 10px;
-  position: fixed;
   top: 50%;
   left: 50%;
   width: 400px;
   box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+  
 }
 //Accept
 .form-popupAC {
+  
+    position: fixed;
     width: 30%;
     display: none;
     overflow: hidden;
     background-color:  #a6d4d8;
     padding: 40px 30px 30px 30px;
     border-radius: 10px;
-    position: fixed;
     top: 50%;
     left: 50%;
     width: 400px;
     box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
-}
+    
+  }
 .form-popupAC {
     -webkit-animation: flip-scale-up-hor 0.5s linear alternate-reverse both;
 	        animation: flip-scale-up-hor 0.5s linear alternate-reverse both;
@@ -157,18 +194,9 @@ button.btnSubmit:hover {
     left: 50%;
     width: 400px;
     box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
-}
-/*.form-popupRE  {
-    animation-name: example;
-    animation-duration: 2s; 
-  }*/
- 
- /* @keyframes example {
-    0%   {background-color: #a6d4d8; left:0px;}
-    50%  {background-color: yellow; left:800px;}
-    80% {background-color: red; left:500px;}
-  }*/
-
+    @include transform(translate(-50%, -50%));
+    @include transition(transform 300ms, box-shadow 300ms);
+  }
 .form-popupRE  {
     -webkit-animation: flip-2-hor-bottom-2 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) alternate-reverse both;
 	        animation: flip-2-hor-bottom-2 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) alternate-reverse both;
