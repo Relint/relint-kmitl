@@ -7,13 +7,13 @@ Main Repository
 ```
 firebase serve
 ```
-## Editing
+### Editing
 ```
 cd functions
 -> README.md in functions directory
 ```
 
-## client
+### client
 ```
 cd client
 
