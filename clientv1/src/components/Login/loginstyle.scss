@@ -1,0 +1,206 @@
+@import "bourbon";
+$greenSeaweed: rgba(2, 128, 144, 1);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgba(244, 91, 105, 1);
+$fontAsap: 'Asap', sans-serif;
+body {
+  background-color: $redFire;
+  font-family: $fontAsap;
+}
+.mainGroup {
+  overflow: hidden;
+  background-color: white;
+  padding: 40px 30px 30px 30px;
+  border-radius: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+  
+  &::before, &::after {
+    content: '';
+    position: absolute;
+    width: 600px;
+    height: 600px;
+    border-top-left-radius: 40%;
+    border-top-right-radius: 45%;
+    border-bottom-left-radius: 35%;
+    border-bottom-right-radius: 40%;
+    z-index: -1;
+  }
+  
+  &::before {
+    left: 40%;
+    bottom: -130%;
+    background-color: rgba($blueQueen, 0.15);
+  }
+  
+  &::after {
+    left: 35%;
+    bottom: -125%;
+    background-color: rgba($greenSeaweed, 0.2);
+  }
+input {
+    font-family: $fontAsap;
+    display: block;
+    border-radius: 5px;
+    font-size: 16px;
+    background: white;
+    width: 100%;
+    border: 0;
+    padding: 10px 10px;
+    margin: 15px -10px;
+  }
+button.btnSubmit {
+    font-family: $fontAsap;
+    cursor: pointer;
+    color: #fff;
+    font-size: 16px;
+    text-transform: uppercase;
+    width: 100px;
+    border: 0;
+    padding: 10px 0;
+    margin-top: 10px;
+    margin-left: 10px;
+    border-radius: 5px;
+    background-color: $redFire;
+    
+    &:hover {
+      background-color: darken($redFire, 5%);
+    }
+  }
+}
+
+button.btnSubmit:hover {
+  animation-name: random-color;
+  animation-duration: 5s;
+}
+@keyframes random-color {
+  0%   {background-color:red; left:0px; top:0px;}
+  25%  {background-color:yellow; left:200px; top:0px;}
+  50%  {background-color:blue; left:200px; top:200px;}
+  75%  {background-color:green; left:0px; top:200px;}
+  100% {background-color:red; left:0px; top:0px;}
+}
+//forget
+.form-popup {
+  width: 30%;
+  display: none;
+  overflow: hidden;
+  background-color:pink;
+  padding: 40px 30px 30px 30px;
+  border-radius: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  width: 400px;
+  box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+}
+//Accept
+.form-popupAC {
+    width: 30%;
+    display: none;
+    overflow: hidden;
+    background-color:  #a6d4d8;
+    padding: 40px 30px 30px 30px;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+}
+.form-popupAC {
+    -webkit-animation: flip-scale-up-hor 0.5s linear alternate-reverse both;
+	        animation: flip-scale-up-hor 0.5s linear alternate-reverse both;
+}
+@-webkit-keyframes flip-scale-up-hor {
+    0% {
+      -webkit-transform: scale(1) rotateX(0);
+              transform: scale(1) rotateX(0);
+    }
+    50% {
+      -webkit-transform: scale(2.5) rotateX(-90deg);
+              transform: scale(2.5) rotateX(-90deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateX(-180deg);
+              transform: scale(1) rotateX(-180deg);
+    }
+  }
+  @keyframes flip-scale-up-hor {
+    0% {
+      -webkit-transform: scale(1) rotateX(0);
+              transform: scale(1) rotateX(0);
+    }
+    50% {
+      -webkit-transform: scale(2.5) rotateX(-90deg);
+              transform: scale(2.5) rotateX(-90deg);
+    }
+    100% {
+      -webkit-transform: scale(1) rotateX(-180deg);
+              transform: scale(1) rotateX(-180deg);
+    }
+  }
+  
+//Register
+.form-popupRE {
+    width: 30%;
+    display: none;
+    overflow: hidden;
+    background-color:#f7af;
+    padding: 40px 30px 30px 30px;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+}
+/*.form-popupRE  {
+    animation-name: example;
+    animation-duration: 2s; 
+  }*/
+ 
+ /* @keyframes example {
+    0%   {background-color: #a6d4d8; left:0px;}
+    50%  {background-color: yellow; left:800px;}
+    80% {background-color: red; left:500px;}
+  }*/
+
+.form-popupRE  {
+    -webkit-animation: flip-2-hor-bottom-2 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) alternate-reverse both;
+	        animation: flip-2-hor-bottom-2 0.5s cubic-bezier(0.455, 0.030, 0.515, 0.955) alternate-reverse both;
+
+}
+
+@-webkit-keyframes flip-2-hor-bottom-2 {
+    0% {
+      -webkit-transform: translateY(0) rotateX(0);
+              transform: translateY(0) rotateX(0);
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%;
+    }
+    100% {
+      -webkit-transform: translateY(100%) rotateX(-180deg);
+              transform: translateY(100%) rotateX(-180deg);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+    }
+  }
+  @keyframes flip-2-hor-bottom-2 {
+    0% {
+      -webkit-transform: translateY(0) rotateX(0);
+              transform: translateY(0) rotateX(0);
+      -webkit-transform-origin: 50% 100%;
+              transform-origin: 50% 100%;
+    }
+    100% {
+      -webkit-transform: translateY(100%) rotateX(-180deg);
+              transform: translateY(100%) rotateX(-180deg);
+      -webkit-transform-origin: 50% 0%;
+              transform-origin: 50% 0%;
+    }
+  }
+  
