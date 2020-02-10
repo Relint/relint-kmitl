@@ -1,6 +1,20 @@
 <template>
 <!-- login -->
   <div class="mainGroup" id="login" >
+    <div class="area" >
+            <ul class="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+    </div >
     <div class="from-login">
       <form @submit="loginWithEmail">
         <div class="title">
