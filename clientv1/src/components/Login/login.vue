@@ -19,10 +19,6 @@
     <div class="from-login">
       <form @submit="loginWithEmail">
         <div class="title">
-          <input class="input" v-model="username" type="text"   placeholder="UserName"  name="uname" required>
-        </div>
-
-        <div class="title">
           <input class="input" v-model="email" type="text"   placeholder="Email"  name="umail" required>
         </div>
 
@@ -70,7 +66,7 @@
               <h1> Success !</h1>
               <p id="count">If you don't get a new password. You can press "AGAIN" </p>
               <button class="btnSubmit" type="button" v-on:click="closeFormAC" >OK</button> 
-              <button class="btnSubmit" id="b1" type="button" v-on:click="countdown" required>AGAIN </button>
+              <button class="btnSubmit" id="b1" type="button" v-on:click="countDownTimer" required >AGAIN   </button>
               <span id="timer"><span id="time">&nbsp; 10 &nbsp;Seconds </span></span>
               
           </form>
@@ -78,6 +74,7 @@
   </div>
 </template>
 <script>
+
 export default {
   name: 'LoginPage',
   data: function () {
@@ -90,7 +87,8 @@ export default {
       passwordRE: '',
       usernameRE: '',
       count:10,
-      dd:0
+      dd:0,
+      countDown : 10
     }
   },
   methods: {
@@ -102,34 +100,55 @@ export default {
     openFormFOR : function () {
       document.getElementById("forget-from").style.display = "block";
     },
-    countdown :function () {
+   /* countdown :function () {
+      this.dd=this.dd+1
+       document.getElementById("time").innerHTML = " "+"10"+" "+"Secounds"
+       if (this.dd>1)
       setInterval(() => {
         this.count=this.count-1
-        
-        document.getElementById("time").innerHTML = " "+this.count+" "+"Secounds"
+        document.getElementById("time").innerHTML = " "+this.count+" "+"Seconds"
         document.getElementById("b1").disabled = true;
         document.getElementById("b1").style.background="Gray"
         document.getElementById("b1").style.animationDelay
       },1000);
-      
+      this.count=10
       setTimeout(() => {
         document.getElementById("timer").innerHTML = "  'AGAIN' "
+
         document.getElementById("b1").disabled = false;
         document.getElementById("b1").style.background="#ef4f6c"
       }, 10000);
-      
-    },
+       
+    },*/
 
+    countDownTimer :function  () {
+                if(this.countDown > 0) {
+                  document.getElementById("time").innerHTML = " "+this.countDown+" "+"Seconds"
+                    setTimeout(() => {
+                        this.countDown -= 1
+                        document.getElementById("time").innerHTML = " "+this.countDown+" "+"Seconds"
+                        document.getElementById("b1").disabled = true;
+                        document.getElementById("b1").style.background="Gray"
+                        this.countDownTimer()
+                    }, 1000)
+                  
+                }
+                if (this.countDown==0) {
+                  this.countDown=10
+                  document.getElementById("time").innerHTML = " "+10+" "+"Seconds"
+                  document.getElementById("b1").style.background="#ef4f6c"
+                  document.getElementById("b1").disabled = false;
+                }
+                
+            },
+            
     //acceptSEnd
     acceptSend : function () { 
-    document.getElementById("accept-from").style.display = "block";
+      document.getElementById("accept-from").style.display = "block";
     },
     closeFormAC : function () {
       document.getElementById("accept-from").style.display = "none";
     },
-
-    
- 
     //register
     closeFormRE  : function () {
       document.getElementById("regis-from").style.display = "none";
@@ -141,10 +160,13 @@ export default {
     addBoard : function () {
         this.$router.replace('AddBoard')
     }
+  },
+  created(){
+    this.countDownTimer()
   }
 }
-
 </script>
+
 <style lang="scss">
 @import '@/components/Login/loginstyle.scss';
 </style>
