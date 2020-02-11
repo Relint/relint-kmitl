@@ -60,21 +60,21 @@
           <div class="title">
             <input class="input" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required>
           </div>
-          <!-- accept-->
             <button class="btnSubmit" type="submit" value="submit" v-on:click="acceptSend" >Send</button>
-            <div class="form-popupAC" id="accept-from">
-              <form  class="form-container">
-                  <h1> Success !</h1>
-                  <p id="count">If you don't get a new password. You can press "AGAIN" </p>
-                  <button class="btnSubmit" type="button" v-on:click="closeFormAC" >OK</button> 
-                  <button class="btnSubmit" type="button" v-on:click="countdown" required>AGAIN </button>
-                  <span id="timer"><span id="time">  10  </span>Seconds</span>
-              </form>
-            </div>
-          <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancle</button>       
+            <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancle</button>       
         </form>
       </div>
-    
+    <!-- accept-->
+      <div class="form-popupAC" id="accept-from">
+          <form  class="form-container">
+              <h1> Success !</h1>
+              <p id="count">If you don't get a new password. You can press "AGAIN" </p>
+              <button class="btnSubmit" type="button" v-on:click="closeFormAC" >OK</button> 
+              <button class="btnSubmit" id="b1" type="button" v-on:click="countdown" required>AGAIN </button>
+              <span id="timer"><span id="time">&nbsp; 10 &nbsp;Seconds </span></span>
+              
+          </form>
+      </div>
   </div>
 </template>
 <script>
@@ -89,7 +89,8 @@ export default {
       emailRE: '',
       passwordRE: '',
       usernameRE: '',
-      timerCount: 10
+      count:10,
+      dd:0
     }
   },
   methods: {
@@ -102,10 +103,32 @@ export default {
       document.getElementById("forget-from").style.display = "block";
     },
     countdown :function () {
-       this. timerCount--
-       document.getElementById("time").setState = this. timerCount
-       
-  },
+      setInterval(() => {
+        this.count=this.count-1
+        
+        document.getElementById("time").innerHTML = " "+this.count+" "+"Secounds"
+        document.getElementById("b1").disabled = true;
+        document.getElementById("b1").style.background="Gray"
+        document.getElementById("b1").style.animationDelay
+      },1000);
+      
+      setTimeout(() => {
+        document.getElementById("timer").innerHTML = "  'AGAIN' "
+        document.getElementById("b1").disabled = false;
+        document.getElementById("b1").style.background="#ef4f6c"
+      }, 10000);
+      
+    },
+
+    //acceptSEnd
+    acceptSend : function () { 
+    document.getElementById("accept-from").style.display = "block";
+    },
+    closeFormAC : function () {
+      document.getElementById("accept-from").style.display = "none";
+    },
+
+    
  
     //register
     closeFormRE  : function () {
@@ -114,20 +137,13 @@ export default {
     openFormRE : function () {
       document.getElementById("regis-from").style.display = "block";
     },
-    //acceptSEnd
-    acceptSend : function () { 
-    document.getElementById("accept-from").style.display = "block";
-     
-    },
-    closeFormAC : function () {
-      document.getElementById("accept-from").style.display = "none";
-    },
     //anth
     addBoard : function () {
         this.$router.replace('AddBoard')
     }
   }
 }
+
 </script>
 <style lang="scss">
 @import '@/components/Login/loginstyle.scss';
