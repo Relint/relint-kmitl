@@ -15,7 +15,7 @@
                     <li></li>
             </ul>
     </div >
-    <img class="logo" src="@/assets/logorelint.png" alt="Mountain" style="width:300px">
+    <img class="logo" src="@/assets/logorelintv3.png" alt="Mountain" style="width:300px">
     <div class="from-login">
       <form @submit="loginWithEmail">
         <div class="title">
@@ -93,35 +93,14 @@ export default {
   },
   methods: {
     //forget
-    closeFormFOR  : function () {
+    closeFormFOR() {
       document.getElementById("forget-from").style.display = "none";
       
     },
-    openFormFOR : function () {
+    openFormFOR() {
       document.getElementById("forget-from").style.display = "block";
     },
-   /* countdown :function () {
-      this.dd=this.dd+1
-       document.getElementById("time").innerHTML = " "+"10"+" "+"Secounds"
-       if (this.dd>1)
-      setInterval(() => {
-        this.count=this.count-1
-        document.getElementById("time").innerHTML = " "+this.count+" "+"Seconds"
-        document.getElementById("b1").disabled = true;
-        document.getElementById("b1").style.background="Gray"
-        document.getElementById("b1").style.animationDelay
-      },1000);
-      this.count=10
-      setTimeout(() => {
-        document.getElementById("timer").innerHTML = "  'AGAIN' "
-
-        document.getElementById("b1").disabled = false;
-        document.getElementById("b1").style.background="#ef4f6c"
-      }, 10000);
-       
-    },*/
-
-    countDownTimer :function  () {
+    countDownTimer() {
                 if(this.countDown > 0) {
                   document.getElementById("time").innerHTML = " "+this.countDown+" "+"Seconds"
                     setTimeout(() => {
@@ -131,7 +110,6 @@ export default {
                         document.getElementById("b1").style.background="Gray"
                         this.countDownTimer()
                     }, 1000)
-                  
                 }
                 if (this.countDown==0) {
                   this.countDown=10
@@ -140,24 +118,23 @@ export default {
                   document.getElementById("b1").disabled = false;
                 }
                 
-            },
-            
+    },     
     //acceptSEnd
-    acceptSend : function () { 
+    acceptSend() { 
       document.getElementById("accept-from").style.display = "block";
     },
-    closeFormAC : function () {
+    closeFormAC () {
       document.getElementById("accept-from").style.display = "none";
     },
     //register
-    closeFormRE  : function () {
+    closeFormRE() {
       document.getElementById("regis-from").style.display = "none";
     },
-    openFormRE : function () {
+    openFormRE() {
       document.getElementById("regis-from").style.display = "block";
     },
     //anth
-    addBoard : function () {
+    addBoard() {
         this.$router.replace('AddBoard')
     }
   },
