@@ -15,6 +15,7 @@
                     <li></li>
             </ul>
     </div >
+    <img class="logo" src="@/assets/logorelint.png" alt="Mountain" style="width:300px">
     <div class="from-login">
       <form @submit="loginWithEmail">
         <div class="title">
