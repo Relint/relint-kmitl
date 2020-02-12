@@ -14,7 +14,6 @@ import '@/assets/bglogin.png'
 Vue.config.productionTip = false
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
-firebase.analytics();
 
 new Vue({
   router,

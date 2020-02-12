@@ -25,7 +25,7 @@
         <div class="title">
           <input class="input" v-model="password" type="password"  placeholder="Password" name="psw" required>
         </div>
-        <button class="btnSubmit" type="submit" value="submit" v-on:click="addBoard">Login</button>
+        <button class="btnSubmit" type="submit" value="submit" v-on:click="login">Login</button>
         <button class="btnSubmit" type="submit" value="submit" v-on:click="openFormRE" >Register</button>
         <span class="psw"  v-on:click="openFormFOR" style="padding-left:2em" > Forgot <a href="#">password?</a></span>
         </form>
@@ -76,13 +76,20 @@
 <script>
 import firebase from "firebase"
 import axios from "axios";
-// eslint-disable-next-line
+/* eslint-disable */
 const client = axios.create({
   baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
   // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
 });
 export default {
   name: 'LoginPage',
+  beforeCreate () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$router.replace('AddBoard')
+      }
+    })
+  },
   data: function () {
     return {
       email: '',
@@ -140,17 +147,18 @@ export default {
       document.getElementById("regis-from").style.display = "block";
     },
     //anth
-    addBoard(e) {
+    login(e) {
+      console.log('email: ' + this.email+' password: '+this.password)
       firebase.auth()
-        .signInWithEmailAndPassword(this.email,this.password)
-        .then(() => { 
-          alert('Logged in')
+        .signInWithEmailAndPassword(this.email, this.password)
+        .then(user => { 
           this.$router.replace('AddBoard')
+          this.$router.go()
         })
         .catch(err => {
           alert(err)
         })
-      e.preventDefault()
+    e.preventDefault()
     }
   },
   created(){
