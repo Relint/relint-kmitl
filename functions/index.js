@@ -15,7 +15,7 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const serviceAccount = require("./_config_/fbServiceAccountKey.json");
+const serviceAccount = require("./_config_fn/fbServiceAccountKey.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
