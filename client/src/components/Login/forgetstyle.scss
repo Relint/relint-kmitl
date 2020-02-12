@@ -1,0 +1,50 @@
+//forget
+@import '@/components/Login/mixin.scss';
+$greenSeaweed: rgba(2, 128, 144, 1);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgba(244, 91, 105, 1);
+$fontAsap: 'Asap', sans-serif;
+.form-popup {
+    position: fixed;
+    width: 30%;
+    display: none;
+    overflow: hidden;
+    background-color:pink;
+    padding: 40px 30px 30px 30px;
+    border-radius: 10px;
+    top: 50%;
+    left: 50%;
+    width: 400px;
+    box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+    &::before, &::after {
+      content: '';
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-top-left-radius: 40%;
+      border-top-right-radius: 45%;
+      border-bottom-left-radius: 35%;
+      border-bottom-right-radius: 40%;
+      z-index: -1;
+    }
+   
+    &::before {
+      left: 40%;
+      bottom: -130%;
+      background-color: rgba($blueQueen, 0.15);
+      animation: rotate 7000ms infinite linear;
+    }
+    
+    &::after {
+      left: 35%;
+      bottom: -125%;
+      background-color: rgba(white, 0.2);
+      animation: rotate 9000ms infinite linear;
+    }
+    
+  }
+  .form-popup{
+    max-width: 100%;
+    height: auto !important;
+    margin: -130px -230px auto;
+}
