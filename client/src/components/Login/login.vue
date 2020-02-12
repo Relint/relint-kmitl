@@ -74,7 +74,13 @@
   </div>
 </template>
 <script>
-
+import firebase from "firebase"
+import axios from "axios";
+// eslint-disable-next-line
+const client = axios.create({
+  baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
+  // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
+});
 export default {
   name: 'LoginPage',
   data: function () {
@@ -134,8 +140,17 @@ export default {
       document.getElementById("regis-from").style.display = "block";
     },
     //anth
-    addBoard() {
-        this.$router.replace('AddBoard')
+    addBoard(e) {
+      firebase.auth()
+        .signInWithEmailAndPassword(this.email,this.password)
+        .then(() => { 
+          alert('Logged in')
+          this.$router.replace('AddBoard')
+        })
+        .catch(err => {
+          alert(err)
+        })
+      e.preventDefault()
     }
   },
   created(){
