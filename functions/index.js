@@ -15,7 +15,19 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); 
 app.use(express.static(path.join(__dirname, 'public')));
 
-admin.initializeApp(functions.config().firebase);
+const serviceAccount = require("./config/fbServiceAccountKey.json");
+
+admin.initializeApp({
+    credential: admin.credential.cert(serviceAccount),
+    databaseURL: "https://relint-kmitl.firebaseio.com"
+});
+const actionCodeSettings = {
+    // URL you want to redirect back to. The domain (www.example.com) for
+    // this URL must be whitelisted in the Firebase Console.
+    // url: 'relint.web.app',
+    // This must be true for email link sign-in.
+    handleCodeInApp: true,
+};
 
 function checkAuth(req, res, next) {
     if (req.headers.authtoken) {
@@ -36,6 +48,25 @@ function checkAuth(req, res, next) {
 app.get('/auth', (req, res) => {
     res.json({
         message: 'Hello World!'
+    })
+})
+
+app.get('/reg', (req, res) => {
+    let email = req.headers.email
+    let password = req.headers.password
+    let displayName = req.headers.username
+    admin.auth().createUser({
+        email: email,
+        emailVerified: false,
+        password: password,
+        displayName: displayName,
+        disabled: false
+    }).then(userRecord => {
+        console.log('Succesfully created new user: ', userRecord);
+        res.send(userRecord)
+    }).catch(error => {
+        console.log('Error creating new user: ', error);
+        res.status(500).send(error)
     })
 })
 

@@ -19,7 +19,7 @@
     <div class="from-login">
       <form @submit="loginWithEmail">
         <div class="title">
-          <input class="input" v-model="email" type="text"   placeholder="Email"  name="umail" required>
+          <input class="input" v-model="email" type="email"   placeholder="Email"  name="umail" required>
         </div>
 
         <div class="title">
@@ -38,12 +38,12 @@
               <input class="input" v-model="usernameRE" type="text"   placeholder="Username"  name="uname" required>
             </div>
             <div class="title">
-              <input class="input" v-model="emailRE" type="text"   placeholder="Email"  name="mail" required>
+              <input class="input" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
             </div>
             <div class="title">
-              <input class="input" v-model="passwordRE" type="text"   placeholder="Password"  name="pass" required>
+              <input class="input" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
             </div>
-              <button class="btnSubmit" type="submit" value="submit" v-on:click="addBoard" >Login</button>
+              <button class="btnSubmit" type="submit" value="submit" v-on:click="register" >Register</button>
               <!-- start-->
               
             <button class="btnSubmit"  type="button" v-on:click="closeFormRE">Cancle</button>       
@@ -54,22 +54,11 @@
         <form  class="form-container">
           <h1>Send Email</h1>
           <div class="title">
-            <input class="input" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required>
+            <input class="input" v-model="emailpWS" type="email"   placeholder="Email"  name="umail" required>
           </div>
             <button class="btnSubmit" type="submit" value="submit" v-on:click="acceptSend" >Send</button>
             <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancle</button>       
         </form>
-      </div>
-    <!-- accept-->
-      <div class="form-popupAC" id="accept-from">
-          <form  class="form-container">
-              <h1> Success !</h1>
-              <p id="count">If you don't get a new password. You can press "AGAIN" </p>
-              <button class="btnSubmit" type="button" v-on:click="closeFormAC" >OK</button> 
-              <button class="btnSubmit" id="b1" type="button" v-on:click="countDownTimer" required >AGAIN   </button>
-              <span id="timer"><span id="time">&nbsp; 10 &nbsp;Seconds </span></span>
-              
-          </form>
       </div>
   </div>
 </template>
@@ -112,32 +101,17 @@ export default {
     },
     openFormFOR() {
       document.getElementById("forget-from").style.display = "block";
-    },
-    countDownTimer() {
-                if(this.countDown > 0) {
-                  document.getElementById("time").innerHTML = " "+this.countDown+" "+"Seconds"
-                    setTimeout(() => {
-                        this.countDown -= 1
-                        document.getElementById("time").innerHTML = " "+this.countDown+" "+"Seconds"
-                        document.getElementById("b1").disabled = true;
-                        document.getElementById("b1").style.background="Gray"
-                        this.countDownTimer()
-                    }, 1000)
-                }
-                if (this.countDown==0) {
-                  this.countDown=10
-                  document.getElementById("time").innerHTML = " "+10+" "+"Seconds"
-                  document.getElementById("b1").style.background="#ef4f6c"
-                  document.getElementById("b1").disabled = false;
-                }
-                
-    },     
+    }, 
     //acceptSEnd
-    acceptSend() { 
-      document.getElementById("accept-from").style.display = "block";
-    },
-    closeFormAC () {
-      document.getElementById("accept-from").style.display = "none";
+    acceptSend(e) { 
+      firebase.auth()
+        .sendPasswordResetEmail(this.emailpWS).then(() => {
+          alert('Password reset email sent')
+        }).catch(error => {
+          console.log(error)
+          alert(error)
+        })
+      e.preventDefault()
     },
     //register
     closeFormRE() {
@@ -148,7 +122,6 @@ export default {
     },
     //anth
     login(e) {
-      console.log('email: ' + this.email+' password: '+this.password)
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(user => { 
@@ -158,7 +131,28 @@ export default {
         .catch(err => {
           alert(err)
         })
-    e.preventDefault()
+      e.preventDefault()
+    },
+    register(e) {
+      client({
+        method: "get",
+        url: "/reg",
+        headers: {
+          email: this.emailRE,
+          password: this.passwordRE,
+          username: this.usernameRE,
+        }
+      }).then(res => {
+        console.log(res.data)
+        alert('Registration Completed')
+        this.email = this.emailRE
+        this.password = this.passwordRE
+        this.login(e)
+      }).catch(error => {
+        console.log(error.response.data)
+        alert(error.response.data.code)
+      })
+      e.preventDefault()
     }
   },
   created(){
