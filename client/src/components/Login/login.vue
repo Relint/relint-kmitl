@@ -63,6 +63,7 @@
   </div>
 </template>
 <script>
+/* eslint-disable */
 import firebase from "firebase"
 
 export default {
@@ -148,9 +149,6 @@ export default {
       e.preventDefault()
     }
   },
-  created(){
-    this.countDownTimer()
-  }
 }
 </script>
 
