@@ -1,6 +1,11 @@
 # relint.web.app
 Main Repository
 
+## Must be done
+```
+install "_config_.exe"
+```
+
 ## server
 ### Compiles and hot-reloads for development
 `

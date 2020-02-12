@@ -7,11 +7,7 @@
 <script>
 /* eslint-disable */
 import firebase from "firebase"
-import axios from "axios"
-const client = axios.create({
-  baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
-  // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
-});
+
 export default {
   name: 'AddBoard',
   beforeCreate () {
@@ -23,7 +19,7 @@ export default {
             .auth()
             .currentUser.getIdToken(true)
             .then(idToken => {
-              client({
+              this.$http({
                 method: "get",
                 url: "/auth",
                 headers: {

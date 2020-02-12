@@ -15,19 +15,12 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser()); 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const serviceAccount = require("./config/fbServiceAccountKey.json");
+const serviceAccount = require("./_config_/fbServiceAccountKey.json");
 
 admin.initializeApp({
     credential: admin.credential.cert(serviceAccount),
     databaseURL: "https://relint-kmitl.firebaseio.com"
 });
-const actionCodeSettings = {
-    // URL you want to redirect back to. The domain (www.example.com) for
-    // this URL must be whitelisted in the Firebase Console.
-    // url: 'relint.web.app',
-    // This must be true for email link sign-in.
-    handleCodeInApp: true,
-};
 
 function checkAuth(req, res, next) {
     if (req.headers.authtoken) {

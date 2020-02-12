@@ -64,12 +64,7 @@
 </template>
 <script>
 import firebase from "firebase"
-import axios from "axios";
-/* eslint-disable */
-const client = axios.create({
-  baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
-  // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
-});
+
 export default {
   name: 'LoginPage',
   beforeCreate () {
@@ -88,9 +83,6 @@ export default {
       emailRE: '',
       passwordRE: '',
       usernameRE: '',
-      count:10,
-      dd:0,
-      countDown : 10
     }
   },
   methods: {
@@ -108,7 +100,7 @@ export default {
         .sendPasswordResetEmail(this.emailpWS).then(() => {
           alert('Password reset email sent')
         }).catch(error => {
-          console.log(error)
+          // console.log(error)
           alert(error)
         })
       e.preventDefault()
@@ -124,9 +116,10 @@ export default {
     login(e) {
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(user => { 
+        .then(() => { 
           this.$router.replace('AddBoard')
-          this.$router.go()
+          location.reload()
+          // this.$router.go()
         })
         .catch(err => {
           alert(err)
@@ -134,7 +127,7 @@ export default {
       e.preventDefault()
     },
     register(e) {
-      client({
+      this.$http({
         method: "get",
         url: "/reg",
         headers: {
@@ -143,13 +136,13 @@ export default {
           username: this.usernameRE,
         }
       }).then(res => {
-        console.log(res.data)
+        // console.log(res.data)
         alert('Registration Completed')
         this.email = this.emailRE
         this.password = this.passwordRE
         this.login(e)
       }).catch(error => {
-        console.log(error.response.data)
+        // console.log(error.response.data)
         alert(error.response.data.code)
       })
       e.preventDefault()
