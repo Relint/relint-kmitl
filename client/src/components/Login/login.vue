@@ -15,66 +15,72 @@
                     <li></li>
             </ul>
     </div >
-    <img class="logo" src="@/assets/logorelintv3.png" alt="Mountain" style="width:300px">
+    <img class="logo" src="@/assets/logorelintv3.png" alt="logo" style="width:300px">
     <div class="from-login">
-      <form @submit="loginWithEmail">
+      <div class="form-container" >
         <div class="title">
-          <input class="input" v-model="email" type="email"   placeholder="Email"  name="umail" required>
+          <input class="input" v-model="email" type="text"   placeholder="Email"  name="umail" >
         </div>
 
         <div class="title">
-          <input class="input" v-model="password" type="password"  placeholder="Password" name="psw" required>
+          <input class="input" v-model="password" type="password"  placeholder="Password" name="psw" >
         </div>
-        <button class="btnSubmit" type="submit" value="submit" v-on:click="login">Login</button>
-        <button class="btnSubmit" type="submit" value="submit" v-on:click="openFormRE" >Register</button>
-        <span class="psw"  v-on:click="openFormFOR" style="padding-left:2em" > Forgot <a href="#">password?</a></span>
-        </form>
+        <button class="btnSubmit" @click="addBoard">Login</button>
+        <button class="btnSubmit" @click="openFormRE" >Register</button>
+        <span class="psw"  @click="openFormFOR" style="padding-left:2em" > Forgot <a href="#">password?</a></span>
+        </div>
       </div>
     <!-- register -->
       <div class="form-popupRE" id="regis-from">
-          <form  class="form-container">
+          <div  class="form-container">
             <h1>Register</h1>
             <div class="title">
               <input class="input" v-model="usernameRE" type="text"   placeholder="Username"  name="uname" required>
             </div>
             <div class="title">
-              <input class="input" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
+              <input class="input" v-model="emailRE" type="text"   placeholder="Email"  name="mail" required>
             </div>
             <div class="title">
-              <input class="input" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
+              <input class="input" v-model="passwordRE" type="text"   placeholder="Password"  name="pass" required>
             </div>
-              <button class="btnSubmit" type="submit" value="submit" v-on:click="register" >Register</button>
-              <!-- start-->
-              
-            <button class="btnSubmit"  type="button" v-on:click="closeFormRE">Cancle</button>       
-          </form>
+              <button class="btnSubmit" @click="addBoard" >Login</button>
+              <button class="btnSubmit" @click="closeFormRE">Cancle</button>       
+          </div>
       </div>
     <!-- forget password -->
       <div class="form-popup" id="forget-from">
-        <form  class="form-container">
+        <div  class="form-container">
           <h1>Send Email</h1>
           <div class="title">
-            <input class="input" v-model="emailpWS" type="email"   placeholder="Email"  name="umail" required>
+            <input class="input" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required>
           </div>
-            <button class="btnSubmit" type="submit" value="submit" v-on:click="acceptSend" >Send</button>
+            <button class="btnSubmit canover" @click="acceptSend" >Send</button>
             <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancle</button>       
-        </form>
+        </div>
+      </div>
+    <!-- accept-->
+      <div class="form-popupAC" id="accept-from">
+          <div  class="form-container">
+              <h1> Success !</h1>
+              <p id="count">If you don't get a new password. You can press "AGAIN" </p>
+              <button class="btnSubmit canhover" type="button" v-on:click="closeFormAC" >OK</button> 
+              <button id="btnAgain" class="btnSubmit" :class="counting ? null:'canhover'" :disabled = "counting"  @click="countDownTimer"  >AGAIN   </button>
+              <span id="time">&nbsp; {{countDown}} &nbsp;Seconds </span>
+              
+          </div>
       </div>
   </div>
 </template>
 <script>
-/* eslint-disable */
 import firebase from "firebase"
-
+import axios from "axios";
+// eslint-disable-next-line
+const client = axios.create({
+  baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
+  // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
+});
 export default {
   name: 'LoginPage',
-  beforeCreate () {
-    firebase.auth().onAuthStateChanged((user) => {
-      if (user) {
-        this.$router.replace('AddBoard')
-      }
-    })
-  },
   data: function () {
     return {
       email: '',
@@ -84,6 +90,18 @@ export default {
       emailRE: '',
       passwordRE: '',
       usernameRE: '',
+      countDown : 10,
+      counting:false,
+      interval: null
+    }
+  },
+  watch:{
+    countDown:function(newc,oldc){
+      if(this.countDown === 0){
+        this.countDown = 10
+         clearInterval(this.interval)
+        this.counting = false
+      }
     }
   },
   methods: {
@@ -94,17 +112,21 @@ export default {
     },
     openFormFOR() {
       document.getElementById("forget-from").style.display = "block";
-    }, 
+    },
+    countDownTimer() {
+                if(this.countDown === 10){
+                  this.counting = true
+                    this.interval  = setInterval(()=>{
+                      this.countDown -= 1
+                    },1000)
+                }
+    },     
     //acceptSEnd
-    acceptSend(e) { 
-      firebase.auth()
-        .sendPasswordResetEmail(this.emailpWS).then(() => {
-          alert('Password reset email sent')
-        }).catch(error => {
-          // console.log(error)
-          alert(error)
-        })
-      e.preventDefault()
+    acceptSend() { 
+      document.getElementById("accept-from").style.display = "block";
+    },
+    closeFormAC () {
+      document.getElementById("accept-from").style.display = "none";
     },
     //register
     closeFormRE() {
@@ -114,39 +136,16 @@ export default {
       document.getElementById("regis-from").style.display = "block";
     },
     //anth
-    login(e) {
+    addBoard() {
       firebase.auth()
-        .signInWithEmailAndPassword(this.email, this.password)
+        .signInWithEmailAndPassword(this.email,this.password)
         .then(() => { 
-          this.$router.replace('AddBoard')
-          location.reload()
-          // this.$router.go()
+            alert('Logged in')
+            this.$router.replace('AddBoard')
         })
         .catch(err => {
           alert(err)
         })
-      e.preventDefault()
-    },
-    register(e) {
-      this.$http({
-        method: "get",
-        url: "/reg",
-        headers: {
-          email: this.emailRE,
-          password: this.passwordRE,
-          username: this.usernameRE,
-        }
-      }).then(res => {
-        // console.log(res.data)
-        alert('Registration Completed')
-        this.email = this.emailRE
-        this.password = this.passwordRE
-        this.login(e)
-      }).catch(error => {
-        // console.log(error.response.data)
-        alert(error.response.data.code)
-      })
-      e.preventDefault()
     }
   },
 }

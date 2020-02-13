@@ -98,7 +98,8 @@ button.btnSubmit {
     background-color: darken($redFire, 5%);
   }
 }
-button.btnSubmit:hover {
+
+button.canhover:hover{
   animation-name: random-color;
   animation-duration: 5s;
 }
