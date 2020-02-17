@@ -1,7 +1,44 @@
 <template>
-<div>
-    <h5><span v-html=authorization></span></h5>
-    <button class="btnSignout" v-on:click="logout" type="submit" >Signout</button>
+<div class="bg-contrain" >
+<b-navbar toggleable="lg" type="light" >
+    <b-navbar-brand >REL I NT</b-navbar-brand>
+
+    <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
+
+    <b-collapse id="nav-collapse" is-nav>
+      <b-navbar-nav>
+        <b-nav-item ><b-icon icon="house" font-scale="3"></b-icon></b-nav-item>
+        <b-nav-item  ><b-icon icon="kanban" font-scale="3"></b-icon></b-nav-item>
+      </b-navbar-nav>
+
+      <!-- Right aligned nav items -->
+      <b-navbar-nav class="ml-auto">
+        <b-nav-form>
+          <b-form-input size="l" class="mr-sm-2" placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" ><b-icon icon="search" font-scale="2"></b-icon></b-button>
+        </b-nav-form>
+        <b-nav-item-dropdown right>
+          <!-- Using 'button-content' slot -->
+          <template v-slot:button-content>
+            <em><b-icon icon="person" font-scale="3"></b-icon></em>
+          </template>
+          <b-dropdown-item href="#">Profile</b-dropdown-item>
+          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+        </b-nav-item-dropdown>
+      </b-navbar-nav>
+    </b-collapse>
+  </b-navbar>
+
+
+      <div class="row">
+      <div class="bg" ></div>
+    </div>
+  
+
+
+   <!-- <h5><span v-html=authorization></span></h5>
+    <button class="btnSignout" v-on:click="logout" >Signout</button> -->
+
 </div>
 </template>
 <script>
@@ -41,13 +78,18 @@ export default {
   },
   data: function (){
     return {
-      authorization: '',
+      authorization: ''
+     
     }
   },
   methods: {
     logout : function () {
         firebase.auth().signOut()
     },
+    
   }
 }
 </script>
+<style scoped lang="scss">
+@import '@/components/createBoard/navbarstyle.scss';
+</style>

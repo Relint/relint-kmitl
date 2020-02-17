@@ -11,6 +11,11 @@ import '@/components/Login/acceptstyle.scss'
 import '@/components/Login/forgetstyle.scss'
 import '@/components/Login/regisstyle.scss'
 import '@/assets/bglogin.png'
+import '@/components/createBoard/navbarstyle.scss'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+Vue.use(BootstrapVue)
+// Optionally install the BootstrapVue icon components plugin
+Vue.use(IconsPlugin)
 Vue.config.productionTip = false
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
