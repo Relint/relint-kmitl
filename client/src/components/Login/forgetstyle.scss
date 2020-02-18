@@ -6,11 +6,11 @@
     display: none;
     overflow: hidden;
     background-color:pink;
-    padding: 30px 15px 30px 30px;
+    padding: 30px 10px 30px 30px;
     border-radius: 10px;
     top: 50%;
     left: 50%;
-    width: 455px;
+    width: 450px;
     box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
     &::before, &::after {
       content: '';
@@ -42,7 +42,7 @@
   .form-popup{
     max-width: 100%;
     height: auto !important;
-    margin: -130px -230px auto;
+    margin: -130px -225px auto;
 }
 .form-popup  {
   -webkit-animation: bounce-top 0.9s both;
