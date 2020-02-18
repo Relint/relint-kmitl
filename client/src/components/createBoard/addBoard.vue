@@ -1,7 +1,10 @@
+
 <template>
 <div class="bg-contrain" >
+ 
 <b-navbar toggleable="lg" type="light" >
-    <b-navbar-brand >REL I NT</b-navbar-brand>
+  
+    <b-navbar-brand >Relint</b-navbar-brand>
 
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
@@ -14,17 +17,18 @@
       <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
         <b-nav-form>
-          <b-form-input size="l" class="mr-sm-2" placeholder="Search"></b-form-input>
-          <b-button size="sm" class="my-2 my-sm-0" ><b-icon icon="search" font-scale="2"></b-icon></b-button>
+          <b-form-input size="l" class="mr-sm-2"  placeholder="Search"></b-form-input>
+          <b-button size="sm" class="my-2 my-sm-0" ><b-icon icon="search" font-scale="2" ></b-icon></b-button>
         </b-nav-form>
+        
         <b-nav-item-dropdown right>
-          <!-- Using 'button-content' slot -->
           <template v-slot:button-content>
             <em><b-icon icon="person" font-scale="3"></b-icon></em>
           </template>
           <b-dropdown-item href="#">Profile</b-dropdown-item>
-          <b-dropdown-item href="#">Sign Out</b-dropdown-item>
+          <b-dropdown-item href="#" v-html=authorization v-on:click="logout">Sign Out</b-dropdown-item>
         </b-nav-item-dropdown>
+
       </b-navbar-nav>
     </b-collapse>
   </b-navbar>
@@ -91,5 +95,8 @@ export default {
 }
 </script>
 <style scoped lang="scss">
+@import '~bootstrap';
+@import '~bootstrap-vue';
 @import '@/components/createBoard/navbarstyle.scss';
+
 </style>

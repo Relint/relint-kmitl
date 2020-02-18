@@ -1,12 +1,10 @@
-@import "bourbon";
-@import '@/components/Login/mixin.scss';
-@import 'node_modules/bootstrap/scss/bootstrap';
-@import 'node_modules/bootstrap-vue/src/index.scss';
+@import '~bootstrap';
+@import '~bootstrap-vue';
+
 $greenSeaweed: rgba(2, 128, 144, 1);
 $blueQueen: rgba(69, 105, 144, 1);
 $redFire: rgba(244, 91, 105, 1);
 $fontAsap: 'Asap', sans-serif;
-
 .bg {
     background-image: "@/assets/bgboard.png";
     background-repeat: no-repeat;
@@ -17,3 +15,5 @@ $fontAsap: 'Asap', sans-serif;
     -o-background-size: cover;
     background-size: cover;
 }
+
+
