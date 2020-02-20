@@ -26,16 +26,14 @@
                 <b-icon icon="person" font-scale="3" v-on:click="showName" ></b-icon>
               </template>
                
-              <b-dropdown-header   > 
-                Hello {{username}}
-                
+              <b-dropdown-header> 
+                Hello {{authorization}}
                 <b-icon icon="star" font-scale="1.3"></b-icon>
                 <b-dropdown-divider></b-dropdown-divider>
-                <!--<login @showUsername="updateName" /> --> 
               </b-dropdown-header>
                
               <b-dropdown-item href="#">Profile</b-dropdown-item>
-              <h5><span v-html=authorization></span></h5>
+              
               <b-dropdown-item  v-on:click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
 
@@ -53,7 +51,7 @@ export default {
    data (){
     return {
       authorization: '',
-      username:showName,
+      username:"fff",
     }
   },
  /*  components: {
@@ -95,10 +93,7 @@ export default {
   methods: {
     logout () {
         firebase.auth().signOut()
-    },
-    showName () {
-    this.username="Piyathida"
-  },
+    }
     
   }
 }

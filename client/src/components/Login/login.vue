@@ -8,8 +8,6 @@
 
             <img class="logo" src="@/assets/logorelint.png" alt="logo" style="width:300px">
       
-   
-     
     <div class="from-login">
       <div class="form-container" >
         <div class="title">
@@ -19,7 +17,7 @@
         <div class="title">
           <input class="inputt" v-model="password" type="password"  placeholder="Password" name="psw" >
         </div>
-        <button class="btnSubmit" @click="addBoard">Login</button>
+        <button class="btnSubmit" v-on:click="login">Login</button>
         <button class="btnSubmit" @click="openFormRE" >Register</button>
         <span class="psw"  @click="openFormFOR"  > Forgot <a class="pswL" href="#"  >password?</a></span>
         </div>
@@ -37,7 +35,7 @@
             <div class="title">
               <input class="inputt" v-model="passwordRE" type="text"   placeholder="Password"  name="pass" required>
             </div>
-              <button class="btnSubmit" @click="addBoard" >Login</button>
+              <button class="btnSubmit" @click="register" >Login</button>
               <button class="btnSubmit" @click="closeFormRE">Cancel</button>       
           </div>
       </div>
@@ -74,9 +72,17 @@ const client = axios.create({
   baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
   // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
 });
+
 export default {
-  name :'LogInpage',
-  data() {
+  name: 'LoginPage',
+  beforeCreate () {
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$router.replace('AddBoard')
+      }
+    })
+  },
+  data: function () {
     return {
       email: '',
       password: '',
@@ -85,18 +91,6 @@ export default {
       emailRE: '',
       passwordRE: '',
       usernameRE: '',
-      countDown : 10,
-      counting:false,
-      interval: null
-    }
-  },
-  watch:{
-    countDown:function(newc,oldc){
-      if(this.countDown === 0){
-        this.countDown = 10
-         clearInterval(this.interval)
-        this.counting = false
-      }
     }
   },
   methods: {
@@ -107,21 +101,17 @@ export default {
     },
     openFormFOR() {
       document.getElementById("forget-from").style.display = "block";
-    },
-    countDownTimer() {
-                if(this.countDown === 10){
-                  this.counting = true
-                    this.interval  = setInterval(()=>{
-                      this.countDown -= 1
-                    },1000)
-                }
-    },     
+    }, 
     //acceptSEnd
-    acceptSend() { 
-      document.getElementById("accept-from").style.display = "block";
-    },
-    closeFormAC () {
-      document.getElementById("accept-from").style.display = "none";
+    acceptSend(e) { 
+      firebase.auth()
+        .sendPasswordResetEmail(this.emailpWS).then(() => {
+          alert('Password reset email sent')
+        }).catch(error => {
+          // console.log(error)
+          alert(error)
+        })
+      e.preventDefault()
     },
     //register
     closeFormRE() {
@@ -131,18 +121,41 @@ export default {
       document.getElementById("regis-from").style.display = "block";
     },
     //anth
-    addBoard() {
+    login(e) {
       firebase.auth()
-        .signInWithEmailAndPassword(this.email,this.password)
+        .signInWithEmailAndPassword(this.email, this.password)
         .then(() => { 
-            alert('Logged in')
-            this.$router.replace('AddBoard')
+          this.$router.replace('AddBoard')
+          location.reload()
+          // this.$router.go()
         })
         .catch(err => {
           alert(err)
         })
+      e.preventDefault()
+    },
+    register(e) {
+      this.$http({
+        method: "get",
+        url: "/reg",
+        headers: {
+          email: this.emailRE,
+          password: this.passwordRE,
+          username: this.usernameRE,
+        }
+      }).then(res => {
+        // console.log(res.data)
+        alert('Registration Completed')
+        this.email = this.emailRE
+        this.password = this.passwordRE
+        this.login(e)
+      }).catch(error => {
+        // console.log(error.response.data)
+        alert(error.response.data.code)
+      })
+      e.preventDefault()
     }
-  },
+  }
 }
 
 </script>
