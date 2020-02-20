@@ -25,14 +25,15 @@ cd client
 
 ## Deployment
 ```
-npm run build    : in client directory
 npm install -g firebase-tools : in main directory 
 npm install firebase-functions : in main directory
 npm install cookie-parser : in main directory 
-firebase deploy  : in main directory
-relint.web.app : in brower
-```
 
+Now :
+    firebase deploy  : in main directory
+    npm run build    : in client directory
+    relint.web.app : in brower
+```
 ## notes
 ```
 2 cmd needed for development
