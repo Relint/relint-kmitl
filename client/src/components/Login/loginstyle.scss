@@ -3,22 +3,20 @@
 @import '@/components/Login/acceptstyle.scss';
 @import '@/components/Login/forgetstyle.scss';
 @import '@/components/Login/regisstyle.scss';
-$greenSeaweed: rgba(2, 128, 144, 1);
-$blueQueen: rgba(69, 105, 144, 1);
-$redFire: rgba(244, 91, 105, 1);
-$fontAsap: 'Asap', sans-serif;
-*{
-  margin: 0px;
-  padding: 0px;
-  font-family: $fontAsap; 
-}
-body, html {
+
+.mainGroup {
   height: 100%;
+  width: 100%;
   margin: 0;
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
-	background-size: 400% 400%;
+	background-size: 250% 250%;
   animation: gradient 15s ease infinite;
+  position: fixed;
 }
+.logo {
+  @include transform(translate(0%, 50%));
+}
+
 @keyframes gradient {
 	0% {
 		background-position: 0% 50%;
@@ -39,7 +37,7 @@ body, html {
   position: fixed;
   top: 50%;
   left: 50%;
-  width: 400px;
+  width: 450px;
   box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
   @include transform(translate(-50%, -50%));
   @include transition(transform 300ms, box-shadow 300ms);
@@ -69,7 +67,7 @@ body, html {
     animation: rotate 3000ms infinite linear;
   }
 }
-input {
+.inputt {
   font-family: $fontAsap;
   display: block;
   border-radius: 5px;
@@ -98,7 +96,8 @@ button.btnSubmit {
     background-color: darken($redFire, 5%);
   }
 }
-button.btnSubmit:hover {
+
+button.canhover,.btnSubmit:hover {
   animation-name: random-color;
   animation-duration: 5s;
 }
@@ -109,8 +108,13 @@ button.btnSubmit:hover {
   75%  {background-color:green; left:0px; top:200px;}
   100% {background-color:red; left:0px; top:0px;}
 }
-
-
+.psw {
+  margin: -30px;
+  padding-left: 3em;
+}
+.pswL {
+  padding-left: 3px;
+}
 //animation BG
 .circles{
     position: absolute;

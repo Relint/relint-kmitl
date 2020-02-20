@@ -6,7 +6,7 @@ import addBoard from '@/components/createBoard/addBoard.vue'
 Vue.use(VueRouter)
 
 const routes = [
-  {
+ {
     path: '/',
     name: 'LogInpage',
     component: login

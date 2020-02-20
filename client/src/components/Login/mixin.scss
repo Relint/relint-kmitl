@@ -1,3 +1,14 @@
+$greenSeaweed: rgba(2, 128, 144, 1);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgba(244, 91, 105, 1);
+$orange : #f7a79d;
+$fontAsap: 'Asap', sans-serif;
+*{
+  margin: 0px;
+  padding: 0px;
+  font-family: $fontAsap; 
+}
+
 // translate
 @mixin translate ($x, $y) {
     @include transform(translate($x, $y));
@@ -28,3 +39,5 @@
     from { transform: rotate(0deg); }
     from { transform: rotate(360deg); }
 }
+
+//responsive
