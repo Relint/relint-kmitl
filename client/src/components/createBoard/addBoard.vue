@@ -25,12 +25,12 @@
               </template>
                
               <b-dropdown-header> 
-                Hello {{authorization}}
+                Hello, <span v-html=username></span>
                 <b-icon icon="star" font-scale="1.3"></b-icon>
                 <b-dropdown-divider></b-dropdown-divider>
               </b-dropdown-header>
               
-              <b-dropdown-item href="#">Profile</b-dropdown-item>
+              <b-dropdown-item href="#" v-on:click="profile">Profile</b-dropdown-item>
               <b-dropdown-item  v-on:click="logout">Sign Out</b-dropdown-item>
             </b-nav-item-dropdown>
           </b-navbar-nav>
@@ -45,51 +45,28 @@ export default {
   name: 'AddBoard',
    data (){
     return {
-      authorization: '',
-      username:"fff",
+      username: '',
+      uid: '',
     }
   },
- /*  components: {
-    login
-  },
-    updateName (variable) {
-      this.childData= variable;
-    },*/
-
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
-        this.$router.replace('/')
-      } else {
-        firebase
-            .auth()
-            .currentUser.getIdToken(true)
-            .then(idToken => {
-              this.$http({
-                method: "get",
-                url: "/auth",
-                headers: {
-                  AuthToken: idToken
-                }
-              })
-                .then(res => {
-                  this.authorization = res.data.message
-                })
-                .catch(error => {
-                  this.authorization = error.response.data
-                });
-            })
-            .catch(() => {
-              this.authorization = "Error getting auth token"
-            });
+        this.$router.replace('/');
       }
-    })
+    });
+  },
+  mounted () {
+    this.username = this.$store.state.username;
+    this.uid = this.$store.state.uid;
   },
   methods: {
     logout () {
-        firebase.auth().signOut()
+        firebase.auth().signOut();
+    },
+    profile () {
+      alert(this.$store.state.uid + '\n' + this.$store.state.username);
     }
-    
   }
 }
 </script>

@@ -19,6 +19,17 @@
         "source": "**",
         "function": "app"
       }
+    ],
+    "headers": [
+      {
+        "source": "/index.html",
+        "headers": [
+          {
+            "key": "Cache-Control",
+            "value": "max-age=0, no-cache"
+          }
+        ]
+      }
     ]
   }
 }

@@ -11,7 +11,7 @@
     <div class="from-login">
       <div class="form-container" >
         <div class="title">
-          <input class="inputt" v-model="email" type="text"   placeholder="Email"  name="umail" >
+          <input class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail" >
         </div>
 
         <div class="title">
@@ -19,7 +19,7 @@
         </div>
         <button class="btnSubmit" v-on:click="login">Login</button>
         <button class="btnSubmit" @click="openFormRE" >Register</button>
-        <span class="psw"  @click="openFormFOR"  > Forgot <a class="pswL" href="#"  >password?</a></span>
+        <span class="psw"    > Forgot <a class="pswL" href="#" @click="openFormFOR" >password?</a></span>
         </div>
       </div>
     <!-- register -->
@@ -30,12 +30,12 @@
               <input class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required>
             </div>
             <div class="title">
-              <input class="inputt" v-model="emailRE" type="text"   placeholder="Email"  name="mail" required>
+              <input class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
             </div>
             <div class="title">
-              <input class="inputt" v-model="passwordRE" type="text"   placeholder="Password"  name="pass" required>
+              <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
             </div>
-              <button class="btnSubmit" @click="register" >Login</button>
+              <button class="btnSubmit" @click="register" >Register</button>
               <button class="btnSubmit" @click="closeFormRE">Cancel</button>       
           </div>
       </div>
@@ -50,47 +50,29 @@
             <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancel</button>       
         </div>
       </div>
-    <!-- accept-->
-      <div class="form-popupAC" id="accept-from">
-          <div  class="form-container">
-              <h1> Success !</h1>
-              <p id="count">If you don't get a new password. You can press "AGAIN" </p>
-              <button class="btnSubmit canhover" type="button" v-on:click="closeFormAC" >OK</button> 
-              <button id="btnAgain" class="btnSubmit" :class="counting ? null:'canhover'" :disabled = "counting"  @click="countDownTimer"  >AGAIN   </button>
-              <span id="time">&nbsp; {{countDown}} &nbsp;Seconds </span>
-              
-          </div>
-      </div>
-  
    </div>
 </template>
 <script>
 import firebase from "firebase"
-import axios from "axios";
-// eslint-disable-next-line
-const client = axios.create({
-  baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
-  // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
-});
-
 export default {
   name: 'LoginPage',
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        this.$store.commit('setRecord', {username: user.displayName, uid: user.uid});
         this.$router.replace('AddBoard')
       }
-    })
+    });
   },
   data: function () {
     return {
       email: '',
       password: '',
-      username: '',
       emailpWS: '',
       emailRE: '',
       passwordRE: '',
       usernameRE: '',
+      regis: '',
     }
   },
   methods: {
@@ -108,10 +90,9 @@ export default {
         .sendPasswordResetEmail(this.emailpWS).then(() => {
           alert('Password reset email sent')
         }).catch(error => {
-          // console.log(error)
           alert(error)
-        })
-      e.preventDefault()
+        });
+      e.preventDefault();
     },
     //register
     closeFormRE() {
@@ -124,17 +105,16 @@ export default {
     login(e) {
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => { 
-          this.$router.replace('AddBoard')
-          location.reload()
-          // this.$router.go()
+        .then(() => {
+          this.regis = false;
+          // alert('Authentication Completed');
         })
         .catch(err => {
-          alert(err)
-        })
-      e.preventDefault()
+          alert(err);
+        });
+      e.preventDefault();
     },
-    register(e) {
+    register(e) {      
       this.$http({
         method: "get",
         url: "/reg",
@@ -143,17 +123,15 @@ export default {
           password: this.passwordRE,
           username: this.usernameRE,
         }
-      }).then(res => {
-        // console.log(res.data)
-        alert('Registration Completed')
+      }).then(() => {
+        // alert('Registration Completed')
         this.email = this.emailRE
         this.password = this.passwordRE
         this.login(e)
       }).catch(error => {
-        // console.log(error.response.data)
         alert(error.response.data.code)
       })
-      e.preventDefault()
+      e.preventDefault();
     }
   }
 }
