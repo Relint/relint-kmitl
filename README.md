@@ -1,4 +1,4 @@
-# relint.web.app
+# Relint
 Main Repository
 
 ## Must be done
@@ -10,11 +10,11 @@ npm install (root, client, and functions directory)
 
 ## server
 ### Compiles and hot-reloads for development
-`
+```
 firebase emulators:start (if using database-functions in functions)
 firebase serve (no database-functions in functions)
 ***database-functions is firebase's feature's name not normal functions calls from firebase that we uses***
-`
+```
 ### editing
 ```
 cd functions
