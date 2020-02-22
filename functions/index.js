@@ -22,28 +22,6 @@ admin.initializeApp({
     databaseURL: "https://relint-kmitl.firebaseio.com"
 });
 
-function checkAuth(req, res, next) {
-    if (req.headers.authtoken) {
-        next();
-        admin.auth().verifyIdToken(req.headers.authtoken)
-            .then(() => {
-                next();
-            }).catch(() => {
-                res.status(403).send('Unauthorized');
-            });
-    } else {
-        res.status(403).send('Unauthorized');
-    }
-}
-
- app.use('/auth', checkAuth)
-
-app.get('/auth', (req, res) => {
-    res.json({
-        message: 'Hello World!'
-    })
-})
-
 app.get('/reg', (req, res) => {
     let email = req.headers.email
     let password = req.headers.password

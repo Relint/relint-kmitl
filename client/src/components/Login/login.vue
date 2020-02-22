@@ -1,89 +1,78 @@
 <template>
 <!-- login -->
   <div class="mainGroup" id="login" >
+  
     <div class="area" >
-            <ul class="circles">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-            </ul>
+            <ul class="circles"> <li></li> <li></li> <li></li><li></li><li></li> <li></li><li></li><li></li><li></li><li></li> </ul>
     </div >
-    <img class="logo" src="@/assets/logorelintv3.png" alt="Mountain" style="width:300px">
+
+            <img class="logo" src="@/assets/logorelint.png" alt="logo" style="width:300px">
+      
     <div class="from-login">
-      <form @submit="loginWithEmail">
+      <div class="form-container" >
         <div class="title">
-          <input class="input" v-model="email" type="email"   placeholder="Email"  name="umail" required>
+          <input class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail" >
         </div>
 
         <div class="title">
-          <input class="input" v-model="password" type="password"  placeholder="Password" name="psw" required>
+          <input class="inputt" v-model="password" type="password"  placeholder="Password" name="psw" >
         </div>
-        <button class="btnSubmit" type="submit" value="submit" v-on:click="login">Login</button>
-        <button class="btnSubmit" type="submit" value="submit" v-on:click="openFormRE" >Register</button>
-        <span class="psw"  v-on:click="openFormFOR" style="padding-left:2em" > Forgot <a href="#">password?</a></span>
-        </form>
+        <button class="btnSubmit" v-on:click="login">Login</button>
+        <button class="btnSubmit" @click="openFormRE" >Register</button>
+        <span class="psw"    > Forgot <a class="pswL" href="#" @click="openFormFOR" >password?</a></span>
+        </div>
       </div>
     <!-- register -->
       <div class="form-popupRE" id="regis-from">
-          <form  class="form-container">
-            <h1>Register</h1>
+          <div  class="form-container">
+            <h3 ><b-icon icon="person-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Register </h3>
             <div class="title">
-              <input class="input" v-model="usernameRE" type="text"   placeholder="Username"  name="uname" required>
+              <input class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required>
             </div>
             <div class="title">
-              <input class="input" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
+              <input class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
             </div>
             <div class="title">
-              <input class="input" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
+              <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
             </div>
-              <button class="btnSubmit" type="submit" value="submit" v-on:click="register" >Register</button>
-              <!-- start-->
-              
-            <button class="btnSubmit"  type="button" v-on:click="closeFormRE">Cancle</button>       
-          </form>
+              <button class="btnSubmit" @click="register" >Register</button>
+              <button class="btnSubmit" @click="closeFormRE">Cancel</button>       
+          </div>
       </div>
     <!-- forget password -->
       <div class="form-popup" id="forget-from">
-        <form  class="form-container">
-          <h1>Send Email</h1>
+        <div  class="form-container">
+          <h3><b-icon icon="cursor-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Send Email</h3>
           <div class="title">
-            <input class="input" v-model="emailpWS" type="email"   placeholder="Email"  name="umail" required>
+            <input class="inputt" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required>
           </div>
-            <button class="btnSubmit" type="submit" value="submit" v-on:click="acceptSend" >Send</button>
-            <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancle</button>       
-        </form>
+            <button class="btnSubmit canover" @click="acceptSend" >Send</button>
+            <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancel</button>       
+        </div>
       </div>
-  </div>
+   </div>
 </template>
 <script>
-/* eslint-disable */
 import firebase from "firebase"
-
 export default {
   name: 'LoginPage',
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
+        this.$store.commit('setRecord', {username: user.displayName, uid: user.uid});
         this.$router.replace('AddBoard')
       }
-    })
+    });
   },
   data: function () {
     return {
       email: '',
       password: '',
-      username: '',
       emailpWS: '',
       emailRE: '',
       passwordRE: '',
       usernameRE: '',
+      regis: '',
     }
   },
   methods: {
@@ -101,10 +90,9 @@ export default {
         .sendPasswordResetEmail(this.emailpWS).then(() => {
           alert('Password reset email sent')
         }).catch(error => {
-          // console.log(error)
           alert(error)
-        })
-      e.preventDefault()
+        });
+      e.preventDefault();
     },
     //register
     closeFormRE() {
@@ -117,17 +105,16 @@ export default {
     login(e) {
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => { 
-          this.$router.replace('AddBoard')
-          location.reload()
-          // this.$router.go()
+        .then(() => {
+          this.regis = false;
+          // alert('Authentication Completed');
         })
         .catch(err => {
-          alert(err)
-        })
-      e.preventDefault()
+          alert(err);
+        });
+      e.preventDefault();
     },
-    register(e) {
+    register(e) {      
       this.$http({
         method: "get",
         url: "/reg",
@@ -136,20 +123,19 @@ export default {
           password: this.passwordRE,
           username: this.usernameRE,
         }
-      }).then(res => {
-        // console.log(res.data)
-        alert('Registration Completed')
+      }).then(() => {
+        // alert('Registration Completed')
         this.email = this.emailRE
         this.password = this.passwordRE
         this.login(e)
       }).catch(error => {
-        // console.log(error.response.data)
         alert(error.response.data.code)
       })
-      e.preventDefault()
+      e.preventDefault();
     }
-  },
+  }
 }
+
 </script>
 
 <style lang="scss">
