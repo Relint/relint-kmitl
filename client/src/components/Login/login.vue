@@ -35,6 +35,9 @@
             <div class="title">
               <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
             </div>
+            <div class="title">
+              <input class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required>
+            </div>
               <button class="btnSubmit" @click="register" >Register</button>
               <button class="btnSubmit" @click="closeFormRE">Cancel</button>       
           </div>
@@ -71,6 +74,7 @@ export default {
       emailpWS: '',
       emailRE: '',
       passwordRE: '',
+      passwordREE: '',
       usernameRE: '',
       regis: '',
     }
@@ -103,6 +107,7 @@ export default {
     },
     //anth
     login(e) {
+      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
@@ -115,22 +120,28 @@ export default {
       e.preventDefault();
     },
     register(e) {      
-      this.$http({
-        method: "get",
-        url: "/reg",
-        headers: {
-          email: this.emailRE,
-          password: this.passwordRE,
-          username: this.usernameRE,
-        }
-      }).then(() => {
-        // alert('Registration Completed')
-        this.email = this.emailRE
-        this.password = this.passwordRE
-        this.login(e)
-      }).catch(error => {
-        alert(error.response.data.code)
-      })
+      if(this.passwordRE === this.passwordREE){
+        this.$http({
+          method: "get",
+          url: "/reg",
+          headers: {
+            email: this.emailRE,
+            password: this.passwordRE,
+            username: this.usernameRE,
+          }
+        }).then(() => {
+          // alert('Registration Completed')
+          this.email = this.emailRE;
+          this.password = this.passwordRE;
+          this.login(e);
+        }).catch(error => {
+          alert(error.response.data.code);
+        });
+      } else {
+        alert('Password does not matched');
+        this.passwordRE = '';
+        this.passwordREE = '';
+      }
       e.preventDefault();
     }
   }

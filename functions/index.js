@@ -22,6 +22,9 @@ admin.initializeApp({
     databaseURL: "https://relint-kmitl.firebaseio.com"
 });
 
+const db = admin.firestore();
+const rtdb = admin.database();
+
 app.get('/reg', (req, res) => {
     let email = req.headers.email
     let password = req.headers.password
@@ -33,11 +36,16 @@ app.get('/reg', (req, res) => {
         displayName: displayName,
         disabled: false
     }).then(userRecord => {
+        rtdb.ref('users/'+userRecord.uid).set({
+            displayName: userRecord.displayName,
+            uid: userRecord.uid,
+            online: true,
+        });
         console.log('Succesfully created new user: ', userRecord);
-        res.send(userRecord)
+        res.send(userRecord);
     }).catch(error => {
         console.log('Error creating new user: ', error);
-        res.status(500).send(error)
+        res.status(500).send(error);
     })
 })
 

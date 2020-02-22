@@ -41,6 +41,8 @@
 <script  >
 /* eslint-disable */
 import firebase from "firebase"
+import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
+
 export default {
   name: 'AddBoard',
    data (){
@@ -49,6 +51,7 @@ export default {
       uid: '',
     }
   },
+  
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {
@@ -59,10 +62,21 @@ export default {
   mounted () {
     this.username = this.$store.state.username;
     this.uid = this.$store.state.uid;
+    const userStatusDatabaseRef = this.$rtdb.ref('/users/' + this.uid);
+    this.$rtdb.ref('.info/connected').on('value', snapshot => {
+      if (snapshot.val() === false) {
+        return;
+      }
+      userStatusDatabaseRef.onDisconnect().update(isOfflineForDatabase).then(() => {
+        userStatusDatabaseRef.update(isOnlineForDatabase);
+      });
+    });
   },
   methods: {
     logout () {
-        firebase.auth().signOut();
+      let user = firebase.auth().currentUser;
+      this.$rtdb.ref('/users/'+user.uid).update(isOfflineForDatabase);
+      firebase.auth().signOut();
     },
     profile () {
       alert(this.$store.state.uid + '\n' + this.$store.state.username);
