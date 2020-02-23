@@ -54,7 +54,9 @@ export default {
   
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
-      if (!user) {
+      if (!user) {    
+        this.$rtdb.ref('/status/'+this.uid).off();
+        this.$rtdb.ref('/status/'+this.uid).update(isOfflineForDatabase);
         this.$router.replace('/');
       }
     });
@@ -62,7 +64,7 @@ export default {
   mounted () {
     this.username = this.$store.state.username;
     this.uid = this.$store.state.uid;
-    const userStatusDatabaseRef = this.$rtdb.ref('/users/' + this.uid);
+    const userStatusDatabaseRef = this.$rtdb.ref('/status/' + this.uid);
     this.$rtdb.ref('.info/connected').on('value', snapshot => {
       if (snapshot.val() === false) {
         return;
@@ -71,11 +73,16 @@ export default {
         userStatusDatabaseRef.update(isOnlineForDatabase);
       });
     });
+    userStatusDatabaseRef.on('value', snapshot => {
+      let stat = snapshot.val();
+      if(stat.online === false){
+          userStatusDatabaseRef.update(isOnlineForDatabase);
+      }
+    });
   },
   methods: {
     logout () {
-      let user = firebase.auth().currentUser;
-      this.$rtdb.ref('/users/'+user.uid).update(isOfflineForDatabase);
+      this.$rtdb.ref('/status/'+this.uid).off();
       firebase.auth().signOut();
     },
     profile () {
