@@ -107,7 +107,6 @@ export default {
     },
     //anth
     login(e) {
-      firebase.auth().setPersistence(firebase.auth.Auth.Persistence.SESSION)
       firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {

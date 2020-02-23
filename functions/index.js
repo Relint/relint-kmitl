@@ -36,11 +36,6 @@ app.get('/reg', (req, res) => {
         displayName: displayName,
         disabled: false
     }).then(userRecord => {
-        rtdb.ref('users/'+userRecord.uid).set({
-            displayName: userRecord.displayName,
-            uid: userRecord.uid,
-            online: true,
-        });
         console.log('Succesfully created new user: ', userRecord);
         res.send(userRecord);
     }).catch(error => {
