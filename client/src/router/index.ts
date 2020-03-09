@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '@/components/Login/login.vue'
-import addBoard from '@/components/createBoard/addBoard.vue'
+import addBoard from '@/components/addBoard/addBoard.vue'
 
 Vue.use(VueRouter)
 
@@ -13,7 +13,7 @@ const routes = [
   },
   {
     path: '/addBoard',
-    name: 'AddBoard',
+    name: 'addBoard',
     component: addBoard
   }
 ]

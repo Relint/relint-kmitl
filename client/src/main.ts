@@ -6,13 +6,8 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import {firebaseConfig} from './_config_ci/firebaseKey'
-import '@/components/Login/loginstyle.scss'
-import '@/components/Login/mixin.scss'
-import '@/components/Login/acceptstyle.scss'
-import '@/components/Login/forgetstyle.scss'
-import '@/components/Login/regisstyle.scss'
+
 import '@/assets/bglogin.png'
-import '@/components/createBoard/navbarstyle.scss'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 require("firebase/firestore");
 
@@ -28,8 +23,8 @@ const rtdb = firebase.database();
 Vue.prototype.$rtdb = rtdb;
 /* eslint-disable */
 const client = axios.create({ //############################################################# change here before build
-  // baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
-  baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
+   baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
+ // baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
 });
 Vue.prototype.$http = client;
 

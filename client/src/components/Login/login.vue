@@ -63,7 +63,7 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit('setRecord', {username: user.displayName, uid: user.uid});
-        this.$router.replace('AddBoard')
+        this.$router.replace('addBoard')
       }
     });
   },
