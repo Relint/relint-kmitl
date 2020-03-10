@@ -2,7 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import login from '@/components/Login/login.vue'
 import addBoard from '@/components/addBoard/addBoard.vue'
-
+import navBar from '@/components/navBar/navBar.vue'
+import createBoard from '@/components/createBoard/createBoard.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -15,6 +16,16 @@ const routes = [
     path: '/addBoard',
     name: 'addBoard',
     component: addBoard
+  },
+  {
+    path: '/navBar',
+    name: 'navBar',
+    component: navBar
+  },
+  {
+    path: '/createBoard',
+    name: 'createBoard',
+    component: createBoard
   }
 ]
 

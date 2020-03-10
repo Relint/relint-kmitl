@@ -1,7 +1,6 @@
 <template>
     <div>
         <navBar/>
-        
     </div>
 </template>
 <script>

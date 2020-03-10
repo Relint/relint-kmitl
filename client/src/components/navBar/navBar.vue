@@ -1,12 +1,8 @@
 <template>
     <div>
-
-<div class="parent">
-   
-
-
-   <div class="nav-links">
-        <div class="div1"><a><b-icon icon="house" font-scale="3" v-on:click="openBoardHome" ></b-icon></a></div>
+  <div class="parent">
+    <div class="nav-links">
+          <div class="div1"><a><b-icon  icon="house" font-scale="3" v-on:click="openFormHome" ></b-icon></a></div>
     </div>     
     <div class="nav-links">
         <div class="div2"><a><b-icon icon="kanban" font-scale="3" v-on:click="openBoardPostit"></b-icon></a></div>
@@ -16,54 +12,54 @@
         <div class="div3"> 
             <a><div id="container-S">
                 <input type="text" id="input" >
-                <b-icon id="input_img" icon="search" font-scale="2" v-on:click="openBoardPostit"></b-icon>
+                <b-icon id="input_img" icon="search" font-scale="2" ></b-icon>
             </div> </a>
         </div>
     </div>   
       
- <div class="div3">  <a><div class="dropdown">
-                <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
-                    <div class="dropdown-content">
-                    <a >Profile</a>
-                    <a  v-on:click="logout">Logout</a>
-                    </div>
-        </div> </a>  </div>
-
-</div>
-  <!--<div class="nav">
-         <input type="checkbox" id="nav-check">
-            <div class="nav-btn">
-                <label for="nav-check">
-                <span></span>
-                <span></span>
-                <span></span>
-                </label>
+  <div class="div3">  <a><div class="dropdown">
+    <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
+        <div class="dropdown-content">
+          <a >Profile</a>
+          <a  v-on:click="logout">Logout</a>
         </div>
-    </div>-->
+    </div> </a>  
+  </div>
+  </div>
 
- 
-
-    
+<div class="parent2">
+<div class="div1-2"> 
   
-  
+   <div class="form-homeBoard" id="from-home">
+     
+      <div  class="form-container"> 
+        
+        <div class="div1-2"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
+          <button class="sele-icon"  @click="closeFormHome">X</button>
+        </div>
+           <createBoard/>
+    </div> 
+    </div>
+</div> 
 </div>
-
-
-
 </template>
 <script>
 /* eslint-disable */
 import firebase from "firebase"
 import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
-
+import createBoard from '../createBoard/createBoard'
 export default {
   name: 'navBar',
+  components: {
+    createBoard
+  },
    data (){
     return {
       username: '',
       uid: '',
     }
   },
+  
   
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
@@ -100,7 +96,15 @@ export default {
     },
     profile () {
       alert(this.$store.state.uid + '\n' + this.$store.state.username);
-    }
+    },
+    closeFormHome () {
+      document.getElementById("from-home").style.display = "none"
+    },
+    openFormHome () {
+      document.getElementById("from-home").style.display = "block"
+    },
+    
+  
   }
 }
 </script>
