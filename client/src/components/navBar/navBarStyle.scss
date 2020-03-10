@@ -191,7 +191,7 @@ $fontAsap: 'Asap', sans-serif;
 
 
 //home
-  .form-homeBoard {
+  .form-homeBoard  {
     position: relative;
       display: none;
       overflow: hidden;
@@ -224,7 +224,7 @@ $fontAsap: 'Asap', sans-serif;
       margin-top: -0px;
       margin-left: -30px;
     }
- .sele-icon {
+ .seleHome-icon  {
    position: fixed;
    border-radius: 30px;
    width: 30px;
@@ -233,4 +233,29 @@ $fontAsap: 'Asap', sans-serif;
    margin-left: -40px;
    background-color:$redFire;
  }
-  
+
+
+
+ .form-postit {
+  position: relative;
+  display: none;
+  overflow: hidden;
+  width: 95%;
+  height: 80%; 
+  background-color:$orange; 
+  padding: 30px 10px 30px 30px; 
+  margin-top: 1%;
+  margin-left: 1.5%;
+  border-radius: 10px; 
+  position:fixed;
+  box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+ }
+  .sele-icon {
+  position: fixed;
+   border-radius: 30px;
+   width: 30px;
+   height: 30px;
+   margin-top: -60px;
+   margin-left: -10px;
+   background-color:$redFire;
+  }

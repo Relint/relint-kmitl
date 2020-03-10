@@ -1,0 +1,24 @@
+@import '../Login/mixin.scss';
+.parent12 {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(1, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .div1 { grid-area: 1 / 1 / 4 / 2; }
+    .div2 { grid-area: 1 / 3 / 4 / 4; }
+    .div3 { grid-area: 1 / 9 / 4 / 9; }
+    .div4 { grid-area: 1 / 10/ 4 / 10; }
+
+    hr {
+        border-style: ridge;
+        color: black;
+    }
+    .form-deadline {
+        font-size: 20px;
+    }
+    .form-projectName {
+        font-size: 20px;
+    }

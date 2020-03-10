@@ -2,10 +2,10 @@
     <div>
   <div class="parent">
     <div class="nav-links">
-          <div class="div1"><a><b-icon  icon="house" font-scale="3" v-on:click="openFormHome" ></b-icon></a></div>
+          <div class="div1"><a><b-icon  icon="house" font-scale="3"  ></b-icon></a></div>
     </div>     
     <div class="nav-links">
-        <div class="div2"><a><b-icon icon="kanban" font-scale="3" v-on:click="openBoardPostit"></b-icon></a></div>
+        <div class="div2"><a><b-icon icon="kanban" font-scale="3" v-on:click="openFormPostit"></b-icon></a></div>
     </div>
 
     <div class="nav-links">
@@ -26,21 +26,14 @@
     </div> </a>  
   </div>
   </div>
+ <!--dropdown home-->
+            <createBoard/>
+      
 
-<div class="parent2">
-<div class="div1-2"> 
-  
-   <div class="form-homeBoard" id="from-home">
-     
-      <div  class="form-container"> 
-        
-        <div class="div1-2"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
-          <button class="sele-icon"  @click="closeFormHome">X</button>
-        </div>
-           <createBoard/>
-    </div> 
-    </div>
-</div> 
+
+
+
+
 </div>
 </template>
 <script>
@@ -48,10 +41,12 @@
 import firebase from "firebase"
 import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
 import createBoard from '../createBoard/createBoard'
+import boardPostit from '../boardPostit/boardPostit'
 export default {
   name: 'navBar',
   components: {
-    createBoard
+    createBoard,
+    boardPostit
   },
    data (){
     return {
@@ -103,6 +98,13 @@ export default {
     openFormHome () {
       document.getElementById("from-home").style.display = "block"
     },
+    openFormPostit () {
+      document.getElementById("from-post").style.display = "block"
+    },
+    closeFormPostit () {
+      document.getElementById("from-post").style.display = "none"
+    }
+
     
   
   }

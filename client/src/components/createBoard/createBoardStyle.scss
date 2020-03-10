@@ -1,5 +1,181 @@
+@import '@/components/Login/mixin.scss';
+$greenSeaweed: rgba(2, 128, 144, 1);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgba(244, 91, 105, 1);
+$orange : #f7a79d;
+$bluesky : #a6d4d8;
+$fontAsap: 'Asap', sans-serif;
+
 .container-C {
     background-color: red;
     width:100px;
     height: 100px;
+}
+
+//home
+.form-homeBoard  {
+    position: relative;
+      overflow: hidden;
+      width: 95%;
+      height: 80%; 
+      background-color:$orange; 
+      padding: 30px 10px 30px 30px; 
+      margin-top: 1%;
+      margin-left: 1.5%;
+      border-radius: 10px; 
+      position:fixed;
+      box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+  }
+
+  .parent2 {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .div1-2 { grid-area: 2 / 1 / 7 / 5; }
+    .div1-x { grid-area: 2 / 1 / 3 / 2; }
+   
+    .bghome {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin-top: -0px;
+      margin-left: -30px;
+    }
+
+    .seleHome-icon  {
+        position: fixed;
+        border-radius: 30px;
+        width: 30px;
+        height: 30px;
+        margin-top: -60px;
+        margin-left: -40px;
+        background-color:$redFire;
+      }
+
+.btnNewBoard {
+  position: fixed ;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  border-style: none;
+  background-color: $redFire;
+  font-size: 50px;
+  color: white;
+  margin-top: 20px;
+} 
+
+
+.parent3 {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+}
+.div1-new { grid-area: 2 / 8 / 5 / 9; }
+
+
+
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+
+.dd-button {
+  text-align: center;
+  display: inline-block;
+  position: fixed ;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  border-style: none;
+  background-color: $redFire;
+  font-size: 80px;
+  color: white;
+  margin-top: 20px;
+}
+
+.dd-button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-top: 5px solid black;
+}
+
+.dd-button:hover {
+  background-color: #eeeeee;
+}
+
+.dd-button:hover {
+  animation-name: random-color;
+  animation-duration: 5s;
+}
+@keyframes random-color {
+  0%   {background-color:red; }
+  25%  {background-color:yellow; }
+  50%  {background-color:blue; }
+  75%  {background-color:green; }
+  100% {background-color:red; }
+}
+.dd-input {
+  display: none;
+}
+
+.dd-menu {
+  position: absolute;
+  top: 100%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  padding: 0;
+  margin-top: 30px ;
+  margin-left: -520px;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  background-color: #ffffff;
+  list-style-type: none;
+}
+
+.dd-input + .dd-menu {
+  display: none;
+} 
+
+.dd-input:checked + .dd-menu {
+  display: block;
+} 
+
+.dd-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+.dd-menu li:hover {
+  background-color: #f6f6f6;
+}
+
+.dd-menu li a {
+  display: block;
+  margin: -10px -20px;
+  padding: 10px 20px;
+}
+
+.dd-menu li.divider{
+  padding: 0;
+  border-bottom: 1px solid #cccccc;
+}
+
+
+
+
+.container-setting {
+  width: 500px;
+  height: 300px;
 }
