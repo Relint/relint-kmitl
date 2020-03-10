@@ -1,6 +1,7 @@
 <template>
     <div>
-        <navBar/>
+            
+       <navBar/>
         <createBoard/>
     </div>
 </template>
@@ -9,9 +10,14 @@ import navBar from '../navBar/navBar'
 import createBoard from '../createBoard/createBoard'
 export default {
     name: 'addBoardPostit',
-    components: {
-    navBar,
-    createBoard
-  },
+      components: {
+        navBar,
+        createBoard
+    },
+    data () {
+        return {
+            todos: [{text: 'test', done: false, id: Date.now()}]
+        }
+    },
 }
 </script>
