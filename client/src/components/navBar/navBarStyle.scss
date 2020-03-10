@@ -5,6 +5,12 @@ $redFire: rgba(244, 91, 105, 1);
 $orange : #f7a79d;
 $bluesky : #a6d4d8;
 $fontAsap: 'Asap', sans-serif;
+.brand {
+  display: inline;
+  float: left;
+  margin-top: 10px;
+  margin-left: -20px;
+}
 .nav {
     height: 50px;
     width: 100%;

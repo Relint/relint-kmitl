@@ -1,17 +1,18 @@
 <template>
     <div>
         <navBar/>
-        <createBoard/>
+        <boardPostit/>
     </div>
 </template>
 <script>
 import navBar from '../navBar/navBar'
-import createBoard from '../createBoard/createBoard'
+import boardPostit from '../boardPostit/boardPostit'
+import navBarProject from '../boardPostit/boardPostit'
 export default {
     name: 'addBoardPostit',
     components: {
     navBar,
-    createBoard
+    boardPostit,
   },
 }
 </script>

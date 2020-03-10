@@ -20,20 +20,20 @@
                         <div class="container-setting"></div>
                         <li class="divider"></li>
                         <li>
-                          <button>accept</button>
+                          <button @click='createMainBoard'>accept</button>
                         </li>
                       </ul>
                   </label>
                 </div>
-              
-  
-              
+
+
+
               </div>
-              
+
           </div>
       </div> 
     </div>
-      
+
 
 
   </div> 
@@ -56,6 +56,7 @@ export default {
   },
   methods: {
     createMainBoard () {
+      this.$router.push('/addBoardPostit')
     }
   }
   

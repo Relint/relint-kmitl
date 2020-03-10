@@ -2,10 +2,10 @@
     <div>
   <div class="parent">
     <div class="nav-links">
-          <div class="div1"><a><b-icon  icon="house" font-scale="3"  ></b-icon></a></div>
+          
     </div>     
     <div class="nav-links">
-        <div class="div2"><a><b-icon icon="kanban" font-scale="3" v-on:click="openFormPostit"></b-icon></a></div>
+        <div class="div2"><h1 class="brand">RELINT</h1></div>
     </div>
 
     <div class="nav-links">
@@ -27,7 +27,7 @@
   </div>
   </div>
  <!--dropdown home-->
-            <createBoard/>
+        
       
 
 

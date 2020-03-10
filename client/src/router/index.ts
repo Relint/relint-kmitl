@@ -4,6 +4,8 @@ import login from '@/components/Login/login.vue'
 import addBoard from '@/components/addBoard/addBoard.vue'
 import navBar from '@/components/navBar/navBar.vue'
 import createBoard from '@/components/createBoard/createBoard.vue'
+import boardPostit from '@/components/boardPostit/boardPostit.vue'
+import addBoardPostit from '@/components/addBoard/addBoardPostit.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,6 +28,16 @@ const routes = [
     path: '/createBoard',
     name: 'createBoard',
     component: createBoard
+  },
+  {
+    path: '/boardPostit',
+    name: 'boardPostit',
+    component: boardPostit
+  },
+  {
+    path: '/addBoardPostit',
+    name: 'addBoardPostit',
+    component: addBoardPostit
   }
 ]
 
