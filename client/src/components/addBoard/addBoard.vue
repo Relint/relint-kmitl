@@ -1,11 +1,10 @@
 <template>
     <div>
         
-                 
-               
+     
 
       <navBar/>
-        <createBoard/>
+      <createBoard/>
     </div>
 </template>
 <script>
@@ -19,9 +18,12 @@ export default {
     },
     data () {
         return {
+          num:0,
+          create: [{numm:0
+            }]
         }
     },
-   
+    
   
 }
 </script>

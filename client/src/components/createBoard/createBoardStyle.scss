@@ -6,14 +6,22 @@ $orange : #f7a79d;
 $bluesky : #a6d4d8;
 $fontAsap: 'Asap', sans-serif;
 
-.container-C {
-    background-color: red;
-    width:100px;
-    height: 100px;
-}
 
-//home
-.form-homeBoard  {
+
+.parent-bg {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(6, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+ 
+  }
+  
+  .div1-bg { grid-area: 2 / 1 / 7 / 5; }
+  .div1-x { grid-area: 2 / 1 / 3 / 2; }
+
+//bg
+  .form-homeBoard  {
     position: relative;
       overflow: hidden;
       width: 95%;
@@ -25,184 +33,82 @@ $fontAsap: 'Asap', sans-serif;
       border-radius: 10px; 
       position:fixed;
       box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
-      
+  }
+  .bghome {
+   // background-color: red;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    margin-top: -0px;
+    margin-left: -30px;
   }
 
-
-.form-container2 {
-  position: fixed;
-  /*overflow-y: scroll;
-  scrollbar-width: thin;
-  padding: 20px;*/
-}
-
-#list-scroll::-webkit-scrollbar
-{
-	width: 12px;
-  background-color: #F5F5F5;
-  border-radius: 30px;
-}
-#list-scroll::-webkit-scrollbar-thumb
-{
-	border-radius: 30px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
-}
-
-
-
-
-
-  .parent2 {
+  //project setting
+  .parent-project {
     display: grid;
-    grid-template-columns: repeat(4, 1fr);
-    grid-template-rows: repeat(6, 1fr);
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(15, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
-   
-    }
-    
-    .div1-2 { grid-area: 2 / 1 / 7 / 5; }
-    .div1-x { grid-area: 2 / 1 / 3 / 2; }
-   
-    .bghome {
-      position: absolute;
-      width: 100%;
-      height: 100%;
-      margin-top: -0px;
-      margin-left: -30px;
-    }
+  }
+  .div1-pj { grid-area: 2 / 8 / 5 / 9; }
 
-    .seleHome-icon  {
-        position: fixed;
-        border-radius: 30px;
-        width: 30px;
-        height: 30px;
-        margin-top: -50px;
-        margin-left: -40px;
-        background-color:$redFire;
-      }
-
-.btnNewBoard {
-  position: fixed ;
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
-  border-style: none;
-  background-color: $redFire;
-  font-size: 50px;
-  color: white;
-  margin-top: 20px;
-} 
-
-
-.parent3 {
-  display: grid;
-  grid-template-columns: repeat(10, 1fr);
-  grid-template-rows: repeat(15, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-}
-.div1-new { grid-area: 2 / 8 / 5 / 9; }
-
-
-
-
-.dropdown {
-  display: inline-block;
-  position: relative;
-}
-
-.dd-button {
-  text-align: center;
-  display: inline-block;
-  position: fixed ;
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
-  border-style: none;
-  background-color: $redFire;
-  font-size: 80px;
-  color: white;
-  margin-top: 20px;
-}
-
-.dd-button:after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  width: 0; 
-  height: 0; 
-  border-top: 5px solid black;
-}
-
-.dd-button:hover {
-  background-color: #eeeeee;
-}
-
-.dd-button:hover {
-  animation-name: random-color;
-  animation-duration: 5s;
-}
-@keyframes random-color {
-  0%   {background-color:red; }
-  25%  {background-color:yellow; }
-  50%  {background-color:blue; }
-  75%  {background-color:green; }
-  100% {background-color:red; }
-}
-
-
-.dd-menu {
-  position: absolute;
-  top: 100%;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 0;
-  margin-top: 30px ;
-  margin-left: -480px;
-  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  //+//-------------------------------------------------------------------
+  .dropdown {
+    display: inline-block;
+    position: relative;
+  }
+  .dd-button {
+    text-align: center;
+    display: inline-block;
+    position: fixed ;
+    width: 100px;
+    height: 100px;
+    border-radius: 100px;
+    border-style: none;
+    background-color: $redFire;
+    font-size: 80px;
+    color: white;
+    margin-top: 20px;
+  }
+  .dd-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+    width: 0; 
+    height: 0; 
+    border-top: 5px solid black;
+  }
   
-  background-color: greenyellow;
-  list-style-type: none;
-}
-
-.dd-input + .dd-menu {
-  display: none;
-} 
-.dd-input + .dd-menu {
-  display: block;
-} 
-.dd-menu li {
-  padding: 10px 20px;
-  cursor: pointer;
-  white-space: nowrap;
-}
-
-.dd-menu li:hover {
-  background-color: #f6f6f6;
-}
-
-.dd-menu li a {
-  display: none;
-  margin: -10px -20px;
-  padding: 10px 20px;
-}
-
-
-
+  .dd-button:hover {
+    background-color: #eeeeee;
+  }
+  
+  .dd-button:hover {
+    animation-name: random-color;
+    animation-duration: 5s;
+  }
+  @keyframes random-color {
+    0%   {background-color:red; }
+    25%  {background-color:yellow; }
+    50%  {background-color:blue; }
+    75%  {background-color:green; }
+    100% {background-color:red; }
+  }
+  
+//invite//------------------------------------------------------------
 .container-setting {
-  width: 410px;
-  height: 250px;
-  border-radius: 20px;
-  background-color: red;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  padding: 20px;
-}
-
+    width: 410px;
+    height: 250px;
+    border-radius: 20px;
+    background-color: red;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    padding: 20px;
+  }
+  
 #style-scroll::-webkit-scrollbar
 {
 	width: 12px;
@@ -232,22 +138,80 @@ $fontAsap: 'Asap', sans-serif;
   /*.div5-s { grid-area: 2 / 2 / 2 / 3; }
   .div6-s { grid-area: 3 / 2 / 2 / 3; }*/
 
-
-
-
-.projectBoardStyle {
-  position: relative;
-  width: 400px;
-  height: 200px;
-  background-color: white;
-}
-
-  .btnProject {
+  .dd-menu {
     position: absolute;
+    top: 100%;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 0;
+    margin-top: 30px ;
+    margin-left: -480px;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    
+    background-color: greenyellow;
+    list-style-type: none;
   }
-.btnProjectDelete {
-  position: absolute;
-  margin-left: 70px;
-}
-
   
+  .dd-input + .dd-menu {
+    display: none;
+  } 
+  .dd-input + .dd-menu {
+    display: block;
+  } 
+  .dd-menu li {
+    padding: 10px 20px;
+    cursor: pointer;
+    white-space: nowrap;
+  }
+
+
+  //create/----------------------------------------------------------------
+  .parent-create {
+    display: grid;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(12, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    }
+    
+    .div1-c { grid-area: 3 / 1 / 7 / 3; }
+    .div2-c { grid-area: 8 / 1 / 12 / 3; }
+    .div3-c { grid-area: 3 / 4 / 7 / 6; }
+    .div4-c { grid-area: 8 / 4 / 12 / 6; }
+
+
+    .form-container2 {
+      position: fixed;
+      /*overflow-y: scroll;
+      scrollbar-width: thin;
+      padding: 20px;*/
+    }
+    
+    #list-scroll::-webkit-scrollbar
+    {
+      width: 12px;
+      background-color: #F5F5F5;
+      border-radius: 30px;
+    }
+    #list-scroll::-webkit-scrollbar-thumb
+    {
+      border-radius: 30px;
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+      background-color: #555;
+    }
+
+    .projectBoardStyle {
+      position: relative;
+      width: 400px;
+      height: 200px;
+      background-color: white;
+    }
+    
+      .btnProject {
+        position: absolute;
+      }
+    .btnProjectDelete {
+      position: absolute;
+      margin-left: 70px;
+    }
+    
