@@ -2,81 +2,97 @@
 <div>
 
   <!--dropdown home-->
-  <div class="parent2">
-    <div class="div1-2"> 
+<div class="parent2">
+  <div class="div1-2" > 
     <div class="form-homeBoard" id="from-home">
-        <div  class="form-container"> 
+        <div  class="form-container"   > 
           <div class="div1-2"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
            <!-- <div class="seleHome-icon"></div>-->
-          </div>
-
-
-
- 
-
-
-              <div class="parent3">
+          <!-- newBoard-->
+           
+        </div>
+        <div class="form-container2" id="list-scroll"  >
+            
+                <div v-for="project in createProject" :key="project.id" > 
+                
+                  <div class="projectBoardStyle" v-if=" countProjevt>0&&countProjevt<=2">
+                              {{project.projectName}}<br>
+                              {{project.deadline}}<br>
+                              {{project.statusProject}}<br>
+                          <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
+                          <button class="btnProjectDelete" @click="deleteBoard(project.id)"> delete  </button>
+                  </div>
+                  
+                              
+               
+                </div>
+                
+           </div>
+            <div class="parent3">
                 <div class="div1-new">
-
+                  <!--setting-->
                   <label  class="dropdown">
                     <div @click="openFormSetting" class="dd-button">+</div>
                         
                          <ul id="form-setting"  class="dd-menu">
-
-
+                          <div class="container-setting" id="style-scroll">    
                             <div class="parent-setting">
-                              <div class="div1-s"><input type="text" placeholder="Project Name"> </div>
-                              <div class="div2-s"><input type="text" placeholder="Deadline"></div>
-                              <div class="div3-s"><input type="text" placeholder="Description"> </div>
+                              <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
+                              <div class="div2-s"><input type="text" placeholder="Deadline"  v-model="deadlineIn"></div>
+                              <div class="div3-s"><input type="checkbox" placeholder="Description"  v-model="statusProjectIn"> done</div>
+                              
                               <div class="div4-s">
-              
-             
-         e   
-
-            <input type="text" class="nes-input" placeholder="invite" v-on:keyup.enter="addMember">  
-            <ul>
-                <li v-for="invite in invites" :key="invite.id" >
-                <label>
-                    <input type="checkbox" class="nes-checkbox" v-model="invite.done">
-                    <span>&nbsp;</span>
-                </label>
-                <del v-if="invite.done">{{ invite.projectName  }}</del>
-                <span v-else>{{ invite.projectName  }}</span>
-                <div class="space"></div>
-                <button class="nes-btn is-error padding" v-on:click="removeTodo(invite.id)">X</button>
-                </li>
-            </ul>
-                 
-            
+                                iam an admin
                               </div>
-                              <div class="div5-s">5 </div>
-                              <div class="div6-s"> 6</div>
-                              <div class="div5-s">5 </div>
-                              <div class="div6-s"> 6</div>                  
-                                  
-                     
+                               
+                              <div class="div5-s" >
+                                  <!--show-->
+                                  <div v-if=" countMember>0">
+                                    <div v-for="invite in invites" :key="invite.id" > 
+                                    <div >
+                                      <div> 
+                                        {{ invite.email  }}
+                                        {{ invites.priority }}
+                                        {{ invites.status  }}
+                                        <button class="nes-btn is-error padding" v-on:click="removeTodo(invite.id)">remove</button>
+                                      </div> 
+                                    </div>  
+                                    </div> 
+                                  </div>
+                                  <div v-else > </div> 
+                              
+                                  <!--input-->
+                                    <ul  id="form-invite" >
+                                      <div >
+                                      <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" >
+                                          <br>
+                                          <input type="radio" name="invites" value="coAdmin" v-model="priorityVal">CoAdmin
+                                          <input type="radio" name="invites" value="member" v-model="priorityVal">Member <br>
+                                          <button  class="nes-btn is-error padding" v-on:click="addMember">ok</button>
+                                      {{countMember}}
+                                      </div>
+                                    </ul> 
+                                </div>     
                             </div>
-          
-                            <div class="container-setting"></div>
-                            <li class="divider"></li>
+                          </div>
                             <li>
                               <button @click='createMainBoard'>accept</button>
                               <button @click='closeFormSetting'>cancel</button>
                             </li>
                          </ul>
-                  </label>
+                </label>
 
-                </div>
+              </div>
               </div>
           </div>
       </div> 
-    </div>
+  </div>
 
 
-    
-  </div> 
-  
- 
+
+
+
+</div> 
 </template>
 <script  >
 /* eslint-disable */
@@ -92,27 +108,73 @@ export default {
   },
 data () {
         return {
-            invites: [{projectName: 'test', done: false, id: Date.now()}]
+            projectNameIn:'',
+            deadlineIn:'',
+            statusProjectIn:false,
+            countMember:0,
+            countProjevt:0,
+            createProject :[{ projectName:'',
+                          deadline:'',
+                          statusProject:false,
+                          id: Date.now()
+            }],
+            emailIn:'',
+            priorityVal:0,
+            statusIn:false,
+            invites: [{email:'',
+                       priority:0,
+                       status:false,
+                       id: Date.now()
+            }]
         }
     },
   
   methods: {
+    //project
     createMainBoard () {
-     // this.$router.push('/addBoardPostit')
+       document.getElementById('form-setting').style.display ="none"
+       this.createProject.push({
+                          projectName:this.projectNameIn,
+                          deadline:this.deadlineIn,
+                          statusProject:this.statusProjectIn
+                          })
+       this.countProjevt+=1
+     
+    },
+    goBoardPostit () {
+       this.$router.push('/addBoardPostit')
+    },
+    deleteBoard (id) {
+       this.createProject = this.createProject.filter(project => project.id !== id)
+        this. countProjevt-=1
     },
     openFormSetting () {
         document.getElementById('form-setting').style.display="block"
     },
     closeFormSetting () {
       document.getElementById('form-setting').style.display ="none"
+    }, 
+
+
+    //invite
+    openFormInvite () {
+      document.getElementById('form-invite').style.display="block"
     },
-  addMember({target}) {
-            this.invites.push({projectName: target.value, done: false, id: Date.now()})
-            target.value = ''
-        },
-        removeTodo(id) {
-            this.invites = this.invites.filter(invite => invite.id !== id)
-        }
+    addMember ({target}) {
+        
+        this.invites.push({ email:this.emailIn,
+                            priority:this.priorityVal,
+                            status:this.statusIn,
+                            id: Date.now()
+                          })
+            this. countMember+=1
+            this.emailIn = ''
+    },
+    removeTodo (id) {
+        this.invites = this.invites.filter(invite => invite.id !== id)
+        this. countMember-=1
+    },
+   
     
   }
   

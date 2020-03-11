@@ -1,7 +1,10 @@
 <template>
     <div>
-            
-       <navBar/>
+        
+                 
+               
+
+      <navBar/>
         <createBoard/>
     </div>
 </template>
@@ -16,8 +19,9 @@ export default {
     },
     data () {
         return {
-            todos: [{text: 'test', done: false, id: Date.now()}]
         }
     },
+   
+  
 }
 </script>
