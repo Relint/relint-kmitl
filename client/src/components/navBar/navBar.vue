@@ -20,7 +20,14 @@
   <div class="div3">  <a><div class="dropdown">
     <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
         <div class="dropdown-content">
+          <div class="contain-showName"> 
+            <label >Hello</label>
+             <span class="showName" v-html="username" ></span>
+          </div>
+         
+           
           <a >Profile</a>
+           
           <a  v-on:click="logout">Logout</a>
         </div>
     </div> </a>  

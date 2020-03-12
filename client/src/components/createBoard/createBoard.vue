@@ -15,7 +15,7 @@
                <div class="form-container2" id="list-scroll"  >
                       <!--1-->
                       <!-- eslint-disable -->
-                      <div v-for="(project,index) in createProject" :key="project.pid"  > 
+                      <div v-for="(project,index) in project" :key="project.pid"  > 
                         <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
                                     {{project.projectName}}    index: {{index}}<br>
                                     {{project.deadline}}<br>
@@ -59,7 +59,7 @@
                                       {{ invite.email  }}
                                       {{ invites.priority }}
                                       {{ invites.status  }}
-                                      <button class="nes-btn is-error padding" v-on:click="removeTodo(invite.uid)">remove</button>
+                                      <button class="nes-btn is-error padding" v-on:click="removeMenber(invite.uid)">remove</button>
                                     </div> 
                                  
                                   </div> 
@@ -69,8 +69,8 @@
                                       <div >
                                       <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" >
                                           <br>
-                                          <input type="radio" name="invites" value="coAdmin" v-model="priorityVal">CoAdmin
-                                          <input type="radio" name="invites" value="member" v-model="priorityVal">Member <br>
+                                          <input type="radio" name="invites" value="coAdmin" v-model="priority">CoAdmin
+                                          <input type="radio" name="invites" value="member" v-model="priority">Member <br>
                                           <button  class="nes-btn is-error padding" v-on:click="addMember(uid)">ok</button>
                                       {{countMember}}
                                       </div>
@@ -114,21 +114,13 @@ export default {
   },
 data () {
         return {
-            shiftLeft:0,
-            dwidth:400,
-            num:0,
-            numAdd:0,
-            numShow:0,
-            checkState:false,
             projectNameIn:'',
             deadlineIn:'',
             statusProjectIn:false,
-            countMember:0,
-            countProject:0,
             
-            createProject :[],
+            project :[],
             emailIn:'',
-            priorityVal:0,
+            priority:0,
             statusIn:false,
             invites: [],
             temp0:[],
@@ -211,14 +203,14 @@ data () {
     },
     showObject (pid) {
           
-          this.createProject=[]
+          this.project=[]
           this.temp2.forEach(element => {
-            this.createProject.push(element)
+            this.project.push(element)
           });
       
     },
     deleteBoardV2 (pid) {
-      this.createProject = this.createProject.filter(project => {
+      this.project = this.project.filter(project => {
          return project.pid !== pid
          })
     },
@@ -227,7 +219,7 @@ data () {
     //project
     createMainBoard () {
        document.getElecreateMainBoardmentById('form-setting').style.display ="none"
-       this.createProject.push({
+       this.project.push({
                           projectName:this.projectNameIn,
                           deadline:this.deadlineIn,
                           statusProject:this.statusProjectIn
@@ -239,7 +231,7 @@ data () {
        this.$router.push('/addBoardPostit')
     },
     deleteBoard (pid) {
-       this.createProject = this.createProject.filter(project => {
+       this.project = this.project.filter(project => {
          return project.pid !== pid
          })
       
@@ -262,16 +254,19 @@ data () {
         this.invites.push({ 
                             uid:'d'+this.invites.length,
                             email:this.emailIn,
-                            priority:this.priorityVal,
+                            priority:this.priority,
                             status:this.statusIn,
                             
                           })
         
             this.emailIn = ''
     },
-    removeTodo (uid) {
+    removeMenber (uid) {
+
+
+
          this.invites = this.invites.filter(invite => {
-         return invites.uid !== uid
+         return invite.uid !== uid
          })
         
     },
