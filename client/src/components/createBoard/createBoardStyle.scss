@@ -200,13 +200,15 @@ $fontAsap: 'Asap', sans-serif;
       background-color: #555;
     }
 
-    
+
     .projectBoardStyle {
-      position: relative;
+      position: absolute;
       width: 400px;
       height: 200px;
       background-color:red;
     }
+  
+
     
       .btnProject {
         position: absolute;
@@ -216,3 +218,51 @@ $fontAsap: 'Asap', sans-serif;
       margin-left: 70px;
     }
     
+
+
+    #whiteBoard {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    
+   #addPostIt{
+     position: relative;
+   } 
+    .postIt {
+      line-height: 1;
+      text-align: center;
+      margin: 25px;
+      width: 275px;
+      min-height: 245px; /* setting min/max params will keep the height steady */
+      max-height: 245px;
+    
+      padding-top: 35px; /* room for the sticky */
+      position: relative;
+      border: 1px solid #e8e8e8;
+      border-top: 60px solid #fdfd86;
+      font-family: 'Reenie Beanie', cursive;
+      font-size: 48px;
+      border-bottom-right-radius: 60px 5px;
+      display: inline-block;
+      box-sizing: border-box;/* phew! if the padding is adding to the size, remember this trick!!! */
+      /* background: #ffff88; */
+      background: linear-gradient(
+        134deg,
+        #ffff88 81%,
+        #ffff88 82%,
+        #ffff88 82%,
+        #ffffc6 100%
+      ); /* assuming the consortiums have ironed all this stuff out - I guess we'll see. Four sections... gawd NOW I see. Details, details - very subtle*/
+    }
+    .postIt:after {
+      content: "";
+      position: absolute;
+      z-index: -1;
+      right: -0px;
+      bottom: 20px;
+      width: 200px;
+      height: 25px;
+      background: rgba(0, 0, 0, 0.2);
+      box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
+      transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    }

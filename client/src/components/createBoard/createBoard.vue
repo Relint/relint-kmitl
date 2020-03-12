@@ -12,29 +12,26 @@
             </div><!--form-container-->
 
             <!--project create------------------------------------------------------->
-            
-            <div class="parent-create">
-             
-              <div class="div1-c">
-                  <div class="form-container2" id="list-scroll"  >
+               <div class="form-container2" id="list-scroll"  >
                       <!--1-->
                       <!-- eslint-disable -->
                       <div v-for="(project,index) in createProject" :key="project.pid"  > 
-                        <div class="projectBoardStyle"  >
+                        <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
                                     {{project.projectName}}    index: {{index}}<br>
                                     {{project.deadline}}<br>
                                     {{project.statusProject}}<br>
-                                    
                                 <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
                                <button class="btnProjectDelete" @click="deleteBoardV2(project.pid)"> delete  </button>
                         </div>
                       </div>
                      
                   </div><!--form-container2-->
-                </div>
-                <div class="div2-c">2</div>
-                <div class="div3-c">3</div>
-                <div class="div4-c">4</div>
+          
+               <div class="parent-create">
+                <div class="div1-c"> </div>
+                <div class="div2-c"></div>
+                <div class="div3-c"></div>
+                <div class="div4-c"></div>
               
             </div><!--parent-create------------------------------------------------------->
             <!--project setting------------------------------------------------------->
@@ -117,6 +114,8 @@ export default {
   },
 data () {
         return {
+            shiftLeft:0,
+            dwidth:400,
             num:0,
             numAdd:0,
             numShow:0,
@@ -137,11 +136,13 @@ data () {
               {
                 pid:'P1',
                 projectName:'projectname1.1 ',
+                deadline:'deadline',
                 status:false
               },
               {
                 pid:'P2',
                 projectName:'projectname1.2 ',
+                deadline:'deadline',
                 status:false
               }
             
@@ -150,16 +151,19 @@ data () {
               {
                 pid:'P1',
                 projectName:'projectname2.1 ',
+                deadline:'deadline',
                 status:false
               },
                {
                 pid:'P2',
                 projectName:'projectname2.2 ',
+                deadline:'deadline',
                 status:false
                },
                 {
                 pid:'P3',
                 projectName:'projectname2.3 ',
+                deadline:'deadline',
                 status:false
                },
             ],
@@ -167,26 +171,31 @@ data () {
               {
                 pid:'P1',
                 projectName:'projectname3.1 ',
+                deadline:'deadline',
                 status:false
               },
               {
                 pid:'P2',
                 projectName:'projectname3.2 ',
+                deadline:'deadline',
                 status:false
               },
               {
                 pid:'P3',
                 projectName:'projectname3.3 ',
+                deadline:'deadline',
                 status:false
               },
               {
                 pid:'P4',
                 projectName:'projectname3.4 ',
+                deadline:'deadline',
                 status:false
               },
                {
                 pid:'P5',
                 projectName:'projectname3.5 ',
+                deadline:'deadline',
                 status:false
               },
             
@@ -201,10 +210,9 @@ data () {
  
     },
     showObject (pid) {
-        
-          this.createProject=[]
           
-          this.temp1.forEach(element => {
+          this.createProject=[]
+          this.temp2.forEach(element => {
             this.createProject.push(element)
           });
       
