@@ -1,6 +1,9 @@
 <template>
   <div>
-    <!--dropdowm-->
+   
+     
+
+     <!--dropdowm-->
     <div class="parent-bg">
        <div class="div1-bg" >
           <div class="form-homeBoard" id="from-home">
@@ -9,22 +12,25 @@
             </div><!--form-container-->
 
             <!--project create------------------------------------------------------->
+            
             <div class="parent-create">
+             
               <div class="div1-c">
                   <div class="form-container2" id="list-scroll"  >
-                    <div v-if=" countProjevt>0" >
-                      <div v-for="project in createProject" :key="project.iv" > 
-                      <div class="projectBoardStyle"  >
-                                  {{project.projectName}}<br>
-                                  {{project.deadline}}<br>
-                                  {{project.statusProject}}<br>
-                              <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
-                              <button class="btnProjectDelete" @click="deleteBoard(project.iv)"> delete  </button>
+                      <!--1-->
+                      <!-- eslint-disable -->
+                      <div v-for="(project,index) in createProject" :key="project.pid"  > 
+                        <div class="projectBoardStyle"  >
+                                    {{project.projectName}}    index: {{index}}<br>
+                                    {{project.deadline}}<br>
+                                    {{project.statusProject}}<br>
+                                    
+                                <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
+                               <button class="btnProjectDelete" @click="deleteBoardV2(project.pid)"> delete  </button>
+                        </div>
                       </div>
-                    </div>
-                    </div>
-                    
-                  </div>
+                     
+                  </div><!--form-container2-->
                 </div>
                 <div class="div2-c">2</div>
                 <div class="div3-c">3</div>
@@ -35,6 +41,10 @@
             <div class="parent-project">
               <div class="div1-pj">
                 <label  class="dropdown">
+
+                  <button @click="addObject(pid)">add</button>
+                  <button  @click="showObject(pid) ">show</button>
+
                    <div @click="openFormSetting" class="dd-button">+</div>
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
@@ -45,19 +55,18 @@
                             <div class="div4-s">iam an admin</div>
                             <div class="div5-s" >
                               <!--show-->
-                                <div v-if=" countMember>0">
-                                  <div v-for="invite in invites" :key="invite.id" > 
+                                
+                                  <div v-for="invite in invites" :key="invite.uid" > 
                                   
                                     <div> 
                                       {{ invite.email  }}
                                       {{ invites.priority }}
                                       {{ invites.status  }}
-                                      <button class="nes-btn is-error padding" v-on:click="removeTodo(invite.id)">remove</button>
+                                      <button class="nes-btn is-error padding" v-on:click="removeTodo(invite.uid)">remove</button>
                                     </div> 
                                  
                                   </div> 
-                                </div>
-                                <div v-else > </div> 
+                                
                                   <!--input-->
                                     <div  id="form-invite" >
                                       <div >
@@ -65,7 +74,7 @@
                                           <br>
                                           <input type="radio" name="invites" value="coAdmin" v-model="priorityVal">CoAdmin
                                           <input type="radio" name="invites" value="member" v-model="priorityVal">Member <br>
-                                          <button  class="nes-btn is-error padding" v-on:click="addMember">ok</button>
+                                          <button  class="nes-btn is-error padding" v-on:click="addMember(uid)">ok</button>
                                       {{countMember}}
                                       </div>
                                     </div> 
@@ -73,9 +82,10 @@
                         </div>
                       </div><!--container-setting"-->
                         <li>
-                          <button @click='createMainBoard'>accept</button>
+                          <button @click='createMainBoard' >accept</button>
                           <button @click='closeFormSetting'>cancel</button>
                         </li>
+                        
                     </div><!--dd-menu-->
                 </label><!--dropdown-->
               </div>
@@ -107,45 +117,126 @@ export default {
   },
 data () {
         return {
+            num:0,
+            numAdd:0,
+            numShow:0,
+            checkState:false,
             projectNameIn:'',
             deadlineIn:'',
             statusProjectIn:false,
             countMember:0,
-            countProjevt:0,
-            createProject :[{ projectName:'',
-                          deadline:'',
-                          statusProject:false,
-                          id: Date.now()
-            }],
+            countProject:0,
+            
+            createProject :[],
             emailIn:'',
             priorityVal:0,
             statusIn:false,
-            invites: [{email:'',
-                       priority:0,
-                       status:false,
-                       id: Date.now()
-            }]
+            invites: [],
+            temp0:[],
+            temp1: [
+              {
+                pid:'P1',
+                projectName:'projectname1.1 ',
+                status:false
+              },
+              {
+                pid:'P2',
+                projectName:'projectname1.2 ',
+                status:false
+              }
+            
+            ],
+            temp2: [
+              {
+                pid:'P1',
+                projectName:'projectname2.1 ',
+                status:false
+              },
+               {
+                pid:'P2',
+                projectName:'projectname2.2 ',
+                status:false
+               },
+                {
+                pid:'P3',
+                projectName:'projectname2.3 ',
+                status:false
+               },
+            ],
+            temp3: [
+              {
+                pid:'P1',
+                projectName:'projectname3.1 ',
+                status:false
+              },
+              {
+                pid:'P2',
+                projectName:'projectname3.2 ',
+                status:false
+              },
+              {
+                pid:'P3',
+                projectName:'projectname3.3 ',
+                status:false
+              },
+              {
+                pid:'P4',
+                projectName:'projectname3.4 ',
+                status:false
+              },
+               {
+                pid:'P5',
+                projectName:'projectname3.5 ',
+                status:false
+              },
+            
+            ],
+          
         }
     },
   
   methods: {
+    //test
+    addObject (pid) {
+ 
+    },
+    showObject (pid) {
+        
+          this.createProject=[]
+          
+          this.temp1.forEach(element => {
+            this.createProject.push(element)
+          });
+      
+    },
+    deleteBoardV2 (pid) {
+      this.createProject = this.createProject.filter(project => {
+         return project.pid !== pid
+         })
+    },
+
+
     //project
     createMainBoard () {
-       document.getElementById('form-setting').style.display ="none"
+       document.getElecreateMainBoardmentById('form-setting').style.display ="none"
        this.createProject.push({
                           projectName:this.projectNameIn,
                           deadline:this.deadlineIn,
                           statusProject:this.statusProjectIn
                           })
-       this.countProjevt+=1
+       this.countProject+=1
      
     },
     goBoardPostit () {
        this.$router.push('/addBoardPostit')
     },
-    deleteBoard (iv) {
-       this.createProject = this.createProject.filter(project => project.iv !== iv)
-        this. countProjevt-=1
+    deleteBoard (pid) {
+       this.createProject = this.createProject.filter(project => {
+         return project.pid !== pid
+         })
+      
+       
+        this. countProject-=1
     },
     openFormSetting () {
         document.getElementById('form-setting').style.display="block"
@@ -159,19 +250,22 @@ data () {
     openFormInvite () {
       document.getElementById('form-invite').style.display="block"
     },
-    addMember ({target}) {
-        
-        this.invites.push({ email:this.emailIn,
+    addMember (uid) {
+        this.invites.push({ 
+                            uid:'d'+this.invites.length,
+                            email:this.emailIn,
                             priority:this.priorityVal,
                             status:this.statusIn,
-                            id: Date.now()
+                            
                           })
-            this. countMember+=1
+        
             this.emailIn = ''
     },
-    removeTodo (id) {
-        this.invites = this.invites.filter(invite => invite.id !== id)
-        this. countMember-=1
+    removeTodo (uid) {
+         this.invites = this.invites.filter(invite => {
+         return invites.uid !== uid
+         })
+        
     },
    
     
