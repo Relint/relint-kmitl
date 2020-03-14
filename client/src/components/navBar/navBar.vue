@@ -21,7 +21,7 @@
     <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
         <div class="dropdown-content">
           <div class="contain-showName"> 
-            <label >Hello</label>
+            <label >Hello,</label>
              <span class="showName" v-html="username" ></span>
           </div>
          

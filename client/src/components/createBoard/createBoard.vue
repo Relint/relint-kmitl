@@ -17,11 +17,11 @@
                       <!-- eslint-disable -->
                       <div v-for="(project,index) in project" :key="project.pid"  > 
                         <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
-                                    {{project.projectName}}    index: {{index}}<br>
+                                    {{project.title}}    index: {{index}}<br>
                                     {{project.deadline}}<br>
                                     {{project.statusProject}}<br>
                                 <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
-                               <button class="btnProjectDelete" @click="deleteBoardV2(project.pid)"> delete  </button>
+                               <button class="btnProjectDelete" @click="deleteBoard(project.pid)"> delete  </button>
                         </div>
                       </div>
                      
@@ -38,17 +38,13 @@
             <div class="parent-project">
               <div class="div1-pj">
                 <label  class="dropdown">
-
-                  <button @click="addObject(pid)">add</button>
-                  <button  @click="showObject(pid) ">show</button>
-
-                   <div @click="openFormSetting" class="dd-button">+</div>
+                  <div><button  @click="showObject">show</button></div>
+                  <div @click="openFormSetting" class="dd-button">+</div>
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
                         <div class="parent-setting">
                             <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s"><input type="text" placeholder="Deadline"  v-model="deadlineIn"></div>
-                            <div class="div3-s"><input type="checkbox" placeholder="Description"  v-model="statusProjectIn"> done</div>
+                            <div class="div2-s"><input type="date" placeholder="Deadline"  id='deadline' v-model="deadlineIn"></div>
                             <div class="div4-s">iam an admin</div>
                             <div class="div5-s" >
                               <!--show-->
@@ -57,8 +53,7 @@
                                   
                                     <div> 
                                       {{ invite.email  }}
-                                      {{ invites.priority }}
-                                      {{ invites.status  }}
+                                      {{ invites.authority }}
                                       <button class="nes-btn is-error padding" v-on:click="removeMenber(invite.uid)">remove</button>
                                     </div> 
                                  
@@ -69,10 +64,12 @@
                                       <div >
                                       <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" >
                                           <br>
-                                          <input type="radio" name="invites" value="coAdmin" v-model="priority">CoAdmin
-                                          <input type="radio" name="invites" value="member" v-model="priority">Member <br>
-                                          <button  class="nes-btn is-error padding" v-on:click="addMember(uid)">ok</button>
-                                      {{countMember}}
+                                          <select @change='onChange' id='selector'>
+                                            <option v-for="(opt, index) in opts" :key="index" :value="opt.value">
+                                              {{ opt.text }}
+                                            </option>
+                                          </select><br>
+                                          <button  class="nes-btn is-error padding" v-on:click="addMember">ok</button>
                                       </div>
                                     </div> 
                             </div>
@@ -116,24 +113,30 @@ data () {
         return {
             projectNameIn:'',
             deadlineIn:'',
-            statusProjectIn:false,
             
             project :[],
+
             emailIn:'',
-            priority:0,
-            statusIn:false,
+            authority:0,
             invites: [],
+
+            opts: [
+              { value: 0, text: '--Choose Member Type--'},
+              { value: 1, text: 'Co-Admin' },
+              { value: 2, text: 'Member' },
+            ],
+
             temp0:[],
             temp1: [
               {
                 pid:'P1',
-                projectName:'projectname1.1 ',
+                title:'projectname1.1 ',
                 deadline:'deadline',
                 status:false
               },
               {
                 pid:'P2',
-                projectName:'projectname1.2 ',
+                title:'projectname1.2 ',
                 deadline:'deadline',
                 status:false
               }
@@ -142,19 +145,19 @@ data () {
             temp2: [
               {
                 pid:'P1',
-                projectName:'projectname2.1 ',
+                title:'projectname2.1 ',
                 deadline:'deadline',
                 status:false
               },
                {
                 pid:'P2',
-                projectName:'projectname2.2 ',
+                title:'projectname2.2 ',
                 deadline:'deadline',
                 status:false
                },
                 {
                 pid:'P3',
-                projectName:'projectname2.3 ',
+                title:'projectname2.3 ',
                 deadline:'deadline',
                 status:false
                },
@@ -162,31 +165,31 @@ data () {
             temp3: [
               {
                 pid:'P1',
-                projectName:'projectname3.1 ',
+                title:'projectname3.1 ',
                 deadline:'deadline',
                 status:false
               },
               {
                 pid:'P2',
-                projectName:'projectname3.2 ',
+                title:'projectname3.2 ',
                 deadline:'deadline',
                 status:false
               },
               {
                 pid:'P3',
-                projectName:'projectname3.3 ',
+                title:'projectname3.3 ',
                 deadline:'deadline',
                 status:false
               },
               {
                 pid:'P4',
-                projectName:'projectname3.4 ',
+                title:'projectname3.4 ',
                 deadline:'deadline',
                 status:false
               },
                {
                 pid:'P5',
-                projectName:'projectname3.5 ',
+                title:'projectname3.5 ',
                 deadline:'deadline',
                 status:false
               },
@@ -197,11 +200,7 @@ data () {
     },
   
   methods: {
-    //test
-    addObject (pid) {
- 
-    },
-    showObject (pid) {
+    showObject () {
           
           this.project=[]
           this.temp2.forEach(element => {
@@ -209,23 +208,37 @@ data () {
           });
       
     },
-    deleteBoardV2 (pid) {
-      this.project = this.project.filter(project => {
-         return project.pid !== pid
-         })
-    },
-
-
     //project
     createMainBoard () {
-       document.getElecreateMainBoardmentById('form-setting').style.display ="none"
-       this.project.push({
-                          projectName:this.projectNameIn,
-                          deadline:this.deadlineIn,
-                          statusProject:this.statusProjectIn
-                          })
-       this.countProject+=1
-     
+      if(this.deadlineIn == 'mm/dd/yyyy'){
+        alert('Please Select Deadline')
+        return
+      }
+      const ref = this.$db.collection('Project')
+      ref.doc('pindex').get().then(doc => {
+        let pindex = doc.data()
+        let pid = 'P' + pindex.count
+        let obj = {
+          title: this.projectNameIn,
+          deadline: firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T00:00:00+07:00')),
+          status: false,
+          member: [
+            {
+              uid: firebase.auth().currentUser.uid,
+              priority: 0
+          }],
+          invite: this.invites
+        }
+        ref.doc(pid).set(obj)
+        ref.doc('pindex').set({
+          count: pindex.count+1,
+          total: pindex.total+1
+        },{merge: true})
+      }).catch(err => {
+        console.log(err)
+      })
+
+      document.getElementById('form-setting').style.display ="none"
     },
     goBoardPostit () {
        this.$router.push('/addBoardPostit')
@@ -234,15 +247,13 @@ data () {
        this.project = this.project.filter(project => {
          return project.pid !== pid
          })
-      
-       
-        this. countProject-=1
     },
     openFormSetting () {
         document.getElementById('form-setting').style.display="block"
     },
     closeFormSetting () {
       document.getElementById('form-setting').style.display ="none"
+      this.invites = []
     }, 
 
 
@@ -250,27 +261,42 @@ data () {
     openFormInvite () {
       document.getElementById('form-invite').style.display="block"
     },
-    addMember (uid) {
-        this.invites.push({ 
-                            uid:'d'+this.invites.length,
+    addMember () {
+        if(!this.authority){
+          alert('Please Choose Member Type')
+          return
+        } else {
+          document.getElementById('selector').selectedIndex = 0;
+        }
+
+        this.$http({
+          method: "get",
+          url: "/invite",
+          headers:{
+            email: this.emailIn
+          }
+        }).then(res=> {
+          this.invites.push({ 
+                            uid: res.data,
                             email:this.emailIn,
-                            priority:this.priority,
-                            status:this.statusIn,
-                            
+                            authority:this.authority,
                           })
+          this.emailIn = ''
+        }).catch(err=> {
+          alert('User doesn\'t exist')
+        })
+
         
-            this.emailIn = ''
     },
     removeMenber (uid) {
-
-
-
          this.invites = this.invites.filter(invite => {
          return invite.uid !== uid
          })
-        
     },
-   
+    onChange(e) {
+      let index = e.target.selectedIndex;
+      this.authority = index
+    },
     
   }
   
