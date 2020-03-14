@@ -1,5 +1,6 @@
 <template>
     <div>
+
        <navBar/>
       <createBoard/>
     </div>
@@ -20,6 +21,7 @@ export default {
         return {
           username: '',
           uid: '',
+          
         }
     },
      beforeCreate () {
@@ -51,6 +53,13 @@ export default {
     });
   },
     methods: {
+      methods: {
+    onChange(e) {
+      const index = e.target.selectedIndex;
+      const option = this.opts[index];
+      console.log(index, option);
+    }
+  },
     logout () {
       this.$rtdb.ref('/status/'+this.uid).off();
       firebase.auth().signOut();

@@ -6,11 +6,12 @@ $orange : #f7a79d;
 $bluesky : #a6d4d8;
 $fontAsap: 'Asap', sans-serif;
 .contain-showName {
-  height: 40px;
-  background-color: red;
+  height: 25px;
+  background-color: $greenSeaweed;
   border-radius: 15px;
   padding: 25px;
   font-size: 22px;
+  color: white;
 }
 .showName {
   text-align: center;

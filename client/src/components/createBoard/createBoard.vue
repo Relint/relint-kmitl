@@ -46,13 +46,21 @@
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
                         <div class="parent-setting">
-                            <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s"><input type="text" placeholder="Deadline"  v-model="deadlineIn"></div>
-                            <div class="div3-s"><input type="checkbox" placeholder="Description"  v-model="statusProjectIn"> done</div>
-                            <div class="div4-s">iam an admin</div>
-                            <div class="div5-s" >
+                            <div class="div1-s"><input class="style-inputPid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
+                            <div class="div2-s"><input class="style-inputPid" type="text" placeholder="Deadline"  v-model="deadlineIn"></div>
+                            <div class="div3-s">
+
+                              <div class="contain-statusPid">
+                                  <Label class="label-statusPid">Status Project</Label><br>
+                                  <input class="style-check-statusPid" type="checkbox"   v-model="statusProjectIn"> 
+                                  </div>
+                              </div>
+                              <div class="contain-label-invte">
+                            <div class="div4-s"><div class="contain-invite-admin"><Label class="label-invite-admin">I'm an Admin</Label></div></div>
+                            </div>
+                            <div class="contain-invte">
+                            <div class="div5-s" id="dd-invite" >
                               <!--show-->
-                                
                                   <div v-for="invite in invites" :key="invite.uid" > 
                                   
                                     <div> 
@@ -68,13 +76,15 @@
                                     <div  id="form-invite" >
                                       <div >
                                       <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" >
-                                          <br>
-                                          <input type="radio" name="invites" value="coAdmin" v-model="priority">CoAdmin
-                                          <input type="radio" name="invites" value="member" v-model="priority">Member <br>
+                                          
+                                            <br>
+                                          <input  type="radio" name="invites" value="coAdmin" v-model="priority">CoAdmin
+                                          <input  type="radio" name="invites" value="member" v-model="priority">Member 
                                           <button  class="nes-btn is-error padding" v-on:click="addMember(uid)">ok</button>
-                                      {{countMember}}
+                                      
                                       </div>
                                     </div> 
+                            </div>
                             </div>
                         </div>
                       </div><!--container-setting"-->
@@ -279,5 +289,5 @@ data () {
 }
 </script>
 <style scoped lang="scss" >
-@import './createBoardStyle.scss'
+@import './createBoardStyle.scss';
 </style>
