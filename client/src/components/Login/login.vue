@@ -11,11 +11,11 @@
     <div class="from-login">
       <div class="form-container" >
         <div class="title">
-          <input class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail" >
+          <input class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
         </div>
 
         <div class="title">
-          <input class="inputt" v-model="password" type="password"  placeholder="Password" name="psw" >
+          <input class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
         </div>
         <button class="btnSubmit" v-on:click="login">Login</button>
         <button class="btnSubmit" @click="openFormRE" >Register</button>
@@ -27,16 +27,16 @@
           <div  class="form-container">
             <h3 ><b-icon icon="person-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Register </h3>
             <div class="title">
-              <input class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required>
+              <input class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required v-on:keyup.enter="register">  
             </div>
             <div class="title">
-              <input class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
+              <input class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required v-on:keyup.enter="register">
             </div>
             <div class="title">
-              <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
+              <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required v-on:keyup.enter="register">
             </div>
             <div class="title">
-              <input class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required>
+              <input class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
             </div>
               <button class="btnSubmit" @click="register" >Register</button>
               <button class="btnSubmit" @click="closeFormRE">Cancel</button>       
@@ -47,7 +47,7 @@
         <div  class="form-container">
           <h3><b-icon icon="cursor-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Send Email</h3>
           <div class="title">
-            <input class="inputt" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required>
+            <input class="inputt" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
           </div>
             <button class="btnSubmit canover" @click="acceptSend" >Send</button>
             <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancel</button>       

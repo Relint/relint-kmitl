@@ -1,8 +1,6 @@
 <template>
   <div>
    
-     
-
      <!--dropdowm-->
     <div class="parent-bg">
        <div class="div1-bg" >
@@ -188,13 +186,16 @@ data () {
               uid: firebase.auth().currentUser.uid,
               priority: 0
           }],
-          invite: this.invites
+          invite:this.invites.map(ele => ele.data)
         }
         ref.doc(pid).set(obj)
         ref.doc('pindex').set({
           count: pindex.count+1,
           total: pindex.total+1
         },{merge: true})
+        this.projectNameIn=''
+        this.deadlineIn=''
+        this.invites=[]
       }).catch(err => {
         console.log(err)
       })
@@ -226,9 +227,7 @@ data () {
         if(!this.authority){
           alert('Please Choose Member Type')
           return
-        } else {
-          document.getElementById('selector').selectedIndex = 0;
-        }
+        } 
 
         this.$http({
           method: "get",
@@ -238,13 +237,19 @@ data () {
           }
         }).then(res=> {
           this.invites.push({ 
-                            uid: res.data,
-                            email:this.emailIn,
-                            authority:this.authority,
+                            data:{
+                                  priority:this.authority,
+                                  uid: res.data,
+                                 },
+                            email:this.emailIn
                           })
           this.emailIn = ''
+          document.getElementById('selector').selectedIndex = 0
+          this.authority=0
         }).catch(err=> {
           alert('User doesn\'t exist')
+          document.getElementById('selector').selectedIndex = 0
+          this.authority=0
         })
 
         

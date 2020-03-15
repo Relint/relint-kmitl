@@ -11,7 +11,7 @@
     <div class="nav-links">
         <div class="div3"> 
             <a><div id="container-S">
-                <input type="text" id="input" placeholder="Search" v-model="searchText" @change='searchTextHandler'>
+                <input type="text" id="input" placeholder="Search" v-model="searchText" @keyup='searchTextHandler'>
                 <b-icon id="input_img" icon="search" font-scale="2" ></b-icon>
             </div> </a>
         </div>
@@ -104,8 +104,8 @@ export default {
     closeFormPostit () {
       document.getElementById("from-post").style.display = "none"
     },
-    searchTextHandler() {
-      this.$store.commit('setSearchText',this.searchText)
+    async searchTextHandler() {
+      await this.$store.commit('setSearchText',this.searchText)
     }
 
     
