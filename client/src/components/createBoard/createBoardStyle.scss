@@ -101,9 +101,9 @@ $fontAsap: 'Asap', sans-serif;
 //invite//------------------------------------------------------------
 .container-setting {
     width: 410px;
-    height: 250px;
+    height: 280px;
     border-radius: 20px;
-    background-color: red;
+    background-color: white;
     overflow-y: scroll;
     scrollbar-width: thin;
     padding: 20px;
@@ -131,7 +131,7 @@ $fontAsap: 'Asap', sans-serif;
   grid-row-gap: 0px;
   }
   
-  .div1-s { grid-area: 1 / 1 / 1 / 2; }
+  .div1-s { grid-area: 1 / 1 / 1 / 2;}
   .div2-s { grid-area: 2 / 1 / 2 / 2; }
   .div3-s { grid-area: 3 / 1 / 3 / 2; }
   .div4-s { grid-area: 1 / 2 / 3 / 2 ; }
@@ -148,7 +148,7 @@ $fontAsap: 'Asap', sans-serif;
     margin-left: -480px;
     box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
     
-    background-color: greenyellow;
+    background-color:white;
     list-style-type: none;
   }
   
@@ -164,7 +164,91 @@ $fontAsap: 'Asap', sans-serif;
     white-space: nowrap;
   }
 
+//input
+.style-inputPid {
+  width: 200px;
+  height: 80px;
+  border-radius: 10px;
+  border-style: none;
+  background-color:#d0e5e7 ;
+  text-align: center;
+  color: #828686;
+  font-size: 17px;
+  
+}
+.contain-statusPid {
+  position: relative;
+  border-radius: 10px;
+  background-color: $bluesky;
+  width: 200px;
+  height: 80px;
+  margin-left: 20px;
+  text-align: center;
+  left: -20px;
+  
+}
+.label-statusPid {
+  position: relative;
+  color: #828686;
+  font-size: 20px;
+  border-radius: 10px;
+  height: 30px;
+  top: 10px;
+}
+.style-check-statusPid {
+  position: relative;
+  font-size: 30px;
+  width: 30px;
+  height: 30px;
+  border-radius: 10px;
+  top: 12px;
+  
+}
 
+//invite style
+.nes-input {
+  top: 5px;
+  width: 150px;
+  height: 30px;
+  border-radius: 15px ;
+  border: 0.5px ridge #828686;
+  
+}
+
+.contain-invite-admin {
+  position: relative;
+  background-color:white ;
+  width: 150px;
+  height: 60px;
+  margin-left: 18px;
+  border-radius: 15px;
+  top: 20px;
+  left: -3px;
+}
+.label-invite-admin {
+  position: relative;
+  font-size: 20px;
+  text-align: center;
+  margin-left: 15px;
+  color: #828686;
+  top: 20px;
+  left: -3px;
+  }
+#dd-invite {
+  border-radius: 15px;
+  background-color:$bluesky;
+  margin: 8px;
+}
+.contain-invte {
+  border-radius: 15px;
+  height: 100px;
+}
+.contain-label-invte {
+  position: static;
+  background-color:red;
+  border-radius: 15px;
+  height: 100px;
+}
   //create/----------------------------------------------------------------
   .parent-create {
     display: grid;
@@ -219,50 +303,3 @@ $fontAsap: 'Asap', sans-serif;
     }
     
 
-
-    #whiteBoard {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    
-   #addPostIt{
-     position: relative;
-   } 
-    .postIt {
-      line-height: 1;
-      text-align: center;
-      margin: 25px;
-      width: 275px;
-      min-height: 245px; /* setting min/max params will keep the height steady */
-      max-height: 245px;
-    
-      padding-top: 35px; /* room for the sticky */
-      position: relative;
-      border: 1px solid #e8e8e8;
-      border-top: 60px solid #fdfd86;
-      font-family: 'Reenie Beanie', cursive;
-      font-size: 48px;
-      border-bottom-right-radius: 60px 5px;
-      display: inline-block;
-      box-sizing: border-box;/* phew! if the padding is adding to the size, remember this trick!!! */
-      /* background: #ffff88; */
-      background: linear-gradient(
-        134deg,
-        #ffff88 81%,
-        #ffff88 82%,
-        #ffff88 82%,
-        #ffffc6 100%
-      ); /* assuming the consortiums have ironed all this stuff out - I guess we'll see. Four sections... gawd NOW I see. Details, details - very subtle*/
-    }
-    .postIt:after {
-      content: "";
-      position: absolute;
-      z-index: -1;
-      right: -0px;
-      bottom: 20px;
-      width: 200px;
-      height: 25px;
-      background: rgba(0, 0, 0, 0.2);
-      box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
-      transform: matrix(-1, -0.1, 0, 1, 0, 0);
-    }

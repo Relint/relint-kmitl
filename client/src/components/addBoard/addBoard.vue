@@ -1,5 +1,6 @@
 <template>
     <div>
+
        <navBar/>
       <createBoard/>
     </div>

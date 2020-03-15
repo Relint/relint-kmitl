@@ -46,12 +46,21 @@
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
                         <div class="parent-setting">
-                            <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s"><input type="date" placeholder="Deadline"  id='deadline' v-model="deadlineIn"></div>
-                            <div class="div4-s">iam an admin</div>
-                            <div class="div5-s" >
+                            <div class="div1-s"><input class="style-inputPid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
+                            <div class="div2-s"><input class="style-inputPid" type="date" placeholder="Deadline" id='deadline' v-model="deadlineIn"></div>
+                            <div class="div3-s">
+
+                              <div class="contain-statusPid">
+                                  <Label class="label-statusPid">Status Project</Label><br>
+                                  <input class="style-check-statusPid" type="checkbox"   v-model="statusProjectIn"> 
+                                  </div>
+                              </div>
+                              <div class="contain-label-invte">
+                            <div class="div4-s"><div class="contain-invite-admin"><Label class="label-invite-admin">I'm an Admin</Label></div></div>
+                            </div>
+                            <div class="contain-invte">
+                            <div class="div5-s" id="dd-invite" >
                               <!--show-->
-                                
                                   <div v-for="invite in invites" :key="invite.uid" > 
                                   
                                     <div> 
@@ -75,6 +84,7 @@
                                           <button  class="nes-btn is-error padding" v-on:click="addMember">ok</button>
                                       </div>
                                     </div> 
+                            </div>
                             </div>
                         </div>
                       </div><!--container-setting"-->
@@ -266,5 +276,5 @@ data () {
 }
 </script>
 <style scoped lang="scss" >
-@import './createBoardStyle.scss'
+@import './createBoardStyle.scss';
 </style>
