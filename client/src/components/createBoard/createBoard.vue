@@ -18,7 +18,7 @@
                       <div v-for="(project,index) in project" :key="project.pid"  > 
                         <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
                                     {{project.title}}    index: {{index}}<br>
-                                    {{project.deadline}}<br>
+                                    {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
                                     {{project.statusProject}}<br>
                                 <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
                                <button class="btnProjectDelete" @click="deleteBoard(project.pid)"> delete  </button>
@@ -35,10 +35,13 @@
               
             </div><!--parent-create------------------------------------------------------->
             <!--project setting------------------------------------------------------->
+
+            <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
+            <div>Data from other components can't be accessed. Event handler implemented</div>
+
             <div class="parent-project">
               <div class="div1-pj">
                 <label  class="dropdown">
-                  <div><button  @click="showObject">show</button></div>
                   <div @click="openFormSetting" class="dd-button">+</div>
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
@@ -126,77 +129,34 @@ data () {
               { value: 2, text: 'Member' },
             ],
 
-            temp0:[],
-            temp1: [
-              {
-                pid:'P1',
-                title:'projectname1.1 ',
-                deadline:'deadline',
-                status:false
-              },
-              {
-                pid:'P2',
-                title:'projectname1.2 ',
-                deadline:'deadline',
-                status:false
-              }
-            
-            ],
-            temp2: [
-              {
-                pid:'P1',
-                title:'projectname2.1 ',
-                deadline:'deadline',
-                status:false
-              },
-               {
-                pid:'P2',
-                title:'projectname2.2 ',
-                deadline:'deadline',
-                status:false
-               },
-                {
-                pid:'P3',
-                title:'projectname2.3 ',
-                deadline:'deadline',
-                status:false
-               },
-            ],
-            temp3: [
-              {
-                pid:'P1',
-                title:'projectname3.1 ',
-                deadline:'deadline',
-                status:false
-              },
-              {
-                pid:'P2',
-                title:'projectname3.2 ',
-                deadline:'deadline',
-                status:false
-              },
-              {
-                pid:'P3',
-                title:'projectname3.3 ',
-                deadline:'deadline',
-                status:false
-              },
-              {
-                pid:'P4',
-                title:'projectname3.4 ',
-                deadline:'deadline',
-                status:false
-              },
-               {
-                pid:'P5',
-                title:'projectname3.5 ',
-                deadline:'deadline',
-                status:false
-              },
-            
-            ],
+            searchText: ''
           
         }
+    },
+    beforeCreate(){
+      let collection = this.$db.collection('project').onSnapshot(snapshot => {
+          this.project = []
+          snapshot.forEach(doc => {
+            if(doc.data().member){
+              let proj = doc.data().member.filter(value => {
+                return value.uid === this.$store.state.uid
+              })
+              if(proj){
+                let obj = doc.data()
+                obj.pid = doc.id
+                this.project.push(obj)
+              }
+            }
+          });
+        })
+    },
+    mounted () {
+      this.closeFormSetting()
+      this.$store.subscribe((mutation, state) => {
+        if(mutation.type === 'setSearchText'){
+          this.searchText = state.searchText
+        }
+      })
     },
   
   methods: {
@@ -210,17 +170,18 @@ data () {
     },
     //project
     createMainBoard () {
-      if(this.deadlineIn == 'mm/dd/yyyy'){
-        alert('Please Select Deadline')
-        return
-      }
-      const ref = this.$db.collection('Project')
+      const ref = this.$db.collection('project')
       ref.doc('pindex').get().then(doc => {
+        if(!this.deadlineIn){
+          alert('Please select deadline')
+          return
+        }
+        this.deadlineIn = firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T00:00:00+07:00'))
         let pindex = doc.data()
         let pid = 'P' + pindex.count
         let obj = {
           title: this.projectNameIn,
-          deadline: firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T00:00:00+07:00')),
+          deadline: this.deadlineIn,
           status: false,
           member: [
             {

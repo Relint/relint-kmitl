@@ -8,11 +8,15 @@ export default new Vuex.Store({
   state: {
     username: '',
     uid: '',
+    searchText: '',
   },
   mutations: {
     setRecord(state, n) {
       state.username = n.username;
       state.uid = n.uid;
+    },
+    setSearchText(state, n){
+      state.searchText = n;
     }
   },
   actions: {

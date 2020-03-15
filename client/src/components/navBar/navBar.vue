@@ -11,7 +11,7 @@
     <div class="nav-links">
         <div class="div3"> 
             <a><div id="container-S">
-                <input type="text" id="input" >
+                <input type="text" id="input" placeholder="Search" v-model="searchText" @change='searchTextHandler'>
                 <b-icon id="input_img" icon="search" font-scale="2" ></b-icon>
             </div> </a>
         </div>
@@ -34,13 +34,7 @@
   </div>
   </div>
  <!--dropdown home-->
-        
       
-
-
-
-
-
 </div>
 </template>
 <script>
@@ -52,13 +46,12 @@ import boardPostit from '../boardPostit/boardPostit'
 export default {
   name: 'navBar',
   components: {
-    createBoard,
-    boardPostit
   },
    data (){
     return {
       username: '',
       uid: '',
+      searchText: '',
     }
   },
   
@@ -110,6 +103,9 @@ export default {
     },
     closeFormPostit () {
       document.getElementById("from-post").style.display = "none"
+    },
+    searchTextHandler() {
+      this.$store.commit('setSearchText',this.searchText)
     }
 
     
