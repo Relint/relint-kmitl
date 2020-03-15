@@ -141,7 +141,7 @@ data () {
               let proj = doc.data().member.filter(value => {
                 return value.uid === this.$store.state.uid
               })
-              if(proj){
+              if(proj.length !== 0){
                 let obj = doc.data()
                 obj.pid = doc.id
                 this.project.push(obj)
