@@ -46,11 +46,14 @@
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
                         <div class="parent-setting">
-                            <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s"><input type="text" placeholder="Deadline"  v-model="deadlineIn"></div>
-                            <div class="div3-s"><input type="checkbox" placeholder="Description"  v-model="statusProjectIn"> done</div>
-                            <div class="div4-s">iam an admin</div>
-                            <div class="div5-s" >
+                            <div class="div1-s"><input class="style-inputPid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
+                            <div class="div2-s"><input class="style-inputPid" type="date" placeholder="Deadline" id='deadline' v-model="deadlineIn"></div>
+                     
+                              <div class="contain-label-invte">
+                            <div class="div4-s"><div class="contain-invite-admin"><Label class="label-invite-admin">I'm an Admin</Label></div></div>
+                            </div>
+                            <div class="contain-invte">
+                            <div class="div5-s" id="dd-invite" >
                               <!--show-->
                                 
                                   <div v-for="invite in invites" :key="invite.uid" > 
@@ -194,6 +197,31 @@ data () {
             ],
           
         }
+    },
+    beforeCreate(){
+      let collection = this.$db.collection('project').onSnapshot(snapshot => {
+          this.project = []
+          snapshot.forEach(doc => {
+            if(doc.data().member){
+              let proj = doc.data().member.filter(value => {
+                return value.uid === this.$store.state.uid
+              })
+              if(proj!==0){
+                let obj = doc.data()
+                obj.pid = doc.id
+                this.project.push(obj)
+              }
+            }
+          });
+        })
+    },
+    mounted () {
+      this.closeFormSetting()
+      this.$store.subscribe((mutation, state) => {
+        if(mutation.type === 'setSearchText'){
+          this.searchText = state.searchText
+        }
+      })
     },
   
   methods: {
