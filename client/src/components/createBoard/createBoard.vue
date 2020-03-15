@@ -51,7 +51,6 @@
                               <!--show-->
                                 
                                   <div v-for="invite in invites" :key="invite.uid" > 
-                                  
                                     <div> 
                                       {{ invite.email  }}
                                       {{ invites.authority }}

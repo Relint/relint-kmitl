@@ -21,12 +21,23 @@
   <div class="div3"> 
      <div class="contain-noti-relative">
      <a><div class="dropdown-noti">
-      <button class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
+       <button @click="showNotification">show</button>
+      <button  class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
         <div class="dropdown-content-noti">
-          <a >noti</a>
-          <a >noti2</a>
-          <a >noti2</a>
-          <a >noti2</a>
+          <!--eslint-disable -->
+          <a> test</a>
+          <div v-for="(noti,index) in notifications" :key="noti.pid">
+            <a>
+               <div class="contain-relative-btnNoti">
+                  <button @click="inviteAccept(noti.pid)">T</button>
+                 <button @click="inviteDecline(noti.pid)">F</button>
+                </div>
+               <h3>{{index}} {{noti.title}}</h3> 
+                <p>{{noti.description}}</p>
+                <p>{{noti.timestamp}}</p>
+               
+            </a>
+          </div>
         </div>
     </div> </a>  
     </div>
@@ -66,6 +77,36 @@ export default {
       username: '',
       uid: '',
       searchText: '',
+      notifications:[],
+      temp1: [
+            {  
+               pid:'P1',
+               title:'invite',
+               description:'dd 20-11-20 20:44 m',
+               timestamp:(new Date('2020-11-20T20:44:26+07:00')).getTime()
+            },
+             {
+               pid:'P2',
+               title:'invite',
+               description:'dd 20-11-20 15:30 m',
+               timestamp:new Date('2020-11-20T15:30:26+07:00').getTime()
+            },
+             {
+               pid:'P3',
+               title:'invite',
+               description:'dd 30-11-20 13:00 m',
+               timestamp:new Date('2020-11-30T13:00:26+07:00').getTime()
+            },
+             { 
+               pid:'P4',
+               title:'invite',
+               description:'dd 29-11-20 18:04 m',
+               timestamp:new Date('2020-11-29T18:04:26+07:00').getTime()
+             }
+
+      ]
+
+      
     }
   },
   
@@ -121,8 +162,23 @@ export default {
     async searchTextHandler() {
       await this.$store.commit('setSearchText',this.searchText)
     },
-    openFormNoti () {
-      alert('d')
+    
+    showNotification () {
+      this.notifications=[]
+      this.temp1.forEach(element => {
+        this.notifications.push(element)
+      });
+      this.notifications=this.notifications.sort((a,b)=>{
+        return a.timestamp-b.timestamp
+      })
+    },
+    inviteAccept (pid) {
+        alert('accept ' + pid )
+    },
+    inviteDecline (pid) {
+        this.notifications = this.notifications.filter(noti => {
+         return noti.pid !== pid
+         })
     }
     
   
