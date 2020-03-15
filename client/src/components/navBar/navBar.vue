@@ -17,20 +17,34 @@
         </div>
     </div>   
       
-  <div class="div3">  <a><div class="dropdown">
+      
+  <div class="div3"> 
+     <div class="contain-noti-relative">
+     <a><div class="dropdown-noti">
+      <button class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
+        <div class="dropdown-content-noti">
+          <a >noti</a>
+          <a >noti2</a>
+          <a >noti2</a>
+          <a >noti2</a>
+        </div>
+    </div> </a>  
+    </div>
+        
+    
+   <div class="contain-prof-relative">
+    <a><div class="dropdown">
     <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
         <div class="dropdown-content">
           <div class="contain-showName"> 
-            <label >Hello,</label>
+            <label class="label-showName" >Hello,</label>
              <span class="showName" v-html="username" ></span>
           </div>
-         
-           
           <a >Profile</a>
-           
           <a  v-on:click="logout">Logout</a>
         </div>
-    </div> </a>  
+    </div></a>  
+  </div>
   </div>
   </div>
  <!--dropdown home-->
@@ -106,8 +120,10 @@ export default {
     },
     async searchTextHandler() {
       await this.$store.commit('setSearchText',this.searchText)
+    },
+    openFormNoti () {
+      alert('d')
     }
-
     
   
   }

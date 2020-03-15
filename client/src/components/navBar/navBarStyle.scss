@@ -6,21 +6,22 @@ $orange : #f7a79d;
 $bluesky : #a6d4d8;
 $fontAsap: 'Asap', sans-serif;
 .contain-showName {
-  height: 40px;
-  background-color: red;
+  height: 15px;
+  background-color: $greenSeaweed;
   border-radius: 15px;
-  padding: 25px;
+  padding: 20px;
   font-size: 22px;
+  color: white;text-align: center;
+  margin: 10px 10px 10px 10px;
 }
-.showName {
-  text-align: center;
-  margin-left: 15px;
+.showName  {
+
 }
 
 .brand {
   display: inline;
   float: left;
-  margin-top: 10px;
+  margin-top: 20px;
   margin-left: -20px;
 }
 .nav {
@@ -129,7 +130,7 @@ $fontAsap: 'Asap', sans-serif;
     position:relative;
     padding:0 0 0 ;
     width: 200px;
-    top: 7px;
+    top: 18px;
 }
 #input {
     border-radius: 20px; 
@@ -151,6 +152,8 @@ $fontAsap: 'Asap', sans-serif;
 .dropdown {
 
   display: inline-block;
+  position: absolute;
+  top: 5px;
 }
 
 .dropdown-content {
@@ -181,8 +184,8 @@ $fontAsap: 'Asap', sans-serif;
 }
 
  .dropbtn {
-  position: relative;
-  bottom: -5px;
+  position: static;
+  bottom: 0px;
   left:-50px;
   background-color:$bluesky;
   border-radius: 70px;
@@ -190,7 +193,62 @@ $fontAsap: 'Asap', sans-serif;
   height: 65px;
   border-style: none;
 }
+.contain-prof-relative {
+  position: relative;
+  background-color: yellow;
+}
 
+
+//noti
+.dropdown-noti {
+  display: inline-block;
+  position: absolute;;
+  left: -80px;
+  top: 15px;
+}
+
+.dropdown-content-noti {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 180px;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 15px;
+  width: 300px;
+  
+}
+.dropdown-content-noti a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 15px;
+  padding: 20px;
+}
+
+.dropdown-content-noti a:hover {background-color: #f1f1f1;}
+.dropdown-noti:hover .dropdown-content-noti {
+  display: block;
+  margin-left: -190px ;
+}
+
+ .dropbtn-noti {
+  position: static;
+  bottom: 0px;
+  left:-50px;
+  background-color:$redFire;
+  border-radius: 70px;
+  width: 45px;
+  height: 45px;
+  border-style: none;
+}
+
+.contain-noti-relative {
+  position: relative;
+  background-color: yellow;
+  
+}
 
 //nav
 .parent {
