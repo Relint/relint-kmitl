@@ -161,7 +161,6 @@ data () {
       if(dd < 10) dd = '0'+dd
       if(mm < 10) mm = '0'+mm
       today = yyyy+'-'+mm+'-'+dd
-      console.log(today)
       document.getElementById('datefield').setAttribute('min', today)
 
       this.closeFormSetting()
@@ -213,8 +212,6 @@ data () {
         this.descriptionIn=''
         this.deadlineIn=''
         this.invites=[]
-      }).catch(err => {
-        console.log(err)
       })
 
       document.getElementById('form-setting').style.display ="none"
