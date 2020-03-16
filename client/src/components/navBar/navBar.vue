@@ -21,18 +21,18 @@
   <div class="div3"> 
      <div class="contain-noti-relative">
      <a><div class="dropdown-noti">
-       <button @click="showNotification">show</button>
       <button  class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
         <div class="dropdown-content-noti">
-          <!--eslint-disable -->
-          <a> test</a>
-          <div v-for="(noti,index) in notifications" :key="noti.pid">
+          <div v-if="this.notifications.length === 0"><a><center>No notification</center></a></div>
+          <div v-else-if="this.notifications.length === 1"><a><center>1 notification</center></a></div>
+          <div v-else><a><center>{{this.notifications.length}} notifications</center></a></div>
+          <div v-for="noti in notifications" :key="noti.pid">
             <a>
                <div class="contain-relative-btnNoti">
                   <button @click="inviteAccept(noti.pid)">T</button>
                  <button @click="inviteDecline(noti.pid)">F</button>
                 </div>
-               <h3>{{index}} {{noti.title}}</h3> 
+               <h3>{{noti.title}}</h3> 
                 <p>{{noti.description}}</p>
                 <p>{{noti.timestamp}}</p>
                
@@ -48,7 +48,7 @@
     <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
         <div class="dropdown-content">
           <div class="contain-showName"> 
-            <label class="label-showName" >Hello,</label>
+            <label class="label-showName" >Hello, </label>
              <span class="showName" v-html="username" ></span>
           </div>
           <a >Profile</a>
@@ -78,35 +78,12 @@ export default {
       uid: '',
       searchText: '',
       notifications:[],
-      temp1: [
-            {  
-               pid:'P1',
-               title:'invite',
-               description:'dd 20-11-20 20:44 m',
-               timestamp:(new Date('2020-11-20T20:44:26+07:00')).getTime()
-            },
-             {
-               pid:'P2',
-               title:'invite',
-               description:'dd 20-11-20 15:30 m',
-               timestamp:new Date('2020-11-20T15:30:26+07:00').getTime()
-            },
-             {
-               pid:'P3',
-               title:'invite',
-               description:'dd 30-11-20 13:00 m',
-               timestamp:new Date('2020-11-30T13:00:26+07:00').getTime()
-            },
-             { 
-               pid:'P4',
-               title:'invite',
-               description:'dd 29-11-20 18:04 m',
-               timestamp:new Date('2020-11-29T18:04:26+07:00').getTime()
-             }
 
-      ]
-
-      
+      priorityMap: [
+        'Admin',
+        'Co-Admin',
+        'Member'
+      ],
     }
   },
   
@@ -119,6 +96,25 @@ export default {
         this.$router.replace('/');
       }
     });
+    let collection = this.$db.collection('project').onSnapshot(snapshot => {
+          this.notifications = []
+          snapshot.forEach(doc => {
+            if(doc.data().member){
+              let proj = doc.data().invite.filter(value => {
+                return value.uid === this.$store.state.uid
+              })
+              if(proj.length !== 0){
+                let obj = {
+                  pid: doc.id,
+                  title: 'Invite from ' + doc.data().title,
+                  description: 'As ' + this.priorityMap[proj[0].priority],
+                  timestamp: proj[0].timestamp.toDate().getDate() + '-' + proj[0].timestamp.toDate().getMonth() + '-' + proj[0].timestamp.toDate().getFullYear()
+                }
+                this.notifications.push(obj)
+              }
+            }
+          });
+        })
   },
   mounted () {
     this.username = this.$store.state.username;
@@ -162,23 +158,42 @@ export default {
     async searchTextHandler() {
       await this.$store.commit('setSearchText',this.searchText)
     },
-    
-    showNotification () {
-      this.notifications=[]
-      this.temp1.forEach(element => {
-        this.notifications.push(element)
-      });
-      this.notifications=this.notifications.sort((a,b)=>{
-        return a.timestamp-b.timestamp
+    inviteAccept (pid) {
+      let projectRef = this.$db.collection('project').doc(pid)
+      projectRef.get().then(doc => {
+        if(doc.exists){
+          let data = doc.data()
+          let inviteRecord = data.invite.filter(ele=>ele.uid === this.uid)
+          inviteRecord = {
+            priority: inviteRecord[0].priority,
+            uid: inviteRecord[0].uid
+          }
+          data.member.push(inviteRecord)
+          projectRef.update({
+            invite: data.invite.filter(ele => ele.uid !== this.uid),
+            member: data.member,
+          }).then(()=>{
+            this.notifications = this.notifications.filter(noti => {
+              return noti.pid !== pid
+            })
+          })
+        }
       })
     },
-    inviteAccept (pid) {
-        alert('accept ' + pid )
-    },
     inviteDecline (pid) {
-        this.notifications = this.notifications.filter(noti => {
-         return noti.pid !== pid
-         })
+      let projectRef = this.$db.collection('project').doc(pid)
+      projectRef.get().then(doc => {
+        if(doc.exists) {
+          let data = doc.data()
+          projectRef.update({
+            invite: data.invite.filter(ele => ele.uid !== this.uid)
+          }).then(()=>{
+            this.notifications = this.notifications.filter(noti => {
+              return noti.pid !== pid
+            })
+          })
+        }
+      })
     }
     
   

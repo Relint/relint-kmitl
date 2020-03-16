@@ -15,18 +15,18 @@
                       <!-- eslint-disable -->
                       <div v-for="(project,index) in project" :key="project.pid"  > 
                         <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
-                                    {{project.title}}    index: {{index}}<br>
+                                    <h3>{{project.title}}</h3>
+                                    {{project.description}}<br><br> 
                                     {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
-                                    {{project.statusProject}}<br>
                                 <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
-                               <button class="btnProjectDelete" @click="deleteBoard(project.pid)"> delete  </button>
+                               <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
                         </div>
                       </div>
                      
                   </div><!--form-container2-->
           
                <div class="parent-create">
-                <div class="div1-c"> </div>
+                <div class="div1-c"></div>
                 <div class="div2-c"></div>
                 <div class="div3-c"></div>
                 <div class="div4-c"></div>
@@ -45,15 +45,14 @@
                       <div class="container-setting" id="style-scroll">
                         <div class="parent-setting">
                             <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s"><input type="date" placeholder="Deadline"  id='deadline' v-model="deadlineIn"></div>
-                            <div class="div4-s">iam an admin</div>
-                            <div class="div5-s" >
+                            <div class="div2-s"><input type="text" placeholder="Description" v-model="descriptionIn"></div>
+                            <div class="div3-s"><input type="date" placeholder="Deadline" v-model="deadlineIn"></div>
+                            <div class="div4-s" >
                               <!--show-->
                                 
                                   <div v-for="invite in invites" :key="invite.uid" > 
                                     <div> 
-                                      {{ invite.email  }}
-                                      {{ invites.authority }}
+                                      <a>{{ invite.email  }} {{priorityMap[invite.data.priority] }}</a>
                                       <button class="nes-btn is-error padding" v-on:click="removeMenber(invite.uid)">remove</button>
                                     </div> 
                                  
@@ -112,6 +111,7 @@ export default {
 data () {
         return {
             projectNameIn:'',
+            descriptionIn:'',
             deadlineIn:'',
             
             project :[],
@@ -124,6 +124,11 @@ data () {
               { value: 0, text: '--Choose Member Type--'},
               { value: 1, text: 'Co-Admin' },
               { value: 2, text: 'Member' },
+            ],
+            priorityMap: [
+              'Admin',
+              'Co-Admin',
+              'Member'
             ],
 
             searchText: ''
@@ -141,6 +146,7 @@ data () {
               if(proj.length !== 0){
                 let obj = doc.data()
                 obj.pid = doc.id
+                obj.permission = !proj[0].priority
                 this.project.push(obj)
               }
             }
@@ -178,6 +184,7 @@ data () {
         let pid = 'P' + pindex.count
         let obj = {
           title: this.projectNameIn,
+          description: this.descriptionIn,
           deadline: this.deadlineIn,
           status: false,
           member: [
@@ -193,6 +200,7 @@ data () {
           total: pindex.total+1
         },{merge: true})
         this.projectNameIn=''
+        this.descriptionIn=''
         this.deadlineIn=''
         this.invites=[]
       }).catch(err => {
@@ -205,9 +213,19 @@ data () {
        this.$router.push('/addBoardPostit')
     },
     deleteBoard (pid) {
-       this.project = this.project.filter(project => {
-         return project.pid !== pid
-         })
+      let ref = this.$db.collection('project')
+      if(confirm('Delete this board? The deleted board cannot be restored.')){
+        ref.doc(pid).delete().then(()=>{
+          ref.doc('pindex').get().then(doc=>{
+            let data = doc.data()
+            ref.doc('pindex').set({
+              total: data.total-1
+            },{merge:true})
+          })
+        }).catch(err=>{
+          alert(err)
+        })
+      }
     },
     openFormSetting () {
         document.getElementById('form-setting').style.display="block"
@@ -235,10 +253,26 @@ data () {
             email: this.emailIn
           }
         }).then(res=> {
+          if(res.data === firebase.auth().currentUser.uid){
+            alert('You invited yourself.')
+            this.emailIn = ''
+            document.getElementById('selector').selectedIndex = 0
+            this.authority=0
+            return
+          }
+          let check = this.invites.filter(ele => ele.data.uid === res.data)
+          if(check.length !== 0){
+            alert('Duplicate user invited')
+            this.emailIn = ''
+            document.getElementById('selector').selectedIndex = 0
+            this.authority=0
+            return
+          }
           this.invites.push({ 
                             data:{
                                   priority:this.authority,
                                   uid: res.data,
+                                  timestamp: firebase.firestore.Timestamp.fromDate(new Date())
                                  },
                             email:this.emailIn
                           })
@@ -262,7 +296,6 @@ data () {
       let index = e.target.selectedIndex;
       this.authority = index
     },
-    
   }
   
   
