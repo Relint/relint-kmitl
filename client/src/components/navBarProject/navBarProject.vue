@@ -6,10 +6,10 @@
     </div>
     
     <div class="div2"> 
-        <div class="form-projectName">{{projectName}}</div>
+        <div class="form-projectName"><h5>Title</h5>{{projectName}}</div>
     </div>
     <div class="div3">
-         <div class="form-deadline">{{deadline}}</div>
+         <div class="form-deadline"><h5>Deadline</h5>{{deadline}}</div>
     </div>
     <div class="div4"> 
         <b-icon  font-scale="3" id="iconNBP" icon="chat-fill" @click="openFormChat"   ></b-icon>
@@ -23,17 +23,37 @@
     </div>
 </template>
 <script>
+/* eslint-disable */
 export default {
     name:'navBarProject',
    data (){
     return {
-      projectName: 'ProjectName',
-      deadline : '00.00 Sat 2020'
+      projectName: '',
+      deadline : '',
+      description: '',
     }
+   },
+   beforeCreate () {
+       this.$db.collection('project').doc(this.$store.state.pid).onSnapshot(doc=>{
+           if(doc.exists){
+               this.projectName = doc.data().title
+               const time = doc.data().deadline.toDate()
+               this.deadline = time.getDate() + '-' + (time.getMonth()+1) + '-' + time.getFullYear()
+               this.description = doc.data().description
+           } else {
+               this.$router.replace('/addBoard')
+           }
+       })
    },
    methods: {
     backToHome () {
       this.$router.push('/addBoard')
+    },
+    openFormChat () {
+        console.log('openFormChat')
+    },
+    openFormMa () {
+        console.log('openFormMa')
     }
    }
 }

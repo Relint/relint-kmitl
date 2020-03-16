@@ -18,7 +18,7 @@
                                     <h3>{{project.title}}</h3>
                                     {{project.description}}<br><br> 
                                     {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
-                                <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
+                                <button class="btnProject" @click="goBoardPostit(project.pid)"> goBoard  </button>
                                <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
                         </div>
                       </div>
@@ -216,7 +216,8 @@ data () {
 
       document.getElementById('form-setting').style.display ="none"
     },
-    goBoardPostit () {
+    goBoardPostit (pid) {
+      this.$store.commit('setSelectedPID',pid)
        this.$router.push('/addBoardPostit')
     },
     deleteBoard (pid) {
