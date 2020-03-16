@@ -110,7 +110,6 @@ export default {
   },
 data () {
         return {
-            countSett:0,
             projectNameIn:'',
             descriptionIn:'',
             deadlineIn:'',
@@ -229,14 +228,15 @@ data () {
       }
     },
     openFormSetting () {
-      this.countSett+=1
-      if (this.countSett==1) {
-        document.getElementById('form-setting').style.display="block"
-      }
-      else if ( this.countSett==2) {
-        document.getElementById('form-setting').style.display ="none"
-       this.invites = []
-       this.countSett=0
+      let display = document.getElementById('form-setting').style.display
+      if(document.getElementById('form-setting').style.display === 'none'){
+        document.getElementById('form-setting').style.display = 'block'
+      } else {
+        document.getElementById('form-setting').style.display = 'none'      
+        this.projectNameIn=''
+        this.descriptionIn=''
+        this.deadlineIn=''
+        this.invites = []
       }
         
     },
