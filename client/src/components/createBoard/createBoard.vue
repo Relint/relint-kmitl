@@ -18,7 +18,7 @@
                                     <h3>{{project.title}}</h3>
                                     {{project.description}}<br><br> 
                                     {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
-                                <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
+                                <button class="btnProject" @click="goBoardPostit(project.pid)"> goBoard  </button>
                                <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
                         </div>
                       </div>
@@ -132,7 +132,7 @@ data () {
             ],
 
             searchText: ''
-          
+
         }
     },
     beforeCreate(){
@@ -161,7 +161,6 @@ data () {
       if(dd < 10) dd = '0'+dd
       if(mm < 10) mm = '0'+mm
       today = yyyy+'-'+mm+'-'+dd
-      console.log(today)
       document.getElementById('datefield').setAttribute('min', today)
 
       this.closeFormSetting()
@@ -173,14 +172,6 @@ data () {
     },
   
   methods: {
-    showObject () {
-          
-          this.project=[]
-          this.temp2.forEach(element => {
-            this.project.push(element)
-          });
-      
-    },
     //project
     createMainBoard () {
       const ref = this.$db.collection('project')
@@ -213,13 +204,12 @@ data () {
         this.descriptionIn=''
         this.deadlineIn=''
         this.invites=[]
-      }).catch(err => {
-        console.log(err)
       })
 
       document.getElementById('form-setting').style.display ="none"
     },
-    goBoardPostit () {
+    goBoardPostit (pid) {
+      this.$store.commit('setSelectedPID',pid)
        this.$router.push('/addBoardPostit')
     },
     deleteBoard (pid) {
@@ -238,10 +228,23 @@ data () {
       }
     },
     openFormSetting () {
-        document.getElementById('form-setting').style.display="block"
+      let display = document.getElementById('form-setting').style.display
+      if(document.getElementById('form-setting').style.display === 'none'){
+        document.getElementById('form-setting').style.display = 'block'
+      } else {
+        document.getElementById('form-setting').style.display = 'none'      
+        this.projectNameIn=''
+        this.descriptionIn=''
+        this.deadlineIn=''
+        this.invites = []
+      }
+        
     },
     closeFormSetting () {
       document.getElementById('form-setting').style.display ="none"
+      this.projectNameIn=''
+      this.descriptionIn=''
+      this.deadlineIn=''
       this.invites = []
     }, 
 

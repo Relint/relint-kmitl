@@ -126,7 +126,7 @@ export default {
           headers: {
             email: this.emailRE,
             password: this.passwordRE,
-            username: this.usernameRE,
+            username: this.usernameRE.charAt(0).toUpperCase()+this.usernameRE.substring(1).toLowerCase(),
           }
         }).then(() => {
           // alert('Registration Completed')
