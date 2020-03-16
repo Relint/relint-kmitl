@@ -172,14 +172,6 @@ data () {
     },
   
   methods: {
-    showObject () {
-          
-          this.project=[]
-          this.temp2.forEach(element => {
-            this.project.push(element)
-          });
-      
-    },
     //project
     createMainBoard () {
       const ref = this.$db.collection('project')
@@ -240,6 +232,9 @@ data () {
     },
     closeFormSetting () {
       document.getElementById('form-setting').style.display ="none"
+      this.projectNameIn=''
+      this.descriptionIn=''
+      this.deadlineIn=''
       this.invites = []
     }, 
 
