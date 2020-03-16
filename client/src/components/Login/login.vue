@@ -30,10 +30,10 @@
               <input class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required v-on:keyup.enter="register">  
             </div>
             <div class="title">
-              <input class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required v-on:keyup.enter="register">
+              <input class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
             </div>
             <div class="title">
-              <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required v-on:keyup.enter="register">
+              <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
             </div>
             <div class="title">
               <input class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
