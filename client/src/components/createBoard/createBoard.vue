@@ -132,7 +132,7 @@ data () {
             ],
 
             searchText: ''
-          
+
         }
     },
     beforeCreate(){
