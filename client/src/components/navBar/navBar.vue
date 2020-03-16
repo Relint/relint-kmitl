@@ -108,7 +108,7 @@ export default {
                   pid: doc.id,
                   title: 'Invite from ' + doc.data().title,
                   description: 'As ' + this.priorityMap[proj[0].priority],
-                  timestamp: proj[0].timestamp.toDate().getDate() + '-' + proj[0].timestamp.toDate().getMonth() + '-' + proj[0].timestamp.toDate().getFullYear()
+                  timestamp: proj[0].timestamp.toDate().getDate() + '-' + (proj[0].timestamp.toDate().getMonth()+1) + '-' + proj[0].timestamp.toDate().getFullYear()
                 }
                 this.notifications.push(obj)
               }

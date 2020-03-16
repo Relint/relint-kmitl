@@ -46,7 +46,7 @@
                         <div class="parent-setting">
                             <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
                             <div class="div2-s"><input type="text" placeholder="Description" v-model="descriptionIn"></div>
-                            <div class="div3-s"><input type="date" placeholder="Deadline" v-model="deadlineIn"></div>
+                            <div class="div3-s"><input type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
                             <div class="div4-s" >
                               <!--show-->
                                 
@@ -154,6 +154,16 @@ data () {
         })
     },
     mounted () {
+      let today = new Date()
+      let dd = today.getDate()
+      let mm = today.getMonth()+1
+      let yyyy = today.getFullYear()
+      if(dd < 10) dd = '0'+dd
+      if(mm < 10) mm = '0'+mm
+      today = yyyy+'-'+mm+'-'+dd
+      console.log(today)
+      document.getElementById('datefield').setAttribute('min', today)
+
       this.closeFormSetting()
       this.$store.subscribe((mutation, state) => {
         if(mutation.type === 'setSearchText'){
