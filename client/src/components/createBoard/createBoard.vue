@@ -1,6 +1,16 @@
 <template>
  <div>
-   
+     <!--dropdowm-->
+    <div class="parent-bg">
+       <div class="div1-bg" >
+          <div class="form-homeBoard" id="from-home">
+            <div  class="form-container"   > 
+              <div class="div1-dd"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
+            </div><!--form-container-->
+          </div>
+       </div>
+    </div>
+
       <div class="parentBG">
           <div class="div1-BG"> 
             <div class="contain-relative-bg">
