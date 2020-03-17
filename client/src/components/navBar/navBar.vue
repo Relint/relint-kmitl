@@ -21,7 +21,13 @@
   <div class="div3"> 
      <div class="contain-noti-relative">
      <a><div class="dropdown-noti">
+       <div v-if="this.notifications.length >= 1" class="notification">
+              {{this.notifications.length}}
+              
+      </div>
       <button  class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
+      
+      
         <div class="dropdown-content-noti">
           <div v-if="this.notifications.length === 0"><a><center>No notification</center></a></div>
           <div v-else-if="this.notifications.length === 1"><a><center>1 notification</center></a></div>
