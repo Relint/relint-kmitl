@@ -1,154 +1,255 @@
-<template> 
-<div>
-
-  <!--dropdown home-->
-<div class="parent2">
-  <div class="div1-2" > 
-    <div class="form-homeBoard" id="from-home">
-        <div  class="form-container"   > 
-          <div class="div1-2"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
-           
-         <!-- newBoard-->
-           
-        </div>
-        <div class="form-container2" id="list-scroll"  >
+<template>
+  <div>
+   
+      <div class="parentBG">
+          <div class="div1-BG"> 
+            <div class="contain-relative-bg">
+              
+              <!-- <img class="bghome" src="@/assets/bghome.png" alt="bghome" > -->
+                 <div class="contain-bg">
+                   
+                    
+               
+                 
+                        <!--project setting------------------------------------------------------->
+           <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
+            <div>Data from other components can't be accessed. Event handler implemented</div>
             
-                <div v-for="project in createProject" :key="project.id" > 
-                  <div class="projectBoardStyle" v-if=" countProjevt>0&&countProjevt<=2">
-                  <div>
-                              {{project.projectName}}<br>
-                              {{project.deadline}}<br>
-                              {{project.statusProject}}<br></div>
-                          <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
-                          <button class="btnProjectDelete" @click="deleteBoard(project.id)"> delete  </button>
-                  </div>
-                </div>
-           </div>
-            <div class="parent3">
-                <div class="div1-new">
-                  <!--setting-->
-                  <label  class="dropdown">
-                    <div @click="openFormSetting" class="dd-button">+</div>
-                        
-                         <ul id="form-setting"  class="dd-menu">
-                          <div class="container-setting" id="style-scroll">    
-                            <div class="parent-setting">
-                              <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                              <div class="div2-s"><input type="text" placeholder="Deadline"  v-model="deadlineIn"></div>
-                              <div class="div3-s"><input type="checkbox" placeholder="Description"  v-model="statusProjectIn"> done</div>
-                              
-                              <div class="div4-s">
-                                iam an admin
-                              </div>
-                               
-                              <div class="div5-s" >
-                                  <!--show-->
-                                  <div v-if=" countMember>0">
-                                    <div v-for="invite in invites" :key="invite.id" > 
-                                    <div >
-                                      <div> 
-                                        {{ invite.email  }}
-                                        {{ invites.priority }}
-                                        {{ invites.status  }}
-                                        <button class="nes-btn is-error padding" v-on:click="removeTodo(invite.id)">remove</button>
-                                      </div> 
-                                    </div>  
+                         
+            <div class="parent-project">
+              <div class="div1-pj">
+                <label  class="dropdown">
+                   
+                  <div @click="openFormSetting" class="dd-button">+</div>
+                 
+                    <div class="dd-menu" id="form-setting"  >
+                      <div class="container-setting" id="style-scroll">
+                        <div class="parent-setting">
+                            <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
+                            <div class="div2-s"><input type="text" placeholder="Description" v-model="descriptionIn"></div>
+                            <div class="div3-s"><input type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
+                            <div class="div4-s" >
+                              <!--show-->
+                                
+                                  <div v-for="invite in invites" :key="invite.uid" > 
+                                    <div> 
+                                      <a>{{ invite.email  }} {{priorityMap[invite.data.priority] }}</a>
+                                      <button class="nes-btn is-error padding" v-on:click="removeMenber(invite.uid)">remove</button>
                                     </div> 
-                                  </div>
-                                  <div v-else > </div> 
-                              
+                                 
+                                  </div> 
+                                
                                   <!--input-->
-                                    <ul  id="form-invite" >
+                                    <div  id="form-invite" >
                                       <div >
                                       <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" >
                                           <br>
-                                          <input type="radio" name="invites" value="coAdmin" v-model="priorityVal">CoAdmin
-                                          <input type="radio" name="invites" value="member" v-model="priorityVal">Member <br>
+                                          <select @change='onChange' id='selector'>
+                                            <option v-for="(opt, index) in opts" :key="index" :value="opt.value">
+                                              {{ opt.text }}
+                                            </option>
+                                          </select><br>
                                           <button  class="nes-btn is-error padding" v-on:click="addMember">ok</button>
-                                      {{countMember}}
                                       </div>
-                                    </ul> 
-                                </div>     
+                                    </div> 
                             </div>
-                          </div>
-                            <li>
-                              <button @click='createMainBoard'>accept</button>
-                              <button @click='closeFormSetting'>cancel</button>
-                            </li>
-                         </ul>
-                </label>
+                        </div>
+                      </div><!--container-setting"-->
+                        <li>
+                          <button @click='createMainBoard' >accept</button>
+                          <button @click='closeFormSetting'>cancel</button>
+                        </li>
+                        
+                    </div><!--dd-menu-->
+                    
+                </label><!--dropdown-->
+                
+              </div>
+              
+            </div><!--parent-project-------------------------------------------------->
 
-              </div>
-              </div>
+                    <div class="form-scroll-createBoard" id="board-scroll"  >
+                  
+                     <div class="from-createBoard">
+                     
+                        <!-- <p>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
+                        5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
+                        5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
+       
+                        </p> -->
+                            <div v-for="(project,index) in project" :key="project.pid"  > 
+                        <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
+                                    <h3>{{project.title}}</h3>
+                                    {{project.description}}<br><br> 
+                                    {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
+                                <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
+                               <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
+                        </div>
+                      </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
           </div>
-      </div> 
-  </div>
-
-
-
-
-
-</div> 
+      </div>
+  
+  </div> <!--close-->
 </template>
-<script  >
+
+<script>
 /* eslint-disable */
 import firebase from "firebase"
 import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
 import navBarProject from '../navBarProject/navBarProject'
 
 export default {
-  
   name: 'createBoard',
   components: {
     navBarProject
   },
 data () {
         return {
+            countSett:0,
             projectNameIn:'',
+            descriptionIn:'',
             deadlineIn:'',
-            statusProjectIn:false,
-            countMember:0,
-            countProjevt:0,
-            createProject :[{ projectName:'',
-                          deadline:'',
-                          statusProject:false,
-                          id: Date.now()
-            }],
+            
+            project :[],
+
             emailIn:'',
-            priorityVal:0,
-            statusIn:false,
-            invites: [{email:'',
-                       priority:0,
-                       status:false,
-                       id: Date.now()
-            }]
+            authority:0,
+            invites: [],
+
+            opts: [
+              { value: 0, text: '--Choose Member Type--'},
+              { value: 1, text: 'Co-Admin' },
+              { value: 2, text: 'Member' },
+            ],
+            priorityMap: [
+              'Admin',
+              'Co-Admin',
+              'Member'
+            ],
+
+            searchText: ''
+
         }
+    },
+    beforeCreate(){
+      let collection = this.$db.collection('project').onSnapshot(snapshot => {
+          this.project = []
+          snapshot.forEach(doc => {
+            if(doc.data().member){
+              let proj = doc.data().member.filter(value => {
+                return value.uid === this.$store.state.uid
+              })
+              if(proj.length !== 0){
+                let obj = doc.data()
+                obj.pid = doc.id
+                obj.permission = !proj[0].priority
+                this.project.push(obj)
+              }
+            }
+          });
+        })
+    },
+    mounted () {
+      let today = new Date()
+      let dd = today.getDate()
+      let mm = today.getMonth()+1
+      let yyyy = today.getFullYear()
+      if(dd < 10) dd = '0'+dd
+      if(mm < 10) mm = '0'+mm
+      today = yyyy+'-'+mm+'-'+dd
+      document.getElementById('datefield').setAttribute('min', today)
+
+      this.closeFormSetting()
+      this.$store.subscribe((mutation, state) => {
+        if(mutation.type === 'setSearchText'){
+          this.searchText = state.searchText
+        }
+      })
     },
   
   methods: {
+    showObject () {
+          
+          this.project=[]
+          this.temp2.forEach(element => {
+            this.project.push(element)
+          });
+      
+    },
     //project
     createMainBoard () {
-       document.getElementById('form-setting').style.display ="none"
-       this.createProject.push({
-                          projectName:this.projectNameIn,
-                          deadline:this.deadlineIn,
-                          statusProject:this.statusProjectIn
-                          })
-       this.countProjevt+=1
-     
+      const ref = this.$db.collection('project')
+      ref.doc('pindex').get().then(doc => {
+        if(!this.deadlineIn){
+          alert('Please select deadline')
+          return
+        }
+        this.deadlineIn = firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T00:00:00+07:00'))
+        let pindex = doc.data()
+        let pid = 'P' + pindex.count
+        let obj = {
+          title: this.projectNameIn,
+          description: this.descriptionIn,
+          deadline: this.deadlineIn,
+          status: false,
+          member: [
+            {
+              uid: firebase.auth().currentUser.uid,
+              priority: 0
+          }],
+          invite:this.invites.map(ele => ele.data)
+        }
+        ref.doc(pid).set(obj)
+        ref.doc('pindex').set({
+          count: pindex.count+1,
+          total: pindex.total+1
+        },{merge: true})
+        this.projectNameIn=''
+        this.descriptionIn=''
+        this.deadlineIn=''
+        this.invites=[]
+      })
+
+      document.getElementById('form-setting').style.display ="none"
     },
     goBoardPostit () {
        this.$router.push('/addBoardPostit')
     },
-    deleteBoard (id) {
-       this.createProject = this.createProject.filter(project => project.id !== id)
-        this. countProjevt-=1
+    deleteBoard (pid) {
+      let ref = this.$db.collection('project')
+      if(confirm('Delete this board? The deleted board cannot be restored.')){
+        ref.doc(pid).delete().then(()=>{
+          ref.doc('pindex').get().then(doc=>{
+            let data = doc.data()
+            ref.doc('pindex').set({
+              total: data.total-1
+            },{merge:true})
+          })
+        }).catch(err=>{
+          alert(err)
+        })
+      }
     },
     openFormSetting () {
+      // alert('dd')
+      this.countSett+=1
+      if (this.countSett==1) {
         document.getElementById('form-setting').style.display="block"
+      }
+      else if ( this.countSett==2) {
+        document.getElementById('form-setting').style.display ="none"
+       this.invites = []
+       this.countSett=0
+      }
+        
     },
     closeFormSetting () {
       document.getElementById('form-setting').style.display ="none"
+      this.invites = []
     }, 
 
 
@@ -156,28 +257,68 @@ data () {
     openFormInvite () {
       document.getElementById('form-invite').style.display="block"
     },
-    addMember ({target}) {
-        
-        this.invites.push({ email:this.emailIn,
-                            priority:this.priorityVal,
-                            status:this.statusIn,
-                            id: Date.now()
-                          })
-            this. countMember+=1
+    addMember () {
+        if(!this.authority){
+          alert('Please Choose Member Type')
+          return
+        } 
+
+        this.$http({
+          method: "get",
+          url: "/invite",
+          headers:{
+            email: this.emailIn
+          }
+        }).then(res=> {
+          if(res.data === firebase.auth().currentUser.uid){
+            alert('You invited yourself.')
             this.emailIn = ''
+            document.getElementById('selector').selectedIndex = 0
+            this.authority=0
+            return
+          }
+          let check = this.invites.filter(ele => ele.data.uid === res.data)
+          if(check.length !== 0){
+            alert('Duplicate user invited')
+            this.emailIn = ''
+            document.getElementById('selector').selectedIndex = 0
+            this.authority=0
+            return
+          }
+          this.invites.push({ 
+                            data:{
+                                  priority:this.authority,
+                                  uid: res.data,
+                                  timestamp: firebase.firestore.Timestamp.fromDate(new Date())
+                                 },
+                            email:this.emailIn
+                          })
+          this.emailIn = ''
+          document.getElementById('selector').selectedIndex = 0
+          this.authority=0
+        }).catch(err=> {
+          alert('User doesn\'t exist')
+          document.getElementById('selector').selectedIndex = 0
+          this.authority=0
+        })
+
+        
     },
-    removeTodo (id) {
-        this.invites = this.invites.filter(invite => invite.id !== id)
-        this. countMember-=1
+    removeMenber (uid) {
+         this.invites = this.invites.filter(invite => {
+         return invite.uid !== uid
+         })
     },
-   
-    
+    onChange(e) {
+      let index = e.target.selectedIndex;
+      this.authority = index
+    },
   }
   
   
   
 }
 </script>
-<style scoped lang="scss">
-@import './createBoardStyle.scss';
+<style scoped lang="scss" >
+@import './test.scss'
 </style>

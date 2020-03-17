@@ -2,11 +2,10 @@
 $greenSeaweed: rgba(2, 128, 144, 1);
 $blueQueen: rgba(69, 105, 144, 1);
 $redFire: rgba(244, 91, 105, 1);
-$orange : #f7a79d;
+$pinkk :#FFCFD2;
+$orange: #f7a79d;
 $bluesky : #a6d4d8;
 $fontAsap: 'Asap', sans-serif;
-
-
 
 .parent-bg {
   display: grid;
@@ -37,232 +36,703 @@ $fontAsap: 'Asap', sans-serif;
   .bghome {
    // background-color: red;
     position: absolute;
-    width: 100%;
+    width: 95%;
     height: 100%;
-    margin-top: -0px;
-    margin-left: -30px;
+    margin-top: -15px;
+    margin-left: 65px;
   }
 
-  //project setting
-  .parent-project {
-    display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(15, 1fr);
-    grid-column-gap: 0px;
-    grid-row-gap: 0px;
-  }
-  .div1-pj { grid-area: 2 / 8 / 5 / 9; }
+ 
 
-  //+//-------------------------------------------------------------------
-  .dropdown {
-    display: inline-block;
+
+.parentBG {
+  display: grid;
+  grid-template-columns: repeat(50, 1fr);
+  grid-template-rows: repeat(50, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }
+ 
+  .div1-BG { grid-area: 2 / 2 / 50 / 50; }
+
+ //bg  
+  .contain-bg {
+    position: relative;
+    width: 100%;
+    // background-color:$orange;
+    border-radius: 15px;
+    height: 820px;  
+  }
+  .contain-pic-bghome {
     position: relative;
   }
-  .dd-button {
-    text-align: center;
-    display: inline-block;
-    position: fixed ;
-    width: 100px;
-    height: 100px;
-    border-radius: 100px;
-    border-style: none;
-    background-color: $redFire;
-    font-size: 80px;
-    color: white;
-    margin-top: 20px;
-  }
-  .dd-button:after {
-    content: '';
+  .bghome {
+  
     position: absolute;
-    top: 50%;
-    right: 15px;
-    transform: translateY(-50%);
-    width: 0; 
-    height: 0; 
-    border-top: 5px solid black;
+    border-radius: 15px;
+    width: 95%;
+    top: -130px;
+    left: 100px;
   }
-  
-  .dd-button:hover {
-    background-color: #eeeeee;
+
+  .from-createBoard {
+    position: relative;
+    padding: 30px;
   }
-  
-  .dd-button:hover {
-    animation-name: random-color;
-    animation-duration: 5s;
-  }
-  @keyframes random-color {
-    0%   {background-color:red; }
-    25%  {background-color:yellow; }
-    50%  {background-color:blue; }
-    75%  {background-color:green; }
-    100% {background-color:red; }
-  }
-  
-//invite//------------------------------------------------------------
-.container-setting {
-    width: 410px;
-    height: 250px;
+
+
+//scroll bar board
+  .form-scroll-createBoard {
+    position: static;
+    width: 65%;
+    height: 680px;
     border-radius: 20px;
-    background-color: red;
+    // background-color: red;
     overflow-y: scroll;
     scrollbar-width: thin;
-    padding: 20px;
+    left: 50px;
+    top: 30px;
+    
   }
-  
+  #board-scroll::-webkit-scrollbar
+  { 
+    
+    width: 12px;
+    // background-color:$bluesky;
+    border-radius: 30px;
+  }
+  #board-scroll::-webkit-scrollbar-thumb
+  {
+    border-radius: 30px;
+    background-color: $blueQueen;
+    scrollbar-width: thin;
+    
+  }
+
+
+//project setting
+
+//project setting
+
+.parent-project {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(15, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  // width: 100%;
+  // background-color: yellow;
+}
+.div1-pj { grid-area: 2 / 8 / 10 / 8;
+  // width: 100%;
+  // background-color: darkgreen;
+ }
+//+//-------------------------------------------------------------------
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dd-button {
+  text-align: center;
+  display: inline-block;
+  position: fixed ;
+  width: 100px;
+  height: 100px;
+  border-radius: 100px;
+  border-style: none;
+  background-color: $redFire;
+  font-size: 80px;
+  color: white;
+  margin-top: 20px;
+}
+.dd-button:after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  right: 15px;
+  transform: translateY(-50%);
+  width: 0; 
+  height: 0; 
+  border-top: 5px solid black;
+}
+
+.dd-button:hover {
+  background-color: #eeeeee;
+}
+
+.dd-button:hover {
+  animation-name: random-color;
+  animation-duration: 5s;
+}
+@keyframes random-color {
+  0%   {background-color:red; }
+  25%  {background-color:yellow; }
+  50%  {background-color:blue; }
+  75%  {background-color:green; }
+  100% {background-color:red; }
+}
+//invite//------------------------------------------------------------
+.container-setting {
+  width: 410px;
+  height: 250px;
+  border-radius: 20px;
+  background-color: red;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  padding: 20px;
+}
+
 #style-scroll::-webkit-scrollbar
 {
-	width: 12px;
-  background-color: #F5F5F5;
-  border-radius: 30px;
+width: 12px;
+background-color: #F5F5F5;
+border-radius: 30px;
 }
 #style-scroll::-webkit-scrollbar-thumb
 {
-	border-radius: 30px;
-	-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-	background-color: #555;
+border-radius: 30px;
+-webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+background-color: #555;
 }
 
 
 .parent-setting {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+grid-column-gap: 0px;
+grid-row-gap: 0px;
+width: 100%;
+background-color: purple;
+}
+
+.div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
+  background-color: aquamarine;}
+.div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
+  background-color:wheat;}
+.div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
+  background-color: gold; }
+.div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
+  background-color: rgb(21, 192, 214) ; }
+/*.div5-s { grid-area: 2 / 2 / 2 / 3; }
+.div6-s { grid-area: 3 / 2 / 2 / 3; }*/
+
+.dd-menu {
+  position: absolute;
+  top: 100%;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 0;
+  margin-top: 120px ;
+   margin-left: -50px;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  
+  background-color: greenyellow;
+  list-style-type: none;
+}
+
+.dd-input + .dd-menu {
+  display: none;
+} 
+.dd-input + .dd-menu {
+  display: block;
+} 
+.dd-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+
+
+//create/----------------------------------------------------------------
+.parent-create {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(1, 1fr);
+  grid-template-columns: repeat(10, 1fr);
+  grid-template-rows: repeat(12, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   }
   
-  .div1-s { grid-area: 1 / 1 / 1 / 2; }
-  .div2-s { grid-area: 2 / 1 / 2 / 2; }
-  .div3-s { grid-area: 3 / 1 / 3 / 2; }
-  .div4-s { grid-area: 1 / 2 / 3 / 2 ; }
-  /*.div5-s { grid-area: 2 / 2 / 2 / 3; }
-  .div6-s { grid-area: 3 / 2 / 2 / 3; }*/
+  .div1-c { grid-area: 3 / 1 / 7 / 3; }
+  .div2-c { grid-area: 8 / 1 / 12 / 3; }
+  .div3-c { grid-area: 3 / 4 / 7 / 6; }
+  .div4-c { grid-area: 8 / 4 / 12 / 6; }
 
-  .dd-menu {
-    position: absolute;
-    top: 100%;
-    border: 1px solid #ccc;
-    border-radius: 20px;
-    padding: 0;
-    margin-top: 30px ;
-    margin-left: -480px;
-    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
-    
-    background-color: greenyellow;
-    list-style-type: none;
+
+  .form-container2 {
+    position: fixed;
+    /*overflow-y: scroll;
+    scrollbar-width: thin;
+    padding: 20px;*/
   }
   
-  .dd-input + .dd-menu {
-    display: none;
-  } 
-  .dd-input + .dd-menu {
-    display: block;
-  } 
-  .dd-menu li {
-    padding: 10px 20px;
-    cursor: pointer;
-    white-space: nowrap;
+  #list-scroll::-webkit-scrollbar
+  {
+    width: 12px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+  }
+  #list-scroll::-webkit-scrollbar-thumb
+  {
+    border-radius: 30px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
   }
 
 
-  //create/----------------------------------------------------------------
-  .parent-create {
+  .projectBoardStyle {
+    position: absolute;
+    width: 400px;
+    height: 200px;
+    background-color:yellow;
+  }
+
+
+  
+    .btnProject {
+      position: absolute;
+    }
+  .btnProjectDelete {
+    position: absolute;
+    margin-left: 70px;
+  }
+
+
+
+  $white: #FCFCFC;
+  $gray: #CBCDD3;
+  $dark: #777777;
+  $orange: #FFC39E;
+  $success: #B0DB7D;
+  $secondary: #99DBB4;
+  
+
+  #container-Board {
+    position: absolute;
+    margin: auto;
+    overflow: hidden;
+    width: 290px;
+    height: 260px;
+    background-color:$bluesky;
+    border-radius: 15px;
+  }
+  
+  p {
+    margin-top: -5px;
+    font-size: 15px;
+    font-weight: 100;
+    color: darken($dark, 10%);
+    letter-spacing: 1px;
+  }
+ 
+  .face {
+    position: absolute;
+    width: 22%;
+    height: 22%;
+    background: $white;
+    border-radius: 50%;
+    border: 1px solid $dark;
+    top: 10%;
+    left: 37.5%;
+    z-index: 2;
+    animation: bounce 1s ease-in infinite;
+  }
+  
+  .eye {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: $dark;
+    border-radius: 50%;
+    top: 40%;
+    left: 20%;
+  }
+  
+  .right {
+    left: 68%;
+  }
+  
+  .mouth {
+    position:absolute;
+    top: 43%;
+    left: 41%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  
+  .happy {
+    border: 2px solid;
+    border-color: transparent $dark $dark transparent;
+    transform: rotate(45deg);
+  }
+  shadow {
+    position: absolute;
+    width: 21%;
+    height: 3%;
+    opacity: .5;
+    background: $dark;
+    left: 40%;
+    top: 43%;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .scale {
+    animation: scale 1s ease-in infinite;
+  }
+  .move {
+    animation: move 3s ease-in-out infinite;
+  }
+  .show-message {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 40%;
+    top: 35%;
+  }
+  
+  .button-box {
+    position: absolute;
+    background: $white;
+    width: 25%;
+    height: 15%;
+    border-radius: 20px;
+    top: 73%;
+    left: 20%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  .button-box1 {
+    position: absolute;
+    background: $white;
+    width: 25%;
+    height: 15%;
+    border-radius: 20px;
+    top: 73%;
+    left: 55%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  @keyframes bounce {50% { transform: translateY(-10px);}}
+  
+  @keyframes scale {50% {transform: scale(0.9); } }
+  
+
+  @keyframes move {
+    0% {
+      left: 25%;
+    }
+    50% {
+      left: 60%;
+    }
+    100% {
+      left: 25%;
+    }
+  }
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*-------------------------------------
+  
+  -------------------------
+/* 
+  ##Device = Desktops
+  ##Screen = 1281px to higher resolution desktops
+*/
+@media (min-width: 1281px) {
+  
+  //CSS
+  .parent-bg {
     display: grid;
-    grid-template-columns: repeat(10, 1fr);
-    grid-template-rows: repeat(12, 1fr);
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+   
     }
     
-    .div1-c { grid-area: 3 / 1 / 7 / 3; }
-    .div2-c { grid-area: 8 / 1 / 12 / 3; }
-    .div3-c { grid-area: 3 / 4 / 7 / 6; }
-    .div4-c { grid-area: 8 / 4 / 12 / 6; }
-
-
-    .form-container2 {
-      position: fixed;
-      /*overflow-y: scroll;
-      scrollbar-width: thin;
-      padding: 20px;*/
+    .div1-bg { grid-area: 2 / 1 / 7 / 5; }
+    .div1-x { grid-area: 2 / 1 / 3 / 2; }
+  
+  //bg
+    .form-homeBoard  {
+      position: relative;
+        overflow: hidden;
+        width: 95%;
+        height: 80%; 
+        background-image: image('/client/src/assets/logo.png');
+        background-color: $pinkk; 
+        padding: 30px 10px 30px 30px; 
+        margin-top: 1%;
+        margin-left: 1.5%;
+        border-radius: 10px; 
+        position:fixed;
+        box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
     }
-    
-    #list-scroll::-webkit-scrollbar
-    {
-      width: 12px;
-      background-color: #F5F5F5;
-      border-radius: 30px;
-    }
-    #list-scroll::-webkit-scrollbar-thumb
-    {
-      border-radius: 30px;
-      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-      background-color: #555;
-    }
-
-
-    .projectBoardStyle {
+    .bghome {
+     // background-color: red;
       position: absolute;
-      width: 400px;
-      height: 200px;
-      background-color:red;
+      width: 94%;
+      height: 100%;
+      margin-top: 135px;
+      margin-left: 14px;
     }
   
+   
+  
+}
 
-    
-      .btnProject {
-        position: absolute;
-      }
-    .btnProjectDelete {
-      position: absolute;
-      margin-left: 70px;
+
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
+
+@media (min-width: 1025px) and (max-width: 1280px) {
+  
+  //CSS
+  .parent-bg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+   
     }
     
-
-
-    #whiteBoard {
-      display: flex;
-      flex-wrap: wrap;
-    }
-    
-   #addPostIt{
-     position: relative;
-   } 
-    .postIt {
-      line-height: 1;
-      text-align: center;
-      margin: 25px;
-      width: 275px;
-      min-height: 245px; /* setting min/max params will keep the height steady */
-      max-height: 245px;
-    
-      padding-top: 35px; /* room for the sticky */
+    .div1-bg { grid-area: 2 / 1 / 7 / 5; }
+    .div1-x { grid-area: 2 / 1 / 3 / 2; }
+  
+  //bg
+    .form-homeBoard  {
       position: relative;
-      border: 1px solid #e8e8e8;
-      border-top: 60px solid #fdfd86;
-      font-family: 'Reenie Beanie', cursive;
-      font-size: 48px;
-      border-bottom-right-radius: 60px 5px;
-      display: inline-block;
-      box-sizing: border-box;/* phew! if the padding is adding to the size, remember this trick!!! */
-      /* background: #ffff88; */
-      background: linear-gradient(
-        134deg,
-        #ffff88 81%,
-        #ffff88 82%,
-        #ffff88 82%,
-        #ffffc6 100%
-      ); /* assuming the consortiums have ironed all this stuff out - I guess we'll see. Four sections... gawd NOW I see. Details, details - very subtle*/
+        overflow: hidden;
+        width: 93%;
+        height: 80%; 
+        background-color:red; 
+        padding: 30px 10px 30px 30px; 
+        margin-top: 1%;
+        margin-left: 1.5%;
+        border-radius: 10px; 
+        position:fixed;
+        box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
     }
-    .postIt:after {
-      content: "";
+    .bghome {
+     // background-color: red;
       position: absolute;
-      z-index: -1;
-      right: -0px;
-      bottom: 20px;
-      width: 200px;
-      height: 25px;
-      background: rgba(0, 0, 0, 0.2);
-      box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
-      transform: matrix(-1, -0.1, 0, 1, 0, 0);
+      width: 100%;
+      height: 100%;
+      margin-top: 150px;
+      margin-left: -100px;
     }
+  
+   
+  
+  
+}
+
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  .parent-bg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+   
+    }
+    
+    .div1-bg { grid-area: 2 / 1 / 7 / 5; }
+    .div1-x { grid-area: 2 / 1 / 3 / 2; }
+  
+  //bg
+    .form-homeBoard  {
+      position: relative;
+        overflow: hidden;
+        width: 92%;
+        height: 80%; 
+        background-color:rgba(2, 128, 144, 1); 
+        padding: 30px 10px 30px 30px; 
+        margin-top: 1%;
+        margin-left: 1.5%;
+        border-radius: 10px; 
+        position:fixed;
+        box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+    }
+    .bghome {
+     // background-color: red;
+      position: absolute;
+      width: 100%;
+      height: 600px;
+      margin-top: 350px;
+      margin-left: -100px;
+    }
+  
+}
+
+
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  
+  //CSS
+  .parent-bg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+   background-color: red;
+   width: 100%;
+    }
+    
+    .div1-bg { grid-area: 2 / 1 / 3 / 5; }
+    .div1-x { grid-area: 2 / 1 / 3 / 2; }
+  
+  //bg
+    .form-homeBoard  {
+      position: relative;
+        overflow: hidden;
+        width: 91%;
+        height: 80%; 
+        background-color:blue; 
+        padding: 30px 10px 30px 30px; 
+        margin-top: 1%;
+        margin-left: 1.5%;
+        border-radius: 10px; 
+        position:fixed;
+        box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+    }
+    .bghome {
+     // background-color: red;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin-top: 150px;
+      margin-left: -100px;
+    }
+}
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 100px) and (max-width: 767px) {
+  
+  //CSS
+  .parent-bg {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+   background-color: red;
+   width: 100%;
+    }
+    
+    .div1-bg { grid-area: 2 / 1 / 3 / 5; }
+    .div1-x { grid-area: 2 / 1 / 3 / 2; }
+  
+  //bg
+    .form-homeBoard  {
+      position: relative;
+        overflow: hidden;
+        width: 88%;
+        height: 80%; 
+        background-color:wheat; 
+        padding: 30px 10px 30px 30px; 
+        margin-top: 1%;
+        margin-left: 1.5%;
+        border-radius: 10px; 
+        position:fixed;
+        box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+    }
+    .bghome {
+     // background-color: red;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      margin-top: 150px;
+      margin-left: -100px;
+    }
+}
+
+// /* 
+//   ##Device = Low Resolution Tablets, Mobiles (Landscape)
+//   ##Screen = B/w 481px to 767px
+// */
+
+// @media (min-width: 481px) and (max-width: 767px) {
+  
+//   //CSS
+//   .contain-bg {
+//     position: relative;
+//     background-color:green;
+//     border-radius: 15px;
+//   }
+//   .bghome {
+//     position: relative;
+//     width: 100%;
+//     border-radius: 15px;
+//     top: 5px
+//   }
+// }
+
+// /* 
+//   ##Device = Most of the Smartphones Mobiles (Portrait)
+//   ##Screen = B/w 320px to 479px
+// */
+
+// @media (min-width: 320px) and (max-width: 480px) {
+  
+//   //CSS
+//   .contain-bg {
+//     position: relative;
+//     background-color:gray;
+//     border-radius: 15px;
+//   }
+//   .bghome {
+//     position: relative;
+//     width: 100%;
+//     border-radius: 15px;
+//     top: 5px
+//   }
+// }
+  

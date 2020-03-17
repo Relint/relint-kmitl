@@ -1,6 +1,5 @@
 <template>
-  <div>
-   
+ <div>
      <!--dropdowm-->
     <div class="parent-bg">
        <div class="div1-bg" >
@@ -8,39 +7,32 @@
             <div  class="form-container"   > 
               <div class="div1-dd"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
             </div><!--form-container-->
+          </div>
+       </div>
+    </div>
 
-            <!--project create------------------------------------------------------->
-               <div class="form-container2" id="list-scroll"  >
-                      <!--1-->
-                      <!-- eslint-disable -->
-                      <div v-for="(project,index) in project" :key="project.pid"  > 
-                        <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
-                                    <h3>{{project.title}}</h3>
-                                    {{project.description}}<br><br> 
-                                    {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
-                                <button class="btnProject" @click="goBoardPostit(project.pid)"> goBoard  </button>
-                               <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
-                        </div>
-                      </div>
-                     
-                  </div><!--form-container2-->
-          
-               <div class="parent-create">
-                <div class="div1-c"></div>
-                <div class="div2-c"></div>
-                <div class="div3-c"></div>
-                <div class="div4-c"></div>
-              
-            </div><!--parent-create------------------------------------------------------->
-            <!--project setting------------------------------------------------------->
-
-            <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
+      <div class="parentBG">
+          <div class="div1-BG"> 
+            <div class="contain-relative-bg">
+             
+                 <div class="contain-bg">
+                    <!-- <img class="bghome" src="@/assets/bghome.png" alt="bghome" > -->
+                
+                 
+                        <!--project setting------------------------------------------------------->
+           <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
             <div>Data from other components can't be accessed. Event handler implemented</div>
-
+              
+            
+                        
+              
             <div class="parent-project">
-              <div class="div1-pj">
+              <div class="div1-pj">  
+
                 <label  class="dropdown">
+                   
                   <div @click="openFormSetting" class="dd-button">+</div>
+                 
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
                         <div class="parent-setting">
@@ -61,9 +53,9 @@
                                   <!--input-->
                                     <div  id="form-invite" >
                                       <div >
-                                      <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" >
+                                      <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
                                           <br>
-                                          <select @change='onChange' id='selector'>
+                                          <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
                                             <option v-for="(opt, index) in opts" :key="index" :value="opt.value">
                                               {{ opt.text }}
                                             </option>
@@ -80,19 +72,65 @@
                         </li>
                         
                     </div><!--dd-menu-->
+                    
                 </label><!--dropdown-->
+                
               </div>
+              
             </div><!--parent-project-------------------------------------------------->
 
-
-
-          </div><!--form-homeBoard----------------------------------------------------->
-       </div> <!--div1-dd-->
-    </div><!--parent-dropdown-->
+                    <div class="form-scroll-createBoard" id="board-scroll"  >
+                  
+                     <div class="from-createBoard">
+                     
+                        <!-- <p>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
+                        5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
+                        5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
+       
+                        </p> -->
 
    
-  
-  
+                            <div v-for="(project,index) in project" :key="project.pid"  > 
+
+
+                                <div id="container-Board" v-bind:style="{left: (index%2)*250+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*270+50+(Math.floor(index/2))+'px'  }">
+                                   
+                                      
+                                      <div class="dot two"></div>
+                                      <div class="face">
+                                        <div class="eye"></div>
+                                        <div class="eye right"></div>
+                                        <div class="mouth happy"></div>
+                                      </div>
+                                      <div class="shadow scale"></div>
+
+                                      <div class="show-message">
+                                          <h1>{{project.title}}</h1>
+                                         <p> {{project.description}}</p><br><br> 
+                                          <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
+                                      </div>
+                                      <button class="button-box"><p class="green" @click="goBoardPostit">join</p></button>
+                                      <button class="button-box1"><p class="green" @click="deleteBoard(project.pid)" v-if="project.permission">delete</p></button>
+                                    </div>
+                                  
+
+
+
+                        <!-- <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*250+50+(Math.floor(index/2))+'px'  }" >
+                                    <h3>{{project.title}}</h3>
+                                    {{project.description}}<br><br> 
+                                    {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
+                                <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
+                               <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
+                        </div> -->
+
+                       </div>
+                     </div>
+                  </div>
+                </div>
+            </div>
+          </div>
+      </div>
   
   </div> <!--close-->
 </template>
