@@ -17,7 +17,6 @@
              
                  <div class="contain-bg">
                     <!-- <img class="bghome" src="@/assets/bghome.png" alt="bghome" > -->
-
                 
                  
                         <!--project setting------------------------------------------------------->
@@ -149,7 +148,6 @@ export default {
   },
 data () {
         return {
-            countSett:0,
             projectNameIn:'',
             descriptionIn:'',
             deadlineIn:'',
@@ -212,14 +210,6 @@ data () {
     },
   
   methods: {
-    showObject () {
-          
-          this.project=[]
-          this.temp2.forEach(element => {
-            this.project.push(element)
-          });
-      
-    },
     //project
     createMainBoard () {
       const ref = this.$db.collection('project')
@@ -256,7 +246,8 @@ data () {
 
       document.getElementById('form-setting').style.display ="none"
     },
-    goBoardPostit () {
+    goBoardPostit (pid) {
+      this.$store.commit('setSelectedPID',pid)
        this.$router.push('/addBoardPostit')
     },
     deleteBoard (pid) {
@@ -275,19 +266,22 @@ data () {
       }
     },
     openFormSetting () {
-      this.countSett+=1
-      if (this.countSett==1) {
-        document.getElementById('form-setting').style.display="block"
-      }
-      else if ( this.countSett==2) {
-        document.getElementById('form-setting').style.display ="none"
-       this.invites = []
-       this.countSett=0
+      if(document.getElementById('form-setting').style.display === 'none'){
+        document.getElementById('form-setting').style.display = 'block'
+      } else {
+        document.getElementById('form-setting').style.display = 'none'      
+        this.projectNameIn=''
+        this.descriptionIn=''
+        this.deadlineIn=''
+        this.invites = []
       }
         
     },
     closeFormSetting () {
       document.getElementById('form-setting').style.display ="none"
+      this.projectNameIn=''
+      this.descriptionIn=''
+      this.deadlineIn=''
       this.invites = []
     }, 
 

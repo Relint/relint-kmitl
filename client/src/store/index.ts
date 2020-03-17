@@ -9,6 +9,7 @@ export default new Vuex.Store({
     username: '',
     uid: '',
     searchText: '',
+    pid: '',
   },
   mutations: {
     setRecord(state, n) {
@@ -17,7 +18,10 @@ export default new Vuex.Store({
     },
     setSearchText(state, n){
       state.searchText = n;
-    }
+    },
+    setSelectedPID(state, n){
+      state.pid = n;
+    },
   },
   actions: {
   },
