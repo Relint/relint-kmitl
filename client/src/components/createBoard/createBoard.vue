@@ -228,7 +228,6 @@ data () {
       }
     },
     openFormSetting () {
-      let display = document.getElementById('form-setting').style.display
       if(document.getElementById('form-setting').style.display === 'none'){
         document.getElementById('form-setting').style.display = 'block'
       } else {
