@@ -24,7 +24,7 @@
            <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
             <div>Data from other components can't be accessed. Event handler implemented</div>
               
-                       
+            
                         
               
             <div class="parent-project">
@@ -54,9 +54,9 @@
                                   <!--input-->
                                     <div  id="form-invite" >
                                       <div >
-                                      <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" >
+                                      <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
                                           <br>
-                                          <select @change='onChange' id='selector'>
+                                          <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
                                             <option v-for="(opt, index) in opts" :key="index" :value="opt.value">
                                               {{ opt.text }}
                                             </option>
@@ -89,15 +89,43 @@
                         5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
        
                         </p> -->
+
+   
                             <div v-for="(project,index) in project" :key="project.pid"  > 
-                        <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*250+50+(Math.floor(index/2))+'px'  }" >
+
+
+                                <div id="container-Board" v-bind:style="{left: (index%2)*250+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*270+50+(Math.floor(index/2))+'px'  }">
+                                   
+                                      
+                                      <div class="dot two"></div>
+                                      <div class="face">
+                                        <div class="eye"></div>
+                                        <div class="eye right"></div>
+                                        <div class="mouth happy"></div>
+                                      </div>
+                                      <div class="shadow scale"></div>
+
+                                      <div class="show-message">
+                                          <h1>{{project.title}}</h1>
+                                         <p> {{project.description}}</p><br><br> 
+                                          <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
+                                      </div>
+                                      <button class="button-box"><p class="green" @click="goBoardPostit">join</p></button>
+                                      <button class="button-box1"><p class="green" @click="deleteBoard(project.pid)" v-if="project.permission">delete</p></button>
+                                    </div>
+                                  
+
+
+
+                        <!-- <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*250+50+(Math.floor(index/2))+'px'  }" >
                                     <h3>{{project.title}}</h3>
                                     {{project.description}}<br><br> 
                                     {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
                                 <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
                                <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
-                        </div>
-                      </div>
+                        </div> -->
+
+                       </div>
                      </div>
                   </div>
                 </div>

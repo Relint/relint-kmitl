@@ -2,6 +2,7 @@
 $greenSeaweed: rgba(2, 128, 144, 1);
 $blueQueen: rgba(69, 105, 144, 1);
 $redFire: rgba(244, 91, 105, 1);
+$pinkk :#FFCFD2;
 $orange: #f7a79d;
 $bluesky : #a6d4d8;
 $fontAsap: 'Asap', sans-serif;
@@ -97,13 +98,15 @@ $fontAsap: 'Asap', sans-serif;
   { 
     
     width: 12px;
-    background-color:$bluesky;
+    // background-color:$bluesky;
     border-radius: 30px;
   }
   #board-scroll::-webkit-scrollbar-thumb
   {
     border-radius: 30px;
     background-color: $blueQueen;
+    scrollbar-width: thin;
+    
   }
 
 
@@ -292,6 +295,170 @@ background-color: purple;
     position: absolute;
     margin-left: 70px;
   }
+
+
+
+  $white: #FCFCFC;
+  $gray: #CBCDD3;
+  $dark: #777777;
+  $orange: #FFC39E;
+  $success: #B0DB7D;
+  $secondary: #99DBB4;
+  
+
+  #container-Board {
+    position: absolute;
+    margin: auto;
+    overflow: hidden;
+    width: 290px;
+    height: 260px;
+    background-color:$bluesky;
+    border-radius: 15px;
+  }
+  
+  p {
+    margin-top: -5px;
+    font-size: 15px;
+    font-weight: 100;
+    color: darken($dark, 10%);
+    letter-spacing: 1px;
+  }
+ 
+  .face {
+    position: absolute;
+    width: 22%;
+    height: 22%;
+    background: $white;
+    border-radius: 50%;
+    border: 1px solid $dark;
+    top: 10%;
+    left: 37.5%;
+    z-index: 2;
+    animation: bounce 1s ease-in infinite;
+  }
+  
+  .eye {
+    position: absolute;
+    width: 5px;
+    height: 5px;
+    background: $dark;
+    border-radius: 50%;
+    top: 40%;
+    left: 20%;
+  }
+  
+  .right {
+    left: 68%;
+  }
+  
+  .mouth {
+    position:absolute;
+    top: 43%;
+    left: 41%;
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+  }
+  
+  .happy {
+    border: 2px solid;
+    border-color: transparent $dark $dark transparent;
+    transform: rotate(45deg);
+  }
+  shadow {
+    position: absolute;
+    width: 21%;
+    height: 3%;
+    opacity: .5;
+    background: $dark;
+    left: 40%;
+    top: 43%;
+    border-radius: 50%;
+    z-index: 1;
+  }
+  
+  .scale {
+    animation: scale 1s ease-in infinite;
+  }
+  .move {
+    animation: move 3s ease-in-out infinite;
+  }
+  .show-message {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    height: 40%;
+    top: 35%;
+  }
+  
+  .button-box {
+    position: absolute;
+    background: $white;
+    width: 25%;
+    height: 15%;
+    border-radius: 20px;
+    top: 73%;
+    left: 20%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  .button-box1 {
+    position: absolute;
+    background: $white;
+    width: 25%;
+    height: 15%;
+    border-radius: 20px;
+    top: 73%;
+    left: 55%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  @keyframes bounce {50% { transform: translateY(-10px);}}
+  
+  @keyframes scale {50% {transform: scale(0.9); } }
+  
+
+  @keyframes move {
+    0% {
+      left: 25%;
+    }
+    50% {
+      left: 60%;
+    }
+    100% {
+      left: 25%;
+    }
+  }
+  
+ 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 /*-------------------------------------
   
   -------------------------
@@ -320,7 +487,8 @@ background-color: purple;
         overflow: hidden;
         width: 95%;
         height: 80%; 
-        background-color: fuchsia ; 
+        background-image: image('/client/src/assets/logo.png');
+        background-color: $pinkk; 
         padding: 30px 10px 30px 30px; 
         margin-top: 1%;
         margin-left: 1.5%;
