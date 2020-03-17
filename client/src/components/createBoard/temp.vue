@@ -320,5 +320,5 @@ data () {
 }
 </script>
 <style scoped lang="scss" >
-@import './createBoardStyle.scss'
+@import './temp.scss'
 </style>

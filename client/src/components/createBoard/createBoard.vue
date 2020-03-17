@@ -4,20 +4,22 @@
       <div class="parentBG">
           <div class="div1-BG"> 
             <div class="contain-relative-bg">
-              
-              <!-- <img class="bghome" src="@/assets/bghome.png" alt="bghome" > -->
+             
                  <div class="contain-bg">
-                   
-                    
-               
+                    <!-- <img class="bghome" src="@/assets/bghome.png" alt="bghome" > -->
+
+                
                  
                         <!--project setting------------------------------------------------------->
            <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
             <div>Data from other components can't be accessed. Event handler implemented</div>
-            
-                         
+              
+                       
+                        
+              
             <div class="parent-project">
-              <div class="div1-pj">
+              <div class="div1-pj">  
+
                 <label  class="dropdown">
                    
                   <div @click="openFormSetting" class="dd-button">+</div>
@@ -78,7 +80,7 @@
        
                         </p> -->
                             <div v-for="(project,index) in project" :key="project.pid"  > 
-                        <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*100 + 'px',top:(Math.floor(index/2))*200+100+(Math.floor(index/2)) +'px'  }" >
+                        <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*250+50+(Math.floor(index/2))+'px'  }" >
                                     <h3>{{project.title}}</h3>
                                     {{project.description}}<br><br> 
                                     {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>

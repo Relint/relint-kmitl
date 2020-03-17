@@ -1,7 +1,8 @@
 <template>
     <div>
        <navBar/>
-        <!--<test/> -->
+        <!-- <test/>  -->
+        <!-- <temp/> -->
       <createBoard/>
     </div>
 </template>
@@ -9,6 +10,7 @@
 /* eslint-disable */
 import navBar from '../navBar/navBar'
 import createBoard from '../createBoard/createBoard'
+import temp from '../createBoard/temp'
 import test from '../createBoard/test'
 
 export default {
@@ -16,7 +18,8 @@ export default {
       components: {
         navBar,
         createBoard,
-        test
+        test,
+        temp
     }
 }
 </script>

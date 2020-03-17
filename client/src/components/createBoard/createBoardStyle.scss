@@ -22,15 +22,18 @@ $fontAsap: 'Asap', sans-serif;
     width: 100%;
     background-color:$orange;
     border-radius: 15px;
-    height: 820px;
+    height: 820px;  
   }
   .contain-pic-bghome {
     position: relative;
   }
   .bghome {
+  
     position: absolute;
     border-radius: 15px;
-    width: 100%;
+    width: 95%;
+    top: -130px;
+    left: 100px;
   }
 
   .from-createBoard {
@@ -43,9 +46,9 @@ $fontAsap: 'Asap', sans-serif;
   .form-scroll-createBoard {
     position: static;
     width: 65%;
-    height: 650px;
+    height: 680px;
     border-radius: 20px;
-     background-color: red;
+    background-color: red;
     overflow-y: scroll;
     scrollbar-width: thin;
     left: 50px;
@@ -155,7 +158,6 @@ background-color: #555;
 .parent-setting {
 display: grid;
 grid-template-columns: repeat(2, 1fr);
-grid-template-rows: repeat(1, 1fr);
 grid-column-gap: 0px;
 grid-row-gap: 0px;
 width: 100%;
@@ -164,12 +166,12 @@ background-color: purple;
 
 .div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
   background-color: aquamarine;}
-.div2-s { grid-area: 2 / 1 / 2 / 2; width: 100%;
+.div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
   background-color:wheat;}
 .div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
   background-color: gold; }
 .div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
-  background-color: rgba(2, 128, 144, 1) ; }
+  background-color: rgb(21, 192, 214) ; }
 /*.div5-s { grid-area: 2 / 2 / 2 / 3; }
 .div6-s { grid-area: 3 / 2 / 2 / 3; }*/
 
@@ -180,7 +182,7 @@ background-color: purple;
   border-radius: 20px;
   padding: 0;
   margin-top: 120px ;
-  // margin-left: 80px;
+   margin-left: -50px;
   box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
   
   background-color: greenyellow;
@@ -259,84 +261,77 @@ background-color: purple;
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
-// @media (min-width: 1281px) {
+@media (min-width: 1281px) {
   
-//   //CSS
-//   .contain-bg {
-//     position: relative;
-//     background-color: yellow;
-//     border-radius: 15px;
-//   }
-//   .bghome {
-//     position: relative;
-//     width: 100%;
-//     border-radius: 15px;
-//     top: 5px
-//   }
-// }
+  //CSS
+  .contain-bg {
+    position: relative;
+    background-color: yellow;
+    border-radius: 15px;
+  }
+  .bghome {
+    border-radius: 15px;
+    width: 95%;
+    top: -19%;
+    
+  }
+}
 
 
-// /* 
-//   ##Device = Laptops, Desktops
-//   ##Screen = B/w 1025px to 1280px
-// */
+/* 
+  ##Device = Laptops, Desktops
+  ##Screen = B/w 1025px to 1280px
+*/
 
-// @media (min-width: 1025px) and (max-width: 1280px) {
+@media (min-width: 1025px) and (max-width: 1280px) {
   
-//   //CSS
-//   .contain-bg {
-//     position: relative;
-//     background-color: red;
-//     border-radius: 15px;
-//   }
-//   .bghome {
-//     position: relative;
-//     border-radius: 15px;
-//     top: 5px;
-//   }
-// }
-
-// /* 
-//   ##Device = Tablets, Ipads (portrait)
-//   ##Screen = B/w 768px to 1024px
-// */
-
-// @media (min-width: 768px) and (max-width: 1024px) {
+  //CSS
+  .contain-bg {
+    position: relative;
+    background-color: red;
+    border-radius: 15px;
+  }
+  .bghome {
+    border-radius: 15px;
+    width: 100%;
+     top: 21%;
+     left: 0%;
+    
+  }
   
-//   //CSS
-//   .contain-bg {
-//     position: relative;
-//     background-color:blue;
-//     border-radius: 15px;
-//   }
-//   .bghome {
-//     position: relative;
-//     width: 100%;
-//     border-radius: 15px;
-//     top: 5px
-//   }
-// }
+}
 
-// /* 
-//   ##Device = Tablets, Ipads (landscape)
-//   ##Screen = B/w 768px to 1024px
-// */
+/* 
+  ##Device = Tablets, Ipads (portrait)
+  ##Screen = B/w 768px to 1024px
+*/
 
-// @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+@media (min-width: 768px) and (max-width: 1024px) {
   
-//   //CSS
-//   .contain-bg {
-//     position: relative;
-//     background-color:purple;
-//     border-radius: 15px;
-//   }
-//   .bghome {
-//     position: relative;
-//     width: 100%;
-//     border-radius: 15px;
-//     top: 5px
-//   }
-// }
+  //CSS
+  .contain-bg {
+    position: relative;
+    background-color:blue;
+    border-radius: 15px;
+  }
+  
+}
+
+/* 
+  ##Device = Tablets, Ipads (landscape)
+  ##Screen = B/w 768px to 1024px
+*/
+
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
+  
+  //CSS
+  .contain-bg {
+    position: relative;
+    background-color:purple;
+    border-radius: 15px;
+  }
+ 
+}
 
 // /* 
 //   ##Device = Low Resolution Tablets, Mobiles (Landscape)
