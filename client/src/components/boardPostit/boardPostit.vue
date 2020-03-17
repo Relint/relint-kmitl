@@ -9,24 +9,26 @@
            <!-- <div class="seleHome-icon"></div>-->
           </div>
               <navBarProject/>
-              <h1>5555</h1>
+
+              <div>
+              <input type="text" placeholder="postit">
+              </div>
+
           </div>
       </div> 
     </div>
-</div>
-      
-
+</div><!--close-->
 </template>
 <script  >
 /* eslint-disable */
 import firebase from "firebase"
 import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
 import navBarProject from '../navBarProject/navBarProject'
-import navBar from '../navBar/navBar'
+//import navBar from '../navBar/navBar'
 export default {
   name: 'boardPostit',
   components: {
-   navBar,
+  // navBar,
    navBarProject
   },
    data (){
