@@ -32,15 +32,13 @@
               <div class="div1-pj">  
 
                 <label  class="dropdown">
-                   
                   <div @click="openFormSetting" class="dd-button">+</div>
-                 
                     <div class="dd-menu" id="form-setting"  >
                       <div class="container-setting" id="style-scroll">
                         <div class="parent-setting">
-                            <div class="div1-s"><input type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s"><input type="text" placeholder="Description" v-model="descriptionIn"></div>
-                            <div class="div3-s"><input type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
+                            <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
+                            <div class="div2-s" ><input class="input-box-setting-des" type="text" placeholder="Description" v-model="descriptionIn"></div>
+                            <div class="div3-s" ><input class="input-box-setting-date" type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
                             <div class="div4-s" >
                               <!--show-->
                                 
@@ -55,27 +53,27 @@
                                   <!--input-->
                                     <div  id="form-invite" >
                                       <div >
-                                      <input   type="text" class="nes-input" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
+                                      <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
                                           <br>
                                           <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
-                                            <option v-for="(opt, index) in opts" :key="index" :value="opt.value">
+                                            <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
                                               {{ opt.text }}
                                             </option>
                                           </select><br>
-                                          <button  class="nes-btn is-error padding" v-on:click="addMember">ok</button>
+                                          <button  class="btn-invite-ok" v-on:click="addMember">ok</button>
                                       </div>
                                     </div> 
                             </div>
                         </div>
                       </div><!--container-setting"-->
                         <li>
-                          <button @click='createMainBoard' >accept</button>
-                          <button @click='closeFormSetting'>cancel</button>
+                          <button class="btn-setting-accept" @click='createMainBoard' >Create</button>
+                          <button  class="btn-setting-cancel" @click='closeFormSetting'>Cancel</button>
                         </li>
                         
                     </div><!--dd-menu-->
                     
-                </label><!--dropdown-->
+                </label><!--dropdown-->                 
                 
               </div>
               
@@ -84,7 +82,7 @@
                     <div class="form-scroll-createBoard" id="board-scroll"  >
                      <div class="from-createBoard">
                             <div v-for="(project,index) in project" :key="project.pid"  > 
-                                <div id="container-Board" v-bind:style="{left: (index%2)*250+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*270+50+(Math.floor(index/2))+'px'  }">
+                                <div id="container-Board" v-bind:style="{left: (index%2)*250+80+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
  
                                       <div class="dot two"></div>
                                       <div class="face">
@@ -99,8 +97,9 @@
                                          <p> {{project.description}}</p><br><br> 
                                           <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
                                       </div>
-                                      <button class="button-box" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
-                                      <button class="button-box1" @click="deleteBoard(project.pid)" v-if="project.permission"><p class="green" >delete</p></button>
+                                      <button class="button-box" id="button-box" @click="goBoardPostit(project.pid)"><p  >join</p></button>
+                                      <button class="button-box1"  @click="deleteBoard(project.pid)" v-if="project.permission"><p  >delete</p></button>
+                                            <!-- <div v-else><div class="button-boxc" v-bind:style="{left: 110 + 'px'}"><p >join</p></div></div> -->
                                     </div>
 
                        </div>
@@ -138,7 +137,7 @@ data () {
             invites: [],
 
             opts: [
-              { value: 0, text: '--Choose Member Type--'},
+              { value: 0, text: '-Choose Member Type-'},
               { value: 1, text: 'Co-Admin' },
               { value: 2, text: 'Member' },
             ],
@@ -227,7 +226,7 @@ data () {
     },
     goBoardPostit (pid) {
       this.$store.commit('setSelectedPID',pid)
-       this.$router.push('/addBoardPostit')
+      this.$router.push('/addBoardPostit')
     },
     deleteBoard (pid) {
       let ref = this.$db.collection('project')

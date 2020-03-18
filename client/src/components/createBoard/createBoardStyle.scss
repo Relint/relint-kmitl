@@ -5,9 +5,15 @@ $redFire: rgba(244, 91, 105, 1);
 $pinkk :#FFCFD2;
 $orange: #f7a79d;
 $bluesky : #a6d4d8; 
+$colorFront : #707070;
 $fontAsap: 'Asap', sans-serif;
 
-
+$white: #FCFCFC;
+$gray: #CBCDD3;
+$dark: #777777;
+$orange: #FFC39E;
+$success: #B0DB7D;
+$secondary: #99DBB4;
 
 
 .parentBG {
@@ -49,10 +55,10 @@ $fontAsap: 'Asap', sans-serif;
 //scroll bar board
   .form-scroll-createBoard {
     position: static;
-    width: 65%;
-    height: 680px;
+    width: 50%;
+    height: 80%;
     border-radius: 20px;
-    // background-color: red;
+    //  background-color: red;
     overflow-y: scroll;
     scrollbar-width: thin;
     left: 50px;
@@ -63,6 +69,7 @@ $fontAsap: 'Asap', sans-serif;
     width: 12px;
     // background-color:$bluesky;
     border-radius: 30px;
+    display: none
   }
   #board-scroll::-webkit-scrollbar-thumb
   {
@@ -108,56 +115,50 @@ $fontAsap: 'Asap', sans-serif;
   font-size: 80px;
   color: white;
   margin-top: 20px;
+  &:hover {
+    background: $bluesky;
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+  
 }
-.dd-button:after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  right: 15px;
-  transform: translateY(-50%);
-  width: 0; 
-  height: 0; 
-  border-top: 5px solid black;
-}
-
-.dd-button:hover {
-  background-color: #eeeeee;
-}
-
-.dd-button:hover {
-  animation-name: random-color;
-  animation-duration: 5s;
-}
-@keyframes random-color {
-  0%   {background-color:red; }
-  25%  {background-color:yellow; }
-  50%  {background-color:blue; }
-  75%  {background-color:green; }
-  100% {background-color:red; }
-}
+// .dd-button:hover {
+//   // animation-name: random-color;
+//   animation-duration:5s;
+// }
+// @keyframes random-color {
+//   0%   {background-color:$greenSeaweed; }
+//   25%  {background-color:$blueQueen; }
+//   50%  {background-color:$redFire; }
+//   75%  {background-color:$pinkk; }
+//   100% {background-color:$bluesky; }
+  
+// }
 //invite//------------------------------------------------------------
 .container-setting {
   width: 410px;
-  height: 250px;
+  height: 270px;
   border-radius: 20px;
-  background-color: red;
+  background-color:white;
   overflow-y: scroll;
   scrollbar-width: thin;
   padding: 20px;
 }
 
-#style-scroll::-webkit-scrollbar
-{
-width: 12px;
-background-color: #F5F5F5;
-border-radius: 30px;
-}
-#style-scroll::-webkit-scrollbar-thumb
-{
-border-radius: 30px;
--webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-background-color: #555;
-}
+  #style-scroll::-webkit-scrollbar
+  {
+    width: 12px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+    display: none;
+  }
+  #style-scroll::-webkit-scrollbar-thumb
+  {
+    border-radius: 30px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+    display: none;
+  }
 
 
 .parent-setting {
@@ -166,40 +167,192 @@ grid-template-columns: repeat(2, 1fr);
 grid-column-gap: 0px;
 grid-row-gap: 0px;
 width: 100%;
-background-color: purple;
+// background-color: purple;
+padding:  0 0  20px 0;
 }
 
 .div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
-  background-color: aquamarine;}
+  // background-color: aquamarine;
+}
 .div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
-  background-color:wheat;}
+  //  background-color:wheat;
+}
 .div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
-  background-color: gold; }
+  
+  //  background-color: gold; 
+}
 .div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
-  background-color: rgb(21, 192, 214) ; }
+  height: 120%;
+  //  background-color: rgb(21, 192, 214) ; 
+}
 /*.div5-s { grid-area: 2 / 2 / 2 / 3; }
 .div6-s { grid-area: 3 / 2 / 2 / 3; }*/
 
+.input-box-setting-pid {
+  border-radius: 20px;
+  width: 180px;
+  height: 50px;
+  border-radius: 40px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+}
+ .input-box-setting-des {
+  border-radius: 20px;
+  width: 180px;
+  height: 100px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  0 ;
+}
+
+.input-box-setting-inv {
+  border-radius: 20px;
+  width: 160px;
+  height: 50px;
+  border-radius: 40px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  margin: 20px 0  0  30px ;
+  font-size: 15px;
+}
+.btn-invite-ok {
+  position: relative;
+  font-size: 20px;
+  color: white;
+  background: $redFire;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  outline: 0;
+  bottom: -20px;
+  left: 45%;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+  }
+.btn-setting-accept {
+  position: relative;
+  background: $bluesky;
+  font-size: 17px;
+  color: white;
+  width: 25%;
+  height:35px;
+  border-radius: 20px;
+  top: 73%;
+  left: 52%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-setting-cancel {
+  background: $redFire;
+  color: white;
+  font-size: 17px;
+  width: 25%;
+  height:35px;
+  border-radius: 20px;
+  top: 73%;
+  left: 48%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+// Removes  clear button 
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+// Removes  spin button 
+input[type="date"]::-webkit-inner-spin-button { 
+  display: none;
+}
+
+// Always display the drop down caret 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color:$colorFront;
+  font-size: 20px;
+  padding: 0 30px 0 0 ;
+ 
+}
+
+// styles  date inputs 
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding:5px;
+  display: inline-block !important;
+  visibility: visible !important;
+  border-radius: 30px;
+  width: 180px;
+  height: 50px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  0 ;
+}
+// style
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-style: none; ;
+  border-radius: 20px;
+  outline: 0;
+  box-shadow: none;
+  background: $redFire;
+  width: 180px;
+  height: 50px;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  30px ;
+}
+// /* Remove IE arrow 
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+
 .dd-menu {
   position: absolute;
-  top: 100%;
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 0;
-  margin-top: 120px ;
-   margin-left: -50px;
+  margin-top: 150px ;
+  margin-left: -160px;
   box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
   
-  background-color: greenyellow;
+  background-color: white;
   list-style-type: none;
 }
 
-.dd-input + .dd-menu {
-  display: none;
-} 
-.dd-input + .dd-menu {
-  display: block;
-} 
 .dd-menu li {
   padding: 10px 20px;
   cursor: pointer;
@@ -262,12 +415,7 @@ background-color: purple;
 
 
 
-  $white: #FCFCFC;
-  $gray: #CBCDD3;
-  $dark: #777777;
-  $orange: #FFC39E;
-  $success: #B0DB7D;
-  $secondary: #99DBB4;
+ 
   
 
   #container-Board {
@@ -276,7 +424,7 @@ background-color: purple;
     overflow: hidden;
     width: 290px;
     height: 260px;
-    background-color:$bluesky;
+    background-color:white;
     border-radius: 15px;
   }
   
@@ -357,7 +505,7 @@ background-color: purple;
   
   .button-box {
     position: absolute;
-    background: $white;
+    background: $bluesky;
     width: 25%;
     height: 15%;
     border-radius: 20px;
@@ -373,9 +521,27 @@ background-color: purple;
       transition: all .3s ease-in-out;
     }
   }
+  
+  .button-boxc {
+    position: absolute;
+    background: $bluesky;
+    width: 25%;
+    height: 15%;
+    border-radius: 20px;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+
   .button-box1 {
     position: absolute;
-    background: $white;
+    background: $orange;
     width: 25%;
     height: 15%;
     border-radius: 20px;
