@@ -97,9 +97,8 @@
                                          <p> {{project.description}}</p><br><br> 
                                           <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
                                       </div>
-                                      <button class="button-box" id="button-box" @click="goBoardPostit(project.pid)"><p  >join</p></button>
-                                      <button class="button-box1"  @click="deleteBoard(project.pid)" v-if="project.permission"><p  >delete</p></button>
-                                            <!-- <div v-else><div class="button-boxc" v-bind:style="{left: 110 + 'px'}"><p >join</p></div></div> -->
+                                      <button class="button-box" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
+                                      <button class="button-box1" @click="deleteBoard(project.pid)" v-if="project.permission"><p class="green" >delete</p></button>
                                     </div>
 
                        </div>
