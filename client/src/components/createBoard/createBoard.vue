@@ -1,15 +1,17 @@
 <template>
  <div>
      <!--dropdowm-->
-    <div class="parent-bg">
-       <div class="div1-bg" >
-          <div class="form-homeBoard" id="from-home">
+ 
+          <div class="form-BoardBG" >
             <div  class="form-container"   > 
-              <div class="div1-dd"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
+                  <div class="dotBG1"></div>
+                  <div class="dotBG2"></div>
+                  <div class="dotBG3"></div>
+                  <div class="dotBG4"></div>
             </div><!--form-container-->
+            
           </div>
-       </div>
-    </div>
+    
 
       <div class="parentBG">
           <div class="div1-BG"> 
@@ -97,8 +99,8 @@
                                          <p> {{project.description}}</p><br><br> 
                                           <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
                                       </div>
-                                      <button class="button-box"><p class="green" @click="goBoardPostit(project.pid)">join</p></button>
-                                      <button class="button-box1"><p class="green" @click="deleteBoard(project.pid)" v-if="project.permission">delete</p></button>
+                                      <button class="button-box" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
+                                      <button class="button-box1" @click="deleteBoard(project.pid)" v-if="project.permission"><p class="green" >delete</p></button>
                                     </div>
 
                        </div>
