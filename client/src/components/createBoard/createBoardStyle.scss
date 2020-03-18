@@ -92,7 +92,6 @@ $fontAsap: 'Asap', sans-serif;
     scrollbar-width: thin;
     left: 50px;
     top: 30px;
-    
   }
   #board-scroll::-webkit-scrollbar
   { 
@@ -106,6 +105,7 @@ $fontAsap: 'Asap', sans-serif;
     border-radius: 30px;
     background-color: $blueQueen;
     scrollbar-width: thin;
+    display: none
     
   }
 

@@ -80,22 +80,10 @@
             </div><!--parent-project-------------------------------------------------->
 
                     <div class="form-scroll-createBoard" id="board-scroll"  >
-                  
                      <div class="from-createBoard">
-                     
-                        <!-- <p>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
-                        5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
-                        5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>5555<br>
-       
-                        </p> -->
-
-   
                             <div v-for="(project,index) in project" :key="project.pid"  > 
-
-
                                 <div id="container-Board" v-bind:style="{left: (index%2)*250+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*270+50+(Math.floor(index/2))+'px'  }">
-                                   
-                                      
+ 
                                       <div class="dot two"></div>
                                       <div class="face">
                                         <div class="eye"></div>
@@ -109,20 +97,9 @@
                                          <p> {{project.description}}</p><br><br> 
                                           <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
                                       </div>
-                                      <button class="button-box"><p class="green" @click="goBoardPostit">join</p></button>
+                                      <button class="button-box"><p class="green" @click="goBoardPostit(project.pid)">join</p></button>
                                       <button class="button-box1"><p class="green" @click="deleteBoard(project.pid)" v-if="project.permission">delete</p></button>
                                     </div>
-                                  
-
-
-
-                        <!-- <div class="projectBoardStyle" id="form-layout" v-bind:style="{left: (index%2)*400+100+(index%2)*150 + 'px',top:(Math.floor(index/2))*250+50+(Math.floor(index/2))+'px'  }" >
-                                    <h3>{{project.title}}</h3>
-                                    {{project.description}}<br><br> 
-                                    {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}<br>
-                                <button class="btnProject" @click="goBoardPostit"> goBoard  </button>
-                               <button class="btnProjectDelete" @click="deleteBoard(project.pid)" v-if="project.permission"> delete  </button>
-                        </div> -->
 
                        </div>
                      </div>
