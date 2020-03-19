@@ -18,14 +18,13 @@ $secondary: #99DBB4;
 
 
 
-.parentBG {
-  display: grid;
-  grid-template-columns: repeat(50, 1fr);
-  grid-template-rows: repeat(50, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
+  .parentBG {
+    display: grid;
+    grid-template-columns: repeat(50, 1fr);
+    grid-template-rows: repeat(50, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
   }
- 
   .div1-BG { grid-area: 2 / 2 / 50 / 50; }
 
  //bg  
@@ -40,14 +39,12 @@ $secondary: #99DBB4;
     position: relative;
   }
   .bghome {
-  
     position: absolute;
     border-radius: 15px;
     width: 95%;
     top: -130px;
     left: 100px;
   }
-
   .from-createBoard {
     position: relative;
     padding: 30px;
@@ -60,7 +57,7 @@ $secondary: #99DBB4;
     width: 50%;
     height: 80%;
     border-radius: 20px;
-    //  background-color: red;
+      // background-color: red;
     overflow-y: scroll;
     scrollbar-width: thin;
     left: 50px;
@@ -79,14 +76,9 @@ $secondary: #99DBB4;
     background-color: $blueQueen;
     scrollbar-width: thin;
     display: none
-    
   }
 
-
-//project setting
-
-//project setting
-
+//project setting-----------------------------
 .parent-project {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -100,10 +92,29 @@ $secondary: #99DBB4;
   // width: 100%;
   // background-color: darkgreen;
  }
+
 //+//-------------------------------------------------------------------
 .dropdown {
   display: inline-block;
   position: relative;
+}
+.dd-menu {
+  position: absolute;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  padding: 15px;
+  margin-top: 150px ;
+  margin-left: -160px;
+  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+  
+  background-color: white;
+  list-style-type: none;
+}
+
+.dd-menu li {
+  padding: 10px 20px;
+  cursor: pointer;
+  white-space: nowrap;
 }
 .dd-button {
   text-align: center;
@@ -122,73 +133,94 @@ $secondary: #99DBB4;
     transform: scale(1.05);
     transition: all .3s ease-in-out;
   }
-  
 }
-// .dd-button:hover {
-//   // animation-name: random-color;
-//   animation-duration:5s;
-// }
-// @keyframes random-color {
-//   0%   {background-color:$greenSeaweed; }
-//   25%  {background-color:$blueQueen; }
-//   50%  {background-color:$redFire; }
-//   75%  {background-color:$pinkk; }
-//   100% {background-color:$bluesky; }
-  
-// }
+
 //invite//------------------------------------------------------------
-.container-setting {
-  width: 410px;
-  height: 270px;
-  border-radius: 20px;
-  background-color:white;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  padding: 20px;
-}
+  .container-setting {
+    width: 210px;
+    height: 230px;
+    //  background-color:red;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    padding: 10px 0 0 20px;
+  }
 
   #style-scroll::-webkit-scrollbar
   {
     width: 12px;
     background-color: #F5F5F5;
     border-radius: 30px;
-    display: none;
+     display: none;
   }
   #style-scroll::-webkit-scrollbar-thumb
   {
     border-radius: 30px;
     -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
     background-color: #555;
-    display: none;
+     display: none;
   }
 
+  .contain-obj-invite {
+    position: relative;
+    // text-align: center;
+    width: 180px;
+    height: 50px;
+    background-color: $bluesky;
+    border-radius: 7px;
+    padding-top: 10px;
+    padding-left: 10px;
+    color: white;
+    font-size:15px;
+  }
+  .remove-invite {
+    position: absolute;
+    background: $orange;
+    font-size: 15px;
+    color: white;
+    width: 40%;
+    height:25px;
+    border-radius: 20px;
+    top: 47%;
+    left: 58%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  .parent-setting {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    width: 100%;
+    // background-color: purple;
+    padding:  0 0  20px 0;
+  }
 
-.parent-setting {
-display: grid;
-grid-template-columns: repeat(2, 1fr);
-grid-column-gap: 0px;
-grid-row-gap: 0px;
-width: 100%;
-// background-color: purple;
-padding:  0 0  20px 0;
-}
+  .div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
+    // background-color: aquamarine;
+  }
+  .div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
+    //  background-color:wheat;
+  }
+  .div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
+    
+    //  background-color: gold; 
+  }
+  .div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
+    height: 120%;
+    //  background-color: rgb(21, 192, 214) ; 
+  }
+  /*.div5-s { grid-area: 2 / 2 / 2 / 3; }
+  .div6-s { grid-area: 3 / 2 / 2 / 3; }*/
 
-.div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
-  // background-color: aquamarine;
-}
-.div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
-  //  background-color:wheat;
-}
-.div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
-  
-  //  background-color: gold; 
-}
-.div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
-  height: 120%;
-  //  background-color: rgb(21, 192, 214) ; 
-}
-/*.div5-s { grid-area: 2 / 2 / 2 / 3; }
-.div6-s { grid-area: 3 / 2 / 2 / 3; }*/
+
+//input project des date-----------------------
 
 .input-box-setting-pid {
   border-radius: 20px;
@@ -216,7 +248,7 @@ padding:  0 0  20px 0;
   border-radius: 40px;
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
-  margin: 20px 0  0  30px ;
+  // margin: 20px 0  0  30px ;
   font-size: 15px;
 }
 .btn-invite-ok {
@@ -229,7 +261,7 @@ padding:  0 0  20px 0;
   border-radius: 40px;
   outline: 0;
   bottom: -20px;
-  left: 45%;
+  left: 35%;
   border: none;
   box-shadow: 2px 2px 10px rgba($dark, .5);
   transition: all .5s ease-in-out;
@@ -278,11 +310,12 @@ padding:  0 0  20px 0;
     transition: all .3s ease-in-out;
   }
 }
+
+//style date---------------------------------------------
 // Removes  clear button 
 input[type="date"]::-webkit-clear-button {
   display: none;
 }
-
 // Removes  spin button 
 input[type="date"]::-webkit-inner-spin-button { 
   display: none;
@@ -295,7 +328,6 @@ input[type="date"]::-webkit-calendar-picker-indicator {
   padding: 0 30px 0 0 ;
  
 }
-
 // styles  date inputs 
 input[type="date"] {
   appearance: none;
@@ -328,41 +360,26 @@ select {
   height: 50px;
   padding: 0 0 0 20px ;
   font-size: 15px;
-  margin: 20px 0  0  30px ;
+   margin: 15px 0  0  0 ;
 }
+//style select option-------------------------
 // /* Remove IE arrow 
-select::-ms-expand {
-  display: none;
-}
+  select::-ms-expand {
+    display: none;
+  }
 
-select {
-  flex: 1;
-  padding: 0 .5em;
-  color: #fff;
-  cursor: pointer;
-}
-
-.dd-menu {
-  position: absolute;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 0;
-  margin-top: 150px ;
-  margin-left: -160px;
-  box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
-  
-  background-color: white;
-  list-style-type: none;
-}
-
-.dd-menu li {
-  padding: 10px 20px;
-  cursor: pointer;
-  white-space: nowrap;
-}
+  select {
+    flex: 1;
+    padding: 0 .5em;
+    color: #fff;
+    cursor: pointer;
+  }
 
 
-//create/----------------------------------------------------------------
+
+
+
+//create Board/----------------------------------------------------------------
 .parent-create {
   display: grid;
   grid-template-columns: repeat(10, 1fr);
@@ -370,55 +387,44 @@ select {
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   }
-  
   .div1-c { grid-area: 3 / 1 / 7 / 3; }
   .div2-c { grid-area: 8 / 1 / 12 / 3; }
   .div3-c { grid-area: 3 / 4 / 7 / 6; }
   .div4-c { grid-area: 8 / 4 / 12 / 6; }
 
+  // .form-container2 {
+  //   position: fixed;
+  //   /*overflow-y: scroll;
+  //   scrollbar-width: thin;
+  //   padding: 20px;*/
+  // }
+  // #list-scroll::-webkit-scrollbar
+  // {
+  //   width: 12px;
+  //   background-color: #F5F5F5;
+  //   border-radius: 30px;
+  // }
+  // #list-scroll::-webkit-scrollbar-thumb
+  // {
+  //   border-radius: 30px;
+  //   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  //   background-color: #555;
+  // }
 
-  .form-container2 {
-    position: fixed;
-    /*overflow-y: scroll;
-    scrollbar-width: thin;
-    padding: 20px;*/
-  }
-  
-  #list-scroll::-webkit-scrollbar
-  {
-    width: 12px;
-    background-color: #F5F5F5;
-    border-radius: 30px;
-  }
-  #list-scroll::-webkit-scrollbar-thumb
-  {
-    border-radius: 30px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-  }
+  // .projectBoardStyle {
+  //   position: absolute;
+  //   width: 400px;
+  //   height: 200px;
+  //   background-color:yellow;
+  // }
 
-
-  .projectBoardStyle {
-    position: absolute;
-    width: 400px;
-    height: 200px;
-    background-color:yellow;
-  }
-
-
-  
-    .btnProject {
-      position: absolute;
-    }
-  .btnProjectDelete {
-    position: absolute;
-    margin-left: 70px;
-  }
-
-
-
- 
-  
+  // .btnProject {
+  //     position: absolute;
+  //   }
+  // .btnProjectDelete {
+  //   position: absolute;
+  //   margin-left: 70px;
+  // }
 
   #container-Board {
     position: absolute;
@@ -523,23 +529,7 @@ select {
       transition: all .3s ease-in-out;
     }
   }
-  
-  .button-boxc {
-    position: absolute;
-    background: $bluesky;
-    width: 25%;
-    height: 15%;
-    border-radius: 20px;
-    outline: 0;
-    border: none;
-    box-shadow: 2px 2px 10px rgba($dark, .5);
-    transition: all .5s ease-in-out;
-    &:hover {
-      background: darken($white, 5%);
-      transform: scale(1.05);
-      transition: all .3s ease-in-out;
-    }
-  }
+
 
   .button-box1 {
     position: absolute;
@@ -560,36 +550,14 @@ select {
     }
   }
   @keyframes bounce {50% { transform: translateY(-10px);}}
-  
   @keyframes scale {50% {transform: scale(0.9); } }
-  
-
   @keyframes move {
-    0% {
-      left: 25%;
-    }
-    50% {
-      left: 60%;
-    }
-    100% {
-      left: 25%;
-    }
+    0% { left: 25%; }
+    50% {left: 60%; }
+    100% {left: 25%;}
   }
   
  
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /*-------------------------------------
   
@@ -604,7 +572,7 @@ select {
         width: 100%;
         height: 100%; 
         background: rgb(252,208,211);
-        background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(175,216,224,1) 100%);
+        background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
         margin-top: 1.5%;
         position:fixed;
     }
@@ -621,9 +589,9 @@ select {
       left: 5%;
     }
     .dotBG2 {
-      background-color:rgb(219, 233, 235);
+      background-color:rgb(208, 236, 240);
       border-radius: 50%;
-      opacity: 30%;
+      opacity: 90%;
       left: 25%;
     }
     .dotBG3 {
@@ -657,7 +625,7 @@ select {
     width: 100%;
     height: 100%; 
     background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(175,216,224,1) 100%);
+    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
     margin-top: 1.5%;
     position:fixed;
 }
@@ -674,9 +642,9 @@ select {
   left: 5%;
 }
 .dotBG2 {
-  background-color:rgb(219, 233, 235);
+  background-color:rgb(208, 236, 240);
   border-radius: 50%;
-  opacity: 30%;
+  opacity: 90%;
   left: 25%;
 }
 .dotBG3 {
@@ -695,9 +663,10 @@ select {
  top: 50%;
  left: -2.5%;
 }
+
 }
 
-
+//ipad  (landscape)
 /* 
   ##Device = Tablets, Ipads (landscape)
   ##Screen = B/w 768px to 1024px
@@ -709,7 +678,7 @@ select {
     width: 100%;
     height: 100%; 
     background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(175,216,224,1) 100%);
+    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
     margin-top: 1.75%;
     position:fixed;
 }
@@ -726,9 +695,9 @@ select {
   left: 5%;
 }
 .dotBG2 {
-  background-color:rgb(219, 233, 235);
+  background-color:rgb(208, 236, 240);
   border-radius: 50%;
-  opacity: 30%;
+  opacity: 90%;
   left: 25%;
 }
 .dotBG3 {
@@ -747,10 +716,11 @@ select {
  top: 50%;
  left: -2.5%;
 }
+
   
 }
 
-
+//ipad  (portrait)
 /* 
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
@@ -762,7 +732,7 @@ select {
     width: 100%;
     height: 100%; 
     background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(175,216,224,1) 100%);
+    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
     margin-top: 2%;
     position:fixed;
 }
@@ -779,9 +749,9 @@ select {
   left: 5%;
 }
 .dotBG2 {
-  background-color:rgb(219, 233, 235);
+  background-color:rgb(208, 236, 240);
   border-radius: 50%;
-  opacity: 30%;
+  opacity: 90%;
   left: 25%;
 }
 .dotBG3 {
@@ -800,7 +770,273 @@ select {
  top: 50%;
  left: -2.5%;
 }
+//scroll bar board
+.form-scroll-createBoard {
+  position: static;
+  width: 50%;
+  height: 80%;
+  border-radius: 20px;
+  // background-color: red;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  left: 50px;
+  top: 30px;
 }
+#board-scroll::-webkit-scrollbar
+{ 
+  width: 12px;
+  // background-color:$bluesky;
+  border-radius: 30px;
+  display: none
+}
+#board-scroll::-webkit-scrollbar-thumb
+{
+  border-radius: 30px;
+  background-color: $blueQueen;
+  scrollbar-width: thin;
+  display: none
+  
+}
+//invite//------------------------------------------------------------
+.container-setting {
+  width: 150px;
+  height: 200px;
+  border-radius: 20px;
+  background-color:white;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  padding: 20px 20px 20px 20px;
+}
+
+  #style-scroll::-webkit-scrollbar
+  {
+    width: 12px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+    display: none;
+  }
+  #style-scroll::-webkit-scrollbar-thumb
+  {
+    border-radius: 30px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+    display: none;
+  }
+
+//object 
+.contain-obj-invite {
+  position: relative;
+  // text-align: center;
+  width: 160px;
+  height: 50px;
+  background-color: $bluesky;
+  border-radius: 7px;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: white;
+  font-size:15px;
+}
+.remove-invite {
+  position: absolute;
+  background: $orange;
+  font-size: 15px;
+  color: white;
+  width: 40%;
+  height:25px;
+  border-radius: 20px;
+  top: 47%;
+  left: 58%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.parent-setting {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 100%;
+  // background-color: purple;
+  // padding:  0 0  20px 0;
+  }
+
+.div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
+  // background-color: aquamarine;
+}
+.div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
+  //  background-color:wheat;
+}
+.div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
+  
+  //  background-color: gold; 
+}
+.div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
+  // height: 120%;
+  //  background-color: rgb(21, 192, 214) ; 
+}
+/*.div5-s { grid-area: 2 / 2 / 2 / 3; }
+.div6-s { grid-area: 3 / 2 / 2 / 3; }*/
+
+.input-box-setting-pid {
+  border-radius: 20px;
+  width: 150px;
+  height: 50px;
+  border-radius: 40px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+}
+ .input-box-setting-des {
+  border-radius: 20px;
+  width: 150px;
+  height: 100px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  0 ;
+}
+
+.input-box-setting-inv {
+  border-radius: 20px;
+  width: 130px;
+  height: 50px;
+  border-radius: 40px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  margin: 20px 0  0  10px ;
+  font-size: 15px;
+}
+.btn-invite-ok {
+  position: relative;
+  font-size: 20px;
+  color: white;
+  background: $redFire;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  outline: 0;
+  bottom: -20px;
+  left: 45%;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+  }
+.btn-setting-accept {
+  position: relative;
+  background: $bluesky;
+  font-size: 17px;
+  color: white;
+  width: 25%;
+  height:35px;
+  border-radius: 20px;
+  top: 73%;
+  left: 52%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-setting-cancel {
+  background: $redFire;
+  color: white;
+  font-size: 17px;
+  width: 25%;
+  height:35px;
+  border-radius: 20px;
+  top: 73%;
+  left: 48%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+// Removes  clear button 
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+// Removes  spin button 
+input[type="date"]::-webkit-inner-spin-button { 
+  display: none;
+}
+
+// Always display the drop down caret 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color:$colorFront;
+  font-size: 20px;
+  padding: 0 30px 0 0 ;
+ 
+}
+
+// styles  date inputs 
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding:5px;
+  display: inline-block !important;
+  visibility: visible !important;
+  border-radius: 30px;
+  width: 150px;
+  height: 50px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  0 ;
+}
+// style
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-style: none; ;
+  border-radius: 20px;
+  outline: 0;
+  box-shadow: none;
+  background: $redFire;
+  width: 150px;
+  height: 50px;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  10px ;
+}
+// /* Remove IE arrow 
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+}
+///smallllll
 /* 
   ##Device = Tablets, Ipads (portrait)
   ##Screen = B/w 768px to 1024px
@@ -812,7 +1048,7 @@ select {
     width: 100%;
     height: 100%; 
     background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(175,216,224,1) 100%);
+    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
     margin-top: 2%;
     position:fixed;
 }
@@ -829,9 +1065,9 @@ select {
   left: 5%;
 }
 .dotBG2 {
-  background-color:rgb(219, 233, 235);
+  background-color:rgb(208, 236, 240);
   border-radius: 50%;
-  opacity: 30%;
+  opacity: 90%;
   left: 25%;
 }
 .dotBG3 {
@@ -850,47 +1086,271 @@ select {
  top: 50%;
  left: -2.5%;
 }
+//scroll bar board
+.form-scroll-createBoard {
+  position: static;
+  width: 50%;
+  height: 80%;
+  border-radius: 20px;
+  // background-color: red;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  left: 50px;
+  top: 30px;
+}
+#board-scroll::-webkit-scrollbar
+{ 
+  width: 12px;
+  // background-color:$bluesky;
+  border-radius: 30px;
+  display: none
+}
+#board-scroll::-webkit-scrollbar-thumb
+{
+  border-radius: 30px;
+  background-color: $blueQueen;
+  scrollbar-width: thin;
+  display: none
+  
+}
+//invite//------------------------------------------------------------
+.container-setting {
+  width: 150px;
+  height: 200px;
+  border-radius: 20px;
+  background-color:white;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  padding: 20px 20px 20px 20px;
 }
 
-// /* 
-//   ##Device = Low Resolution Tablets, Mobiles (Landscape)
-//   ##Screen = B/w 481px to 767px
-// */
+  #style-scroll::-webkit-scrollbar
+  {
+    width: 12px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+    display: none;
+  }
+  #style-scroll::-webkit-scrollbar-thumb
+  {
+    border-radius: 30px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+    background-color: #555;
+    display: none;
+  }
 
-// @media (min-width: 481px) and (max-width: 767px) {
-  
-//   //CSS
-//   .contain-bg {
-//     position: relative;
-//     background-color:green;
-//     border-radius: 15px;
-//   }
-//   .bghome {
-//     position: relative;
-//     width: 100%;
-//     border-radius: 15px;
-//     top: 5px
-//   }
-// }
+//object 
+.contain-obj-invite {
+  position: relative;
+  // text-align: center;
+  width: 160px;
+  height: 50px;
+  background-color: $bluesky;
+  border-radius: 7px;
+  padding-top: 10px;
+  padding-left: 10px;
+  color: white;
+  font-size:15px;
+}
+.remove-invite {
+  position: absolute;
+  background: $orange;
+  font-size: 15px;
+  color: white;
+  width: 40%;
+  height:25px;
+  border-radius: 20px;
+  top: 47%;
+  left: 58%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.parent-setting {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  width: 100%;
+  // background-color: purple;
+  // padding:  0 0  20px 0;
+  }
 
-// /* 
-//   ##Device = Most of the Smartphones Mobiles (Portrait)
-//   ##Screen = B/w 320px to 479px
-// */
+.div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
+  // background-color: aquamarine;
+}
+.div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
+  //  background-color:wheat;
+}
+.div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
+  
+  //  background-color: gold; 
+}
+.div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
+  // height: 120%;
+  //  background-color: rgb(21, 192, 214) ; 
+}
+/*.div5-s { grid-area: 2 / 2 / 2 / 3; }
+.div6-s { grid-area: 3 / 2 / 2 / 3; }*/
 
-// @media (min-width: 320px) and (max-width: 480px) {
-  
-//   //CSS
-//   .contain-bg {
-//     position: relative;
-//     background-color:gray;
-//     border-radius: 15px;
-//   }
-//   .bghome {
-//     position: relative;
-//     width: 100%;
-//     border-radius: 15px;
-//     top: 5px
-//   }
-// }
-  
+.input-box-setting-pid {
+  border-radius: 20px;
+  width: 150px;
+  height: 50px;
+  border-radius: 40px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+}
+ .input-box-setting-des {
+  border-radius: 20px;
+  width: 150px;
+  height: 100px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  0 ;
+}
+
+.input-box-setting-inv {
+  border-radius: 20px;
+  width: 130px;
+  height: 50px;
+  border-radius: 40px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  margin: 20px 0  0  10px ;
+  font-size: 15px;
+}
+.btn-invite-ok {
+  position: relative;
+  font-size: 20px;
+  color: white;
+  background: $redFire;
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+  outline: 0;
+  bottom: -20px;
+  left: 45%;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+  }
+.btn-setting-accept {
+  position: relative;
+  background: $bluesky;
+  font-size: 17px;
+  color: white;
+  width: 25%;
+  height:35px;
+  border-radius: 20px;
+  top: 73%;
+  left: 52%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-setting-cancel {
+  background: $redFire;
+  color: white;
+  font-size: 17px;
+  width: 25%;
+  height:35px;
+  border-radius: 20px;
+  top: 73%;
+  left: 48%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+// Removes  clear button 
+input[type="date"]::-webkit-clear-button {
+  display: none;
+}
+
+// Removes  spin button 
+input[type="date"]::-webkit-inner-spin-button { 
+  display: none;
+}
+
+// Always display the drop down caret 
+input[type="date"]::-webkit-calendar-picker-indicator {
+  color:$colorFront;
+  font-size: 20px;
+  padding: 0 30px 0 0 ;
+ 
+}
+
+// styles  date inputs 
+input[type="date"] {
+  appearance: none;
+  -webkit-appearance: none;
+  padding:5px;
+  display: inline-block !important;
+  visibility: visible !important;
+  border-radius: 30px;
+  width: 150px;
+  height: 50px;
+  border: 1px solid $colorFront;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  0 ;
+}
+// style
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  -ms-appearance: none;
+  appearance: none;
+  -webkit-border-radius: 20px;
+  -moz-border-radius: 20px;
+  border-style: none; ;
+  border-radius: 20px;
+  outline: 0;
+  box-shadow: none;
+  background: $redFire;
+  width: 150px;
+  height: 50px;
+  padding: 0 0 0 20px ;
+  font-size: 15px;
+  margin: 20px 0  0  10px ;
+}
+// /* Remove IE arrow 
+select::-ms-expand {
+  display: none;
+}
+
+select {
+  flex: 1;
+  padding: 0 .5em;
+  color: #fff;
+  cursor: pointer;
+}
+
+
+}
+

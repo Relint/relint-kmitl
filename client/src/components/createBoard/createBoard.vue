@@ -30,24 +30,22 @@
               
             <div class="parent-project">
               <div class="div1-pj">  
-
                 <label  class="dropdown">
                   <div @click="openFormSetting" class="dd-button">+</div>
                     <div class="dd-menu" id="form-setting"  >
-                      <div class="container-setting" id="style-scroll">
+                      
                         <div class="parent-setting">
                             <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
                             <div class="div2-s" ><input class="input-box-setting-des" type="text" placeholder="Description" v-model="descriptionIn"></div>
                             <div class="div3-s" ><input class="input-box-setting-date" type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
                             <div class="div4-s" >
                               <!--show-->
-                                
+                                <div class="container-setting" id="style-scroll">
                                   <div v-for="invite in invites" :key="invite.uid" > 
                                     <div> 
-                                      <a>{{ invite.email  }} {{priorityMap[invite.data.priority] }}</a>
-                                      <button class="nes-btn is-error padding" v-on:click="removeMenber(invite.uid)">remove</button>
+                                      <div class="contain-obj-invite">{{ invite.email  }} <br>{{priorityMap[invite.data.priority] }}
+                                      <button class="remove-invite" v-on:click="removeMenber(invite.uid)">remove</button></div>
                                     </div> 
-                                 
                                   </div> 
                                 
                                   <!--input-->
@@ -82,7 +80,7 @@
                     <div class="form-scroll-createBoard" id="board-scroll"  >
                      <div class="from-createBoard">
                             <div v-for="(project,index) in project" :key="project.pid"  > 
-                                <div id="container-Board" v-bind:style="{left: (index%2)*250+80+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
+                                <div id="container-Board" v-bind:style="{left: (index%2)*250+65+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
  
                                       <div class="dot two"></div>
                                       <div class="face">
