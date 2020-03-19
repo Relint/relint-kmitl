@@ -77,7 +77,7 @@
               
             </div><!--parent-project-------------------------------------------------->
 
-                    <div class="form-scroll-createBoard" id="board-scroll"  >
+                    <div class="form-scroll-createBoard" id="board-scroll"  @click="eventMouseUD" >
                      <div class="from-createBoard">
                             <div v-for="(project,index) in project" :key="project.pid"  > 
                                 <div id="container-Board" v-bind:style="{left: (index%2)*250+65+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
@@ -185,6 +185,52 @@ data () {
     },
   
   methods: {
+    //eventMouse U -D
+    eventMouseUD () {
+        const slider = document.querySelector('.form-scroll-createBoard')
+        let isClickX = false
+        let isClickY = false
+        let startX
+        let startY
+        let scrollLeft
+        let scrollTop 
+        //click 
+        if (slider){
+        slider.addEventListener('mousedown', (e) => {
+          isClickX = true;
+          isClickY = true;
+          slider.classList.add('active');
+
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+
+          startY = e.pageY - slider.offsetTop
+          scrollTop = slider.scrollTop;
+        });
+        }
+        // clicking
+        if (slider){
+        slider.addEventListener('mousemove', (e) => {
+          if(!isClickX || !isClickY) return
+          e.preventDefault();
+          const x = e.pageX - slider.offsetLeft;
+          const Y = e.pageY - slider.offsetTop;
+          const moveX = (x - startX) * 3; //fast
+          const MoveY = (Y - startY) * 3; //fast
+          slider.scrollLeft = scrollLeft - moveX;
+          slider.scrollTop = scrollTop - MoveY;
+        });
+        }
+        // no click
+        if (slider){
+        slider.addEventListener('mouseleave', () => {
+          isClickX = false;
+          isClickY = false;
+          slider.classList.remove('active');
+        });
+        }
+        
+    },
     //project
     createMainBoard () {
       const ref = this.$db.collection('project')
