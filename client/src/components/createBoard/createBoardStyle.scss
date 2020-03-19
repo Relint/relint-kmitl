@@ -56,7 +56,7 @@ $secondary: #99DBB4;
     position: static;
     width: 50%;
     height: 80%;
-    border-radius: 20px;
+    // border-radius: 20px;
       // background-color: red;
     overflow-y: scroll;
     scrollbar-width: thin;
@@ -138,11 +138,11 @@ $secondary: #99DBB4;
 //invite//------------------------------------------------------------
   .container-setting {
     width: 210px;
-    height: 230px;
+    height: 255px;
     //  background-color:red;
     overflow-y: scroll;
     scrollbar-width: thin;
-    padding: 10px 0 0 20px;
+    padding: 5px 0 0 20px;
   }
 
   #style-scroll::-webkit-scrollbar
@@ -234,11 +234,11 @@ $secondary: #99DBB4;
  .input-box-setting-des {
   border-radius: 20px;
   width: 180px;
-  height: 100px;
+  height: 160px;
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
   font-size: 15px;
-  margin: 20px 0  0  0 ;
+  margin: 5px 0  0  0 ;
 }
 
 .input-box-setting-inv {
@@ -248,7 +248,7 @@ $secondary: #99DBB4;
   border-radius: 40px;
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
-  // margin: 20px 0  0  30px ;
+   margin: 5px 0  0  5px ;
   font-size: 15px;
 }
 .btn-invite-ok {
@@ -341,7 +341,7 @@ input[type="date"] {
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
   font-size: 15px;
-  margin: 20px 0  0  0 ;
+  margin: 5px 0  0  0 ;
 }
 // style
 select {
@@ -358,9 +358,9 @@ select {
   background: $redFire;
   width: 180px;
   height: 50px;
-  padding: 0 0 0 20px ;
+  padding: 0 0 0 0px ;
   font-size: 15px;
-   margin: 15px 0  0  0 ;
+   margin: 15px 0  0  7px ;
 }
 //style select option-------------------------
 // /* Remove IE arrow 
@@ -775,7 +775,7 @@ select {
   position: static;
   width: 50%;
   height: 80%;
-  border-radius: 20px;
+  // border-radius: 20px;
   // background-color: red;
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -801,7 +801,7 @@ select {
 .container-setting {
   width: 150px;
   height: 200px;
-  border-radius: 20px;
+  // border-radius: 20px;
   background-color:white;
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -1091,7 +1091,7 @@ select {
   position: static;
   width: 50%;
   height: 80%;
-  border-radius: 20px;
+  // border-radius: 20px;
   // background-color: red;
   overflow-y: scroll;
   scrollbar-width: thin;
@@ -1117,7 +1117,7 @@ select {
 .container-setting {
   width: 150px;
   height: 200px;
-  border-radius: 20px;
+  // border-radius: 20px;
   background-color:white;
   overflow-y: scroll;
   scrollbar-width: thin;
