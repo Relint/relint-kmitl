@@ -5,14 +5,14 @@
     <div class="div1-2"> 
     <div class="form-postit" id="from-postit">
         <div  class="form-container"> 
-          <div class="div1-2p"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div>
+          <!-- <div class="div1-2p"> <img class="bghome" src="@/assets/bghome.png" alt="bghome" ></div> -->
            <!-- <div class="seleHome-icon"></div>-->
           </div>
               <navBarProject/>
-
+<!-- 
               <div>
               <input type="text" placeholder="postit">
-              </div>
+              </div> -->
 
           </div>
       </div> 

@@ -37,6 +37,10 @@ app.get('/reg', (req, res) => {
         disabled: false
     }).then(userRecord => {
         console.log('Succesfully created new user: ', userRecord);
+        db.collection('user').doc(userRecord.uid).set({
+            email: userRecord.email,
+            displayName: userRecord.displayName,
+        })
         res.send(userRecord);
     }).catch(error => {
         console.log('Error creating new user: ', error);
@@ -49,6 +53,16 @@ app.get('/invite', (req, res) => {
     admin.auth().getUserByEmail(email).then(userRecord=>{
         console.log('User Exists')
         res.send(userRecord.uid)
+    }).catch(err=>{
+        console.log('User doesn\'t exist')
+        res.status(400).send(err)
+    })
+})
+app.get('/user', (req, res) => {
+    let email = req.headers.email
+    admin.auth().getUserByEmail(email).then(userRecord=>{
+        console.log('User Exists')
+        res.send(userRecord)
     }).catch(err=>{
         console.log('User doesn\'t exist')
         res.status(400).send(err)
