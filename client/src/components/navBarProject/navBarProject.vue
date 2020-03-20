@@ -13,19 +13,25 @@
     </div>
     <div class="div4"> 
         <b-icon  font-scale="3" id="iconNBP" icon="chat-fill" @click="openFormChat"   ></b-icon>
+                
     </div>
     <div class="div5"> 
     <b-icon font-scale="3" id="iconNBP" icon="inboxes-fill" @click="openFormMa"  ></b-icon>
     </div>
- 
+     
 </div>
 <hr>
+<chat id="chat"/>
     </div>
 </template>
 <script>
+import chat from'../chat/chat.vue'
 /* eslint-disable */
 export default {
     name:'navBarProject',
+    components: {
+        chat
+    },
    data (){
     return {
       projectName: '',
@@ -50,7 +56,11 @@ export default {
       this.$router.push('/addBoard')
     },
     openFormChat () {
-        console.log('openFormChat')
+        if(document.getElementById('chat').style.display === 'none'){
+        document.getElementById('chat').style.display = 'block'
+      } else {
+        document.getElementById('chat').style.display = 'none'
+      }
     },
     openFormMa () {
         console.log('openFormMa')
@@ -60,4 +70,5 @@ export default {
 </script>
 <style scoped>
 @import './navBarProjectStyle.scss';
+
 </style>

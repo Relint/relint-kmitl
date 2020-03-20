@@ -6,6 +6,7 @@ import navBar from '@/components/navBar/navBar.vue'
 import createBoard from '@/components/createBoard/createBoard.vue'
 import boardPostit from '@/components/boardPostit/boardPostit.vue'
 import addBoardPostit from '@/components/addBoard/addBoardPostit.vue'
+import chat from '@/components/chat/chat.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -38,6 +39,11 @@ const routes = [
     path: '/addBoardPostit',
     name: 'addBoardPostit',
     component: addBoardPostit
+  },
+  {
+    path: '/chat',
+    name: 'chat',
+    component: chat
   }
 ]
 
