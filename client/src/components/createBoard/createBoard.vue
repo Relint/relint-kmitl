@@ -254,7 +254,7 @@ data () {
           }],
           invite:this.invites.map(ele => ele.data),
           chatLog: []
-}
+        }
         ref.doc(pid).set(obj)
         ref.doc('pindex').set({
           count: pindex.count+1,

@@ -51,6 +51,9 @@ export default {
            }
        })
    },
+   mounted(){
+    //    document.getElementById('chat').style.display = 'none'
+   },
    methods: {
     backToHome () {
       this.$router.push('/addBoard')

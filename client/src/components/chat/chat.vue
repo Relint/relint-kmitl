@@ -1,17 +1,39 @@
 <template>
-  <div id="chat">
-    <h1>Chat</h1>
-    <link rel="stylesheet" href="/chatStyle.scss" />
-
-    <ul id="chatBox">
-      <li v-for="(message,index) in messages" :key="index">
-        <b>{{ message.sender }}</b> {{ ": " + message.message }} {{timeFormat(message.timestamp)}}
-      </li>
-    </ul>
-
-    <div>
-        <input type="text" placeholder="Type a message..." v-model.lazy="msg" v-on:keyup.enter="sendMessage" />
-        <button  @click="sendMessage">Send</button>
+  <div id="chat" class="dropdown-content-chat">
+    <div class="dropdown-content-chat-margin">
+      <ul id="chatBox">
+        <li v-for="(message,index) in messages" :key="index">
+          <div v-if="!checkUser(message.uid)" class="relative-msg-border">
+            <button class="user-profile-left"><b-icon icon="person" font-scale="3"  ></b-icon></button>
+            <div class="msg-border-left">
+              <b class="align-left">
+                {{ message.sender }}
+              </b><br> 
+              <div>
+                <div class="msg-box"> {{message.message }}</div>
+                <div class="align-right"><font size="1">{{timeFormat(message.timestamp)}}</font></div>
+              </div>
+            </div>
+          </div>
+          <div v-else class="relative-msg-border">
+            <button class="user-profile-right"><b-icon icon="person" font-scale="3"  ></b-icon></button>
+            <div class="msg-border-right">
+              <b class="align-right">
+                {{ message.sender }}
+              </b><br> 
+              <div>
+                <div class="msg-box"> {{message.message }}</div>
+                <div class="align-left"><font size="1">{{timeFormat(message.timestamp)}}</font></div>
+              </div>
+            </div>
+          </div>
+        </li>
+      </ul>
+      
+      <div>
+          <input type="text" class="input-box-msg" placeholder="Type a message..." v-model.lazy="msg" v-on:keyup.enter="sendMessage" />
+          <button class="msg-send-btn" @click="sendMessage"><b-icon icon="chevron-up" font-scale="2"></b-icon></button>
+      </div>
     </div>
   </div>
 </template>
@@ -84,6 +106,9 @@ export default {
       const minutes = time.getMinutes() < 10 ? '0' + time.getMinutes() : time.getMinutes()
       return hours + ':' + minutes
     },
+    checkUser(uid){
+      return uid === firebase.auth().currentUser.uid
+    }
   }
 };
 </script>

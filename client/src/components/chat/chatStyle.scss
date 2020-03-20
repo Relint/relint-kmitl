@@ -1,6 +1,10 @@
+$bluesky : #a6d4d8; 
+$colorFront : #707070;
+$redFire: rgba(244, 91, 105, 1);
+  
   #chatBox {
-    height: 200px;
-    max-width: 300px;
+    height: 500px;
+    max-width: 400px;
     overflow-y: scroll;
   }
   .chat-item {
@@ -106,4 +110,102 @@
     padding: 10px;
     background-color: #ffffff;
     border-top: solid 1px #efefef;
+  }
+
+  .dropdown-content-chat {
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 180px;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+  border-radius: 15px;
+  width: 400px;
+  height: 600px;
+  right: 15%;
+  }
+
+  .dropdown-content-chat-margin {
+    position: relative;
+    margin-top: 15px;
+    margin-left: 15px;
+  }
+
+  .msg-box{
+    border-radius: 10px;
+    border: 1px solid rgb(91, 95, 85);
+    padding-left: 5px;
+    padding-top: 5px;
+    width: 200px;
+    height: 50px;
+  }
+
+  .msg-border-left{
+    left: 55px;
+    position: absolute;
+    // background-color: #2ce6ae;
+  }
+
+   .msg-border-right{
+    right: 55px;
+    position: absolute;
+    // background-color: #e6da2c;
+  }
+
+  .relative-msg-border{
+    // background-color: #e62ca8;
+    position: relative;
+    width: 360px;
+    height: 93px;
+    margin-bottom: 15px;
+  }
+
+  .align-left{
+    // background-color: #e62c2c;
+    float: left;
+  }
+  .align-right{
+    // background-color: #2c92e6;
+    float: right;
+  }
+
+  .user-profile-left {
+    position: absolute;
+    background-color:#a6d4d8;
+    border-radius: 70px;
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    left: 0px;
+  }
+
+  .user-profile-right {
+    position: absolute;
+    background-color:#d8a6d5;
+    border-radius: 70px;
+    width: 50px;
+    height: 50px;
+    border-style: none;
+    right: 0px;
+  }
+
+  .input-box-msg {
+    position: relative;
+    width: 345px;
+    height: 70px;
+    border-radius: 10px;
+    border: 1px solid $colorFront;
+    background-color:#DEE2E2;
+    padding: 0 0 0 20px ;
+    font-size: 15px;
+  }
+
+  .msg-send-btn{
+    position: absolute;
+    background-color: $redFire;
+    border-radius: 70px;
+    width: 45px;
+    height: 45px;
+    border-style: none;
+    right: 30px;
+    bottom: 15px;
   }
