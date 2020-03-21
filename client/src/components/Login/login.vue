@@ -1,12 +1,29 @@
 <template>
 <!-- login -->
   <div class="mainGroup" id="login" >
-  
-    <div class="area" >
+            <div class="navbarLogin">
+              <li class="brand">RELINT</li>
+            </div>
+            <div  class="contain-color-logo"   > 
+                  <div class="box-white"></div>
+                  <div class="dotLo1"></div>
+                  <div class="dotLo2"></div>
+                  <div class="dotLo3"></div>
+                  <div class="dotLo4"></div>
+                  <label class="logoName">RELINT</label>
+            </div><!--contain-color-logo-->
+            <div  class="form-container"   > 
+                  <div class="dotBG1"></div>
+                  <div class="dotBG2"></div>
+                  <div class="dotBG3"></div>
+                  <div class="dotBG4"></div>
+            </div><!--form-container-->
+         
+    <!-- <div class="area" >
             <ul class="circles"> <li></li> <li></li> <li></li><li></li><li></li> <li></li><li></li><li></li><li></li><li></li> </ul>
-    </div >
+    </div > -->
 
-            <img class="logo" src="@/assets/logorelint.png" alt="logo" style="width:300px">
+            <!-- <img class="logo" src="@/assets/logorelint.png" alt="logo" style="width:300px"> -->
       
     <div class="from-login">
       <div class="form-container" >
