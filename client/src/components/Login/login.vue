@@ -53,10 +53,10 @@
               <input id="inputEmailRe" class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
             </div>
             <div class="title">
-              <input id="inputPassword" class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
+              <input id="inputPasswordRE" class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
             </div>
             <div class="title">
-              <input id="inputPasswordRe" class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
+              <input id="inputPasswordREE" class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
             </div>
               <button id="btnSignUpRe" class="btnSubmit" @click="register" >Sign up</button>
               <button id="btnCancelRe" class="btnSubmit" @click="closeFormRE">Cancel</button>       
