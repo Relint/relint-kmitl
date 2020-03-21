@@ -1,5 +1,7 @@
 <template>
 <!-- login -->
+<div>
+  <title>Relint</title>
   <div class="mainGroup" id="login" >
             <div class="navbarLogin">
               <li class="brand">RELINT</li>
@@ -11,56 +13,57 @@
                   <div class="dotLo3"></div>
                   <div class="dotLo4"></div>
                   <label class="logoName">RELINT</label>
-            </div><!--contain-color-logo-->
+            </div>
             <div  class="form-container"   > 
                   <div class="dotBG1"></div>
                   <div class="dotBG2"></div>
                   <div class="dotBG3"></div>
                   <div class="dotBG4"></div>
-            </div><!--form-container-->
-         
-    <!-- <div class="area" >
-            <ul class="circles"> <li></li> <li></li> <li></li><li></li><li></li> <li></li><li></li><li></li><li></li><li></li> </ul>
-    </div > -->
-
-            <!-- <img class="logo" src="@/assets/logorelint.png" alt="logo" style="width:300px"> -->
-      
-    <div class="from-login">
+            </div>
+   
+      </div>   
+    
+   
+      <!-- <div class="btnsignIn" id="signIn" >sign in</div> -->
+      <div class="from-login">
+        
       <div class="form-container" >
         <div class="title">
-          <input class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
+          <input id="inputEmail" class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
         </div>
 
         <div class="title">
-          <input class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
+          <input id="inputPassword" class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
         </div>
-        <button class="btnSubmit" v-on:click="login">Login</button>
-        <button class="btnSubmit" @click="openFormRE" >Register</button>
-        <span class="psw"    > Forgot <a class="pswL" href="#" @click="openFormFOR" >password?</a></span>
+        <button id="btnSign in" class="btnSubmit" v-on:click="login">Sign in</button>
+        <button id="btnRegister" class="btnSubmit" @click="openFormRE" >Register</button>
+        <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
         </div>
       </div>
     <!-- register -->
-      <div class="form-popupRE" id="regis-from">
+      
+     <div class="form-popupRE" id="regis-from">
           <div  class="form-container">
             <h3 ><b-icon icon="person-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Register </h3>
+            <div id="alert-error" > {{errorMessage}}</div>
             <div class="title">
-              <input class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required v-on:keyup.enter="register">  
+              <input id="inputUsernameRe" class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
             </div>
             <div class="title">
-              <input class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
+              <input id="inputEmailRe" class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
             </div>
             <div class="title">
-              <input class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
+              <input id="inputPassword" class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
             </div>
             <div class="title">
-              <input class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
+              <input id="inputPasswordRe" class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
             </div>
-              <button class="btnSubmit" @click="register" >Register</button>
-              <button class="btnSubmit" @click="closeFormRE">Cancel</button>       
+              <button id="btnSignUpRe" class="btnSubmit" @click="register" >Sign up</button>
+              <button id="btnCancelRe" class="btnSubmit" @click="closeFormRE">Cancel</button>       
           </div>
-      </div>
+      </div> 
     <!-- forget password -->
-      <div class="form-popup" id="forget-from">
+       <div class="form-popup" id="forget-from">
         <div  class="form-container">
           <h3><b-icon icon="cursor-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Send Email</h3>
           <div class="title">
@@ -69,7 +72,8 @@
             <button class="btnSubmit canover" @click="acceptSend" >Send</button>
             <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancel</button>       
         </div>
-      </div>
+      </div> 
+  
    </div>
 </template>
 <script>
@@ -84,8 +88,12 @@ export default {
       }
     });
   },
+  mounted () {
+    document.getElementById('alert-error').style.display = "none"
+  },
   data: function () {
     return {
+      errorMessage:'',
       email: '',
       password: '',
       emailpWS: '',
@@ -115,9 +123,15 @@ export default {
         });
       e.preventDefault();
     },
-    //register
+    
     closeFormRE() {
       document.getElementById("regis-from").style.display = "none";
+      document.getElementById('alert-error').style.display = "none"
+      this.emailRE= ''
+      this.passwordRE= ''
+      this.passwordREE= ''
+      this.usernameRE= ''
+      
     },
     openFormRE() {
       document.getElementById("regis-from").style.display = "block";
@@ -135,7 +149,26 @@ export default {
         });
       e.preventDefault();
     },
-    register(e) {      
+    register(e) {  
+        if((!this.emailRE.match(/^([\x20-\x7E])+$/i))||(!this.passwordRE.match(/^([\x20-\x7E])+$/i))||
+        (!this.passwordREE.match(/^([\x20-\x7E])+$/i))||(!this.usernameRE.match(/^([\x20-\x7E])+$/i)))
+        { 
+           if (!this.usernameRE.match(/^([\x20-\x7E])+$/i)) {
+              this.errorMessage='Invalid username'
+              this.usernameRE=''
+           }
+           else if (!this.emailRE.match(/^([\x20-\x7E])+$/i)) {
+              this.errorMessage='Invalid email'
+              this.emailRE=''
+           }
+           else if (!this.passwordRE.match(/^([\x20-\x7E])+$/i)||!this.passwordREE.match(/^([\x20-\x7E])+$/i)) {
+              this.errorMessage='Invalid password'
+              this.passwordRE=''
+              this.passwordREE=''
+           }
+          document.getElementById('alert-error').style.display = "block"
+          return
+        }
       if(this.passwordRE === this.passwordREE){
         this.$http({
           method: "get",
@@ -151,10 +184,11 @@ export default {
           this.password = this.passwordRE;
           this.login(e);
         }).catch(error => {
-          alert(error.response.data.code);
+           this.errorMessage=error.response.data.message
         });
       } else {
-        alert('Password does not matched');
+        this.errorMessage='Password does not matched';
+        document.getElementById('alert-error').style.display = "block"
         this.passwordRE = '';
         this.passwordREE = '';
       }

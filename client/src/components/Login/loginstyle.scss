@@ -145,19 +145,39 @@ $secondary: #99DBB4;
  left: -2.5%;
 }
 
-
-
+.parent {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  }
+  
+  .div1 { grid-area: 3 / 2 / 4 / 4; }
+  .div2 { grid-area: 2 / 5 / 5 / 6; }
+  
+.btnsignIn {
+  position: relative;
+  overflow: hidden;
+  background-color:red;
+  padding: 40px 30px 30px 30px;
+  top: -10%;
+  left: 62.25%;
+  width: 200px;
+  height: 20px;
+}
 .from-login  {
   overflow: hidden;
   background-color: white;
   padding: 40px 30px 30px 30px;
   border-radius: 10px;
   position: fixed;
-  top: 50%;
+  top: 55%;
   left: 75%;
-  width: 400px;
+  width: 430px;
+  height: 450px;
   box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
-  @include transform(translate(-50%, -50%));
+  @include transform(translate(-50%, -43%));
   
 }
 .inputt {
