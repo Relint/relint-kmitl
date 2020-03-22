@@ -6,43 +6,86 @@
             <div class="navbarLogin">
               <li class="brand">RELINT</li>
             </div>
-            <div  class="contain-color-logo"   > 
+               <!-- <div  class="contain-color-logo"> 
                   <div class="box-white"></div>
                   <div class="dotLo1"></div>
                   <div class="dotLo2"></div>
                   <div class="dotLo3"></div>
                   <div class="dotLo4"></div>
                   <label class="logoName">RELINT</label>
-            </div>
-            <div  class="form-container"   > 
+            </div> -->
+         
+        <div class="parentbg">
+          
+          <div class="div1-bg">
+          
+          <div class="parentlogo">
+            
+              <div class="div1-lo">
+                 <div class="box-white"></div>
+              </div>
+              <div class="div2-lo"><div class="dotLo1"></div></div>
+              <div class="div3-lo"><div class="dotLo2"></div></div>
+              <div class="div4-lo"><div class="dotLo3"></div></div>
+              <div class="div5-lo"> <div class="dotLo4"></div></div>
+              <div class="div6-lo"> </div>
+              <div class="div7-lo"></div>
+             <label class="logoName">RELINT</label>
+          </div>
+          </div>
+          
+        <div class="div1-dot"> 
+           <div  class="form-container"   > 
                   <div class="dotBG1"></div>
                   <div class="dotBG2"></div>
                   <div class="dotBG3"></div>
                   <div class="dotBG4"></div>
+            </div> 
+        </div>
+        <div class="div2-bg">
+          <div class="btnF-singnIn">Sign in</div>
+          <div class="from-login">
+            <div class="parentlogin">
+              <div class="div1-login">
+                  <label class="logoInput">RELINT</label>
+              </div>
+              <div class="div2-login">
+                <input id="inputEmail" class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
+              </div>
+              <div class="div3-login">
+                <input id="inputPassword" class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
+              </div>
+              <div class="div4-login">
+                <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
+              </div>
+              <div class="div5-login">
+                <button id="btnSign in" class="btnSubmit" v-on:click="login">Sign in</button>
+              </div>
             </div>
-            
-      </div>   
-    
+
+            <!-- <div class="form-container" >
+              <div class="title">
+                <input id="inputEmail" class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
+              </div>
+              <div class="title">
+                <input id="inputPassword" class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
+              </div>
+              <button id="btnSign in" class="btnSubmit" v-on:click="login">Sign in</button>
+               <button id="btnRegister" class="btnSubmit" @click="openFormRE" >Register</button> 
+              <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
+              </div> -->
+          </div>
+        </div>
+       </div>
+        
+</div>   
+  
    
       <!-- <div class="btnsignIn" id="signIn" >sign in</div> -->
-      <div class="from-login">
-        
-      <div class="form-container" >
-        <div class="title">
-          <input id="inputEmail" class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
-        </div>
-
-        <div class="title">
-          <input id="inputPassword" class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
-        </div>
-        <button id="btnSign in" class="btnSubmit" v-on:click="login">Sign in</button>
-        <button id="btnRegister" class="btnSubmit" @click="openFormRE" >Register</button>
-        <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
-        </div>
-      </div>
+    
     <!-- register -->
       
-     <div class="form-popupRE" id="regis-from">
+     <!-- <div class="form-popupRE" id="regis-from">
           <div  class="form-container">
             <h3 ><b-icon icon="person-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Register </h3>
             <div id="alert-error" > {{errorMessage}}</div>
@@ -61,9 +104,9 @@
               <button id="btnSignUpRe" class="btnSubmit" @click="register" >Sign up</button>
               <button id="btnCancelRe" class="btnSubmit" @click="closeFormRE">Cancel</button>       
           </div>
-      </div> 
+      </div>  -->
     <!-- forget password -->
-       <div class="form-popup" id="forget-from">
+       <!-- <div class="form-popup" id="forget-from">
         <div  class="form-container">
           <h3><b-icon icon="cursor-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Send Email</h3>
           <div class="title">
@@ -72,7 +115,7 @@
             <button class="btnSubmit canover" @click="acceptSend" >Send</button>
             <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancel</button>       
         </div>
-      </div> 
+      </div>  -->
   
    </div>
 </template>
