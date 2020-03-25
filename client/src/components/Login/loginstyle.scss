@@ -1,8 +1,8 @@
 @import "bourbon";
 @import '@/components/Login/mixin.scss';
 // @import '@/components/Login/acceptstyle.scss';
-// @import '@/components/Login/forgetstyle.scss';
-// @import '@/components/Login/regisstyle.scss';
+ @import '@/components/Login/forgetstyle.scss';
+@import '@/components/Login/regisstyle.scss';
 $greenSeaweed: rgba(2, 128, 144, 1);
 $blueQueen: rgba(69, 105, 144, 1);
 $redFire: rgba(244, 91, 105, 1);
@@ -36,9 +36,12 @@ $secondary: #99DBB4;
   .div2-bg { grid-area: 2 / 8 / 5 / 12; 
     // background-color: green;
     width: 100%; }
-    .div1-dot { grid-area: 4 / 2 / 6 / 12;
-      // background-color: violet;
-      width: 100%; }  
+  .div2-bg-regis { grid-area: 2 / 8 / 5 / 12; 
+    // background-color: red;
+    width: 100%; }
+  .div1-dot { grid-area: 4 / 2 / 6 / 12;
+    // background-color: violet;
+    width: 100%; }  
 
 
     .parentlogo {
@@ -219,7 +222,8 @@ $secondary: #99DBB4;
 .logoInput {
   position: absolute;
   color: $colorFront;
-  font-size: 55px;
+  font-size: 40px;
+  margin: 5% 0 0 23% ;
    
 }
 .parentlogin {
@@ -230,24 +234,30 @@ $secondary: #99DBB4;
   grid-row-gap: 0px;
   width: 100%;
   height: 100%;
-  background-color: red;
+  // background-color: red;
   }
   
   .div1-login { grid-area: 1 / 1 / 2 / 2;width: 100%;
     height: 100%;
-    background-color:green; }
+    // background-color:green; 
+  }
   .div2-login { grid-area: 2 / 1 / 3 / 2; width: 100%;
     height: 100%;
-    background-color:blueviolet;}
+    // background-color:blueviolet;
+  }
   .div3-login { grid-area: 3 / 1 / 4 / 2;width: 100%;
     height: 100%;
-    background-color: rgb(48, 121, 19); }
+    // background-color: rgb(48, 121, 19); 
+  }
   .div4-login { grid-area: 4 / 1 / 5 / 2;width: 100%;
     height: 100%;
-    background-color: fuchsia; }
+    // background-color: fuchsia; 
+  }
   .div5-login { grid-area: 5 / 1 / 6 / 2; width: 100%;
     height: 100%;
-    background-color:aqua;}
+    // background-color:aqua;
+  }
+
 .from-login  {
   overflow: hidden;
   background-color: white;
@@ -259,7 +269,7 @@ $secondary: #99DBB4;
   box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
   
 }
-.inputt {
+.inputt-login {
   font-family: $fontAsap;
   display: block;
   background: white;
@@ -269,19 +279,20 @@ $secondary: #99DBB4;
   border-radius: 40px;
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
-  // margin: 8% 15%  5%  15% ;
+  margin: 5% 0 0 5% ;
   font-size: 15px;
 }
-button.btnSubmit {
+button.btnSubmit-login {
   position: relative;
   background: $bluesky;
-  font-size: 17px;
+  font-size: 20px;
   color: white;
-  width: 25%;
-  height:35px;
+  width: 30%;
+  height:50px;
   border-radius: 20px;
   // top: 70px;
   // left: 0%;
+  margin: 5% 0 0 33%;
   outline: 0;
   border: none;
   box-shadow: 2px 2px 10px rgba($dark, .5);
@@ -299,8 +310,9 @@ button.btnSubmit {
 .psw {
   position: relative;
   // background-color: red;
-  // top: -5px;
-  // margin-left: -350px;
+  
+  margin-left: 7%;
+  top:20px
 }
 .pswL {
   margin: 2%;
@@ -310,11 +322,18 @@ button.btnSubmit {
   position: relative;
   grid-area: 2 / 9 / 3 / 10;
   top:10px;
-  background-color: red;
+  background-color: white;
   width: 200px;
   height: 10%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  
 }
+.btnF-singnIn p {
+  margin: 0 0 0 26%;
+  padding: 12px;
+  font-size: 20px;
+  color: $colorFront;
 
-@media (min-width: 1281px) {}
+}
+// @media (min-width: 1281px) {}

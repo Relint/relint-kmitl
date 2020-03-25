@@ -6,21 +6,11 @@
             <div class="navbarLogin">
               <li class="brand">RELINT</li>
             </div>
-               <!-- <div  class="contain-color-logo"> 
-                  <div class="box-white"></div>
-                  <div class="dotLo1"></div>
-                  <div class="dotLo2"></div>
-                  <div class="dotLo3"></div>
-                  <div class="dotLo4"></div>
-                  <label class="logoName">RELINT</label>
-            </div> -->
+               
          
         <div class="parentbg">
-          
           <div class="div1-bg">
-          
           <div class="parentlogo">
-            
               <div class="div1-lo">
                  <div class="box-white"></div>
               </div>
@@ -42,24 +32,25 @@
                   <div class="dotBG4"></div>
             </div> 
         </div>
+
         <div class="div2-bg">
-          <div class="btnF-singnIn">Sign in</div>
-          <div class="from-login">
+          <div class="btnF-singnIn" @click="openFormSignIn"><p>Sign In</p></div>
+          <div class="from-login" id='from-login'>
             <div class="parentlogin">
               <div class="div1-login">
-                  <label class="logoInput">RELINT</label>
+                  <label class="logoInput">R E L I N T</label>
               </div>
               <div class="div2-login">
-                <input id="inputEmail" class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
+                <input id="inputEmail" class="inputt-login" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
               </div>
               <div class="div3-login">
-                <input id="inputPassword" class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
+                <input id="inputPassword" class="inputt-login" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
               </div>
               <div class="div4-login">
                 <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
               </div>
               <div class="div5-login">
-                <button id="btnSign in" class="btnSubmit" v-on:click="login">Sign in</button>
+                <button id="btnSign in" class="btnSubmit-login" v-on:click="login">Sign in</button>
               </div>
             </div>
 
@@ -74,48 +65,58 @@
                <button id="btnRegister" class="btnSubmit" @click="openFormRE" >Register</button> 
               <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
               </div> -->
+
           </div>
         </div>
-       </div>
-        
-</div>   
-  
-   
-      <!-- <div class="btnsignIn" id="signIn" >sign in</div> -->
-    
-    <!-- register -->
-      
-     <!-- <div class="form-popupRE" id="regis-from">
-          <div  class="form-container">
-            <h3 ><b-icon icon="person-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Register </h3>
-            <div id="alert-error" > {{errorMessage}}</div>
-            <div class="title">
-              <input id="inputUsernameRe" class="inputt" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
-            </div>
-            <div class="title">
-              <input id="inputEmailRe" class="inputt" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
-            </div>
-            <div class="title">
-              <input id="inputPasswordRE" class="inputt" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
-            </div>
-            <div class="title">
-              <input id="inputPasswordREE" class="inputt" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
-            </div>
-              <button id="btnSignUpRe" class="btnSubmit" @click="register" >Sign up</button>
-              <button id="btnCancelRe" class="btnSubmit" @click="closeFormRE">Cancel</button>       
-          </div>
-      </div>  -->
-    <!-- forget password -->
-       <!-- <div class="form-popup" id="forget-from">
+
+        <div class="div2-bg-regis">
+              <!-- <div class="form-popupRE" id="regis-from"> -->
+          <div class="btnF-singnUp" @click="openFormSignUp"><p>Sign Up</p></div>
+          <div class="form-register" id='form-register' >
+              <div  class="parentregis">
+                <!-- <div class=" div1-regis">
+                <h3 ><b-icon icon="person-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Register </h3>
+                </div> -->
+                <div class=" div1-regis">
+                  <div id="alert-error" > {{errorMessage}}</div>
+                </div>
+                <div class=" div3-regis">
+                  <input id="inputUsernameRe" class="inputt-regis" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
+                </div>
+                <div class=" div4-regis">
+                  <input id="inputEmailRe" class="inputt-regis" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
+                </div>
+                <div class=" div5-regis">
+                  <input id="inputPasswordRE" class="inputt-regis" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
+                </div>
+                <div class=" div6-regis">
+                  <input id="inputPasswordREE" class="inputt-regis" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
+                </div>
+                <div class="div7-regis">
+                  <button id="btnSignUpRe" class="btnSubmit-regis" @click="register" >Sign up</button>
+                  <button id="btnCancelRe" class="btnSubmit-regis-cancel" @click="closeFormSignUp">Cancel</button> 
+                </div>
+                  
+              </div>
+          </div> 
+        </div>
+
+      <!-- forget password -->
+       <div class="form-popup" id="forget-from">
         <div  class="form-container">
           <h3><b-icon icon="cursor-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Send Email</h3>
           <div class="title">
-            <input class="inputt" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
+            <input class="inputt-forget" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
           </div>
             <button class="btnSubmit canover" @click="acceptSend" >Send</button>
             <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancel</button>       
         </div>
-      </div>  -->
+      </div> 
+       
+       </div>
+</div>   
+  
+   
   
    </div>
 </template>
@@ -133,6 +134,7 @@ export default {
   },
   mounted () {
     document.getElementById('alert-error').style.display = "none"
+    document.getElementById('form-register').style.display = "none"
   },
   data: function () {
     return {
@@ -167,8 +169,8 @@ export default {
       e.preventDefault();
     },
     
-    closeFormRE() {
-      document.getElementById("regis-from").style.display = "none";
+    closeFormSignUp () {
+      document.getElementById("form-register").style.display = "none";
       document.getElementById('alert-error').style.display = "none"
       this.emailRE= ''
       this.passwordRE= ''
@@ -176,8 +178,11 @@ export default {
       this.usernameRE= ''
       
     },
-    openFormRE() {
-      document.getElementById("regis-from").style.display = "block";
+    openFormSignUp() {
+      document.getElementById("form-register").style.display = "block";
+    },
+    openFormSignIn () {
+      document.getElementById("form-register").style.display = "none";
     },
     //anth
     login(e) {
