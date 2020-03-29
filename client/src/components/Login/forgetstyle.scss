@@ -1,7 +1,8 @@
 //forget
 @import '@/components/Login/mixin.scss';
+
 .form-popup {
-    position: fixed;
+    position: absolute;
     width: 30%;
     display: none;
     overflow: hidden;
@@ -12,32 +13,7 @@
     left: 50%;
     width: 410px;
     box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
-    &::before, &::after {
-      content: '';
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-top-left-radius: 40%;
-      border-top-right-radius: 45%;
-      border-bottom-left-radius: 35%;
-      border-bottom-right-radius: 40%;
-      z-index: -1;
-    }
-   
-    &::before {
-      left: 40%;
-      bottom: -130%;
-      background-color: rgba($blueQueen, 0.15);
-      animation: rotate 7000ms infinite linear;
-    }
-    
-    &::after {
-      left: 35%;
-      bottom: -125%;
-      background-color: rgba(white, 0.2);
-      animation: rotate 9000ms infinite linear;
-    }
-    
+  
   }
   .form-popup {
     max-width: 100%;
@@ -56,4 +32,59 @@
         padding: 0 0 0 20px ;
         margin: 5% 0 0 12% ;
         font-size: 15px;
+}
+.btnSubmit-send-for {
+  position: relative;
+  background: $bluesky ;
+  font-size: 20px;
+  color: white;
+  width: 30%;
+  height:50px;
+  border-radius: 20px;
+  // top: 70px;
+  left: -20%;
+  margin: 5% 0 0 12%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.btnSubmit-cancel-for {
+  position: absolute;
+  background: $pinkk ;
+  font-size: 20px;
+  color: white;
+  width: 27%;
+  height:50px;
+  border-radius: 20px;
+  // top: 70px;
+  left: 50%;
+  margin: 5% 0 0 13%;
+  outline: 0;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+
+#alert-error-for {
+  background-color: red;
+  width: 100%;
+  height: 100%;
+  font-size: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+  color: white;
+  padding: 10px 0 0 0;
+  top: -20px;
 }

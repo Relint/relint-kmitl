@@ -32,13 +32,19 @@
                   <div class="dotBG4"></div>
             </div> 
         </div>
-
+        <!-- login -->
         <div class="div2-bg">
-          <div class="btnF-singnIn" @click="openFormSignIn"><p>Sign In</p></div>
           <div class="from-login" id='from-login'>
+            <div class="contain-btnUp-btnIn">
+              <div class="btnF-singnIn" @click="openFormSignIn"><p>Sign In</p></div>
+              <div class="btnF-singnUp" @click="openFormSignUp"><p>Sign Up</p></div>
+            </div>
             <div class="parentlogin">
               <div class="div1-login">
-                  <label class="logoInput">R E L I N T</label>
+                  <div class="logoInput">R E L I N T</div>
+              </div>
+               <div class="div1-login">
+                  <div id="alert-error-login" > {{errorMessageLogin}}</div>
               </div>
               <div class="div2-login">
                 <input id="inputEmail" class="inputt-login" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
@@ -54,29 +60,30 @@
               </div>
             </div>
 
-            <!-- <div class="form-container" >
-              <div class="title">
-                <input id="inputEmail" class="inputt" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
+            <!-- forget password -->
+             
+            <div class="form-popup" id="forget-from">
+              <div class="div1-login">
+                  <div id="alert-error-for" > {{errorMessageFor}}</div>
               </div>
-              <div class="title">
-                <input id="inputPassword" class="inputt" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
+              <div  class="form-container">
+                <div class="div1-login">
+                <div> Send Email</div>
+                </div>
+                  <input class="inputt-forget" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
+                  <button class="btnSubmit-send-for" @click="acceptSend" >Send</button>
+                  <button class="btnSubmit-cancel-for" type="button" v-on:click="closeFormFOR">Cancel</button>       
               </div>
-              <button id="btnSign in" class="btnSubmit" v-on:click="login">Sign in</button>
-               <button id="btnRegister" class="btnSubmit" @click="openFormRE" >Register</button> 
-              <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
-              </div> -->
-
+            </div> 
           </div>
         </div>
-
+        <!-- register -->
         <div class="div2-bg-regis">
-              <!-- <div class="form-popupRE" id="regis-from"> -->
-          <div class="btnF-singnUp" @click="openFormSignUp"><p>Sign Up</p></div>
           <div class="form-register" id='form-register' >
-              <div  class="parentregis">
-                <!-- <div class=" div1-regis">
-                <h3 ><b-icon icon="person-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Register </h3>
-                </div> -->
+               <div  class="parentregis">
+                 <div class=" div1-regis"> 
+                    <div class="name-register" >R E G I S T E R</div>
+                </div> 
                 <div class=" div1-regis">
                   <div id="alert-error" > {{errorMessage}}</div>
                 </div>
@@ -96,24 +103,13 @@
                   <button id="btnSignUpRe" class="btnSubmit-regis" @click="register" >Sign up</button>
                   <button id="btnCancelRe" class="btnSubmit-regis-cancel" @click="closeFormSignUp">Cancel</button> 
                 </div>
-                  
               </div>
           </div> 
         </div>
 
-      <!-- forget password -->
-       <div class="form-popup" id="forget-from">
-        <div  class="form-container">
-          <h3><b-icon icon="cursor-fill" font-scale="1.5" class="rounded-circle bg-danger p-1" variant="light"></b-icon> Send Email</h3>
-          <div class="title">
-            <input class="inputt-forget" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
-          </div>
-            <button class="btnSubmit canover" @click="acceptSend" >Send</button>
-            <button class="btnSubmit" type="button" v-on:click="closeFormFOR">Cancel</button>       
-        </div>
-      </div> 
-       
-       </div>
+     
+      
+      </div>
 </div>   
   
    
@@ -133,11 +129,16 @@ export default {
     });
   },
   mounted () {
+    document.getElementById("alert-error-for").style.display = "none"
+    document.getElementById('alert-error-login').style.display = "none"
     document.getElementById('alert-error').style.display = "none"
     document.getElementById('form-register').style.display = "none"
   },
   data: function () {
     return {
+      timeout:3000,
+      errorMessageFor:'',
+      errorMessageLogin:'',
       errorMessage:'',
       email: '',
       password: '',
@@ -157,18 +158,22 @@ export default {
     },
     openFormFOR() {
       document.getElementById("forget-from").style.display = "block";
+      
     }, 
     //acceptSEnd
     acceptSend(e) { 
+      setTimeout(function(){
+            document.getElementById('alert-error-for').style.display = "none"
+      }, this.timeout);
+      document.getElementById('alert-error-for').style.display = "block"
       firebase.auth()
         .sendPasswordResetEmail(this.emailpWS).then(() => {
-          alert('Password reset email sent')
+          this.errorMessageFor= 'Password reset email sent'
         }).catch(error => {
-          alert(error)
+          this.errorMessageFor= error
         });
       e.preventDefault();
     },
-    
     closeFormSignUp () {
       document.getElementById("form-register").style.display = "none";
       document.getElementById('alert-error').style.display = "none"
@@ -176,7 +181,6 @@ export default {
       this.passwordRE= ''
       this.passwordREE= ''
       this.usernameRE= ''
-      
     },
     openFormSignUp() {
       document.getElementById("form-register").style.display = "block";
@@ -186,37 +190,68 @@ export default {
     },
     //anth
     login(e) {
-      firebase.auth()
+      if((!this.email.match(/^([\x20-\x7E])+$/i))||(!this.password.match(/^([\x20-\x7E])+$/i)) )
+        { 
+          if (!this.email.match(/^([\x20-\x7E])+$/i)) {
+              this.errorMessageLogin='Invalid email'
+              this.email=''
+           }
+          else if (!this.password.match(/^([\x20-\x7E])+$/i)) {
+              this.errorMessageLogin='Invalid password'
+              this.password=''
+           }
+          setTimeout(function(){
+                    document.getElementById('alert-error-login').style.display = "none"
+          }, this.timeout);
+          document.getElementById('alert-error-login').style.display = "block"
+          return
+        }
+        setTimeout(function(){
+                    document.getElementById('alert-error-login').style.display = "none"
+        }, this.timeout);
+        document.getElementById('alert-error-login').style.display = "block"
+
+        firebase.auth()
         .signInWithEmailAndPassword(this.email, this.password)
         .then(() => {
           this.regis = false;
           // alert('Authentication Completed');
         })
         .catch(err => {
-          alert(err);
+          this.errorMessageLogin=err
+          // alert(err);
         });
       e.preventDefault();
     },
     register(e) {  
-        if((!this.emailRE.match(/^([\x20-\x7E])+$/i))||(!this.passwordRE.match(/^([\x20-\x7E])+$/i))||
+      if((!this.emailRE.match(/^([\x20-\x7E])+$/i))||(!this.passwordRE.match(/^([\x20-\x7E])+$/i))||
         (!this.passwordREE.match(/^([\x20-\x7E])+$/i))||(!this.usernameRE.match(/^([\x20-\x7E])+$/i)))
         { 
-           if (!this.usernameRE.match(/^([\x20-\x7E])+$/i)) {
+            if (!this.usernameRE.match(/^([\x20-\x7E])+$/i)) {
               this.errorMessage='Invalid username'
               this.usernameRE=''
-           }
-           else if (!this.emailRE.match(/^([\x20-\x7E])+$/i)) {
+            }
+            else if (!this.emailRE.match(/^([\x20-\x7E])+$/i)) {
               this.errorMessage='Invalid email'
               this.emailRE=''
-           }
-           else if (!this.passwordRE.match(/^([\x20-\x7E])+$/i)||!this.passwordREE.match(/^([\x20-\x7E])+$/i)) {
+            }
+            else if (!this.passwordRE.match(/^([\x20-\x7E])+$/i)||!this.passwordREE.match(/^([\x20-\x7E])+$/i)) {
               this.errorMessage='Invalid password'
               this.passwordRE=''
               this.passwordREE=''
-           }
+            }
+            setTimeout(function(){
+              document.getElementById('alert-error').style.display = "none"
+            }, this.timeout);
+          
           document.getElementById('alert-error').style.display = "block"
           return
-        }
+      }
+      setTimeout(function(){
+                document.getElementById('alert-error').style.display = "none"
+      }, this.timeout);
+      document.getElementById('alert-error').style.display = "block"
+      
       if(this.passwordRE === this.passwordREE){
         this.$http({
           method: "get",

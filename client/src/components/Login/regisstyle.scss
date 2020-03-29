@@ -39,8 +39,13 @@
     height: 100%;
     // background-color:mediumvioletred;
   }
-
-.form-register  {
+  .name-register {
+    text-align: center;
+    font-size: 20px;
+    color: $colorFront;
+    margin-top: 10px;
+  }
+  .form-register  {
   overflow: hidden;
   background-color: white;
   padding: 40px 30px 30px 30px;
@@ -108,24 +113,8 @@ button.btnSubmit-regis-cancel {
 }
 
 
-.btnF-singnUp {
-  position: relative;
-  grid-area: 2 / 9 / 3 / 10;
-  top:10px;
-  background-color: white;
-  width: 200px;
-  height: 10%;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  left: 53.2%;
-}
-.btnF-singnUp p{
-  margin: 0 0 0 26%;
-  padding: 12px;
-  font-size: 20px;
-  color: $colorFront;
 
-}
+
       
 #alert-error {
         //  position: relative;
@@ -139,3 +128,4 @@ button.btnSubmit-regis-cancel {
          color: white;
          padding: 10px 0 0 0;
 }
+

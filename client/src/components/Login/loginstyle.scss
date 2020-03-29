@@ -39,6 +39,7 @@ $secondary: #99DBB4;
   .div2-bg-regis { grid-area: 2 / 8 / 5 / 12; 
     // background-color: red;
     width: 100%; }
+ 
   .div1-dot { grid-area: 4 / 2 / 6 / 12;
     // background-color: violet;
     width: 100%; }  
@@ -220,7 +221,7 @@ $secondary: #99DBB4;
 }
 //login
 .logoInput {
-  position: absolute;
+  // position: absolute;
   color: $colorFront;
   font-size: 40px;
   margin: 5% 0 0 23% ;
@@ -259,7 +260,7 @@ $secondary: #99DBB4;
   }
 
 .from-login  {
-  overflow: hidden;
+  // overflow: hidden;
   background-color: white;
   padding: 40px 30px 30px 30px;
   border-radius: 10px;
@@ -320,13 +321,33 @@ button.btnSubmit-login {
 }
 .btnF-singnIn {
   position: relative;
-  grid-area: 2 / 9 / 3 / 10;
-  top:10px;
+  //  grid-area: 2 / 9 / 3 / 10;
+ 
   background-color: white;
   width: 200px;
   height: 10%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
+  top:65px;
+  left: -30px;
+}
+.btnF-singnUp {
+  position: relative;
+  // grid-area: 2 / 9 / 3 / 10;
+  background-color: white;
+  width: 200px;
+  height: 10%;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  left:260px;
+  top:20px
+  
+}
+.contain-btnUp-btnIn {
+  position: absolute;
+  width: 100%;
+  // background-color:red;
+   top:-20%
   
 }
 .btnF-singnIn p {
@@ -335,5 +356,23 @@ button.btnSubmit-login {
   font-size: 20px;
   color: $colorFront;
 
+}
+.btnF-singnUp p{
+  margin: 0 0 0 26%;
+  padding: 12px;
+  font-size: 20px;
+  color: $colorFront;
+
+}
+#alert-error-login {
+  background-color: red;
+  width: 100%;
+  height: 70px;
+  font-size: 20px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+  color: white;
+  padding: 30px 0 0 0;
 }
 // @media (min-width: 1281px) {}
