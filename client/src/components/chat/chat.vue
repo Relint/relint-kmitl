@@ -110,7 +110,7 @@ export default {
           chatLog: chat
         },{merge:true}).then(()=>{
           const ms = 50*((this.msg.match(/\n/g) || []).length+1)
-          new Promise(resolve => setTimeout(resolve,ms+100)).then(()=>{
+          new Promise(resolve => setTimeout(resolve,ms)).then(()=>{
             this.scrollDown()
           })
           this.msg = ''
