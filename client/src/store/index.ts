@@ -10,6 +10,7 @@ export default new Vuex.Store({
     uid: '',
     searchText: '',
     pid: '',
+    openChat: false,
   },
   mutations: {
     setRecord(state, n) {
@@ -21,6 +22,9 @@ export default new Vuex.Store({
     },
     setSelectedPID(state, n){
       state.pid = n;
+    },
+    setOpenChat(state,n){
+      state.openChat = n
     },
   },
   actions: {
