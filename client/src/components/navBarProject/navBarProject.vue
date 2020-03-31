@@ -52,7 +52,7 @@ export default {
        })
    },
    mounted(){
-    //    document.getElementById('chat').style.display = 'none'
+       document.getElementById('chat').style.display = 'none'
    },
    methods: {
     backToHome () {
@@ -60,10 +60,11 @@ export default {
     },
     openFormChat () {
         if(document.getElementById('chat').style.display === 'none'){
-        document.getElementById('chat').style.display = 'block'
-      } else {
-        document.getElementById('chat').style.display = 'none'
-      }
+            this.$store.commit('setOpenChat',true)
+            document.getElementById('chat').style.display = 'block'
+        } else {
+            document.getElementById('chat').style.display = 'none'
+        }
     },
     openFormMa () {
         console.log('openFormMa')
