@@ -21,8 +21,7 @@ import navBarProject from '../navBarProject/navBarProject'
 export default {
   name: 'boardPostit',
   components: {
-  // navBar,
-   navBarProject
+   navBarProject,
   },
    data (){
     return {

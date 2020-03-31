@@ -227,43 +227,14 @@ $secondary: #99DBB4;
   margin: 5% 0 0 23% ;
    
 }
-.parentlogin {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  width: 100%;
-  height: 100%;
-  // background-color: red;
-  }
-  
-  .div1-login { grid-area: 1 / 1 / 2 / 2;width: 100%;
-    height: 100%;
-    // background-color:green; 
-  }
-  .div2-login { grid-area: 2 / 1 / 3 / 2; width: 100%;
-    height: 100%;
-    // background-color:blueviolet;
-  }
-  .div3-login { grid-area: 3 / 1 / 4 / 2;width: 100%;
-    height: 100%;
-    // background-color: rgb(48, 121, 19); 
-  }
-  .div4-login { grid-area: 4 / 1 / 5 / 2;width: 100%;
-    height: 100%;
-    // background-color: fuchsia; 
-  }
-  .div5-login { grid-area: 5 / 1 / 6 / 2; width: 100%;
-    height: 100%;
-    // background-color:aqua;
-  }
+
 
 .from-login  {
   // overflow: hidden;
   background-color: white;
   padding: 40px 30px 30px 30px;
-  border-radius: 10px;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
   position: relative;
   width: 430px;
   height: 450px;
@@ -271,6 +242,7 @@ $secondary: #99DBB4;
   
 }
 .inputt-login {
+  position: relative;
   font-family: $fontAsap;
   display: block;
   background: white;
@@ -280,7 +252,7 @@ $secondary: #99DBB4;
   border-radius: 40px;
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
-  margin: 5% 0 0 5% ;
+  margin: 0 0 15px 5% ;
   font-size: 15px;
 }
 button.btnSubmit-login {
@@ -311,9 +283,8 @@ button.btnSubmit-login {
 .psw {
   position: relative;
   // background-color: red;
-  
   margin-left: 7%;
-  top:20px
+  margin-bottom: 15px;
 }
 .pswL {
   margin: 2%;
@@ -324,7 +295,7 @@ button.btnSubmit-login {
   //  grid-area: 2 / 9 / 3 / 10;
  
   background-color: white;
-  width: 200px;
+  width: 244px;
   height: 10%;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
@@ -335,14 +306,19 @@ button.btnSubmit-login {
   position: relative;
   // grid-area: 2 / 9 / 3 / 10;
   background-color: white;
-  width: 200px;
-  height: 10%;
+  width: 244px;
+  height: 39px;
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
-  left:260px;
-  top:20px
+  left:216px;
+  top:18px
   
 }
+
+.darker-btn{
+  background-color: rgb(236, 236, 236);
+}
+
 .contain-btnUp-btnIn {
   position: absolute;
   width: 100%;
@@ -351,28 +327,74 @@ button.btnSubmit-login {
   
 }
 .btnF-singnIn p {
-  margin: 0 0 0 26%;
+  margin: 0 0 0 30%;
   padding: 12px;
   font-size: 20px;
   color: $colorFront;
 
 }
 .btnF-singnUp p{
-  margin: 0 0 0 26%;
+  margin: 0 0 0 30%;
   padding: 12px;
   font-size: 20px;
   color: $colorFront;
 
 }
 #alert-error-login {
-  background-color: red;
-  width: 100%;
-  height: 70px;
-  font-size: 20px;
+  background-color: rgb(252, 199, 199);
+  border: 1px solid #EF4E6D;
+  color: #ff3d3d;
+  width: 90%;
+  margin: 15px 0 0 5% ;
+  min-height: 20px;
+  font-size: 16px;
   border-radius: 8px;
   text-align: center;
-  box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
-  color: white;
-  padding: 30px 0 0 0;
+  word-wrap: break-word;
 }
 // @media (min-width: 1281px) {}
+
+.lds-wrapper{
+    position: absolute;
+    background-color: rgb(207, 161, 161);
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+.lds-dual-ring {
+    position: absolute;
+    display: block;
+    left: 45%;
+    top: 45%;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.pwd-wrapper{
+  display: none;
+    position: absolute;
+    background-color: rgb(207, 161, 161);
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}

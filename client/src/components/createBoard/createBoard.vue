@@ -1,17 +1,6 @@
 <template>
  <div>
      <!--dropdowm-->
- 
-          <div class="form-BoardBG" >
-            <div  class="form-container"   > 
-                  <div class="dotBG1"></div>
-                  <div class="dotBG2"></div>
-                  <div class="dotBG3"></div>
-                  <div class="dotBG4"></div>
-            </div><!--form-container-->
-            
-          </div>
-    
 
       <div class="parentBG">
           <div class="div1-BG"> 
@@ -119,7 +108,7 @@ import navBarProject from '../navBarProject/navBarProject'
 export default {
   name: 'createBoard',
   components: {
-    navBarProject
+    navBarProject,
   },
 data () {
         return {

@@ -19,7 +19,6 @@ export default {
       components: {
         navBar,
         createBoard,
-        // test,
        
     }
 }

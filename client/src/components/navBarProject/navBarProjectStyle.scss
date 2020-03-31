@@ -5,6 +5,7 @@
     grid-template-rows: repeat(1, 1fr);
     grid-column-gap: 0px;
     grid-row-gap: 0px;
+    padding: 20px 0px 15px 100px;
     }
     
     .div1 { grid-area: 1 / 1 / 4 / 2; }
@@ -14,8 +15,10 @@
     .div5 { grid-area: 1 / 10/ 4 / 10; }
 
     hr {
+        position: absolute;
         border-style: ridge;
-        color: black;
+        width: 90%;
+        right: 5%;
     }
     .form-deadline {
         font-size: 20px;
@@ -28,3 +31,42 @@
        position: relative;
        margin-top: -10px;
    } 
+
+
+#lds{
+    display: none;
+}
+
+.lds-wrapper{
+    position: absolute;
+    background-color: rgb(207, 161, 161);
+    left: 0px;
+    top: 0px;
+    width: 100%;
+    height: 100%;
+    opacity: 0.5;
+}
+.lds-dual-ring {
+    position: absolute;
+    display: block;
+    left: 45%;
+    top: 45%;
+}
+.lds-dual-ring:after {
+    content: " ";
+    display: block;
+    width: 96px;
+    height: 96px;
+    border-radius: 50%;
+    border: 8px solid #fff;
+    border-color: #fff transparent #fff transparent;
+    animation: lds-dual-ring 1.2s linear infinite;
+}
+@keyframes lds-dual-ring {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}

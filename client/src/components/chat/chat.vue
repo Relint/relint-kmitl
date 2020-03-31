@@ -3,7 +3,10 @@
     <div class="dropdown-content-chat-margin">
       <ul id="chatBox">
         <div v-for="(message,index) in messages" :key="index" :ref="'msg-ref-'+index"  class="relative-msg-border">
-          <div v-if="!checkUser(message.uid)">
+          <div v-if="message.prompt">
+            <div class="msg-prompt">{{ message.msg }}</div>
+          </div>
+          <div v-else-if="!checkUser(message.uid)" class="msg-border-min">
             <button class="user-profile-left"><b-icon icon="person" font-scale="3"  ></b-icon></button>
             <!-- <div class="msg-border-left"> -->
               <div class="align-left">
@@ -15,7 +18,7 @@
               </div><br>
             <!-- </div> -->
           </div>
-          <div v-else>
+          <div v-else class="msg-border-min">
             <button class="user-profile-right"><b-icon icon="person" font-scale="3"  ></b-icon></button>
             <!-- <div class="msg-border-right"> -->
               <div class="align-right">
@@ -55,7 +58,7 @@ export default {
       relativeScrollHeight: 0,
     };
   },
-  mounted() {
+  beforeCreate() {
     const ref = this.$db.collection('project').doc(this.$store.state.pid)
     ref.onSnapshot(doc=>{
       this.$db.collection('user').get().then(snapshot => {
@@ -77,16 +80,18 @@ export default {
           }
           return res
         })
-        this.messages = chat 
+        this.messages = chat
       })
     })
+  },
+  mounted(){
     this.$store.subscribe((mutation, state) => {
         if(mutation.type === 'setOpenChat'){
-          if(this.$store.state.openChat){
+          if(state.openChat === true){
           new Promise(resolve => setTimeout(resolve,100)).then(()=>{
-              this.setRelativeScrollHeight()
-              this.goUnread()
-              this.$store.commit('setOpenChat',false)
+                this.setRelativeScrollHeight()
+                this.goUnread()
+                this.$store.commit('setOpenChat',false)
             })
           }
         }
@@ -153,10 +158,51 @@ export default {
     },
     goUnread(){
       const height = this.messages.filter(value=>{
+        if(!value.read){
+          return false
+        }
         return !value.read.includes(firebase.auth().currentUser.uid) && !this.checkUser(value.uid)
       })
       // console.log(height[0].relativeScrollHeight + ' ' + height[0].height )
-      document.getElementById("chatBox").scrollTop = height[0].relativeScrollHeight - height[0].height
+      /* eslint-disable */
+      let i = 0
+      let count = 0
+      const loop = this.messages.length
+      for(let index = 0; index < loop; index+=1){
+        let value = this.messages[index]
+        //split days
+        console.log(index)
+        if(value.timestamp){
+          const date = value.timestamp.toDate()
+          const yy = date.getFullYear()
+          const mm = date.getMonth()
+          const dd = date.getDate()
+
+          const now = new Date()
+          const yy_n = now.getFullYear()
+          const mm_n = now.getMonth()
+          const dd_n = now.getDate()
+
+          console.log(yy+' '+mm+' '+dd)
+          console.log('...')
+          // this.messages.splice(index+count,0,{prompt: true, msg: date.toString().substring(0,15)})
+        }
+
+        if(value.relativeScrollHeight === height[0].relativeScrollHeight){
+          i = index
+        }
+      }
+      if(i-1 > 0 && !this.messages[i-1].prompt){
+        this.messages.splice(i,0,{prompt: true, msg: 'Unread messages below'})
+      }
+      // console.log(this.messages)
+      if(height[0].relativeScrollHeight){
+        document.getElementById("chatBox").scrollTop = height[0].relativeScrollHeight - height[0].height*2
+      } else {
+         new Promise(resolve => setTimeout(resolve,200)).then(()=>{
+            this.scrollDown()
+        })
+      }
     },
   }
 };

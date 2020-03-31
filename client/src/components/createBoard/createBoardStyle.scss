@@ -559,166 +559,11 @@ select {
   
  
 
-/*-------------------------------------
-  
-  -------------------------
-/* 
-  ##Device = Desktops
-  ##Screen = 1281px to higher resolution desktops
-*/
-@media (min-width: 1281px) {
-  
-    .form-BoardBG  { 
-        width: 100%;
-        height: 100%; 
-        background: rgb(252,208,211);
-        background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-        margin-top: 1.5%;
-        position:fixed;
-    }
-    .dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-      position: absolute;
-      height: 664px;
-      width: 671px;
-      border-radius: 50%;
-      display: inline-table;
-    }
-    .dotBG1 {
-      background-color: rgb(247, 218, 220);
-      opacity: 50%;
-      left: 5%;
-    }
-    .dotBG2 {
-      background-color:rgb(208, 236, 240);
-      border-radius: 50%;
-      opacity: 90%;
-      left: 25%;
-    }
-    .dotBG3 {
-      background-color: #EF4E6D;
-      opacity: 10%;
-      left: 45%;
-    }
-    .dotBG4 {
-      background-color: #F6AF9D;
-      opacity: 30%;
-      left: 65%;
-    }
-   .form-container {
-      position: relative;
-      text-align:center;
-     top: 50%;
-     left: -2.5%;
-   }
-  
-}
 
 
-/* 
-  ##Device = Laptops, Desktops
-  ##Screen = B/w 1025px to 1280px
-*/
 
-@media (min-width: 1025px) and (max-width: 1280px) {
-  
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 1.5%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
-  position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
-}
 
-}
 
-//ipad  (landscape)
-/* 
-  ##Device = Tablets, Ipads (landscape)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 1.75%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
-  position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
-}
-
-  
-}
 
 //ipad  (portrait)
 /* 
@@ -727,49 +572,7 @@ select {
 */
 //ipad
 @media (min-width: 768px) and (max-width: 1024px) {
-  
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 2%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
-  position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
-}
+ 
 //scroll bar board
 .form-scroll-createBoard {
   position: static;
@@ -1044,48 +847,6 @@ select {
 
 @media (min-width: 100px) and (max-width: 767px) {
   
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 2%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
-  position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
-}
 //scroll bar board
 .form-scroll-createBoard {
   position: static;

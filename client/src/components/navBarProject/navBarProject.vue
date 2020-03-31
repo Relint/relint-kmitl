@@ -18,10 +18,14 @@
     <div class="div5"> 
     <b-icon font-scale="3" id="iconNBP" icon="inboxes-fill" @click="openFormMa"  ></b-icon>
     </div>
-     
-</div>
-<hr>
-<chat id="chat"/>
+
+    </div>
+        <hr>
+        <chat id="chat"/>
+        <div id="lds">
+            <div class="lds-wrapper"></div>
+            <div class="lds-dual-ring"></div>
+        </div>
     </div>
 </template>
 <script>
@@ -37,6 +41,7 @@ export default {
       projectName: '',
       deadline : '',
       description: '',
+      once: false,
     }
    },
    beforeCreate () {
@@ -53,17 +58,28 @@ export default {
    },
    mounted(){
        document.getElementById('chat').style.display = 'none'
+       new Promise(resolve => {
+           document.getElementById('lds').style.display = 'block'
+           setTimeout(resolve,1000)
+        }).then(()=>{
+           this.once = true
+           new Promise(resolve => setTimeout(resolve, 500)).then(()=>{
+                document.getElementById('lds').style.display = 'none'
+           })
+       })
    },
    methods: {
     backToHome () {
       this.$router.push('/addBoard')
     },
     openFormChat () {
-        if(document.getElementById('chat').style.display === 'none'){
-            this.$store.commit('setOpenChat',true)
-            document.getElementById('chat').style.display = 'block'
-        } else {
-            document.getElementById('chat').style.display = 'none'
+        if(this.once){
+            if(document.getElementById('chat').style.display === 'none'){
+                this.$store.commit('setOpenChat',true)
+                document.getElementById('chat').style.display = 'block'
+            } else {
+                document.getElementById('chat').style.display = 'none'
+            }
         }
     },
     openFormMa () {

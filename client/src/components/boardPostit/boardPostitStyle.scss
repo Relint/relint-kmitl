@@ -7,19 +7,19 @@ $bluesky : #a6d4d8;
 $fontAsap: 'Asap', sans-serif;
 
 
-.form-postit  {
-  position: relative;
+  .form-postit  {
+    // opacity: 0.5;
+    position: fixed;
     overflow: hidden;
-    width: 95%;
-    height: 80%; 
-    background-color:$orange; 
-    padding: 30px 10px 30px 30px; 
-    margin-top: 1%;
-    margin-left: 1.5%;
-    border-radius: 10px; 
-    position:fixed;
-    box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
-}
+    width: 100%;
+    height: 100%; 
+    // background-color:$orange; 
+    // padding: 30px 10px 30px 30px; 
+    margin-top: 1.5%;
+    // margin-left: 1.5%;
+    // border-radius: 10px; 
+    // box-shadow: 5px 10px 10px rgba($greenSeaweed, 0.2);
+  }
 
 .parent2p {
   display: grid;
@@ -30,16 +30,3 @@ $fontAsap: 'Asap', sans-serif;
   }
   
   .div1-2p { grid-area: 2 / 1 / 7 / 5; }
- 
-  .bghome {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    margin-top: -0px;
-    margin-left: -30px;
-  }
-
- .dd {
-   position: relative
-   ;
- }

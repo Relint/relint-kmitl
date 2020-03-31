@@ -65,8 +65,9 @@
   </div>
   </div>
  <!--dropdown home-->
-      
+ <bg/>
 </div>
+
 </template>
 <script>
 /* eslint-disable */
@@ -74,9 +75,11 @@ import firebase from "firebase"
 import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
 import createBoard from '../createBoard/createBoard'
 import boardPostit from '../boardPostit/boardPostit'
+import bg from '../bg/bg'
 export default {
   name: 'navBar',
   components: {
+    bg,
   },
    data (){
     return {
