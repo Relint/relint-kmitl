@@ -2,126 +2,80 @@
 <!-- login -->
 <div>
   <title>Relint</title>
-  <div class="mainGroup" id="login" >
+  <div class="background-login" id="login" >
             <div class="navbarLogin">
               <li class="brand">RELINT</li>
             </div>
-        <div class="parentbg">
-          <div class="div1-bg">
-          <div class="parentlogo">
-              <div class="div1-lo">
-                 <div class="box-white"></div>
-              </div>
-              <div class="div2-lo"><div class="dotLo1"></div></div>
-              <div class="div3-lo"><div class="dotLo2"></div></div>
-              <div class="div4-lo"><div class="dotLo3"></div></div>
-              <div class="div5-lo"> <div class="dotLo4"></div></div>
-              <div class="div6-lo"> </div>
-              <div class="div7-lo"></div>
-             <label class="logoName">RELINT</label>
-             
-          </div>
-          </div> 
-        <div class="div1-dot"> 
-           <div  class="form-container"   > 
-                  <div class="dotBG1"></div>
-                  <div class="dotBG2"></div>
-                  <div class="dotBG3"></div>
-                  <div class="dotBG4"></div>
-            </div> 
-        </div>
-          
-        <!-- login -->
-        <div class="div2-bg">
+
+
+       <div class="contain-BGball div-1-BG-ball"> </div>
+        <div class="contain-BGball div-2-BG-ball"> </div>
+        <div class="contain-BGball div-3-BG-ball"> </div>
+        <div class="contain-BGball div-4-BG-ball"> </div>
+
+      <!-- login -->
+      <div class="contain-form-login">
           <div class="from-login" id='form-login'>
             <div class="contain-btnUp-btnIn">
               <div id="btn-in" class="btnF-singnIn" @click="openFormSignIn"><p>Sign In</p></div>
               <div id="btn-up" class="btnF-singnUp darker-btn" @click="openFormSignUp"><p>Sign Up</p></div>
             </div>
-            <!-- <div class="parentlogin"> -->
-              <!-- <div class="div1-login"> -->
                   <div class="logoInput">R E L I N T</div><br>
-              <!-- </div> -->
-               <!-- <div class="div1-login"> -->
                   <div id="alert-error-login" > {{errorMessageLogin}}</div><br>
-              <!-- </div> -->
-              <!-- <div class="div2-login"> -->
                 <input id="inputEmail" class="inputt-login" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
                 <br>
-              <!-- </div> -->
-              <!-- <div class="div3-login"> -->
                 <input id="inputPassword" class="inputt-login" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
-              <!-- </div> -->
-              <!-- <div class="div4-login"> -->
+              
                 <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
                 <br>
-              <!-- </div> -->
-              <!-- <div class="div5-login"> -->
                 <button id="btnSign in" class="btnSubmit-login" v-on:click="login">Sign in</button>
-              <!-- </div> -->
-            <!-- </div> -->
-
-            
           </div>
-        </div>
+      </div>
+    
         <!-- register -->
-        <div class="div2-bg-regis">
+        <div class="contain-form-regis">
           <div class="form-register" id='form-register' >
-               <!-- <div  class="parentregis"> -->
-                 <!-- <div class=" div1-regis">  -->
                 <div class="name-register" >R E G I S T E R</div><br>
-                <!-- </div>  -->
                 <div id="alert-error" > {{errorMessage}}</div>
-                <!-- <div class=" div3-regis"> -->
                   <input id="inputUsernameRe" class="inputt-regis" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
                 <br>
-                <!-- </div> -->
-                <!-- <div class=" div4-regis"> -->
                   <input id="inputEmailRe" class="inputt-regis" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
                 <br>
-                <!-- </div> -->
-                <!-- <div class=" div5-regis"> -->
                   <input id="inputPasswordRE" class="inputt-regis" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
                 <br>
-                <!-- </div> -->
-                <!-- <div class=" div6-regis"> -->
                   <input id="inputPasswordREE" class="inputt-regis" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
                 <br>
-                <!-- </div> -->
-                <!-- <div class="div7-regis"> -->
                   <button id="btnSignUpRe" class="btnSubmit-regis" @click="register" >Sign up</button>
                   <button id="btnCancelRe" class="btnSubmit-regis-cancel" @click="openFormSignIn">Cancel</button> 
-                <!-- </div> -->
-              <!-- </div> -->
           </div> 
         </div>
-      </div>
     </div>    
-      <!-- forget password -->
-        <div class="pwd-wrapper"  id="forget-from-wrapper">
-        </div>
-        <div class="form-popup" id="forget-from">
-            <div class="name-pwd-rst"> R E S E T </div>
-          <!-- <div class="div1-login"> -->
-            <div id="alert-error-for" class="alert-error-pwd"> {{errorMessageFor}}</div>
-          <!-- </div> -->
-          <!-- <div  class="form-container"> -->
-            <!-- <div class="div1-login"> -->
-            <!-- </div> -->
-            <input class="inputt-forget" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
-            <button class="btnSubmit-send-for" @click="acceptSend" >Send</button>
-            <button class="btnSubmit-cancel-for" type="button" v-on:click="closeFormFOR">Cancel</button>       
-          <!-- </div> -->
-        </div> 
-
+     
 
         <div id="waiting-login">
             <div class="lds-wrapper"></div>
             <div class="lds-dual-ring"></div>
         </div>
 
-        
+        <div class="contain-logoball div-0-cylinder"> </div>
+        <div class="contain-logoball div-1-ball"> </div>
+        <div class="contain-logoball div-2-ball"> </div>
+        <div class="contain-logoball div-3-ball"> </div>
+        <div class="contain-logoball div-4-ball"> </div>
+        <div class="contain-logoball logoName-ball">RELINT</div>
 
+         <!-- forget password -->
+        <div class="pwd-wrapper"  id="forget-from-wrapper">
+        </div>
+        <div class="form-popup" id="forget-from">
+            <div class="name-pwd-rst"> R E S E T </div>
+            <div id="alert-error-for" class="alert-error-pwd"> {{errorMessageFor}}</div>
+            <input class="inputt-forget" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
+            <button class="btnSubmit-send-for" @click="acceptSend" >Send</button>
+            <button class="btnSubmit-cancel-for" type="button" v-on:click="closeFormFOR">Cancel</button> 
+        </div> 
+        
+      
 </div>
 </template>
 <script>

@@ -18,76 +18,13 @@ $dark: #777777;
 $orange: #FFC39E;
 $success: #B0DB7D;
 $secondary: #99DBB4;
-.parentbg {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(5, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  // background-color: red;
-  width: 100%;
-  height: 100%;
-  }
-
-  
-  .div1-bg { grid-area: 3 / 2 / 4 / 8; 
-    // background-color: blue;
-    width: 100%; }
-  .div2-bg { grid-area: 2 / 8 / 5 / 12; 
-    // background-color: green;
-    width: 100%; }
-  .div2-bg-regis { grid-area: 2 / 8 / 5 / 12; 
-    // background-color: red;
-    width: 100%; }
- 
-  .div1-dot { grid-area: 4 / 2 / 6 / 12;
-    // background-color: violet;
-    width: 100%; }  
-
-
-    .parentlogo {
-      display: grid;
-      grid-template-columns: repeat(12, 1fr);
-      grid-template-rows: repeat(5, 1fr);
-      grid-column-gap: 0px;
-      grid-row-gap: 0px;
-      // background-color:slateblue;
-      width: 100%;
-      height: 100%;
-      }
-      
-      .div1-lo { grid-area: 3 / 1 / 4 / 2; 
-        // background-color:violet ;
-        width: 100%;}
-      .div2-lo { grid-area: 3 / 2 / 4 / 3; 
-        // background-color:#B0DB7D;
-        width: 100%;}
-      .div3-lo { grid-area: 3 / 3 / 4 / 4; 
-        // background-color:navy;
-        width: 100%;}
-      .div4-lo { grid-area: 3 / 4 / 4 / 5; 
-        // background-color:darkgrey;
-        width: 100%;}
-      .div5-lo { grid-area: 3 / 5 / 4 / 6; 
-        // background-color:aqua;
-        width: 100%;}
-      .div6-lo { grid-area: 3 / 6 / 4 / 7; 
-        // background-color:darkolivegreen;
-        width: 100%;}
-      .div7-lo { grid-area: 3 / 7 / 4 / 8;
-        // background-color:darkorange;
-        width: 100%; }
-
-      
-              
-.mainGroup {
+           
+.background-login {
   height: 100%;
   width: 100%;
-  margin: 0;
   background: rgb(223,168,183);
   background: linear-gradient(180deg, rgba(223,168,183,1) 0%, rgba(216,245,255,1) 100%);
   position: fixed;
-
 }
 
 .navbarLogin {
@@ -112,103 +49,6 @@ $secondary: #99DBB4;
   text-decoration: none;
 }
 
-.box-white {
-  position: absolute;
-  height: 322px;
-  width: 54px;
-  border-radius: 124px;
-  display: inline-table;
-  background-color: white;
-  // opacity: 60%;
-  left: 17%;
-   top:33%
-}
-.logoName {
-  position: absolute;
-  color: white;
-  font-size: 55px;
-   top:63%;
-   left: 30%;
-  
-}
-.contain-color-logo {
-  position: relative;
-}
-.dotLo1 ,.dotLo2 ,.dotLo3, .dotLo4 {
-  position: absolute;
-  height: 180px;
-  width: 180px;
-  border-radius: 50%;
-  // display: inline-table;
-  // margin-left: 210px;
-  top:40%
-}
-.dotLo1 {
-  background-color: $pinkk;
-  // opacity: 60%;
-  left: 23%;
-  
-}
-.dotLo2 {
-  background-color:$bluesky;
-  // border-radius: 50%;
-  // opacity: 50%;
-  left: 30%;
-}
-.dotLo3 {
-  background-color: #EF4E6D;
-  // opacity: 10%;
-  left: 37%;
-}
-.dotLo4 {
-  background-color: #F6AF9D;
-  // opacity: 30%;
-  left: 44%;
-}
-.contain-color-logo {
-  position: relative;
-  // text-align:center;
- top: 30%;
- left: -2.5%;
-}
-
-
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: $pinkk;
-  opacity: 60%;
-  left: 1%;
-}
-.dotBG2 {
-  background-color:$bluesky;
-  border-radius: 50%;
-  opacity: 50%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 20%;
-  left: 51%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 77%;
-}
-.form-container {
-  position: relative;
-  text-align:center;
-  top: 20%;
-   left: -10%;
-}
-
-
 .btnsignIn {
   position: relative;
   overflow: hidden;
@@ -219,15 +59,13 @@ $secondary: #99DBB4;
   width: 200px;
   height: 20px;
 }
-//login
+//form-login
 .logoInput {
   // position: absolute;
   color: $colorFront;
   font-size: 40px;
   margin: 5% 0 0 23% ;
-   
 }
-
 
 .from-login  {
   // overflow: hidden;
@@ -279,7 +117,7 @@ button.btnSubmit-login {
   
 }
 
-
+// form-forget
 .psw {
   position: relative;
   // background-color: red;
@@ -352,8 +190,8 @@ button.btnSubmit-login {
   text-align: center;
   word-wrap: break-word;
 }
-// @media (min-width: 1281px) {}
 
+// loading
 .lds-wrapper{
     position: absolute;
     background-color: rgb(207, 161, 161);
@@ -387,7 +225,7 @@ button.btnSubmit-login {
     transform: rotate(360deg);
   }
 }
-
+// loading-form-forget
 .pwd-wrapper{
   display: none;
     position: absolute;
@@ -397,4 +235,83 @@ button.btnSubmit-login {
     width: 100%;
     height: 100%;
     opacity: 0.5;
+}
+
+// form-contain
+.contain-form-login {
+  position: absolute;
+  left:60%;
+  top:30%
+}
+.contain-form-regis {
+  position: absolute;
+  left:60%;
+  top:30%
+}
+
+// contain-logoball
+
+.contain-logoball {
+  position: relative;
+  float: left;
+  // opacity:0.5;
+  width: 8%;
+  height: 8%;
+  border-radius: 100%;
+  padding-top: 8%;
+  margin: 300px 0 0 -2%; 
+  
+  left: 10%;
+}
+.div-0-cylinder {
+  background-color: white;
+  width: 3%;
+  padding-top: 15%;
+  border-radius: 30px;
+  margin-right: 5%;
+}
+.div-1-ball {
+  background-color:$pinkk;
+}
+.div-2-ball {
+  background-color:$bluesky; 
+}
+.div-3-ball {
+  background-color:$redFire;
+}
+.div-4-ball {
+  background-color:$orange;
+}
+.logoName-ball {
+  color: white;
+  padding-top: 10%;
+  border-radius: 30px;
+  left: -7%;
+  font-size: 50px;
+}
+
+// contain-BGball
+.contain-BGball {
+  position: relative;
+  float: left;
+  opacity:0.5;
+  width: 30%;
+  height: 30%;
+  border-radius: 100%;
+  padding-top: 15%;
+  margin: 600px 0 0 -8%; 
+  left: 10%;
+}
+.div-1-BG-ball {
+  background-color:$pinkk;
+}
+.div-2-BG-ball {
+  background-color:$bluesky; 
+}
+.div-3-BG-ball {
+  background-color:$redFire;
+  opacity:0.3;
+}
+.div-4-BG-ball {
+  background-color:$orange;
 }
