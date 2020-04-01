@@ -50,19 +50,18 @@
           </div> 
         </div>
     </div>    
-     
-
-        <div id="waiting-login">
-            <div class="lds-wrapper"></div>
-            <div class="lds-dual-ring"></div>
-        </div>
-
+    
         <div class="contain-logoball div-0-cylinder"> </div>
         <div class="contain-logoball div-1-ball"> </div>
         <div class="contain-logoball div-2-ball"> </div>
         <div class="contain-logoball div-3-ball"> </div>
         <div class="contain-logoball div-4-ball"> </div>
         <div class="contain-logoball logoName-ball">RELINT</div>
+
+        <div id="waiting-login">
+            <div class="lds-wrapper"></div>
+            <div class="lds-dual-ring"></div>
+        </div>
 
          <!-- forget password -->
         <div class="pwd-wrapper"  id="forget-from-wrapper">
