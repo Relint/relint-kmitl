@@ -40,11 +40,6 @@ const routes = [
     name: 'addBoardPostit',
     component: addBoardPostit
   },
-  {
-    path: '/chat',
-    name: 'chat',
-    component: chat
-  }
 ]
 
 const router = new VueRouter({
