@@ -8,7 +8,10 @@
             </div>
 
 
-       
+       <div class="contain-BGball div-1-BG-ball"> </div>
+        <div class="contain-BGball div-2-BG-ball"> </div>
+        <div class="contain-BGball div-3-BG-ball"> </div>
+        <div class="contain-BGball div-4-BG-ball"> </div>
 
       <!-- login -->
       <div class="contain-form-login">
@@ -47,7 +50,21 @@
           </div> 
         </div>
     </div>    
-      <!-- forget password -->
+     
+
+        <div id="waiting-login">
+            <div class="lds-wrapper"></div>
+            <div class="lds-dual-ring"></div>
+        </div>
+
+        <div class="contain-logoball div-0-cylinder"> </div>
+        <div class="contain-logoball div-1-ball"> </div>
+        <div class="contain-logoball div-2-ball"> </div>
+        <div class="contain-logoball div-3-ball"> </div>
+        <div class="contain-logoball div-4-ball"> </div>
+        <div class="contain-logoball logoName-ball">RELINT</div>
+
+         <!-- forget password -->
         <div class="pwd-wrapper"  id="forget-from-wrapper">
         </div>
         <div class="form-popup" id="forget-from">
@@ -57,20 +74,8 @@
             <button class="btnSubmit-send-for" @click="acceptSend" >Send</button>
             <button class="btnSubmit-cancel-for" type="button" v-on:click="closeFormFOR">Cancel</button> 
         </div> 
-
-        <div id="waiting-login">
-            <div class="lds-wrapper"></div>
-            <div class="lds-dual-ring"></div>
-        </div>
-
-        <!-- <div class="contain-class-logoball"> -->
-        <div class="contain-logoball div-0-cylinder"> </div>
-        <div class="contain-logoball div-1-ball"> </div>
-        <div class="contain-logoball div-2-ball"> </div>
-        <div class="contain-logoball div-3-ball"> </div>
-        <div class="contain-logoball div-4-ball"> </div>
-        <div class="contain-logoball logoName-ball">RELINT</div>
-        <!-- </div> -->
+        
+      
 </div>
 </template>
 <script>

@@ -251,14 +251,6 @@ button.btnSubmit-login {
 
 // contain-logoball
 
-// .contain-class-logoball {
-//   position: absolute;
-//   top: 50%;
-//   width: 100%;
-//   height: 100%;
-//   padding-top: 10%;
-//   background-color: rebeccapurple;
-// }
 .contain-logoball {
   position: relative;
   float: left;
@@ -296,4 +288,30 @@ button.btnSubmit-login {
   border-radius: 30px;
   left: -7%;
   font-size: 50px;
+}
+
+// contain-BGball
+.contain-BGball {
+  position: relative;
+  float: left;
+  opacity:0.5;
+  width: 30%;
+  height: 30%;
+  border-radius: 100%;
+  padding-top: 15%;
+  margin: 600px 0 0 -8%; 
+  left: 10%;
+}
+.div-1-BG-ball {
+  background-color:$pinkk;
+}
+.div-2-BG-ball {
+  background-color:$bluesky; 
+}
+.div-3-BG-ball {
+  background-color:$redFire;
+  opacity:0.3;
+}
+.div-4-BG-ball {
+  background-color:$orange;
 }
