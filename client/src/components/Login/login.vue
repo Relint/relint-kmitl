@@ -2,10 +2,13 @@
 <!-- login -->
 <div>
   <title>Relint</title>
-  <div class="mainGroup" id="login" >
+  <div class="background-login" id="login" >
             <div class="navbarLogin">
               <li class="brand">RELINT</li>
             </div>
+
+
+       
 
       <!-- login -->
       <div class="contain-form-login">
@@ -55,14 +58,19 @@
             <button class="btnSubmit-cancel-for" type="button" v-on:click="closeFormFOR">Cancel</button> 
         </div> 
 
-
         <div id="waiting-login">
             <div class="lds-wrapper"></div>
             <div class="lds-dual-ring"></div>
         </div>
 
-        
-
+        <!-- <div class="contain-class-logoball"> -->
+        <div class="contain-logoball div-0-cylinder"> </div>
+        <div class="contain-logoball div-1-ball"> </div>
+        <div class="contain-logoball div-2-ball"> </div>
+        <div class="contain-logoball div-3-ball"> </div>
+        <div class="contain-logoball div-4-ball"> </div>
+        <div class="contain-logoball logoName-ball">RELINT</div>
+        <!-- </div> -->
 </div>
 </template>
 <script>
