@@ -1,13 +1,11 @@
 <template>
 <div>
-    <div class="form-BoardBG" >
-            <div  class="form-container"   > 
-                  <div class="dotBG1"></div>
-                  <div class="dotBG2"></div>
-                  <div class="dotBG3"></div>
-                  <div class="dotBG4"></div>
-            </div><!--form-container-->
-      </div>
+    <div class="form-BoardBG" > 
+          <div class="contain-BGball div-1-BG-ball"> </div>
+        <div class="contain-BGball div-2-BG-ball"> </div>
+        <div class="contain-BGball div-3-BG-ball"> </div>
+        <div class="contain-BGball div-4-BG-ball"> </div>
+      </div> 
 </div>
 </template>
 <script>

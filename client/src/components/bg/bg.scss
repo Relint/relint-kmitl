@@ -14,54 +14,48 @@ $dark: #777777;
 $orange: #FFC39E;
 $success: #B0DB7D;
 $secondary: #99DBB4;
+
+.form-BoardBG  { 
+  width: 100%;
+  height: 100%; 
+  background: rgb(252,208,211);
+  background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
+  // margin-top: 1.5%;
+  position:fixed;
+}
+// contain-BGball
+
 /* 
   ##Device = Desktops
   ##Screen = 1281px to higher resolution desktops
 */
 @media (min-width: 1281px) {
   
-    .form-BoardBG  { 
-        width: 100%;
-        height: 100%; 
-        background: rgb(252,208,211);
-        background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-        margin-top: 1.5%;
-        position:fixed;
-    }
-    .dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-      position: absolute;
-      height: 664px;
-      width: 671px;
-      border-radius: 50%;
-      display: inline-table;
-    }
-    .dotBG1 {
-      background-color: rgb(247, 218, 220);
-      opacity: 50%;
-      left: 5%;
-    }
-    .dotBG2 {
-      background-color:rgb(208, 236, 240);
-      border-radius: 50%;
-      opacity: 90%;
-      left: 25%;
-    }
-    .dotBG3 {
-      background-color: #EF4E6D;
-      opacity: 10%;
-      left: 45%;
-    }
-    .dotBG4 {
-      background-color: #F6AF9D;
-      opacity: 30%;
-      left: 65%;
-    }
-   .form-container {
-      position: relative;
-      text-align:center;
-     top: 50%;
-     left: -2.5%;
-   }
+   // contain-BGball
+.contain-BGball {
+  position: relative;
+  float: left;
+  opacity:0.5;
+  width: 30%;
+  height: 30%;
+  border-radius: 100%;
+  padding-top: 15%;
+  margin: 600px 0 0 -8%; 
+  left: 10%;
+}
+.div-1-BG-ball {
+  background-color:$pinkk;
+}
+.div-2-BG-ball {
+  background-color:$bluesky; 
+}
+.div-3-BG-ball {
+  background-color:$redFire;
+  opacity:0.3;
+}
+.div-4-BG-ball {
+  background-color:$orange;
+}
   
 }
 
@@ -72,48 +66,31 @@ $secondary: #99DBB4;
 */
 
 @media (min-width: 1025px) and (max-width: 1280px) {
-  
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 1.5%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
+  // contain-BGball
+.contain-BGball {
   position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
+  float: left;
+  opacity:0.5;
+  width: 30%;
+  height: 30%;
+  border-radius: 100%;
+  padding-top: 15%;
+  margin: 600px 0 0 -8%; 
+  left: 10%;
+}
+.div-1-BG-ball {
+  // background-color:$pinkk;
+  background-color:red;
+}
+.div-2-BG-ball {
+  background-color:$bluesky; 
+}
+.div-3-BG-ball {
+  background-color:$redFire;
+  opacity:0.3;
+}
+.div-4-BG-ball {
+  background-color:$orange;
 }
 
 }
@@ -125,48 +102,31 @@ $secondary: #99DBB4;
 */
 
 @media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {
-  
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 1.75%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
+  // contain-BGball
+.contain-BGball {
   position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
+  float: left;
+  opacity:0.5;
+  width: 30%;
+  height: 30%;
+  border-radius: 100%;
+  padding-top: 10%;
+  margin: 600px 0 0 -8%; 
+  left: 10%;
+}
+.div-1-BG-ball {
+  // background-color:$pinkk;
+  background-color:blue;
+}
+.div-2-BG-ball {
+  background-color:$bluesky; 
+}
+.div-3-BG-ball {
+  background-color:$redFire;
+  opacity:0.3;
+}
+.div-4-BG-ball {
+  background-color:$orange;
 }
 
   
@@ -179,48 +139,31 @@ $secondary: #99DBB4;
 */
 //ipad
 @media (min-width: 768px) and (max-width: 1024px) {
-  
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 2%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
+  // contain-BGball
+.contain-BGball {
   position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
+  float: left;
+  opacity:0.5;
+  width: 30%;
+  height: 30%;
+  border-radius: 100%;
+  padding-top: 5%;
+  margin: 600px 0 0 -8%; 
+  left: 8%;
+}
+.div-1-BG-ball {
+  // background-color:$pinkk;
+  background-color:yellow;
+}
+.div-2-BG-ball {
+  background-color:$bluesky; 
+}
+.div-3-BG-ball {
+  background-color:$redFire;
+  opacity:0.3;
+}
+.div-4-BG-ball {
+  background-color:$orange;
 }
 
 }
@@ -232,50 +175,32 @@ $secondary: #99DBB4;
 
 @media (min-width: 100px) and (max-width: 767px) {
   
-  .form-BoardBG  { 
-    width: 100%;
-    height: 100%; 
-    background: rgb(252,208,211);
-    background: linear-gradient(180deg, rgba(252,208,211,1) 0%, rgba(183,244,255,1) 100%);
-    margin-top: 2%;
-    position:fixed;
-}
-.dotBG1 ,.dotBG2 ,.dotBG3, .dotBG4 {
-  position: absolute;
-  height: 664px;
-  width: 671px;
-  border-radius: 50%;
-  display: inline-table;
-}
-.dotBG1 {
-  background-color: rgb(247, 218, 220);
-  opacity: 50%;
-  left: 5%;
-}
-.dotBG2 {
-  background-color:rgb(208, 236, 240);
-  border-radius: 50%;
-  opacity: 90%;
-  left: 25%;
-}
-.dotBG3 {
-  background-color: #EF4E6D;
-  opacity: 10%;
-  left: 45%;
-}
-.dotBG4 {
-  background-color: #F6AF9D;
-  opacity: 30%;
-  left: 65%;
-}
-.form-container {
+  // contain-BGball
+.contain-BGball {
   position: relative;
-  text-align:center;
- top: 50%;
- left: -2.5%;
+  float: left;
+  opacity:0.5;
+  width: 30%;
+  height: 30%;
+  border-radius: 100%;
+  padding-top: 15%;
+  margin: 600px 0 0 -8%; 
+  left: 10%;
 }
-
-
+.div-1-BG-ball {
+  // background-color:$pinkk;
+  background-color:olivedrab;
+}
+.div-2-BG-ball {
+  background-color:$bluesky; 
+}
+.div-3-BG-ball {
+  background-color:$redFire;
+  opacity:0.3;
+}
+.div-4-BG-ball {
+  background-color:$orange;
+}
 
 }
 

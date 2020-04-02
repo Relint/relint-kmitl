@@ -94,10 +94,12 @@ $secondary: #99DBB4;
  }
 
 //+//-------------------------------------------------------------------
-.dropdown {
-  display: inline-block;
-  position: relative;
+
+.contain-form-setting {
+  position: absolute;
+  left:70%
 }
+
 .dd-menu {
   position: absolute;
   border: 1px solid #ccc;
@@ -375,7 +377,33 @@ select {
     cursor: pointer;
   }
 
-
+//scroll bar board
+.form-scroll-createBoard {
+  position: static;
+  width: 50%;
+  height: 80%;
+  // border-radius: 20px;
+   background-color: yellow;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  left: 50px;
+  top: 30px;
+}
+#board-scroll::-webkit-scrollbar
+{ 
+  width: 12px;
+  // background-color:$bluesky;
+  border-radius: 30px;
+  display: none
+}
+#board-scroll::-webkit-scrollbar-thumb
+{
+  border-radius: 30px;
+  background-color: $blueQueen;
+  scrollbar-width: thin;
+  display: none
+  
+}
 
 
 
@@ -425,7 +453,13 @@ select {
   //   position: absolute;
   //   margin-left: 70px;
   // }
-
+.contain-show-project {
+  position: absolute;
+  background-color: red;
+  width: 100%;
+  height: 60%;
+  top:25%
+}
   #container-Board {
     position: absolute;
     margin: auto;
@@ -565,6 +599,11 @@ select {
 
 
 
+
+
+
+
+
 //ipad  (portrait)
 /* 
   ##Device = Tablets, Ipads (portrait)
@@ -579,7 +618,7 @@ select {
   width: 50%;
   height: 80%;
   // border-radius: 20px;
-  // background-color: red;
+   background-color: blue;
   overflow-y: scroll;
   scrollbar-width: thin;
   left: 50px;
@@ -625,6 +664,9 @@ select {
     background-color: #555;
     display: none;
   }
+
+
+
 
 //object 
 .contain-obj-invite {
@@ -839,6 +881,11 @@ select {
 }
 
 }
+
+
+
+
+
 ///smallllll
 /* 
   ##Device = Tablets, Ipads (portrait)
@@ -853,7 +900,7 @@ select {
   width: 50%;
   height: 80%;
   // border-radius: 20px;
-  // background-color: red;
+  background-color: palevioletred;
   overflow-y: scroll;
   scrollbar-width: thin;
   left: 50px;

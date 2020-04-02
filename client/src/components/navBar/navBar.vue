@@ -1,73 +1,61 @@
 <template>
     <div>
-  <div class="parent">
-    <div class="nav-links">
-          
-    </div>     
-    <div class="nav-links">
-        <div class="div2"><h1 class="brand">RELINT</h1></div>
-    </div>
-
-    <div class="nav-links">
-        <div class="div3"> 
-            <a><div id="container-S">
-                <input type="text" id="input" placeholder="Search" v-model="searchText" @keyup='searchTextHandler'>
-                <b-icon id="input_img" icon="search" font-scale="2" ></b-icon>
-            </div> </a>
-        </div>
-    </div>   
-      
-      
-  <div class="div3"> 
-     <div class="contain-noti-relative">
-     <a><div class="dropdown-noti">
-       <div v-if="this.notifications.length >= 1" class="notification">
-              {{this.notifications.length}}
-              
+      <div class="navbarLogin">
+              <div class="brand">RELINT</div>
       </div>
-      <button  class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
-      
-      
-        <div class="dropdown-content-noti">
-          <div v-if="this.notifications.length === 0"><a><center>No notification</center></a></div>
-          <div v-else-if="this.notifications.length === 1"><a><center>1 notification</center></a></div>
-          <div v-else><a><center>{{this.notifications.length}} notifications</center></a></div>
-          <div v-for="noti in notifications" :key="noti.pid">
-            <a>
-               <div class="contain-relative-btnNoti">
-                  <button @click="inviteAccept(noti.pid)">T</button>
-                 <button @click="inviteDecline(noti.pid)">F</button>
-                </div>
-               <h3>{{noti.title}}</h3> 
-                <p>{{noti.description}}</p>
-                <p>{{noti.timestamp}}</p>
-               
-            </a>
-          </div>
-        </div>
-    </div> </a>  
+      <bg/>
+
+      <!-- search -->
+      <div class="container-serach">
+        <div class="content-search">
+            <input type="text" class="input-search" placeholder="Search" v-model="searchText" @keyup='searchTextHandler'>
+            <b-icon class="input_icon" icon="search" font-scale="2" ></b-icon>
+        </div> 
+      </div>
+      <!-- noti -->
+     <div class="contain-noti">
+      <a>
+          <div class="dropdown-noti">
+            <div v-if="this.notifications.length >= 1" class="notification">
+                    {{this.notifications.length}}
+            </div>
+          <button  class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
+            <div class="dropdown-content-noti">
+              <div v-if="this.notifications.length === 0"><a><center>No notification</center></a></div>
+              <div v-else-if="this.notifications.length === 1"><a><center>1 notification</center></a></div>
+              <div v-else><a><center>{{this.notifications.length}} notifications</center></a></div>
+              <div v-for="noti in notifications" :key="noti.pid">
+                <a>
+                  <div class="contain-relative-btnNoti">
+                      <button @click="inviteAccept(noti.pid)">T</button>
+                    <button @click="inviteDecline(noti.pid)">F</button>
+                    </div>
+                  <h3>{{noti.title}}</h3> 
+                    <p>{{noti.description}}</p>
+                    <p>{{noti.timestamp}}</p>
+                </a>
+              </div>
+            </div>
+        </div> 
+      </a>  
     </div>
         
-    
-   <div class="contain-prof-relative">
-    <a><div class="dropdown">
-    <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
-        <div class="dropdown-content">
-          <div class="contain-showName"> 
-            <label class="label-showName" >Hello, </label>
-             <span class="showName" v-html="username" ></span>
+    <!-- profile -->
+    <div class="contain-profile">
+      <a><div class="dropdown-profile">
+      <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
+          <div class="dropdown-content-profile">
+            <div class="contain-showName"> 
+              <label class="label-showName" >Hello, </label>
+              <span class="showName" v-html="username" ></span>
+            </div>
+            <a >Profile</a>
+            <a  v-on:click="logout">Logout</a>
           </div>
-          <a >Profile</a>
-          <a  v-on:click="logout">Logout</a>
-        </div>
-    </div></a>  
+      </div></a>  
+    </div>
   </div>
-  </div>
-  </div>
- <!--dropdown home-->
- <bg/>
-</div>
-
+ 
 </template>
 <script>
 /* eslint-disable */
