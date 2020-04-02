@@ -119,10 +119,24 @@ h5 {
 }
 
 .dropdown-content-noti a:hover {background-color: #f1f1f1;}
-.drop-noti:hover .dropdown-content-noti {
+.drop-noti:hover .dropdown-content-noti{
   display:block;
 }
-
+.drop-noti:hover .rect{
+  display:block;
+}
+.rect{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  right: 10.25%;
+  top: 25px;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
 .dropdown-content-noti {
   display: none; 
   position: absolute;
@@ -130,10 +144,10 @@ h5 {
   width: 280px;
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   z-index: 1;
-  top: 55px;
+  top: 50px;
   right: 0px;
   border-radius: 15px;
-  margin-right: 9%;
+  margin-right: 10.25%;
   
 }
 .dropdown-content-noti h3 {
@@ -149,11 +163,13 @@ h5 {
   font-size: 16px;
 }
  .dropbtn-noti {
+  position: relative;
   background-color:$orange;
   border-radius: 100%;
   height: 44px;
   width: 44px;
   border-style: none;
+  z-index: 2;
 }
 
 .btn-T {
@@ -222,9 +238,9 @@ h5 {
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   z-index: 1;
   border-radius: 15px;
-  top: 55px;
+  top: 50px;
   right: 0px;
-  margin-right: 3%;
+  margin-right: 2.75%;
 }
 
 .dropdown-content-profile a {
@@ -242,15 +258,31 @@ h5 {
 .dropdown-content-profile a:hover {background-color: #f1f1f1;}
 .drop-profile:hover .dropdown-content-profile{
   display: block;
-  
 }
- .dropbtn {
+.drop-profile:hover .rect2{
+  display: block;
+}
+.rect2{
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  border-top-left-radius: 100%;
+  border-top-right-radius: 100%;
+  right: 2.75%;
+  top: 25px;
+  width: 50px;
+  height: 50px;
+  z-index: 1;
+}
+.dropbtn {
+  position: relative;
   background-color:$bluesky;
   border-radius: 100%;
   height: 44px;
   width: 44px;
   border-style: none;
+  z-index: 2;
 }
 .contain-profile {
-   position: relative;
+  position: relative;
 }

@@ -18,8 +18,13 @@
                   <p> {{project.description}}</p><br><br> 
                   <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
               </div>
-              <button class="button-box" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
-              <button class="button-box1" @click="deleteBoard(project.pid)" v-if="project.permission"><p class="green" >delete</p></button>
+              <div  v-if="project.permission">
+                <button class="button-box left" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
+                <button class="button-box1 right" @click="deleteBoard(project.pid)"><p class="green" >delete</p></button>
+              </div>
+              <div v-else>
+                <button class="button-box center" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
+              </div>
             </div>
           </div>
         </div>

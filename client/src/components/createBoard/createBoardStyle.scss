@@ -90,8 +90,8 @@ $secondary: #99DBB4;
   position: absolute;
   right: 25%;
   top: 12.5%;
-  width: 6.75%;
-  padding-top: 6.75%;
+  width: 5.75%;
+  padding-top: 5.75%;
   border-radius: 100%;
   border-style: none;
   background-color: $redFire;
@@ -482,14 +482,22 @@ select {
     top: 35%;
   }
   
+  .center{
+    left: 38%;
+  }
+  .left{
+    left: 18%;
+  }
+  .right{
+    left: 57%;
+  }
   .button-box {
     position: absolute;
     background: $bluesky;
     width: 25%;
     height: 15%;
     border-radius: 20px;
-    top: 73%;
-    left: 20%;
+    top: 75%;
     outline: 0;
     border: none;
     box-shadow: 2px 2px 10px rgba($dark, .5);
@@ -508,8 +516,7 @@ select {
     width: 25%;
     height: 15%;
     border-radius: 20px;
-    top: 73%;
-    left: 55%;
+    top: 75%;
     outline: 0;
     border: none;
     box-shadow: 2px 2px 10px rgba($dark, .5);

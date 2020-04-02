@@ -13,6 +13,7 @@
 
               <div class="wrapper float-r div-4" >
                 <div class="drop-profile">
+                  <footer class="rect2"></footer>
                   <button class="dropbtn"><b-icon icon="person" font-scale="3"></b-icon></button>        
                   <div class="dropdown-content-profile">
                     <h5 class="contain-showName">Hello, </h5>
@@ -29,7 +30,8 @@
                 <div class="drop-noti">
                   <div v-if="this.notifications.length >= 1" class="notification float-l">
                     {{this.notifications.length}}
-                  </div>
+                  </div>                  
+                  <footer class="rect"></footer>
                   <button class="dropbtn-noti float-l"><b-icon icon="bell" font-scale="2.5"  ></b-icon></button>
                   <div class="dropdown-content-noti">
                     <div v-if="this.notifications.length === 0"><a><center>No notification</center></a></div>
@@ -48,7 +50,6 @@
                       </a><hr>
                     </div>
                   </div>
-                  
                 </div>
               </div>  
           </div>

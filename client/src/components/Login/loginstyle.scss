@@ -203,8 +203,9 @@ button.btnSubmit-login {
 .lds-dual-ring {
     position: absolute;
     display: block;
-    left: 45%;
-    top: 45%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
 }
 .lds-dual-ring:after {
     content: " ";

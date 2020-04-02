@@ -20,62 +20,59 @@
         </div>
         <br>
         <hr>
-        
-        <div class="ratio4P6" >
-        <div id="chat" class="dropdown-content-chat">
-            <div class="dropdown-content-chat-margin">
-                <div id="chatBox" @wheel="wheelie">
-                    <div v-for="(message,index) in messages" :key="index" :ref="'msg-ref-'+index"  class="relative-msg-border">
-                    <div v-if="message.prompt">
-                        <div class="msg-prompt">{{ message.msg }}</div>
-                    </div>
-                    <div v-if="!checkUser(message.uid)" class="msg-border-min">
-                        <button class="user-profile-left"><b-icon icon="person" font-scale="3"  ></b-icon></button>
-                        <!-- <div class="msg-border-left"> -->
-                        <div class="align-left">
-                            <b class="margin-right">{{ message.sender }}</b>
-                            <span><font size="1">{{timeFormat(message.timestamp)}}</font></span>
-                        </div><br>
-                        <div class="msg-box align-left">
-                            <p class="msg-msg">{{message.message }}</p>
-                        </div><br>
-                        <!-- </div> -->
-                    </div>
-                    <div v-else class="msg-border-min">
-                        <button class="user-profile-right"><b-icon icon="person" font-scale="3"  ></b-icon></button>
-                        <!-- <div class="msg-border-right"> -->
-                        <div class="align-right">
-                            <span><font size="1">{{timeFormat(message.timestamp)}}</font></span>
-                            <b class="margin-left">{{ message.sender }}</b>
-                        </div><br>
-                        <div class="msg-box align-right">
-                            <p class="msg-msg">{{message.message }}</p>
-                        </div><br>
-                        <!-- </div> -->
-                    </div>
-                    </div>
+    </div>
+
+    <div id="chat" class="dropdown-content-chat">
+        <div class="dropdown-content-chat-margin">
+            <div id="chatBox" @wheel="wheelie">
+                <div v-for="(message,index) in messages" :key="index" :ref="'msg-ref-'+index"  class="relative-msg-border">
+                <div v-if="message.prompt">
+                    <div class="msg-prompt">{{ message.msg }}</div>
                 </div>
-                
-                <div>
-                    <div class="btn-wrapper">
-                        <button class="msg-send-btn" @click="sendMessage">Send</button>
-                        <button class="go-unread" id="unread-btn" @click="gotoUnread">New messages</button>
-                        <button class="scroll-down" @click="scrollDown"><b-icon icon="chevron-down" font-scale="1"></b-icon></button>
-                        <div class="msg-send-msg" @click="sendMessage">Shift-Enter</div>
-                    </div>
-                    <div class="input-box-msg-wrapper">
-                        <textarea id="input-msg" class="input-box-msg" placeholder="Type a message..." @keyup="inputMsgHandler"></textarea>
-                    </div>
+                <div v-if="!checkUser(message.uid)" class="msg-border-min">
+                    <button class="user-profile-left"><b-icon icon="person" font-scale="3"  ></b-icon></button>
+                    <!-- <div class="msg-border-left"> -->
+                    <div class="align-left">
+                        <b class="margin-right">{{ message.sender }}</b>
+                        <span><font size="1">{{timeFormat(message.timestamp)}}</font></span>
+                    </div><br>
+                    <div class="msg-box align-left">
+                        <p class="msg-msg">{{message.message }}</p>
+                    </div><br>
+                    <!-- </div> -->
+                </div>
+                <div v-else class="msg-border-min">
+                    <button class="user-profile-right"><b-icon icon="person" font-scale="3"  ></b-icon></button>
+                    <!-- <div class="msg-border-right"> -->
+                    <div class="align-right">
+                        <span><font size="1">{{timeFormat(message.timestamp)}}</font></span>
+                        <b class="margin-left">{{ message.sender }}</b>
+                    </div><br>
+                    <div class="msg-box align-right">
+                        <p class="msg-msg">{{message.message }}</p>
+                    </div><br>
+                    <!-- </div> -->
+                </div>
+                </div>
+            </div>
+            
+            <div>
+                <div class="btn-wrapper">
+                    <button class="msg-send-btn" @click="sendMessage">Send</button>
+                    <button class="go-unread" id="unread-btn" @click="gotoUnread">New messages</button>
+                    <button class="scroll-down" @click="scrollDown"><b-icon icon="chevron-down" font-scale="1"></b-icon></button>
+                    <div class="msg-send-msg" @click="sendMessage">Shift-Enter</div>
+                </div>
+                <div class="input-box-msg-wrapper">
+                    <textarea id="input-msg" class="input-box-msg" placeholder="Type a message..." @keyup="inputMsgHandler"></textarea>
                 </div>
             </div>
         </div>
-        </div>
+    </div>
 
-
-        <div id="lds">
-            <div class="lds-wrapper"></div>
-            <div class="lds-dual-ring"></div>
-        </div>
+    <div id="lds">
+        <div class="lds-wrapper"></div>
+        <div class="lds-dual-ring"></div>
     </div>
 </div>
 </template>
