@@ -1,5 +1,7 @@
 <template>
-    <div>
+<div>
+    <div class="navbar-project-container">
+        <title>{{projectName}}</title>
         <div class="wrapper float-l div-1">
             <b-icon  @click="backToHome" id="iconNBP" icon="house" font-scale="3"  ></b-icon>
         </div>
@@ -75,6 +77,7 @@
             <div class="lds-dual-ring"></div>
         </div>
     </div>
+</div>
 </template>
 <script>
 import firebase from "firebase";

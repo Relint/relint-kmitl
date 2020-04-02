@@ -1,25 +1,22 @@
 <template>
     <div>
       <title>Home</title>
-       <navBar/>
-        <!-- <test/>  -->
-        
+      <bg/>
       <createBoard/>
+      <navBar/>
     </div>
 </template>
 <script>
 /* eslint-disable */
 import navBar from '../navBar/navBar'
 import createBoard from '../createBoard/createBoard'
-
-// import test from '../createBoard/test'
-
+import bg from '../bg/bg'
 export default {
-    name: 'addBoardPostit',
-      components: {
-        navBar,
-        createBoard,
-       
-    }
+  name: 'addBoardPostit',
+    components: {
+      navBar,
+      createBoard,
+      bg,
+  }
 }
 </script>

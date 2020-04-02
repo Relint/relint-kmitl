@@ -1,61 +1,59 @@
 <template>
     <div>
-      <div class="navbarLogin">
-              <div class="brand">RELINT</div>
-      </div>
-      <bg/>
+      <div class="navbar-container">
+          <div class="navbarBorder ">
+            <div class="wrapper float-l div-1">
+              <li class="brand">RELINT</li>
+            </div>
 
-      <!-- search -->
-      <div class="container-serach">
-        <div class="content-search">
-            <input type="text" class="input-search" placeholder="Search" v-model="searchText" @keyup='searchTextHandler'>
-            <b-icon class="input_icon" icon="search" font-scale="2" ></b-icon>
-        </div> 
-      </div>
-      <!-- noti -->
-     <div class="contain-noti">
-      <a>
-          <div class="dropdown-noti">
-            <div v-if="this.notifications.length >= 1" class="notification">
-                    {{this.notifications.length}}
+            <div class="wrapper float-l div-2">
+              <input type="text" class="input-search" placeholder="Search" v-model="searchText" @keyup='searchTextHandler'>
+              <b-icon class="input_icon float-r" icon="search" font-scale="2" ></b-icon>
             </div>
-          <button  class="dropbtn-noti"><b-icon icon="bell" font-scale="3"  ></b-icon></button>
-            <div class="dropdown-content-noti">
-              <div v-if="this.notifications.length === 0"><a><center>No notification</center></a></div>
-              <div v-else-if="this.notifications.length === 1"><a><center>1 notification</center></a></div>
-              <div v-else><a><center>{{this.notifications.length}} notifications</center></a></div>
-              <div v-for="noti in notifications" :key="noti.pid">
-                <a>
-                  <div class="contain-relative-btnNoti">
-                      <button @click="inviteAccept(noti.pid)">T</button>
-                    <button @click="inviteDecline(noti.pid)">F</button>
-                    </div>
-                  <h3>{{noti.title}}</h3> 
-                    <p>{{noti.description}}</p>
-                    <p>{{noti.timestamp}}</p>
-                </a>
+
+              <div class="wrapper float-r div-4" >
+                <div class="drop-profile">
+                  <button class="dropbtn"><b-icon icon="person" font-scale="3"></b-icon></button>        
+                  <div class="dropdown-content-profile">
+                    <h5 class="contain-showName">Hello, </h5>
+                    <div class="showName" v-html="username" ></div>
+                    <hr >
+                    <a >Profile</a>
+                    <a  v-on:click="logout">Logout</a>
+                  </div> 
+                </div>
               </div>
-            </div>
-        </div> 
-      </a>  
-    </div>
-        
-    <!-- profile -->
-    <div class="contain-profile">
-      <a><div class="dropdown-profile">
-      <button class="dropbtn"><b-icon icon="person" font-scale="3"  ></b-icon></button>
-          <div class="dropdown-content-profile">
-            <div class="contain-showName"> 
-              <label class="label-showName" >Hello, </label>
-              <span class="showName" v-html="username" ></span>
-            </div>
-            <a >Profile</a>
-            <a  v-on:click="logout">Logout</a>
+
+            
+              <div class="wrapper float-r div-3">
+                <div class="drop-noti">
+                  <div v-if="this.notifications.length >= 1" class="notification float-l">
+                    {{this.notifications.length}}
+                  </div>
+                  <button class="dropbtn-noti float-l"><b-icon icon="bell" font-scale="2.5"  ></b-icon></button>
+                  <div class="dropdown-content-noti">
+                    <div v-if="this.notifications.length === 0"><a><center>No notification</center></a></div>
+                    <div v-else-if="this.notifications.length === 1"><a><center>1 notification</center></a></div>
+                    <div v-else><a><center>{{this.notifications.length}} notifications</center></a></div>
+                    <hr>
+                    <div v-for="noti in notifications" :key="noti.pid">
+                      <a>
+                        <h3>{{noti.title}}</h3> 
+                        <p>{{noti.description}}</p>
+                        <p class="float-l">{{noti.timestamp}}</p><br>
+                        <div class="contain-btnNoti float-r">
+                          <button class="btn-T" @click="inviteAccept(noti.pid)"><b-icon class="center-icon" icon="check" font-scale="1.5"  ></b-icon></button>
+                          <button class="btn-F" @click="inviteDecline(noti.pid)"><b-icon class="center-icon" icon="x" font-scale="1.5"  ></b-icon></button>
+                        </div>
+                      </a><hr>
+                    </div>
+                  </div>
+                  
+                </div>
+              </div>  
           </div>
-      </div></a>  
-    </div>
+      </div>     
   </div>
- 
 </template>
 <script>
 /* eslint-disable */
@@ -63,11 +61,9 @@ import firebase from "firebase"
 import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
 import createBoard from '../createBoard/createBoard'
 import boardPostit from '../boardPostit/boardPostit'
-import bg from '../bg/bg'
 export default {
   name: 'navBar',
   components: {
-    bg,
   },
    data (){
     return {

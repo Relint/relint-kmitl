@@ -1,168 +1,64 @@
 <template>
- <div>
+  <div>
+    <div class="contain-show-project">
+      <div class="form-scroll-createBoard" id="board-scroll"  @click="eventMouseUD" >
+        <div class="from-createBoard">
+          <div v-for="(project,index) in project" :key="project.pid"  > 
+            <div id="container-Board" v-bind:style="{left: (index%2)*250+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
+              <div class="dot two"></div>
+              <div class="face">
+                <div class="eye"></div>
+                <div class="eye right"></div>
+                <div class="mouth happy"></div>
+              </div>
+              <div class="shadow scale"></div>
 
-    
-         
-                 
- <!-- show project -->
-              <div class="contain-show-project">
-                 <div class="form-scroll-createBoard" id="board-scroll"  @click="eventMouseUD" >
-                     <div class="from-createBoard">
-                            <div v-for="(project,index) in project" :key="project.pid"  > 
-                                <div id="container-Board" v-bind:style="{left: (index%2)*250+65+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
- 
-                                      <div class="dot two"></div>
-                                      <div class="face">
-                                        <div class="eye"></div>
-                                        <div class="eye right"></div>
-                                        <div class="mouth happy"></div>
-                                      </div>
-                                      <div class="shadow scale"></div>
-
-                                      <div class="show-message">
-                                          <h1>{{project.title}}</h1>
-                                         <p> {{project.description}}</p><br><br> 
-                                          <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
-                                      </div>
-                                      <button class="button-box" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
-                                      <button class="button-box1" @click="deleteBoard(project.pid)" v-if="project.permission"><p class="green" >delete</p></button>
-                                    </div>
-                       </div>
-                     </div>
-                  </div> 
-                </div>
-
-                <!-- setting -->
-              <div  class="contain-form-setting">
-            <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
-            <div>Data from other components can't be accessed. Event handler implemented</div>    
-                  <div @click="openFormSetting" class="dd-button">+</div>
-                    <div class="dd-menu" id="form-setting"  >
-                      
-                        <div class="parent-setting">
-                            <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s" ><input class="input-box-setting-des" type="text" placeholder="Description" v-model="descriptionIn"></div>
-                            <div class="div3-s" ><input class="input-box-setting-date" type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
-                            <div class="div4-s" > 
-
-                              <!--show-->
-                                 <div class="container-setting" id="style-scroll">
-                                  <div v-for="invite in invites" :key="invite.uid" > 
-                                    <div> 
-                                      <div class="contain-obj-invite">{{ invite.email  }} <br>{{priorityMap[invite.data.priority] }}
-                                      <button class="remove-invite" v-on:click="removeMenber(invite.uid)">remove</button></div>
-                                    </div> 
-                                  </div>  
-                                
-                                  <!--input-->
-                                     <div  id="form-invite" >
-                                      <div >
-                                      <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
-                                          <br>
-                                          <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
-                                            <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
-                                              {{ opt.text }}
-                                            </option>
-                                          </select><br>
-                                          <button  class="btn-invite-ok" v-on:click="addMember">ok</button>
-                                      </div>
-                                    </div> 
-                            </div>
-                        </div> 
-                      </div>
-                        <li>
-                          <button class="btn-setting-accept" @click='createMainBoard' >Create</button>
-                          <button  class="btn-setting-cancel" @click='closeFormSetting'>Cancel</button>
-                        </li>
-                   </div>
-             </div>              
-
-             
-           <!--project setting------------------------------------------------------->
-          
-           <!-- <div>The text in Search box from navbar component shows here: {{searchText}}</div><br>
-            <div>Data from other components can't be accessed. Event handler implemented</div> -->
-              
-            
-                        
-              
-            <!-- <div class="parent-project">
-              <div class="div1-pj">  
-                <label  class="dropdown">
-                  <div @click="openFormSetting" class="dd-button">+</div>
-                    <div class="dd-menu" id="form-setting"  >
-                      
-                        <div class="parent-setting">
-                            <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-                            <div class="div2-s" ><input class="input-box-setting-des" type="text" placeholder="Description" v-model="descriptionIn"></div>
-                            <div class="div3-s" ><input class="input-box-setting-date" type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
-                            <div class="div4-s" > -->
-
-                              <!--show-->
-                                <!-- <div class="container-setting" id="style-scroll">
-                                  <div v-for="invite in invites" :key="invite.uid" > 
-                                    <div> 
-                                      <div class="contain-obj-invite">{{ invite.email  }} <br>{{priorityMap[invite.data.priority] }}
-                                      <button class="remove-invite" v-on:click="removeMenber(invite.uid)">remove</button></div>
-                                    </div> 
-                                  </div>  -->
-                                
-                                  <!--input-->
-                                    <!-- <div  id="form-invite" >
-                                      <div >
-                                      <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
-                                          <br>
-                                          <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
-                                            <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
-                                              {{ opt.text }}
-                                            </option>
-                                          </select><br>
-                                          <button  class="btn-invite-ok" v-on:click="addMember">ok</button>
-                                      </div>
-                                    </div> 
-                            </div>
-                        </div> -->
-                      <!-- </div>container-setting" -->
-<!-- 
-                        <li>
-                          <button class="btn-setting-accept" @click='createMainBoard' >Create</button>
-                          <button  class="btn-setting-cancel" @click='closeFormSetting'>Cancel</button>
-                        </li>
-                         -->
-                    <!-- </div>dd-menu -->
-                    
-                <!-- </label>dropdown                  -->
-                
-              <!-- </div> -->
-              
-            <!-- </div>parent-project------------------------------------------------ -->
-
-                    <!-- <div class="form-scroll-createBoard" id="board-scroll"  @click="eventMouseUD" >
-                     <div class="from-createBoard">
-                            <div v-for="(project,index) in project" :key="project.pid"  > 
-                                <div id="container-Board" v-bind:style="{left: (index%2)*250+65+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
- 
-                                      <div class="dot two"></div>
-                                      <div class="face">
-                                        <div class="eye"></div>
-                                        <div class="eye right"></div>
-                                        <div class="mouth happy"></div>
-                                      </div>
-                                      <div class="shadow scale"></div>
-
-                                      <div class="show-message">
-                                          <h1>{{project.title}}</h1>
-                                         <p> {{project.description}}</p><br><br> 
-                                          <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
-                                      </div>
-                                      <button class="button-box" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
-                                      <button class="button-box1" @click="deleteBoard(project.pid)" v-if="project.permission"><p class="green" >delete</p></button>
-                                    </div>
-                       </div>
-                     </div>
-                  </div>  -->
-       
-  
+              <div class="show-message">
+                  <h1>{{project.title}}</h1>
+                  <p> {{project.description}}</p><br><br> 
+                  <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
+              </div>
+              <button class="button-box" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
+              <button class="button-box1" @click="deleteBoard(project.pid)" v-if="project.permission"><p class="green" >delete</p></button>
+            </div>
+          </div>
+        </div>
+      </div> 
+    </div>
+    <div @click="openFormSetting" class="dd-button"><b-icon class="center-icon" icon="plus" font-scale="5" ></b-icon></div>
+    <div class="dd-menu" id="form-setting"  >
+      <div class="parent-setting">
+        <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
+        <div class="div2-s" ><input class="input-box-setting-des" type="text" placeholder="Description" v-model="descriptionIn"></div>
+        <div class="div3-s" ><input class="input-box-setting-date" type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
+        <div class="div4-s" > 
+        <div class="container-setting" id="style-scroll">
+        <div v-for="invite in invites" :key="invite.uid" > 
+          <div> 
+            <div class="contain-obj-invite">{{ invite.email  }} <br>{{priorityMap[invite.data.priority] }}
+            <button class="remove-invite" v-on:click="removeMenber(invite.uid)">remove</button></div>
+          </div> 
+        </div>  
+          <div  id="form-invite" >
+            <div >
+              <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
+              <br>
+              <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
+                <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
+                  {{ opt.text }}
+                </option>
+              </select><br>
+              <button  class="btn-invite-ok" v-on:click="addMember">ok</button>
+            </div>
+          </div> 
+        </div>
+      </div> 
+    </div>
+      <li>
+        <button class="btn-setting-accept" @click='createMainBoard' >Create</button>
+        <button  class="btn-setting-cancel" @click='closeFormSetting'>Cancel</button>
+      </li>
+    </div>            
   </div>
 </template>
 

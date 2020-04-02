@@ -37,7 +37,7 @@
           <div class="form-register" id='form-register' >
                 <div class="name-register" >R E G I S T E R</div><br>
                 <div id="alert-error" > {{errorMessage}}</div>
-                  <input id="inputUsernameRe" class="inputt-regis" v-model="usernameRE" type="text"  maxlength="15"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
+                  <input id="inputUsernameRe" class="inputt-regis" v-model="usernameRE" type="text"  maxlength="12"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
                 <br>
                   <input id="inputEmailRe" class="inputt-regis" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
                 <br>

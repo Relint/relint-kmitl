@@ -1,7 +1,7 @@
 @import '@/components/Login/mixin.scss';
 $greenSeaweed: rgba(2, 128, 144, 1);
 $blueQueen: rgba(69, 105, 144, 1);
-$redFire: rgba(244, 91, 105, 1);
+$redFire: #f45b69;
 $pinkk :#FFCFD2;
 $orange: #f7a79d;
 $bluesky : #a6d4d8; 
@@ -51,32 +51,6 @@ $secondary: #99DBB4;
   }
 
 
-//scroll bar board
-  .form-scroll-createBoard {
-    position: static;
-    width: 50%;
-    height: 80%;
-    // border-radius: 20px;
-      // background-color: red;
-    overflow-y: scroll;
-    scrollbar-width: thin;
-    left: 50px;
-    top: 30px;
-  }
-  #board-scroll::-webkit-scrollbar
-  { 
-    width: 12px;
-    // background-color:$bluesky;
-    border-radius: 30px;
-    display: none
-  }
-  #board-scroll::-webkit-scrollbar-thumb
-  {
-    border-radius: 30px;
-    background-color: $blueQueen;
-    scrollbar-width: thin;
-    display: none
-  }
 
 //project setting-----------------------------
 .parent-project {
@@ -94,19 +68,13 @@ $secondary: #99DBB4;
  }
 
 //+//-------------------------------------------------------------------
-
-.contain-form-setting {
-  position: absolute;
-  left:70%
-}
-
 .dd-menu {
   position: absolute;
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 15px;
-  margin-top: 150px ;
-  margin-left: -160px;
+  top: 25%;
+  right: 5%;
   box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
   
   background-color: white;
@@ -119,24 +87,27 @@ $secondary: #99DBB4;
   white-space: nowrap;
 }
 .dd-button {
-  text-align: center;
-  display: inline-block;
-  position: fixed ;
-  width: 100px;
-  height: 100px;
-  border-radius: 100px;
+  position: absolute;
+  right: 25%;
+  top: 12.5%;
+  width: 6.75%;
+  padding-top: 6.75%;
+  border-radius: 100%;
   border-style: none;
   background-color: $redFire;
-  font-size: 80px;
   color: white;
-  margin-top: 20px;
   &:hover {
     background: $bluesky;
     transform: scale(1.05);
     transition: all .3s ease-in-out;
   }
 }
-
+.center-icon {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
 //invite//------------------------------------------------------------
   .container-setting {
     width: 210px;
@@ -379,15 +350,13 @@ select {
 
 //scroll bar board
 .form-scroll-createBoard {
-  position: static;
-  width: 50%;
-  height: 80%;
-  // border-radius: 20px;
-   background-color: yellow;
+  width: 90%;
+  height: 85%;
+  margin-left: 5%;
+  margin-top: 5%;
+  //  background-color: yellow;
   overflow-y: scroll;
   scrollbar-width: thin;
-  left: 50px;
-  top: 30px;
 }
 #board-scroll::-webkit-scrollbar
 { 
@@ -420,45 +389,13 @@ select {
   .div3-c { grid-area: 3 / 4 / 7 / 6; }
   .div4-c { grid-area: 8 / 4 / 12 / 6; }
 
-  // .form-container2 {
-  //   position: fixed;
-  //   /*overflow-y: scroll;
-  //   scrollbar-width: thin;
-  //   padding: 20px;*/
-  // }
-  // #list-scroll::-webkit-scrollbar
-  // {
-  //   width: 12px;
-  //   background-color: #F5F5F5;
-  //   border-radius: 30px;
-  // }
-  // #list-scroll::-webkit-scrollbar-thumb
-  // {
-  //   border-radius: 30px;
-  //   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-  //   background-color: #555;
-  // }
-
-  // .projectBoardStyle {
-  //   position: absolute;
-  //   width: 400px;
-  //   height: 200px;
-  //   background-color:yellow;
-  // }
-
-  // .btnProject {
-  //     position: absolute;
-  //   }
-  // .btnProjectDelete {
-  //   position: absolute;
-  //   margin-left: 70px;
-  // }
 .contain-show-project {
   position: absolute;
-  background-color: red;
+  // background-color: rgb(207, 161, 161);
+  left: 0px;
   width: 100%;
-  height: 60%;
-  top:25%
+  height: 100%;
+  // opacity: 0.5;
 }
   #container-Board {
     position: absolute;
@@ -598,567 +535,4 @@ select {
 
 
 
-
-
-
-
-
-
-//ipad  (portrait)
-/* 
-  ##Device = Tablets, Ipads (portrait)
-  ##Screen = B/w 768px to 1024px
-*/
-//ipad
-@media (min-width: 768px) and (max-width: 1024px) {
- 
-//scroll bar board
-.form-scroll-createBoard {
-  position: static;
-  width: 50%;
-  height: 80%;
-  // border-radius: 20px;
-   background-color: blue;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  left: 50px;
-  top: 30px;
-}
-#board-scroll::-webkit-scrollbar
-{ 
-  width: 12px;
-  // background-color:$bluesky;
-  border-radius: 30px;
-  display: none
-}
-#board-scroll::-webkit-scrollbar-thumb
-{
-  border-radius: 30px;
-  background-color: $blueQueen;
-  scrollbar-width: thin;
-  display: none
-  
-}
-//invite//------------------------------------------------------------
-.container-setting {
-  width: 150px;
-  height: 200px;
-  // border-radius: 20px;
-  background-color:white;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  padding: 20px 20px 20px 20px;
-}
-
-  #style-scroll::-webkit-scrollbar
-  {
-    width: 12px;
-    background-color: #F5F5F5;
-    border-radius: 30px;
-    display: none;
-  }
-  #style-scroll::-webkit-scrollbar-thumb
-  {
-    border-radius: 30px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-    display: none;
-  }
-
-
-
-
-//object 
-.contain-obj-invite {
-  position: relative;
-  // text-align: center;
-  width: 160px;
-  height: 50px;
-  background-color: $bluesky;
-  border-radius: 7px;
-  padding-top: 10px;
-  padding-left: 10px;
-  color: white;
-  font-size:15px;
-}
-.remove-invite {
-  position: absolute;
-  background: $orange;
-  font-size: 15px;
-  color: white;
-  width: 40%;
-  height:25px;
-  border-radius: 20px;
-  top: 47%;
-  left: 58%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-.parent-setting {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  width: 100%;
-  // background-color: purple;
-  // padding:  0 0  20px 0;
-  }
-
-.div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
-  // background-color: aquamarine;
-}
-.div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
-  //  background-color:wheat;
-}
-.div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
-  
-  //  background-color: gold; 
-}
-.div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
-  // height: 120%;
-  //  background-color: rgb(21, 192, 214) ; 
-}
-/*.div5-s { grid-area: 2 / 2 / 2 / 3; }
-.div6-s { grid-area: 3 / 2 / 2 / 3; }*/
-
-.input-box-setting-pid {
-  border-radius: 20px;
-  width: 150px;
-  height: 50px;
-  border-radius: 40px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-}
- .input-box-setting-des {
-  border-radius: 20px;
-  width: 150px;
-  height: 100px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 20px 0  0  0 ;
-}
-
-.input-box-setting-inv {
-  border-radius: 20px;
-  width: 130px;
-  height: 50px;
-  border-radius: 40px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  margin: 20px 0  0  10px ;
-  font-size: 15px;
-}
-.btn-invite-ok {
-  position: relative;
-  font-size: 20px;
-  color: white;
-  background: $redFire;
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
-  outline: 0;
-  bottom: -20px;
-  left: 45%;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-  }
-.btn-setting-accept {
-  position: relative;
-  background: $bluesky;
-  font-size: 17px;
-  color: white;
-  width: 25%;
-  height:35px;
-  border-radius: 20px;
-  top: 73%;
-  left: 52%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-.btn-setting-cancel {
-  background: $redFire;
-  color: white;
-  font-size: 17px;
-  width: 25%;
-  height:35px;
-  border-radius: 20px;
-  top: 73%;
-  left: 48%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-// Removes  clear button 
-input[type="date"]::-webkit-clear-button {
-  display: none;
-}
-
-// Removes  spin button 
-input[type="date"]::-webkit-inner-spin-button { 
-  display: none;
-}
-
-// Always display the drop down caret 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  color:$colorFront;
-  font-size: 20px;
-  padding: 0 30px 0 0 ;
- 
-}
-
-// styles  date inputs 
-input[type="date"] {
-  appearance: none;
-  -webkit-appearance: none;
-  padding:5px;
-  display: inline-block !important;
-  visibility: visible !important;
-  border-radius: 30px;
-  width: 150px;
-  height: 50px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 20px 0  0  0 ;
-}
-// style
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-style: none; ;
-  border-radius: 20px;
-  outline: 0;
-  box-shadow: none;
-  background: $redFire;
-  width: 150px;
-  height: 50px;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 20px 0  0  10px ;
-}
-// /* Remove IE arrow 
-select::-ms-expand {
-  display: none;
-}
-
-select {
-  flex: 1;
-  padding: 0 .5em;
-  color: #fff;
-  cursor: pointer;
-}
-
-}
-
-
-
-
-
-///smallllll
-/* 
-  ##Device = Tablets, Ipads (portrait)
-  ##Screen = B/w 768px to 1024px
-*/
-
-@media (min-width: 100px) and (max-width: 767px) {
-  
-//scroll bar board
-.form-scroll-createBoard {
-  position: static;
-  width: 50%;
-  height: 80%;
-  // border-radius: 20px;
-  background-color: palevioletred;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  left: 50px;
-  top: 30px;
-}
-#board-scroll::-webkit-scrollbar
-{ 
-  width: 12px;
-  // background-color:$bluesky;
-  border-radius: 30px;
-  display: none
-}
-#board-scroll::-webkit-scrollbar-thumb
-{
-  border-radius: 30px;
-  background-color: $blueQueen;
-  scrollbar-width: thin;
-  display: none
-  
-}
-//invite//------------------------------------------------------------
-.container-setting {
-  width: 150px;
-  height: 200px;
-  // border-radius: 20px;
-  background-color:white;
-  overflow-y: scroll;
-  scrollbar-width: thin;
-  padding: 20px 20px 20px 20px;
-}
-
-  #style-scroll::-webkit-scrollbar
-  {
-    width: 12px;
-    background-color: #F5F5F5;
-    border-radius: 30px;
-    display: none;
-  }
-  #style-scroll::-webkit-scrollbar-thumb
-  {
-    border-radius: 30px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
-    background-color: #555;
-    display: none;
-  }
-
-//object 
-.contain-obj-invite {
-  position: relative;
-  // text-align: center;
-  width: 160px;
-  height: 50px;
-  background-color: $bluesky;
-  border-radius: 7px;
-  padding-top: 10px;
-  padding-left: 10px;
-  color: white;
-  font-size:15px;
-}
-.remove-invite {
-  position: absolute;
-  background: $orange;
-  font-size: 15px;
-  color: white;
-  width: 40%;
-  height:25px;
-  border-radius: 20px;
-  top: 47%;
-  left: 58%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-.parent-setting {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-column-gap: 0px;
-  grid-row-gap: 0px;
-  width: 100%;
-  // background-color: purple;
-  // padding:  0 0  20px 0;
-  }
-
-.div1-s { grid-area: 1 / 1 / 1 / 2; width: 100%;
-  // background-color: aquamarine;
-}
-.div2-s { grid-area: 2 / 1 / 2 / 1; width: 100%;
-  //  background-color:wheat;
-}
-.div3-s { grid-area: 3 / 1 / 3 / 2;width: 100%;
-  
-  //  background-color: gold; 
-}
-.div4-s { grid-area: 1 / 2 / 3 / 2 ;width: 100%;
-  // height: 120%;
-  //  background-color: rgb(21, 192, 214) ; 
-}
-/*.div5-s { grid-area: 2 / 2 / 2 / 3; }
-.div6-s { grid-area: 3 / 2 / 2 / 3; }*/
-
-.input-box-setting-pid {
-  border-radius: 20px;
-  width: 150px;
-  height: 50px;
-  border-radius: 40px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-}
- .input-box-setting-des {
-  border-radius: 20px;
-  width: 150px;
-  height: 100px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 20px 0  0  0 ;
-}
-
-.input-box-setting-inv {
-  border-radius: 20px;
-  width: 130px;
-  height: 50px;
-  border-radius: 40px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  margin: 20px 0  0  10px ;
-  font-size: 15px;
-}
-.btn-invite-ok {
-  position: relative;
-  font-size: 20px;
-  color: white;
-  background: $redFire;
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
-  outline: 0;
-  bottom: -20px;
-  left: 45%;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-  }
-.btn-setting-accept {
-  position: relative;
-  background: $bluesky;
-  font-size: 17px;
-  color: white;
-  width: 25%;
-  height:35px;
-  border-radius: 20px;
-  top: 73%;
-  left: 52%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-.btn-setting-cancel {
-  background: $redFire;
-  color: white;
-  font-size: 17px;
-  width: 25%;
-  height:35px;
-  border-radius: 20px;
-  top: 73%;
-  left: 48%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-// Removes  clear button 
-input[type="date"]::-webkit-clear-button {
-  display: none;
-}
-
-// Removes  spin button 
-input[type="date"]::-webkit-inner-spin-button { 
-  display: none;
-}
-
-// Always display the drop down caret 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  color:$colorFront;
-  font-size: 20px;
-  padding: 0 30px 0 0 ;
- 
-}
-
-// styles  date inputs 
-input[type="date"] {
-  appearance: none;
-  -webkit-appearance: none;
-  padding:5px;
-  display: inline-block !important;
-  visibility: visible !important;
-  border-radius: 30px;
-  width: 150px;
-  height: 50px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 20px 0  0  0 ;
-}
-// style
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  -webkit-border-radius: 20px;
-  -moz-border-radius: 20px;
-  border-style: none; ;
-  border-radius: 20px;
-  outline: 0;
-  box-shadow: none;
-  background: $redFire;
-  width: 150px;
-  height: 50px;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 20px 0  0  10px ;
-}
-// /* Remove IE arrow 
-select::-ms-expand {
-  display: none;
-}
-
-select {
-  flex: 1;
-  padding: 0 .5em;
-  color: #fff;
-  cursor: pointer;
-}
-
-
-}
 
