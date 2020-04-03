@@ -4,6 +4,7 @@
         <boardPostit/>
         <navBar/>
         <navBarProject/>
+       
     </div>
 </template>
 <script>
