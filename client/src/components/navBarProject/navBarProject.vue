@@ -186,7 +186,7 @@ export default {
         }
     },
     openFormMa () {
-        console.log('openFormMa')
+        // console.log('openFormMa')
     },
 
     sendMessage() {

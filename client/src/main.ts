@@ -6,8 +6,6 @@ import './registerServiceWorker'
 import router from './router'
 import store from './store'
 import {firebaseConfig} from './_config_ci/firebaseKey'
-
-import '@/assets/bglogin.png'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
 require("firebase/firestore");
 
