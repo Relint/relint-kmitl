@@ -23,19 +23,33 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-color: rgb(255, 0, 200);
-  margin: 5%;
+  margin-right: 1%;
+  margin-left: 1%;
+  margin-top: 1%;
   overflow: auto;
+  height: 100px;
+  
+  
 }
 
 .box1 {
   grid-area: 1 / 1 / 2 / 2;
   overflow: auto;
-  max-height: 200px;
+  height: 450px;
+  /* padding-top:20px */
+  
 }
 /* .box2 {
   grid-area: 2 / 1 / 3 / 2;
   overflow: auto;
 } */
+.userCotainer-parent {
+  height: 450px;
+  margin: 3%;
+  /* padding-top: 15px; */
+  /* margin-bottom: 15px; */
+}
+
 </style>
 
 <script>

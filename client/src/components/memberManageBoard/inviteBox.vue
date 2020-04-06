@@ -28,10 +28,12 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-color: peru;
+  
 }
 
 .textBox {
   grid-area: 1 / 1 / 2 / 2;
+  height: 110px;
 }
 .bottom {
   grid-area: 2 / 1 / 3 / 2;
@@ -41,6 +43,8 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-color: red;
+  height: 110px;
+  
 }
 .setPriority {
   grid-area: 1 / 1 / 2 / 2;

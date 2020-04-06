@@ -19,7 +19,7 @@
   background-color: darkblue;
   /* margin: 5%; */
   /* max-height: 700px; */
-   height: 100%;
+   height: 500px;
    width: 100%;
 }
 
@@ -32,7 +32,7 @@
   grid-area: 2 / 1 / 3 / 2;
   max-height: 200px;
   width: 100%;
-  height: 100%;
+  /* height: 260px; */
 
 }
 </style>
