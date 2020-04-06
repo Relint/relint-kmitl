@@ -17,52 +17,24 @@
           {{deadline}}
         </div>
       </div>
+      
       <div class="wrapper float-r div-5">
-        <!-- member -->
-        <div class="div5">
-          <div class="contain-prof-relative">
-            <a>
-              <div class="dropdown">
-                <button class="dropbtn">
-                  <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon>
-                </button>
-                <div class="dropdown-content">
-                  <div class="stage-parent">
-                    <div class="stage-left">
-                      <taskZone />
-                    </div>
-                    <div class="stage-right">
-                      <userZone />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
-        <!-- member -->
-        <div class="div5">
-          <div class="contain-prof-relative">
-            <a>
-              <div class="dropdown">
-                <button class="dropbtn">
-                  <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon>
-                </button>
-                <div class="dropdown-content">
-                  <div class="stage-parent">
-                    <div class="stage-left">
-                      <taskZone />
-                    </div>
-                    <div class="stage-right">
-                      <userZone />
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
-        </div>
+        <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon>
+      
       </div>
+     
+     <div id="manage">
+       <div class="stage-parent">
+                    <div class="stage-left">
+                      <taskZone />
+                    </div>
+                    <div class="stage-right">
+                      <userZone />
+                    </div>
+                  </div>
+      </div>
+                  
+      
       <div class="wrapper float-r div-4">
         <b-icon font-scale="3" id="iconNBP" icon="chat-fill" @click="openFormChat"></b-icon>
         <div class="float-l">{{unreadIndex.length + leftUnread}}</div>
@@ -70,7 +42,7 @@
       <br />
       <hr />
     </div>
-
+ 
     <div id="chat" class="dropdown-content-chat">
       <div class="dropdown-content-chat-margin">
         <div id="chatBox" @wheel="wheelie">
@@ -147,6 +119,7 @@
       <div class="lds-wrapper"></div>
       <div class="lds-dual-ring"></div>
     </div>
+    
   </div>
 </template>
 <script>
@@ -265,6 +238,7 @@ export default {
   mounted() {
     document.getElementById("chat").style.display = "none";
     document.getElementById("lds").style.display = "block";
+    document.getElementById("manage").style.display = "none"
     new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
       document.getElementById("lds").style.display = "none";
     });
@@ -289,6 +263,12 @@ export default {
       }
     },
     openFormMa() {
+      if (document.getElementById("manage").style.display === "none") {
+        document.getElementById("manage").style.display = "block";
+      }
+      else {
+        document.getElementById("manage").style.display = "none"
+      }
       // console.log('openFormMa')
     },
 

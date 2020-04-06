@@ -18,7 +18,7 @@
   grid-row-gap: 0px;
   background-color: darkblue;
   margin: 5%;
-  max-height: 320px;
+  max-height: 700px;
 }
 
 .member-top {
