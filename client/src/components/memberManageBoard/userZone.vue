@@ -17,16 +17,23 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-color: darkblue;
-  margin: 5%;
-  max-height: 700px;
+  /* margin: 5%; */
+  /* max-height: 700px; */
+   height: 100%;
+   width: 100%;
 }
 
 .member-top {
   grid-area: 1 / 1 / 2 / 2;
+  width: 100%;
+  height: 100%;
 }
 .invite-bot {
   grid-area: 2 / 1 / 3 / 2;
   max-height: 200px;
+  width: 100%;
+  height: 100%;
+
 }
 </style>
 
@@ -63,6 +70,26 @@ export default {
           priority: "Member"
         },
         {
+          userName: "Jate",
+          priority: "Member"
+        },
+         {
+          userName: "Jate",
+          priority: "Member"
+        },
+         {
+          userName: "Jate",
+          priority: "Member"
+        },
+         {
+          userName: "Jate",
+          priority: "Member"
+        },
+         {
+          userName: "Jate",
+          priority: "Member"
+        },
+         {
           userName: "Jate",
           priority: "Member"
         }

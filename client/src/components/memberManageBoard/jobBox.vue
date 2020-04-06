@@ -17,6 +17,8 @@
   grid-row-gap: 0px;
   background-color: gold;
   margin: 5%;
+  width: 322px;
+  height: 70px;
 }
 
 .checkBox {

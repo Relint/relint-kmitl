@@ -2,7 +2,7 @@
   <div class="task-parent">
     <div class="user1">
       <div v-for="(member,index) in members" :key="index">
-        <div class="slide-horizontal" v-bind:style="{left:10+(index)*150+(index)*30 + 'px', }">
+        <div class="slide-horizontal" v-bind:style="{left:90+(index)*500+(index)*30 + 'px',top:40+'px' }">
           <!-- {{member.userName}} -->
           <div id="aUser">
             <taskList :uName="member.userName" :prior="member.priority" :jobs="member.jobs" />
@@ -22,7 +22,7 @@
   grid-row-gap: 0px;
   background-color: chocolate;
   margin: 5%;
-  max-height: 300px;
+  /* height: 300px; */
   position: relative;
 }
 
@@ -157,6 +157,110 @@ export default {
             {
               jobName: "Plaing CSGO",
               date: "25/03/2020"
+            }
+          ]
+        },
+        {
+          userName: "Jate",
+          priority: "Member",
+          jobs: [
+            {
+              jobName: "Angry",
+              date: "32/13/2000"
+            },
+            {
+              jobName: "Shout",
+              date: "42/46/2484"
+            },
+            {
+              jobName: "Watching YouTube",
+              date: "01/01/2020"
+            },
+            {
+              jobName: "Make a gun",
+              date: "25/03/2020"
+            },
+            {
+              jobName: "Kill Pun",
+              date: "30/04/2020"
+            }
+          ]
+        },
+        {
+          userName: "Jate",
+          priority: "Member",
+          jobs: [
+            {
+              jobName: "Angry",
+              date: "32/13/2000"
+            },
+            {
+              jobName: "Shout",
+              date: "42/46/2484"
+            },
+            {
+              jobName: "Watching YouTube",
+              date: "01/01/2020"
+            },
+            {
+              jobName: "Make a gun",
+              date: "25/03/2020"
+            },
+            {
+              jobName: "Kill Pun",
+              date: "30/04/2020"
+            }
+          ]
+        },
+        {
+          userName: "Jate",
+          priority: "Member",
+          jobs: [
+            {
+              jobName: "Angry",
+              date: "32/13/2000"
+            },
+            {
+              jobName: "Shout",
+              date: "42/46/2484"
+            },
+            {
+              jobName: "Watching YouTube",
+              date: "01/01/2020"
+            },
+            {
+              jobName: "Make a gun",
+              date: "25/03/2020"
+            },
+            {
+              jobName: "Kill Pun",
+              date: "30/04/2020"
+            }
+          ]
+        },
+        {
+          userName: "Jate",
+          priority: "Member",
+          jobs: [
+            {
+              jobName: "Angry",
+              date: "32/13/2000"
+            },
+            {
+              jobName: "Shout",
+              date: "42/46/2484"
+            },
+            {
+              jobName: "Watching YouTube",
+              date: "01/01/2020"
+            },
+            {
+              jobName: "Make a gun",
+              date: "25/03/2020"
+            },
+            {
+              jobName: "Kill Pun",
+              date: "30/04/2020"
             }
           ]
         },

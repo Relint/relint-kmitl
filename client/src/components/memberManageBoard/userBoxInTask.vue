@@ -18,6 +18,7 @@
   grid-row-gap: 0px;
   background-color: darkgreen;
   margin: 5%;
+  height: 100px;
 }
 
 .top {

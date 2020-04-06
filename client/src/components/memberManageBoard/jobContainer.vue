@@ -19,13 +19,13 @@
   grid-row-gap: 0px;
   background-color: grey;
   margin: 5%;
-  max-height: 150px;
+  height: 400px;
   overflow: auto;
 }
 
 .job1 {
   grid-area: 1 / 1 / 2 / 2;
-  max-height: 150px;
+  /* height: 550px; */
   overflow: auto;
 }
 /* .job2 {

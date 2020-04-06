@@ -1,5 +1,6 @@
 <template>
-  <div class="list-parent" v-bind:style="{left:index*130+'px'}">
+<!-- v-bind:style="{left:index*130+'px'}" -->
+  <div class="list-parent" >
     <!-- top 1 bot 3 -->
     <div class="userBox">
       <!-- {{uName}} -->
@@ -17,14 +18,14 @@
 .list-parent {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: 1fr 3fr;
+  grid-template-rows: 1fr 4fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-color: blueviolet;
   margin: 5%;
-  max-height: 285px;
-  position: relative;
-  min-width: 170px;
+  height: 600px;
+  position: absolute;
+  width: 400px;
 }
 
 .userBox {
