@@ -1,14 +1,14 @@
-@import '@/components/Login/mixin.scss';
+@import "@/components/Login/mixin.scss";
 $greenSeaweed: rgba(2, 128, 144, 1);
 $blueQueen: rgba(69, 105, 144, 1);
 $redFire: rgba(244, 91, 105, 1);
-$orange : #f7a79d;
-$bluesky : #a6d4d8;
-$fontAsap: 'Asap', sans-serif;
+$orange: #f7a79d;
+$bluesky: #a6d4d8;
+$fontAsap: "Asap", sans-serif;
 
 .contain-boardPostit {
   position: absolute;
-  background-color:$blueQueen;
+  background-color: $blueQueen;
   left: 0px;
   width: 100%;
   height: 100%;
@@ -21,24 +21,21 @@ $fontAsap: 'Asap', sans-serif;
   height: 80%;
   margin-left: 5%;
   margin-top: 130px;
-   background-color: yellow;
+  background-color: yellow;
   overflow-y: scroll;
   scrollbar-width: thin;
 }
-#postit-scroll::-webkit-scrollbar
-{ 
+#postit-scroll::-webkit-scrollbar {
   width: 12px;
   // background-color:$bluesky;
   border-radius: 30px;
   // display: none
 }
-#postit-scroll::-webkit-scrollbar-thumb
-{
+#postit-scroll::-webkit-scrollbar-thumb {
   border-radius: 30px;
   background-color: $blueQueen;
   scrollbar-width: thin;
   // display: none
-  
 }
 
 .from-boardPostit {
@@ -46,15 +43,13 @@ $fontAsap: 'Asap', sans-serif;
   padding: 30px;
 }
 
-
-
 // .board-postit-container {
 //   position: absolute;
 //   // background-color:green;
 //   width: 100%;
 //   height: 100%;
 //   opacity: 0.5;
-  
+
 // }
 
 // .wrapper{
@@ -85,16 +80,19 @@ $fontAsap: 'Asap', sans-serif;
 }
 .form-postit {
   position: absolute;
-  width:350px;
+  width: 350px;
   height: 50px;
   background-color: red;
-  
 }
-
 
 .next-postit {
   position: absolute;
 }
 .form-next-input-postit {
   position: absolute;
+}
+
+.aCard {
+  margin-top: 500px;
+  max-width: 300px;
 }
