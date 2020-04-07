@@ -6,6 +6,13 @@ $orange: #f7a79d;
 $bluesky: #a6d4d8;
 $fontAsap: "Asap", sans-serif;
 
+
+
+
+
+
+
+
 .contain-boardPostit {
   position: absolute;
   background-color: $blueQueen;
@@ -43,56 +50,74 @@ $fontAsap: "Asap", sans-serif;
   padding: 30px;
 }
 
-// .board-postit-container {
-//   position: absolute;
-//   // background-color:green;
-//   width: 100%;
-//   height: 100%;
-//   opacity: 0.5;
-
-// }
-
-// .wrapper{
-//   margin-top:150px;
-//   // top: 50%;
-// }
-
-// .float-l{
-//   float: left;
-// }
-// .float-r{
-//   float: right;
-// }
-// .div-1{
-//   background-color: yellow;
-//   opacity: 0.5;
-// }
-// .input-postit {
-
-// }
-.add-postit-begin {
-  position: absolute;
-  left: 100px;
-}
-
-.show-postit {
+// form-postit
+.form-input-postit {
   position: absolute;
 }
-.form-postit {
+.input-postit {
+  width: 250px;
+  height: 50px;
+  padding-left:20px;
+  padding-right: 20px;
+  border-style: none;
+  border-radius: 20px;
+}
+.btn-create-postit {
+  z-index: 1;
+  width: 20%;
+  padding-top: 20%;
+  border-radius: 100%;
+  background-color: $redFire;
+  color: white;
+  position: relative;
+  left: 250px;
+  top:-55px;
+  &:hover {
+    background: $bluesky;
+    transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.center-icon {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.form-show-postit {
+  // z-index: 2;
   position: absolute;
   width: 350px;
   height: 50px;
-  background-color: red;
+  background-color: $bluesky;
 }
 
-.next-postit {
+.wrapper {
+  // margin-top: 15px;
   position: absolute;
+  background-color:red;
+  height: 100%;
 }
-.form-next-input-postit {
+
+.float-l {
+  float: left;
+}
+.float-r {
+  float: right;
+}
+.div-1 {
+}
+.div-2 {
+  padding-right: 10%;
+  background-color:red;
+  width: 100%;
+  height: 100%;
+}
+.form-edit-postit {
   position: absolute;
 }
 
 .aCard {
-  margin-top: 500px;
-  max-width: 300px;
+  position: absolute;
 }
+
