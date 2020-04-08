@@ -4,46 +4,61 @@
       <div class="form-scroll-postit" id="postit-scroll">
         <div class="from-boardPostit">
          
-            <div v-for="(postit , index) in postits" :key="postit.postId" ref="postId">
-              <div class="form-show-postit" v-bind:style="{left: 10+(index)*350+(index)*30 + 'px',top:50+'px'  }">
-                    {{postit.title}}
-                    <button @click="editPostit(index)"   >...</button>
-                    <button @click="deletePostit(postit.postId)">delete</button><br/>
-                    <button @click="openFormCard(index)">add card</button>
-              </div>
+            <div v-for="(postit , index) in postits" :key="'pt-'+index" :ref="'psti'"  class="contain-show-postit" v-bind:style="{left:10+(index)*350+(index)*30 + 'px',top:0+'px'  }">
+            <!-- v-bind:style="{left:10+(index)*350+(index)*30 + 'px',top:50+'px'  } -->
                 
-              <div v-if="postits.length>0">
-                  <div class="form-input-postit" v-bind:style="{left:(postits.length)*350+(postits.length)*30 + 'px',top:50+'px'  }">
+              <div v-if="postit.createBox">
+                  <div class="form-input-postit">
                     <input class="input-postit" type="text" placeholder="add post-it" v-model="postitIn">
                     <div @click="createPostit(postit.postId)" class="btn-create-postit"><b-icon class="center-icon" icon="plus" font-scale="3" ></b-icon></div>
                     <!-- <button @click="createPostit2" >test</button> -->
                   </div>
               </div>
-              <div  ref="edit" class="form-edit-postit" id="form-edit-postit"  v-bind:style="{left: 10+(index)*350+(index)*30 + 'px',top:100+'px'  }">
+              <div v-else>
+                <div class="form-show-postit">
+                  <div ref="epsti" style="display:none">
+                    <input type="text" v-model="postitInEdit"> 
+                    <button @click="saveEditPostit(index)"><b-icon icon="check" id="mov-l" font-scale='1'></b-icon></button>
+                    <button @click="closeFormEditPostit(index)"><b-icon icon="x" id="mov-r" font-scale='1'></b-icon></button>
+                  </div>
+                  <div ref="npsti">
+                  <div class="show-postit-title" @click="editPostit(index)">{{postit.title}} </div>
+                  <button class="btn-move" v-if="index!=0" @click="movLeft(index)"><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1'></b-icon></button>
+                  <button class="disabled" v-else><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1'></b-icon></button>
+                  <button class="btn-move" v-if="index<postits.length-2" @click="movRight(index)"><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1'></b-icon></button>
+                  <button class="disabled" v-else><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1'></b-icon></button>
+                  <button @click="deletePostit(index)"><b-icon icon="x" font-scale="1"></b-icon></button><br/>
+                  </div>
+                </div>
+                <button class="btn-add-card" @click="toggleFormCard(index)">add card</button>
+                <div id="postit-scroll" class="contain-show-card">
+                  <div  v-for="(card , index2) in postit.card" :key="'kc'+index+'-'+index2" :ref="'rc'+index" >
+                    <div ref="card" class="from-card" id="form-card" >
+                      {{card.title}}<br/>{{card.status}}<br/>{{card.description}}<br/>{{analysisTime(card.duedate,true)+' '+ timeFormat(card.duedate)}}<br/>{{card.difficulty}}
+                      <button @click="removeCard(index,index2)">remove</button>
+                      <button >edit</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- <div  ref="edit" class="form-edit-postit" id="form-edit-postit"  v-bind:style="{left: 10+(index)*350+(index)*30 + 'px',top:100+'px'  }">
                 <input class="input-edit-postit" type="text" placeholder="add post-it" v-model="postitInEdit">
-                <button >save</button>
-                <button>cancel</button>
-              </div>
-              <div ref="settingCard" class="setting-card">
-                <button @click="createCard(index)">create</button>
-                <button @click="closeFormSettingCard(index)">cancel</button>
-              </div>
+                <button @click="saveEditPostit(postit.title)" >save</button>
+                <button @click="closeFormEditPostit">cancel</button>
+              </div> -->
+
             </div>
-            <div class="form-input-postit" id="form-input-postit" >
+
+            <!-- <div  class="form-input-postit" id="form-input-postit" >
                 <input class="input-postit" type="text" placeholder="add post-it" v-model="postitIn">
                 <div @click="createPostit" class="btn-create-postit"><b-icon class="center-icon" icon="plus" font-scale="3" ></b-icon></div>
-            </div>
+            </div> -->
              
-            <div v-for="(card , index) in cards" :key="card.cid" ref="cid">
-              <div ref="card" class="from-card" id="form-card" v-bind:style="{ top:120+(index)*80+'px'  }">
-                  {{card.cardName}} <br/>
-                  {{card.date}} <br/>
-                 vote : {{card.star}}<br/>
-                <button @click="removeCard(card.cid)">remove</button>
-                <button >edit</button>
-              </div>
-              
-          </div>
+        </div>
+        <div v-for="(postit,i) in postits" :key="'fc'+i" :ref="'fc'" class="setting-card center-icon">
+          <h1>{{i}}</h1>
+          <button @click="createCard(i)">create</button>
+          <button @click="closeFormCard(i)">cancel</button>
         </div>
       </div>
     </div>
@@ -64,56 +79,54 @@ export default {
   },
   data() {
     return {
+      pid:'',
       postitIn:'',
       postitInEdit:'',
       postits:[],
       cards:[],
-      temp0:[
-        {
-          pid:'P1',
-          postId:'Po1',
-          title:'test1',
-        },
-        {
-          pid:'P1',
-          postId:'Po2',
-          title:'test2',
-        },
-        {
-          pid:'P1',
-          postId:'Po3',
-          title:'test3',
-        },
-        {
-          pid:'P1',
-          postId:'Po4',
-          title:'test4',
-        },
-        {
-          pid:'P1',
-          postId:'Po5',
-          title:'test5',
-        }
-      ],
+      temp0:[],
       temp1:[
         {
-          cid:'C1',
-          cardName:'card1',
-          date: '22/05/2020',
-          star: 4
+          title:'test1',
+          card:[]
         },
-         {
-          cid:'C2',
-          cardName:'card2',
-          date: '25/05/2020',
-          star: 3
+        { 
+          title:'test2',
+          card:[{description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date('5-20-20')) ,
+                  status:"complete",title:'card1'}],
         },
-         {
-           cid:'C3',
-          cardName:'card3',
-          date: '29/05/2020',
-          star: 3
+        {
+          title:'test3',
+          card:[{description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card1'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card2'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card3'},
+               ],
         },
+        {
+          title:'test4',
+          card:[{description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card1'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card2'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card3'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card4'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card5'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card6'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card7'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card8'},
+                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
+                  status:"complete",title:'card9'},
+               ],
+        }
       ]
     };
   },
@@ -134,24 +147,46 @@ export default {
             }
           });
         })
+
+
+      new Promise(resolve=>setTimeout(resolve,50)).then(()=>{      
+        this.postits = this.temp1
+        this.postits.push({createBox:true,card:[]})
+        // console.log(this.postits)
+      })
     },
   mounted () {
-    // document.getElementById('form-edit-postit').style.display='none'
+    this.pid = this.$store.state.pid
+    document.addEventListener('keyup',this.keyupCallback)
   },
   methods: {
-    removeCard(cid) {
-      this.cards = this.cards.filter(card => {
-         return card.cid !== cid
-         })
+    swap(list, iA, iB){
+      list[iA] = list.splice(iB, 1, list[iA])[0];
+      return list;
     },
-    openFormCard(index) {
-       if (this.$refs.settingCard[index].style.display==='block'){
-        this.$refs.settingCard[index].style.display='none'
-      }
-      else {
-        this.$refs.settingCard[index].style.display='block'
-      }
-      
+    movLeft (index) {
+      this.postits= this.swap(this.postits,index,index-1)
+    },
+    movRight (index) {
+      this.postits= this.swap(this.postits,index,index+1)
+    },
+    removeCard(index,index2) {
+      this.postits[index].card = this.postits[index].card.filter((ele,i) => {
+        return i !== index2
+      })
+    },
+    toggleFormCard(index) {
+      this.$refs.fc[index].classList.toggle('show')
+      this.$refs.fc.forEach((ele,i)=>{
+        if(i !== index){
+          ele.classList.remove('show')
+        }
+      })
+    },
+    closeFormCard(index) {
+      this.$refs.fc.forEach((ele,i)=>{
+        ele.classList.remove('show')
+      })
     },
     createCard (index) {
       this.cards=[]
@@ -160,33 +195,107 @@ export default {
       });
       this.$refs.settingCard[index].style.display='none'
     },
-    closeFormSettingCard (index) {
-       this.$refs.settingCard[index].style.display='none'
-    },
-    deletePostit (postId) {
-       this.postits = this.postits.filter(postit => {
-         return postit.postId !== postId
+    deletePostit (index) {
+       this.postits = this.postits.filter((ele,i) => {
+         return i !== index 
          })
+        //  if (length==1){
+        //    document.getElementById('form-input-postit').style.display='block'
+        //    this.cards=[]
+        //  }
     },
     editPostit (index) {
-      if (this.$refs.edit[index].style.display==='block'){
-        this.$refs.edit[index].style.display='none'
-      }
-      else {
-        this.$refs.edit[index].style.display='block'
-      }
+      this.$refs.epsti.forEach((ele,i)=>{
+        if(i===index){
+          ele.style.display='block'
+        } else {
+          ele.style.display='none'
+        }
+      })
+      this.$refs.npsti.forEach((ele,i)=>{
+        if(i===index){
+          ele.style.display='none'
+        } else {
+          ele.style.display='block'
+        }
+      })
       
+    },
+    saveEditPostit (index) {
+      this.postits[index].title = this.postitInEdit
+      this.postits.push(null)
+      this.postits.pop()
+      this.closeFormEditPostit(index)
+    },
+    closeFormEditPostit (index) {
+        this.$refs.epsti.forEach((ele,i)=>{
+        if(i===index){
+          ele.style.display='none'
+        } 
+      })
+      this.$refs.npsti.forEach((ele,i)=>{
+        if(i===index){
+          ele.style.display='block'
+        } 
+      })  
+      this.postitInEdit=''
     },
     // createPostit2 () {
     //   this.postits.push(this.postitIn)
     // },
     createPostit () {
-      this.postits=[]
-      this.temp0.forEach(element => {
-        this.postits.push(element)
-      });
-      document.getElementById('form-input-postit').style.display='none'
-    }
+      
+      // document.getElementById('form-input-postit').style.display='none'
+    },
+     timeFormat(n) {
+      const time = n.toDate()
+      const hours =
+        time.getHours() < 10 ? "0" + time.getHours() : time.getHours()
+      const minutes =
+        time.getMinutes() < 10 ? "0" + time.getMinutes() : time.getMinutes()
+      return hours + ":" + minutes
+    },
+    analysisTime(timestamp,n=false){
+      const time = timestamp.toDate()
+      const now = new Date()
+      const yy = time.getFullYear()
+      const mm = time.getMonth()
+      const dd = time.getDate()
+      const ny = now.getFullYear()
+      const nm = now.getMonth()
+      const nd = now.getDate()
+      if(yy === ny && mm === nm && dd === nd){
+        if(n){
+          return 'Today'
+        } else {
+          return this.timeFormat(timestamp)
+        }
+      } else if(yy === ny && mm === nm && nd - dd === 1){
+        return 'Yesterday'
+      } else if(yy === ny) {
+        if(n){
+          return time.toString().substring(4,8) + ' ' + dd + '(' + time.toString().substring(0,3) + ')'
+        } else {
+          return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
+        }
+      } else {
+        return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
+      }
+    },
+    keyupCallback(e){
+      e = e || window.event
+      // console.log(e.keyCode)
+      this.$refs.epsti.forEach((ele,i)=>{
+        if(ele.style.display === 'block'){
+          if(e.keyCode === 27){ //esc
+            this.closeFormEditPostit(i)
+          }
+          if(e.keyCode === 13){ //enter
+            this.saveEditPostit(i)
+          }
+        }
+      })
+    },
   }
 }
 </script>
