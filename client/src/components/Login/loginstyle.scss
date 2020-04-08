@@ -46,6 +46,7 @@ $secondary: #99DBB4;
   text-align: center;
   padding: 14px 16px;
   text-decoration: none;
+  cursor: pointer;
 }
 
 .btnsignIn {
@@ -315,4 +316,18 @@ button.btnSubmit-login {
 }
 .div-4-BG-ball {
   background-color:$orange;
+}
+
+.outline-n{
+  outline: none;
+}
+
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
 }

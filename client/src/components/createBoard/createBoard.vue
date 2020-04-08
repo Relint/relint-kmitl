@@ -3,8 +3,9 @@
     <div class="contain-show-project">
       <div class="form-scroll-createBoard" id="board-scroll"  @click="eventMouseUD" >
         <div class="from-createBoard">
-          <div v-for="(project,index) in project" :key="project.pid"  > 
+          <div v-for="(project,index) in projects" :key="project.pid"  > 
             <div id="container-Board" v-bind:style="{left: (index%2)*250+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
+              <p class="pid-show">{{project.pid}}</p>
               <div class="dot two"></div>
               <div class="face">
                 <div class="eye"></div>
@@ -15,22 +16,22 @@
 
               <div class="show-message">
                   <h1>{{project.title}}</h1>
-                  <p> {{project.description}}</p><br><br> 
-                  <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br>
+                  <p> {{project.description}}</p><br class="noselect"> 
+                  <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br class="noselect">
               </div>
               <div  v-if="project.permission">
-                <button class="button-box left" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
-                <button class="button-box1 right" @click="deleteBoard(project.pid)"><p class="green" >delete</p></button>
+                <button class="button-box left" @click="goBoardPostit(project.pid)"><p class="green noselect" >join</p></button>
+                <button class="button-box1 right" @click="deleteBoard(project.pid)"><p class="green noselect" >delete</p></button>
               </div>
               <div v-else>
-                <button class="button-box center" @click="goBoardPostit(project.pid)"><p class="green" >join</p></button>
+                <button class="button-box center" @click="goBoardPostit(project.pid)"><p class="green noselect" >join</p></button>
               </div>
             </div>
           </div>
         </div>
       </div> 
     </div>
-    <div @click="openFormSetting" class="dd-button"><b-icon class="center-icon" icon="plus" font-scale="5" ></b-icon></div>
+    <div @click="openFormSetting" class="dd-button noselect"><a class="center-icon">+</a></div>
     <div class="dd-menu" id="form-setting"  >
       <div class="parent-setting">
         <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
@@ -47,21 +48,21 @@
           <div  id="form-invite" >
             <div >
               <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
-              <br>
+              <br class="noselect">
               <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
                 <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
                   {{ opt.text }}
                 </option>
-              </select><br>
-              <button  class="btn-invite-ok" v-on:click="addMember">ok</button>
+              </select><br class="noselect">
+              <button  class="btn-invite-ok noselect" v-on:click="addMember">ok</button>
             </div>
           </div> 
         </div>
       </div> 
     </div>
       <li>
-        <button class="btn-setting-accept" @click='createMainBoard' >Create</button>
-        <button  class="btn-setting-cancel" @click='closeFormSetting'>Cancel</button>
+        <button class="btn-setting-accept noselect" @click='createMainBoard' >Create</button>
+        <button  class="btn-setting-cancel noselect" @click='closeFormSetting'>Cancel</button>
       </li>
     </div>            
   </div>
@@ -84,7 +85,7 @@ data () {
             descriptionIn:'',
             deadlineIn:'',
             
-            project :[],
+            projects :[],
 
             emailIn:'',
             authority:0,
@@ -105,24 +106,6 @@ data () {
 
         }
     },
-    beforeCreate(){
-      let collection = this.$db.collection('project').onSnapshot(snapshot => {
-          this.project = []
-          snapshot.forEach(doc => {
-            if(doc.data().member){
-              let proj = doc.data().member.filter(value => {
-                return value.uid === this.$store.state.uid
-              })
-              if(proj.length !== 0){
-                let obj = doc.data()
-                obj.pid = doc.id
-                obj.permission = !proj[0].priority
-                this.project.push(obj)
-              }
-            }
-          });
-        })
-    },
     mounted () {
       let today = new Date()
       let dd = today.getDate()
@@ -137,6 +120,9 @@ data () {
       this.$store.subscribe((mutation, state) => {
         if(mutation.type === 'setSearchText'){
           this.searchText = state.searchText
+        }
+        if(mutation.type === 'setProject'){
+          this.projects = state.project
         }
       })
     },

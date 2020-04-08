@@ -97,11 +97,15 @@ $secondary: #99DBB4;
   border-style: none;
   background-color: $redFire;
   color: white;
+  cursor: default;
   &:hover {
     background: $bluesky;
     transform: scale(1.05);
     transition: all .3s ease-in-out;
   }
+}
+.dd-button a{
+  font-size: 4vw;
 }
 .center-icon {
   position: absolute;
@@ -483,7 +487,25 @@ select {
     height: 40%;
     top: 35%;
   }
-  
+  .show-message h1{
+    padding-left: 15px;
+    padding-right: 15px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }  
+  .show-message p{
+    padding-left: 5px;
+    padding-right: 5px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+  .pid-show{
+    margin-top: 5px;
+    margin-left: 10px;
+    font-size: 10px;
+  }
   .center{
     left: 38%;
   }
@@ -538,7 +560,15 @@ select {
   }
   
  
-
+.noselect {
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */
+}
 
 
 

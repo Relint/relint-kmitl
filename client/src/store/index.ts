@@ -11,6 +11,7 @@ export default new Vuex.Store({
     searchText: '',
     pid: '',
     openChat: false,
+    project: [],
   },
   mutations: {
     setRecord(state, n) {
@@ -26,6 +27,9 @@ export default new Vuex.Store({
     setOpenChat(state,n){
       state.openChat = n
     },
+    setProject(state,n){
+      state.project = n
+    }
   },
   actions: {
   },
