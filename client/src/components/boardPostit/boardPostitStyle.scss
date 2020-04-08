@@ -114,10 +114,29 @@ $fontAsap: "Asap", sans-serif;
   height: 100%;
 }
 .form-edit-postit {
+  z-index: 1;
   position: absolute;
 }
 
-.aCard {
+.form-edit-postit {
   position: absolute;
+  display: none;
+}
+.from-card {
+  position: absolute;
+  width: 300px;
+  height: 50px;
+  background-color:white;
+  top: 100px;
 }
 
+.setting-card {
+  z-index: 1;
+  display: none;
+  position: absolute;
+  width: 500px;
+  height: 500px;
+  background-color:blueviolet;
+  top: 100px;
+  left:40%
+}
