@@ -32,7 +32,14 @@
                 </div>
                 <button class="btn-add-card" @click="toggleFormCard(index)">add card...</button>
                 <div id="postit-scroll" class="contain-show-card">
-                  <div  v-for="(card , index2) in postit.card" :key="'kc'+index+'-'+index2" :ref="'rc'+index" >
+                <Container 
+                    group-name="col"
+                    @drop="(e) => onCardDrop(postit.title, e)"
+                    :get-child-payload="getCardPayload(postit.title)"
+                    drag-class="card-ghost"
+                    drop-class="card-ghost-drop"
+                  >
+                  <Draggable  v-for="(card , index2) in postit.card" :key="'kc'+index+'-'+index2" :ref="'rc'+index" >
                     <div ref="card" class="from-card" id="form-card" >
                       <h3>{{card.title}}</h3>
                       <h5>{{analysisTime(card.duedate,true)+' '+ timeFormat(card.duedate)}}</h5><br/>
@@ -42,9 +49,9 @@
 
                       <button class="wrapperC btn-remove-card float-r " ><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.5'></b-icon></button> <br/>
                       <button class="wrapperC btn-edit-card float-r" ><b-icon icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
-                      
                     </div>
-                  </div>
+                  </Draggable>
+                </Container>
                 </div>
               </div>
             </div>
@@ -85,6 +92,8 @@
 </template>
 <script  >
 /* eslint-disable */
+import { Container, Draggable } from "vue-smooth-dnd";
+import _ from 'lodash'
 import firebase from "firebase";
 import {
   isOfflineForDatabase,
@@ -94,7 +103,9 @@ import cardBox from "../boardPostit/cardBox";
 export default {
   name: "boardPostit",
   components: {
-    cardBox
+    cardBox,
+    Container,
+    Draggable 
   },
   data() {
     return {
@@ -188,6 +199,30 @@ export default {
     document.addEventListener('keyup',this.keyupCallback)
   },
   methods: {
+     onCardDrop(columnId, dropResult) {
+      if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+        
+        if (dropResult.addedIndex !== null){
+          let found = this.postits.filter(p => p.title === columnId)[0];
+          found.card.splice(dropResult.addedIndex, 0, dropResult.payload)
+        }
+
+        if(dropResult.removedIndex !== null){
+          let found = this.postits.filter(p => p.title === columnId)[0];
+          found.card.splice(dropResult.removedIndex, 1);
+        }
+      }
+    },
+     getCardPayload(id){
+      let that = this;
+      return function(index) {
+        let found = that.postits.filter(p => p.title === id)[0].card[
+          index
+        ];
+
+        return found;
+      }
+    },
     swap(list, iA, iB){
       list[iA] = list.splice(iB, 1, list[iA])[0];
       return list;
