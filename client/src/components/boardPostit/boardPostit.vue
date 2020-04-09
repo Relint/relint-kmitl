@@ -23,10 +23,10 @@
                   <div ref="npsti">
                   <div class="show-postit-title" @click="editPostit(index)">{{postit.title}}</div>
                   <button class="btn-x-postit " @click="deletePostit(index)"><b-icon icon="x" font-scale="2"></b-icon></button><br/>
-                  <button class="wrapperI btn-move float-l  " v-if="index!=0" @click="movLeft(index)"><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
-                  <button class="wrapperI disabled float-l " v-else><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
-                  <button class="wrapperI btn-move float-r" v-if="index<postits.length-2" @click="movRight(index)"><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
-                  <button class="wrapperI disabled float-r " v-else><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
+                  <button class=" btn-move float-l  " v-if="index!=0" @click="movLeft(index)"><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
+                  <button class="disabled float-l " v-else><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
+                  <button class="btn-move float-r" v-if="index<postits.length-2" @click="movRight(index)"><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
+                  <button class=" disabled float-r " v-else><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
                  
                   </div>
                 </div>
@@ -49,10 +49,35 @@
               </div>
             </div>
         </div>
-        <div v-for="(postit,i) in postits" :key="'fc'+i" :ref="'fc'" class="setting-card center-icon">
-          <h1>{{i}}</h1>
-          <button class="wrapperCbtn btn-create-card" @click="createCard(i)">create</button>
-          <button class=" wrapperCbtn btn-cancel-card" @click="closeFormCard(i)">cancel</button>
+        <div v-for="(postit,i) in postits" :key="'fc'+i" :ref="'fc'" class="setting-card ">
+          <p>index:{{i}}   name:{{postit.title}}</p>
+            <input class="input-title" type="text" placeholder="Title"  > <br/>
+            <input class="input-des" type="text" placeholder="Description"><br/>
+            <input  type="date" id="datefield" min="2000-01-01" ><br/>
+            
+            <input class="input-as"   type="text" placeholder="Assign"  >
+            <button  class="btn-as-ok " >ok</button>
+
+             <!--<div class="contain-selector">
+              <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
+                <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
+                  {{ opt.text }}
+                </option>
+              </select><br> 
+            </div>  -->
+            <div class="contain-vote ">  
+              <p>vote this card</p>
+              <br/>
+              <ul id="rating" class="rating">
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+                <li></li>
+              </ul>  
+            </div> 
+          <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
+          <button  class="btn-setting-cancel" @click="closeFormCard(i)">Cancel</button>
         </div>
       </div>
     </div>
@@ -121,7 +146,16 @@ export default {
                   status:"complete",title:'card9'},
                ],
         }
-      ]
+      ],
+      opts: [
+              { value: 0, text: 'Menber in this board'},
+              { value: 1, text: 'Fai' },
+              { value: 2, text: 'Karn' },
+              { value: 3, text: 'Ming' },
+              { value: 4, text: 'Donaut' },
+              { value: 5, text: 'Jade' },
+              { value: 6, text: 'Punpun' },
+            ],
     };
   },
   beforeCreate(){
