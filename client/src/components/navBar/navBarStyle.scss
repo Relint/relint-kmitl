@@ -60,36 +60,6 @@ $fontAsap: 'Asap', sans-serif;
   cursor: pointer;
 }
 
-//search
-.container-serach {
-  position: relative;
-  // top:0%;
-  // left: 20%;
-}
-.content-search {
-    display: inline;
-    float: left;
-    position:relative;
-    padding:0 0 0 ;
-    width: 200px;
-    top: 18px;
-}
-.input-search {
-    position: relative;
-    border-radius: 20px; 
-    border-style: ridge;
-    height:40px;
-    padding-left: 20px;
-}
-.input_icon {
-    position: relative;
-    right: 15%;
-    top:5px;
-    width:30px;
-    height:30px;
-}
-
-
 .contain-showName {
   height: 15px;
   // background-color: $greenSeaweed;
