@@ -1,6 +1,5 @@
 <template>
-<!-- v-bind:style="{left:index*130+'px'}" -->
-  <div class="list-parent" >
+  <div class="list-parent">
     <!-- top 1 bot 3 -->
     <div class="userBox">
       <!-- {{uName}} -->

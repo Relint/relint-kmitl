@@ -4,7 +4,7 @@
   <title>Relint</title>
   <div class="background-login" id="login" >
             <div class="navbarLogin">
-              <li class="brand">RELINT</li>
+              <li class="brand noselect" @click="openInNewTab('/')">RELINT</li>
             </div>
 
 
@@ -17,36 +17,36 @@
       <div class="contain-form-login">
           <div class="from-login" id='form-login'>
             <div class="contain-btnUp-btnIn">
-              <div id="btn-in" class="btnF-singnIn" @click="openFormSignIn"><p>Sign In</p></div>
-              <div id="btn-up" class="btnF-singnUp darker-btn" @click="openFormSignUp"><p>Sign Up</p></div>
+              <div id="btn-in" class="btnF-singnIn noselect pointer" @click="openFormSignIn"><p>Sign In</p></div>
+              <div id="btn-up" class="btnF-singnUp darker-btn noselect pointer" @click="openFormSignUp"><p>Sign Up</p></div>
             </div>
-                  <div class="logoInput">R E L I N T</div><br>
-                  <div id="alert-error-login" > {{errorMessageLogin}}</div><br>
-                <input id="inputEmail" class="inputt-login" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
-                <br>
-                <input id="inputPassword" class="inputt-login" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
+                  <div class="logoInput noselect">R E L I N T</div><br class="noselect">
+                  <div id="alert-error-login" > {{errorMessageLogin}}</div><br class="noselect">
+                <input id="inputEmail" class="inputt-login outline-n" v-model="email" type="email"   placeholder="Email"  name="umail"  v-on:keyup.enter="login">
+                <br class="noselect">
+                <input id="inputPassword" class="inputt-login outline-n" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
               
-                <span class="psw"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
-                <br>
-                <button id="btnSign in" class="btnSubmit-login" v-on:click="login">Sign in</button>
+                <span class="psw noselect"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
+                <br class="noselect">
+                <button id="btnSign in" class="btnSubmit-login noselect pointer" v-on:click="login">Sign in</button>
           </div>
       </div>
     
         <!-- register -->
         <div class="contain-form-regis">
           <div class="form-register" id='form-register' >
-                <div class="name-register" >R E G I S T E R</div><br>
+                <div class="name-register noselect" >R E G I S T E R</div><br class="noselect">
                 <div id="alert-error" > {{errorMessage}}</div>
-                  <input id="inputUsernameRe" class="inputt-regis" v-model="usernameRE" type="text"  maxlength="12"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
-                <br>
-                  <input id="inputEmailRe" class="inputt-regis" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
-                <br>
-                  <input id="inputPasswordRE" class="inputt-regis" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
-                <br>
-                  <input id="inputPasswordREE" class="inputt-regis" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
-                <br>
-                  <button id="btnSignUpRe" class="btnSubmit-regis" @click="register" >Sign up</button>
-                  <button id="btnCancelRe" class="btnSubmit-regis-cancel" @click="openFormSignIn">Cancel</button> 
+                  <input id="inputUsernameRe" class="inputt-regis outline-n" v-model="usernameRE" type="text"  maxlength="12"  placeholder="Username"  name="uname" required  v-on:keyup.enter="register">  
+                <br class="noselect">
+                  <input id="inputEmailRe" class="inputt-regis outline-n" v-model="emailRE" type="email"   placeholder="Email"  name="mail" required>
+                <br class="noselect">
+                  <input id="inputPasswordRE" class="inputt-regis outline-n" v-model="passwordRE" type="password"   placeholder="Password"  name="pass" required>
+                <br class="noselect">
+                  <input id="inputPasswordREE" class="inputt-regis outline-n" v-model="passwordREE" type="password"   placeholder="Confirm Password"  name="re-pass" required v-on:keyup.enter="register" >
+                <br class="noselect">
+                  <button id="btnSignUpRe" class="btnSubmit-regis noselect pointer" @click="register" >Sign up</button>
+                  <button id="btnCancelRe" class="btnSubmit-regis-cancel noselect pointer" @click="openFormSignIn">Cancel</button> 
           </div> 
         </div>
     </div>    
@@ -56,7 +56,7 @@
         <div class="contain-logoball div-2-ball"> </div>
         <div class="contain-logoball div-3-ball"> </div>
         <div class="contain-logoball div-4-ball"> </div>
-        <div class="contain-logoball logoName-ball">RELINT</div>
+        <div class="contain-logoball logoName-ball noselect">RELINT</div>
 
         <div id="waiting-login">
             <div class="lds-wrapper"></div>
@@ -67,11 +67,11 @@
         <div class="pwd-wrapper"  id="forget-from-wrapper">
         </div>
         <div class="form-popup" id="forget-from">
-            <div class="name-pwd-rst"> R E S E T </div>
+            <div class="name-pwd-rst noselect"> R E S E T </div>
             <div id="alert-error-for" class="alert-error-pwd"> {{errorMessageFor}}</div>
-            <input class="inputt-forget" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
-            <button class="btnSubmit-send-for" @click="acceptSend" >Send</button>
-            <button class="btnSubmit-cancel-for" type="button" v-on:click="closeFormFOR">Cancel</button> 
+            <input class="inputt-forget outline-n" v-model="emailpWS" type="text"   placeholder="Email"  name="umail" required v-on:keyup.enter="acceptSend">
+            <button class="btnSubmit-send-for noselect pointer" @click="acceptSend" >Send</button>
+            <button class="btnSubmit-cancel-for noselect pointer" type="button" v-on:click="closeFormFOR">Cancel</button> 
         </div> 
         
       
@@ -269,7 +269,11 @@ export default {
         }
       }
       e.preventDefault();
-    }
+    },
+    openInNewTab(url){
+      const win = window.open(url,'_blank')
+      win.focus()
+    },
   }
 }
 

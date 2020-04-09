@@ -2,8 +2,8 @@
     <div>
         <bg/>
         <boardPostit/>
-        <navBar/>
         <navBarProject/>
+        <navBar/>
        
     </div>
 </template>
