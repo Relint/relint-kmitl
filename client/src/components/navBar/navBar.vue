@@ -303,6 +303,8 @@ export default {
       }
     });
     this.$rtdb.ref('/status').on('value', snapshot => {
+      // console.log('rtdb snap!')
+      this.users = []
       snapshot.forEach((user,index)=>{
         if(user){
           const uid = user.key
@@ -671,6 +673,7 @@ export default {
         if(type === 'name'){
           return sender.displayName
         } else if(type === 'status'){
+          // console.log(sender.displayName + ' online: ' + sender.online)
           return sender.online
         }
       }
