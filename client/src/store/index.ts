@@ -12,6 +12,7 @@ export default new Vuex.Store({
     pid: '',
     openChat: false,
     project: [],
+    user: [],
   },
   mutations: {
     setRecord(state, n) {
@@ -29,6 +30,9 @@ export default new Vuex.Store({
     },
     setProject(state,n){
       state.project = n
+    },
+    setUser(state,n){
+      state.user = n
     }
   },
   actions: {

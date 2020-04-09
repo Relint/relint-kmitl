@@ -91,7 +91,9 @@
                                     <b-icon icon="person" font-scale="2.5"></b-icon>
                                   </button>
                                   <div class="float-l">
-                                    <b class="margin-right">{{ message.sender + '' }}</b>
+                                    <b  style="margin-right:2px">{{ analysisSender('name',message.uid) + '' }}</b>
+                                    <b-icon v-if="analysisSender('status',message.uid)" style="color:green; margin-right:5px" icon="circle-fill" font-scale="0.45" shift-v="-1"></b-icon>
+                                    <b-icon v-else style="color:#cccccc; margin-right:5px" icon="circle-fill" font-scale="0.45" shift-v="-1"></b-icon>
                                     <span>
                                       <font size="1">{{timeFormat(message.timestamp)}}</font>
                                     </span>
@@ -110,7 +112,7 @@
                                     <span>
                                       <font size="1">{{timeFormat(message.timestamp)}}</font>
                                     </span>
-                                    <b class="margin-left">{{ message.sender + '' }}</b>
+                                    <b class="margin-left">{{ analysisSender('name',message.uid) + '' }}</b>
                                   </div>
                                   <br class="noselect">
                                   <div class="msg-box float-r">
@@ -192,6 +194,7 @@ export default {
       notifications:[],
 
       projects:[],
+      users:[],
       unread:[],
       lastIndex:[],
       msg:[],
@@ -284,32 +287,46 @@ export default {
     })
   },
   mounted () {
-    document.addEventListener('keyup', this.keyupCallback);
+    document.addEventListener('keyup', this.keyupCallback)
     document.getElementById('chat-form').style.display = "none"
-    this.username = this.$store.state.username;
-    this.uid = this.$store.state.uid;
-    const userStatusDatabaseRef = this.$rtdb.ref('/status/' + this.uid);
+    this.username = this.$store.state.username
+    this.uid = this.$store.state.uid
+    const userStatusDatabaseRef = this.$rtdb.ref('/status/' + this.uid)
     this.$rtdb.ref('.info/connected').on('value', snapshot => {
       if (snapshot.val() === false) {
-        return;
+        return
       }
       userStatusDatabaseRef.onDisconnect().update(isOfflineForDatabase).then(() => {
-        userStatusDatabaseRef.update(isOnlineForDatabase);
-      });
-    });
+        userStatusDatabaseRef.update(isOnlineForDatabase)
+      })
+    })
     userStatusDatabaseRef.on('value', snapshot => {
-      let stat = snapshot.val();
-      if(stat && stat.online === false){
-          userStatusDatabaseRef.update(isOnlineForDatabase);
+      const stat = snapshot.val()
+      if(stat){
+        if(stat.online === false){
+            userStatusDatabaseRef.update(isOnlineForDatabase)
+        }
       }
     });
-
+    this.$rtdb.ref('/status').on('value', snapshot => {
+      snapshot.forEach((user,index)=>{
+        if(user){
+          const uid = user.key
+          user = user.val()
+          user.uid = uid
+          this.users.push(user)
+        }
+      })
+      this.projects.push(null)
+      this.projects.pop()
+      this.$store.commit('setUser',this.users)
+    })
   },
   methods: {
     logout () {
-      this.$rtdb.ref('/status/'+this.uid).off();
+      this.$rtdb.ref('/status/'+this.uid).off()
       this.collection()
-      firebase.auth().signOut();
+      firebase.auth().signOut()
     },
     profile () {
       alert(this.$store.state.uid + '\n' + this.$store.state.username);
@@ -655,6 +672,18 @@ export default {
       this.sendMsg(project,index)
       this.msg[index] = ''
       this.$refs.bprt.filter((ele,i)=>i===index).value = ''
+    },
+    analysisSender(type,uid){
+      let sender = this.users.filter(ele=>ele.uid === uid)
+      if(sender.length > 0){
+        sender = sender[0]
+        if(type === 'name'){
+          return sender.displayName
+        } else if(type === 'status'){
+          return sender.online
+        }
+      }
+      return null
     }
   }
 }
