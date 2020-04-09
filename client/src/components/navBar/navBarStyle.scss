@@ -260,7 +260,15 @@ h5 {
   border-radius: 15px;
   padding: 20px;
   font-size: 16px;
+  cursor: pointer;
   
+  -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome, Opera and Firefox */  
 }   
 
 .dropdown-content-profile a:hover {background-color: #f1f1f1;}
@@ -396,7 +404,9 @@ h5 {
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
-
+.pointer{
+  cursor: pointer;
+}
 .chat-board-container {
   width: 100%;
   height: 100%;
@@ -656,6 +666,7 @@ h5 {
   position: relative;
   width: 100%;
   height: 25%;
+  border-bottom: 0.5px solid #f9f9f9;
 }
 
 .msg-send-btn {
@@ -716,4 +727,26 @@ h5 {
   width: 100%;
   height: 4%;
   cursor: pointer;
+}
+
+.input-box-msg {
+  position: relative;
+  width: 100%;
+  height: 75%;
+  border: #dee2e2;
+  // background-color: #dee2e2;
+  font-size: 15px;
+  outline: none;
+  resize: none;
+}
+.input-box-msg::-webkit-scrollbar {
+  width: 12px;
+  border-radius: 30px;
+  display: none;
+}
+.input-box-msg::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background-color: $bluesky;
+  scrollbar-width: thin;
+  display: none;
 }

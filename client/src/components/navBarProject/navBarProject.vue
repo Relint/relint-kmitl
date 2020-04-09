@@ -37,10 +37,10 @@
       <hr />
     </div>
  
-    <div id="lds">
+    <!-- <div id="lds"> ห้ามลบ
       <div class="lds-wrapper"></div>
       <div class="lds-dual-ring"></div>
-    </div>
+    </div> -->
     
   </div>
 </template>
@@ -91,11 +91,7 @@ export default {
       });
   },
   mounted() {
-    document.getElementById("lds").style.display = "block";
     document.getElementById("manage").style.display = "none"
-    new Promise(resolve => setTimeout(resolve, 2000)).then(() => {
-      document.getElementById("lds").style.display = "none";
-    });
   },
   methods: {
     backToHome() {

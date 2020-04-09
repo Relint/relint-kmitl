@@ -19,8 +19,8 @@
                     <h5 class="contain-showName">Hello, </h5>
                     <div class="showName" v-html="username" ></div>
                     <hr >
-                    <a style="cursor:pointer;">Profile</a>
-                    <a style="cursor:pointer;" v-on:click="logout">Logout</a>
+                    <a>Profile</a>
+                    <a v-on:click="logout">Logout</a>
                   </div> 
                 </div>
               </div>
@@ -125,11 +125,18 @@
                               <div class="n-message-btn" ref="bmb2" v-if="checkNewMessagePopup(project,index)">{{project.chatLog[project.chatLog.length-1].message}}</div>
                               <div class="t-message-btn" ref="bmb3" v-if="checkNewMessagePopup(project,index)" @click="toNewMessage(project,index)"></div>
                               <div class="btn-wrapper">
-                                <button class="msg-send-btn noselect">Send</button>
+                                <button class="msg-send-btn noselect" @click="sendMsgWrap(project,index)">Send</button>
                                 <button class="scroll-down" ref="scrld" @click="scrollDown(project,index)">
                                   <b-icon icon="chevron-down" font-scale="1"></b-icon>
                                 </button>
                               </div>
+
+                              <textarea
+                                ref="input-msg"
+                                class="input-box-msg"
+                                placeholder="Type a message..."
+                              ></textarea>
+
                             </div>
                           </div>
                       </div>
@@ -187,6 +194,7 @@ export default {
       projects:[],
       unread:[],
       lastIndex:[],
+      msg:[],
 
       priorityMap: [
         'Admin',
@@ -239,7 +247,7 @@ export default {
       this.$store.commit('setProject',this.projects)
       new Promise(resolve=>setTimeout(resolve,50)).then(()=>{
         this.projects.map((ele,index)=>{
-          if((document && document.getElementById('chat-form').style.display === 'none') || (this.$refs.prt && this.$refs.prt[index].style.backgroundColor === 'white')){
+          if((document && document.getElementById('chat-form').style.display === 'none') || (this.$refs.prt && this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index))){
             let count = 0
             ele.chatLog.forEach((ele2,index2)=>{
               if(ele2.uid != firebase.auth().currentUser.uid && !ele2.read.includes(firebase.auth().currentUser.uid)){
@@ -453,6 +461,19 @@ export default {
           ele.style.display = 'none'
         })
       }
+      this.$refs['input-msg'].forEach((ele,i)=>{
+        if(ele === document.activeElement){
+          if(!e.shiftKey && e.keyCode === 13){
+            e.preventDefault()
+            this.sendMsg(this.projects[i],i)
+            // console.log('clear')
+            this.msg[i] = ''
+            ele.value = ''
+          } else {
+            this.msg[i] = ele.value
+          }
+        }
+      })
     },
     anaylysisNumber(arr){
       const ans1 = arr.reduce((a,b)=>a+b,0) > 0
@@ -465,25 +486,33 @@ export default {
           ele.currentIndex = null
           ele.chatLog.forEach((ele2,index2)=>{
             if(ele2.uid != firebase.auth().currentUser.uid && !ele2.read.includes(firebase.auth().currentUser.uid)){
-              let closed = false
-              try{
-                closed = this.$refs.prt[index].style.backgroundColor === 'white' || document.getElementById('chat-form').style.display === 'none'
-              }catch(err){
-                location.reload()
-              }
+              const closed = this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index) || document.getElementById('chat-form').style.display === 'none'
               if(!ele.currentIndex && closed) {
                 ele.currentIndex = index2
               }
             }
           })
-          if(this.$refs.prt[index].style.backgroundColor != 'white' && document.getElementById('chat-form').style.display === 'block'){
-            if(this.$refs.scrld[index].style.display === 'none' || (ele.chatLog.length > 0 && this.checkUser(ele.chatLog[ele.chatLog.length-1].uid))){
+          if(this.$refs.prt && !this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index) && document.getElementById('chat-form').style.display === 'block'){
+            if((this.$refs.scrld && !this.$refs.scrld.some((ele,i)=>ele.style.display==='none'&&i===index)) || (ele.chatLog.length > 0 && this.checkUser(ele.chatLog[ele.chatLog.length-1].uid))){
+              console.log('scrolling down')
               this.scrollDown(ele,index)
             }
-            if(this.$refs.bmb1 && this.$refs.bmb2 && this.$refs.bmb3 && this.$refs.bmb1[index] && this.$refs.bmb2[index] && this.$refs.bmb3[index]){
-              this.$refs.bmb1[index].style.display = 'block'
-              this.$refs.bmb2[index].style.display = 'block'
-              this.$refs.bmb3[index].style.display = 'block'
+            if(this.$refs.bmb1 && this.$refs.bmb2 && this.$refs.bmb3){
+              this.$refs.bmb1.forEach((ele,i)=>{
+                if(index === i){
+                  ele.style.display = 'block'
+                }
+              })
+              this.$refs.bmb2.forEach((ele,i)=>{
+                if(index === i){
+                  ele.style.display = 'block'
+                }
+              })
+              this.$refs.bmb3.forEach((ele,i)=>{
+                if(index === i){
+                  ele.style.display = 'block'
+                }
+              })
             }
           }
           return ele
@@ -524,7 +553,11 @@ export default {
       })
     },
     scrollDown(project,index){
-      this.$refs.chma[index].scrollTop = this.$refs.chma[index].scrollHeight 
+      this.$refs.chma.forEach((ele,i)=>{
+        if(i === index){
+          ele.scrollTop = ele.scrollHeight
+        }
+      })
     },
     toNewMessage(project,index){
       this.scrollDown(project,index)
@@ -560,6 +593,8 @@ export default {
         desiredPos -= this.$refs.chma[index].clientHeight / 2
         // console.log(desiredPos)
         this.$refs.chma[index].scrollTop = desiredPos
+      } else{
+        this.scrollDown(project,index)
       }
     },
     feedbackRead(project,index){
@@ -579,20 +614,42 @@ export default {
         return value
       })
       if(!allRead){
-        console.log('Feeding data to Firestore')
+        // console.log('Feeding data to Firestore')
         this.lastIndex[index] = null
         new Promise(resolve=>setTimeout(resolve,50)).then(()=>{
           this.$db.collection("project").doc(project.pid).set({
             chatLog: project.chatLog
           },{ merge: true }).then(()=>{
-            console.log('done!')
+            // console.log('done!')
           })
         })
       } else {
-        console.log('No need to feeding data to Firestore')
+        // console.log('No need to feeding data to Firestore')
       }
       // console.log(project.chatLog)
     },
+    sendMsg(project,index){
+      // console.log('Sending message of index: '+index)
+      // console.log('msg: '+this.msg[index])
+      if(this.msg[index]){
+        // console.log('Condition satisfied')
+        this.$db.collection('project').doc(this.projects[index].pid).update({
+          chatLog: firebase.firestore.FieldValue.arrayUnion({
+            message: this.msg[index],
+            read:[],
+            timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
+            uid: firebase.auth().currentUser.uid
+          })
+        })
+      } else {
+        // console.log('Condition unsatisfied')
+      }
+    },
+    sendMsgWrap(project,index){
+      this.sendMsg(project,index)
+      this.msg[index] = ''
+      this.$refs.bprt.filter((ele,i)=>i===index).value = ''
+    }
   }
 }
 </script>
