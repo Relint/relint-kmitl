@@ -37,7 +37,7 @@ app.get('/reg', (req, res) => {
         disabled: false
     }).then(userRecord => {
         console.log('Succesfully created new user: ', userRecord);
-        db.collection('user').doc(userRecord.uid).set({
+        rtdb.ref('/status/'+userRecord.uid).update({
             email: userRecord.email,
             displayName: userRecord.displayName,
         })

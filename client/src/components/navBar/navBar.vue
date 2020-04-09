@@ -214,7 +214,7 @@ export default {
       }
     });
     this.collection = this.$db.collection('project').onSnapshot(snapshot => {
-      console.log('Snap!')
+      // console.log('Snap!')
       this.notifications = []
       this.projects = []
       snapshot.forEach(doc => {
@@ -299,7 +299,7 @@ export default {
     });
     userStatusDatabaseRef.on('value', snapshot => {
       let stat = snapshot.val();
-      if(stat.online === false){
+      if(stat && stat.online === false){
           userStatusDatabaseRef.update(isOnlineForDatabase);
       }
     });
@@ -330,11 +330,13 @@ export default {
       if(document.getElementById('chat-form').style.display === 'none'){
         document.getElementById('chat-form').style.display = 'block'
       } else {
-        this.$refs.bprt.forEach((ele,i)=>{
-            if(ele.style.display === 'block'){
-              this.feedbackRead(this.projects[i],i)
-            }
-        })
+        if(this.$refs.bprt){
+          this.$refs.bprt.forEach((ele,i)=>{
+              if(ele.style.display === 'block'){
+                this.feedbackRead(this.projects[i],i)
+              }
+          })
+        }
         document.getElementById('chat-form').style.display = 'none'
       }
     },
@@ -451,29 +453,33 @@ export default {
     keyupCallback(e){
       e = e || window.event
       if(e.keyCode === 27){
-        this.$refs.prt.forEach((ele,i)=>{
-          ele.style.backgroundColor = "white"
-        })
-        this.$refs.bprt.forEach((ele,i)=>{
-          if(ele.style.display === 'block'){
-            this.feedbackRead(this.projects[i],i)
+        if(this.$refs.prt && this.$refs.bprt){
+          this.$refs.prt.forEach((ele,i)=>{
+            ele.style.backgroundColor = "white"
+          })
+          this.$refs.bprt.forEach((ele,i)=>{
+            if(ele.style.display === 'block'){
+              this.feedbackRead(this.projects[i],i)
+            }
+            ele.style.display = 'none'
+          })
+        }
+      }
+      if(this.$refs['input-msg']){
+        this.$refs['input-msg'].forEach((ele,i)=>{
+          if(ele === document.activeElement){
+            if(!e.shiftKey && e.keyCode === 13){
+              e.preventDefault()
+              this.sendMsg(this.projects[i],i)
+              // console.log('clear')
+              this.msg[i] = ''
+              ele.value = ''
+            } else {
+              this.msg[i] = ele.value
+            }
           }
-          ele.style.display = 'none'
         })
       }
-      this.$refs['input-msg'].forEach((ele,i)=>{
-        if(ele === document.activeElement){
-          if(!e.shiftKey && e.keyCode === 13){
-            e.preventDefault()
-            this.sendMsg(this.projects[i],i)
-            // console.log('clear')
-            this.msg[i] = ''
-            ele.value = ''
-          } else {
-            this.msg[i] = ele.value
-          }
-        }
-      })
     },
     anaylysisNumber(arr){
       const ans1 = arr.reduce((a,b)=>a+b,0) > 0
@@ -494,7 +500,7 @@ export default {
           })
           if(this.$refs.prt && !this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index) && document.getElementById('chat-form').style.display === 'block'){
             if((this.$refs.scrld && !this.$refs.scrld.some((ele,i)=>ele.style.display==='none'&&i===index)) || (ele.chatLog.length > 0 && this.checkUser(ele.chatLog[ele.chatLog.length-1].uid))){
-              console.log('scrolling down')
+              // console.log('scrolling down')
               this.scrollDown(ele,index)
             }
             if(this.$refs.bmb1 && this.$refs.bmb2 && this.$refs.bmb3){
