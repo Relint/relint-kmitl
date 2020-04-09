@@ -3,7 +3,7 @@
     <div class="contain-boardPostit">
       <div class="form-scroll-postit" id="postit-scroll">
         <div class="from-boardPostit">
-            <div v-for="(postit , index) in postits" :key="'pt-'+index" :ref="'psti'"  class="contain-show-postit" v-bind:style="{left:10+(index)*350+(index)*30 + 'px',top:0+'px'  }">
+            <div v-for="(postit , index) in postits" :key="'pt-'+index" :ref="'psti'"  class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
               <div v-if="postit.createBox">
                   <div class="form-input-postit">
                     <input class="input-postit" type="text" placeholder="add post-it" v-model="postitIn">
@@ -41,15 +41,18 @@
                   >
                   <Draggable  v-for="(card , index2) in postit.card" :key="'kc'+index+'-'+index2" :ref="'rc'+index" >
                     <div ref="card" class="from-card" id="form-card" >
+                      <div class="opa-card" @click="cardSetting(index,index2)"></div>
                       <h3>{{card.title}}</h3>
                       <h5>{{analysisTime(card.duedate,true)+' '+ timeFormat(card.duedate)}}</h5><br/>
                      {{card.description}}<br/>{{card.status}}
                       <br/><br/>
                       difficulty : {{card.difficulty}}<br/>
-
+                      
                       <button class="wrapperC btn-remove-card float-r " ><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.5'></b-icon></button> <br/>
-                      <button class="wrapperC btn-edit-card float-r" ><b-icon icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
+                      <button class="wrapperC btn-edit-card float-r" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
+                      
                     </div>
+                    
                   </Draggable>
                 </Container>
                 </div>
@@ -57,21 +60,12 @@
             </div>
         </div>
         <div v-for="(postit,i) in postits" :key="'fc'+i" :ref="'fc'" class="setting-card ">
-          <p>index:{{i}}   name:{{postit.title}}</p>
-            <input class="input-title" type="text" placeholder="Title"  > <br/>
-            <input class="input-des" type="text" placeholder="Description"><br/>
-            <input  type="date" id="datefield" min="2000-01-01" ><br/>
-            
+          <p>index:{{i}} name:{{postit.title}}  </p>
+            <input class="input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
+            <input class="input-des" type="text" placeholder="Description" v-model="dessIn"><br/>
+            <input  type="date" id="datefield" min="2000-01-01" v-model="dateIn"><br/>
             <input class="input-as"   type="text" placeholder="Assign"  >
             <button  class="btn-as-ok " >ok</button>
-
-             <!--<div class="contain-selector">
-              <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
-                <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
-                  {{ opt.text }}
-                </option>
-              </select><br> 
-            </div>  -->
             <div class="contain-vote ">  
               <p>vote this card</p>
               <br/>
@@ -85,7 +79,33 @@
             </div> 
           <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
           <button  class="btn-setting-cancel" @click="closeFormCard(i)">Cancel</button>
-        </div>
+          </div>
+
+          <div v-for="(postit,i) in postits" :key="'xfc'+i" :ref="'xfc'">
+            <div v-for="(card,j) in postit.card" :key="'efc'+i+'-'+j" :ref="'efc'+i" class="setting-card ">
+              <p>index:{{j}} name:{{card.title}}  </p>
+                <input class="input-title" type="text" placeholder="Title"  > <br/>
+                <input class="input-des" type="text" placeholder="Description"><br/>
+                <input  type="date" id="datefield" min="2000-01-01" ><br/>
+                
+                <input class="input-as"   type="text" placeholder="Assign"  >
+                <button  class="btn-as-ok " >ok</button>
+                <div class="contain-vote ">  
+                  <p>vote this card</p>
+                  <br/>
+                  <ul id="rating" class="rating">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>  
+                </div> 
+              <button class="btn-setting-accept" @click="saveCard(i)" >Save</button>
+              <button  class="btn-setting-cancel" @click="closeEditFormCard(i)">Cancel</button>
+            </div>
+          </div>
+
       </div>
     </div>
   </div>
@@ -109,6 +129,9 @@ export default {
   },
   data() {
     return {
+      cardTiltleIn:'',
+      dessIn:'',
+      dateIn:'',
       pid:'',
       postitIn:'',
       postitInEdit:'',
@@ -237,6 +260,37 @@ export default {
       this.postits[index].card = this.postits[index].card.filter((ele,i) => {
         return i !== index2
       })
+    },
+    cardSetting (index,indexC) {
+      this.$refs['efc'+index].forEach((ele,i)=>{
+        if(i != indexC){
+          ele.classList.remove('show')
+        } else {
+          ele.classList.add('show')
+        }
+      })
+      this.$refs['xfc'].forEach((ele,i)=>{
+        if(i!=index){
+          ele.style.display='none'
+        } else {
+          ele.style.display='block'
+        }
+      })
+    },
+    saveCard (index) {
+      this.cards=[]
+      this.temp1.forEach(element => {
+        this.cards.push(element)
+      });
+      this.$refs['efc'+index].style.display='none'
+    },
+    closeEditFormCard (index) {
+      let temp = ''
+      this.$refs['efc'+index].forEach((ele,i)=>{
+        ele.classList.remove('show')
+        temp = ele
+      })
+      
     },
     toggleFormCard(index) {
       this.$refs.fc[index].classList.toggle('show')

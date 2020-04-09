@@ -7,13 +7,13 @@
       </div>
       <div class="wrapper float-l div-2">
         <div class="form-projectName">
-          <h5>Title</h5>
+          <h5 class="noselect">Title</h5>
           {{projectName}}
         </div>
       </div>
       <div class="wrapper float-l div-3">
         <div class="form-deadline">
-          <h5>Deadline</h5>
+          <h5 class="noselect">Deadline</h5>
           {{deadline}}
         </div>
       </div>
