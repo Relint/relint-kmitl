@@ -5,14 +5,6 @@ $redFire: rgba(244, 91, 105, 1);
 $orange: #f7a79d;
 $bluesky: #a6d4d8;
 $fontAsap: "Asap", sans-serif;
-
-
-
-
-
-
-
-
 .contain-boardPostit {
   position: absolute;
   // background-color: $blueQueen;
@@ -34,17 +26,13 @@ $fontAsap: "Asap", sans-serif;
   
 }
 #postit-scroll::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
-  // background-color:$bluesky;
-  border-radius: 30px;
-  // display: none
+  width: 8px;
+  height: 8px;
+  background-color: transparent;
 }
 #postit-scroll::-webkit-scrollbar-thumb {
   border-radius: 30px;
-  background-color: $blueQueen;
-  scrollbar-width: thin;
-  // display: none
+  background-color: gray;
 }
 
 .from-boardPostit {
@@ -52,40 +40,42 @@ $fontAsap: "Asap", sans-serif;
   padding: 30px;
 }
 
-// form-postit
 
+
+// form-postit
 .contain-show-postit {
   position: absolute;
   width: 290px;
   height: 820px;
 }
+//scroll postit
 .contain-show-card {
   position: absolute;
   width: 290px;
-  height: 675px;
-  margin-top: 5px;
+  height: 645px;
+  // top: 5px;
   // background-color:teal;
   overflow-y: scroll;
   overflow-x: hidden;
-  scrollbar-width: thin;
+  
 }
 
 #postit-scroll::-webkit-scrollbar {
-  width: 8px;
-  // background-color:$bluesky;
-  border-radius: 30px;
-  // display: none
+  background-color: transparent;
+  width: 4px;
 }
 #postit-scroll::-webkit-scrollbar-thumb {
-  border-radius: 30px;
-  background-color: $blueQueen;
-  scrollbar-width: thin;
-  // display: none
+  border-radius: 40px;
+  background-color: rgb(170, 170, 170);
 }
+
+
+// input postit
 .form-input-postit {
   position: relative;
-  // top: 50px;
+  top: 10px;
 }
+
 .input-postit {
   width: 250px;
   height: 50px;
@@ -93,7 +83,10 @@ $fontAsap: "Asap", sans-serif;
   padding-right: 20px;
   border-style: none;
   border-radius: 20px;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+
 }
+// +
 .btn-create-postit {
   z-index: 1;
   width: 20%;
@@ -104,37 +97,149 @@ $fontAsap: "Asap", sans-serif;
   position: relative;
   left: 250px;
   top:-55px;
+  cursor: pointer;
   &:hover {
     background: $bluesky;
     transform: scale(1.05);
     transition: all .3s ease-in-out;
   }
 }
+
 .center-icon {
   position: absolute;
   top:50%;
   left: 50%;
   transform: translate(-50%,-50%);
 }
+
+// edit input postit
+.input-edit-postit {
+  width: 260px;
+  height: 30px;
+  background-color:white;
+  margin-left: 10px;
+  margin-top: 10px;
+  border-radius: 5px;
+  padding-left: 10px;
+  border: 0.5px solid rgb(197, 196, 196);
+}
+.contain-input-edit {
+  width: 290px;
+  height: 70px;
+  background-color: #fff;
+  // opacity: 0.5;
+  border-style: none;
+  border-radius: 10px;
+  box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
+
+}
+.btn-check {
+  cursor: pointer;
+  position: relative;
+  transform: translate(-50%,-50%);
+  color: white;
+  background: $redFire;
+  width: 30px;
+  height: 20px;
+  border-radius: 7px;
+  top: 20%;
+  left: 9%;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    // transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-x {
+  cursor: pointer;
+  position: relative;
+  transform: translate(-50%,-50%);
+  color: white;
+  background: $redFire;
+  width: 30px;
+  height: 20px;
+  border-radius: 7px;
+  top: 20%;
+  left: 12%;
+  border: none;
+  box-shadow: 2px 2px 10px rgba($dark, .5);
+  transition: all .5s ease-in-out;
+  &:hover {
+    background: darken($white, 5%);
+    // transform: scale(1.05);
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-x-postit {
+  cursor: pointer;
+  position: relative;
+  top: -25px;
+  left:257px;
+  background-color: $bluesky;
+  border:none;
+  outline: none;
+  opacity: 0.3;
+  color: gray;
+  &:hover{
+    opacity: 1;
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-move {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  background-color:$bluesky;
+  border: none;
+  outline: none;
+  opacity: 0.5;
+  &:hover {
+    opacity: 1;
+    // transition: all .3s ease-in-out;
+  }
+}
+.disabled{
+  width: 20px;
+  height: 20px;
+  background-color:$bluesky;
+  color: rgb(105, 103, 103);
+  border: none;
+  outline: none;
+  opacity: 0.3;
+}
+
+
+
+// show postit
 .form-show-postit {
   // z-index: 2;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
   position: relative;
   width: 100%;
-  height: 50px;
+  height: 70px;
+  border-radius: 10px;
   background-color: $bluesky;
 }
 .show-postit-title {
-  padding-right: 5px ;
+  padding-left: 10px ;
+  padding-top: 10px;
+  // padding-bottom: 5px;
   width: 200px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color:rgb(88, 88, 88);
+  font-size: 18px;
 }
-.wrapper {
-  // margin-top: 15px;
-  position: absolute;
-  background-color:red;
-  height: 100%;
+
+
+.wrapperI {
+  margin-top: -20px;
+  margin-left: 10px;
+  margin-right: 10px;
 }
 
 .float-l {
@@ -143,32 +248,83 @@ $fontAsap: "Asap", sans-serif;
 .float-r {
   float: right;
 }
-.div-1 {
-}
-.div-2 {
-  padding-right: 10%;
-  background-color:red;
-  width: 100%;
-  height: 100%;
-}
-.form-edit-postit {
-  z-index: 1;
-  position: absolute;
-}
 
-.form-edit-postit {
-  position: absolute;
-  display: none;
-}
+
+
+// card
 .from-card {
   position: relative;
-  width: 265px;
+  width: 247px;
   height: 100%;
   background-color:white;
+  border-radius: 10px;
   margin-left: 10px;
-  margin-top: 10px;
+  margin-top: 8px;
+  padding: 10px 10px 10px 10px;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
 }
 
+.btn-add-card {
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  position: relative;
+  width: 290px;
+  height: 30px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  opacity: 0.5;
+  top:7px;
+  font-size: 16px;
+  background-color: white;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+  &:hover{
+    background: rgb(238, 238, 238);
+    transition: all .3s ease-in-out;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+  }
+}
+
+.wrapperC {
+  margin-top: -5px;
+  
+}
+.btn-remove-card {
+  margin-top: -125px;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color:white;
+  border: none;
+  outline: none;
+  opacity: 0.3;
+  cursor: pointer;
+  &:hover{
+    opacity: 1;
+    transition: all .3s ease-in-out;
+  }
+}
+.btn-edit-card {
+ margin-top: -110px;
+ width: 20px;
+ height: 20px;
+ position: relative;
+  background-color:white;
+  border: none;
+  outline: none;
+  opacity: 0.3;
+  cursor: pointer;
+  &:hover{
+    opacity: 1;
+    transition: all .3s ease-in-out;
+  }
+}
+h5 {
+  color: $redFire;
+}
+
+// setting
 .setting-card {
   z-index: 1;
   position: absolute;
@@ -186,20 +342,12 @@ $fontAsap: "Asap", sans-serif;
   height: 500px;
 }
 
-.btn-add-card {
+.wrapperCbtn{
+  top: 440px;
+}
+.btn-create-card {
+ position: relative;
+}
+.btn-cancel-card {
   position: relative;
-}
-
-.btn-move {
-  border: none;
-  outline: none;
-  background-color: rgb(255, 255, 255);
-  &:hover {
-    background-color: rgb(238, 238, 238);
-  }
-}
-.disabled{
-  background-color: rgb(238, 238, 238);
-  border: none;
-  outline: none;
 }
