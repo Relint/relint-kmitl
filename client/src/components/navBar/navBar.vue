@@ -6,11 +6,6 @@
               <li class="brand noselect" @click="openInNewTab('/')">RELINT</li>
             </div>
 
-            <div class="wrapper float-l div-2">
-              <input type="text" class="input-search" placeholder="Search" v-model="searchText" @keyup='searchTextHandler'>
-              <b-icon class="input_icon float-r" icon="search" font-scale="2" ></b-icon>
-            </div>
-
               <div class="wrapper float-r div-4" >
                 <div class="drop-profile">
                   <footer class="rect2"></footer>
@@ -190,7 +185,6 @@ export default {
     return {
       username: '',
       uid: '',
-      searchText: '',
       notifications:[],
 
       projects:[],
@@ -356,9 +350,6 @@ export default {
         }
         document.getElementById('chat-form').style.display = 'none'
       }
-    },
-    async searchTextHandler() {
-      await this.$store.commit('setSearchText',this.searchText)
     },
     inviteAccept (pid) {
       let projectRef = this.$db.collection('project').doc(pid)
