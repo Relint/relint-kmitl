@@ -52,12 +52,15 @@ $fontAsap: "Asap", sans-serif;
 .contain-show-card {
   position: absolute;
   width: 290px;
-  height: 630px;
+  max-height: 630px;
   // top: 5px;
-  // background-color:teal;
+  // background-color:white;
+  border-style: 5px solid rgb(83, 83, 83);
   overflow-y: scroll;
   overflow-x: hidden;
-  
+  box-shadow: 0px 0px 2px 0px rgba(0, 0, 0, 0.2);
+  padding-bottom: 30px;
+  border-radius: 15px;
 }
 
 #postit-scroll::-webkit-scrollbar {
@@ -263,10 +266,10 @@ $fontAsap: "Asap", sans-serif;
   height: 100%;
   background-color:white;
   border-radius: 10px;
-  margin-left: 10px;
-  margin-top: 8px;
+  margin-left: 12px;
+  margin-top: 10px;
   padding: 10px 10px 10px 10px;
-  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
 }
 
 .btn-add-card {
@@ -337,13 +340,12 @@ h5 {
 .setting-card {
   z-index: 1;
   position: absolute;
-  width: 0px;
+  width: 500px;
   height: 450px;
-  
-  // display: none;
+  display: none;
   background-color:rgb(255, 255, 255);
-  opacity: 0;
-  transition:all 0.75s ease;
+  // opacity: 0;
+  // transition:all 0.75s ease;
   border: 1px solid #ccc;
   border-radius: 20px;
   padding: 15px;
@@ -353,10 +355,10 @@ h5 {
   transform: translate(-50%,-50%);
 }
 .setting-card.show{
-  // display: block;
-  opacity: 1;
-  width: 500px;
-  height: 450px;
+  display: block;
+  // opacity: 1;
+  // width: 500px;
+  // height: 450px;
 }
 
 
@@ -554,17 +556,17 @@ select {
 	transition: all .3s ease;
 }
 
-.rating li.current,
-.rating li.current ~ li,
-.rating li:focus,
-.rating li:focus ~ li{
-	background: #c93d3d;
-}
+// .rating li.current,
+// .rating li.current ~ li,
+// .rating li:focus,
+// .rating li:focus ~ li{
+// 	background: #c93d3d;
+// }
 
-.rating:hover li.current,
-.rating:hover li.current ~ li{
-	background: #c3c3c3;
-}
+// .rating:hover li.current,
+// .rating:hover li.current ~ li{
+// 	background: #c3c3c3;
+// }
 
 .rating li:hover,
 .rating li:hover ~ li{
@@ -588,4 +590,16 @@ select {
   left:53%;
   top:44%;
   text-align: center;
+  
+}
+
+
+.card-ghost {
+  transition: transform 0.18s ease;
+  transform: rotateZ(5deg)
+}
+
+.card-ghost-drop{
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(0deg)
 }
