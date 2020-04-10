@@ -6,8 +6,8 @@
             <div v-for="(postit , index) in postits" :key="'pt-'+index" :ref="'psti'"  class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
               <div v-if="postit.createBox">
                   <div class="form-input-postit">
-                    <input class="input-postit" type="text" placeholder="add post-it" v-model="postitIn">
-                    <div @click="createPostit(postit.postId)" class="btn-create-postit"><b-icon class="center-icon" icon="plus" font-scale="3" ></b-icon></div>
+                    <input class="input-postit" type="text" placeholder="add post-it" v-model="postitIn" v-on:keyup.enter="createPostit">
+                    <div @click="createPostit" class="btn-create-postit"><b-icon class="center-icon" icon="plus" font-scale="3" ></b-icon></div>
                   </div>
               </div>
               <div v-else>
@@ -230,9 +230,8 @@ export default {
         if (doc) {
           // console.log(this.postits)
           this.project = doc
-          // this.postits = doc.postit
-          this.postits = this.temp1
-          this.postits.push({createBox:true,card:[]})
+          this.postits = doc.postit.concat([{createBox:true,card:[]}])
+          // this.postits = this.temp1
         }
       }
     })
@@ -270,9 +269,17 @@ export default {
     },
     movLeft (index) {
       this.postits= this.swap(this.postits,index,index-1)
+      this.postits.pop()
+      this.$db.collection('project').doc(this.project.pid).update({
+        postit: this.postits
+      })
     },
     movRight (index) {
       this.postits= this.swap(this.postits,index,index+1)
+      this.postits.pop()
+      this.$db.collection('project').doc(this.project.pid).update({
+        postit: this.postits
+      })
     },
     removeCard(index,index2) {
       this.postits[index].card = this.postits[index].card.filter((ele,i) => {
@@ -331,9 +338,13 @@ export default {
       this.$refs.settingCard[index].style.display='none'
     },
     deletePostit (index) {
-       this.postits = this.postits.filter((ele,i) => {
-         return i !== index 
-         })
+      this.postits = this.postits.filter((ele,i) => {
+        return i !== index 
+      })
+      this.postits.pop()
+      this.$db.collection('project').doc(this.project.pid).update({
+        postit: this.postits
+      })
     },
     editPostit (index) {
       this.$refs.epsti.forEach((ele,i)=>{
@@ -354,8 +365,12 @@ export default {
     },
     saveEditPostit (index) {
       this.postits[index].title = this.postitInEdit
-      this.postits.push(null)
       this.postits.pop()
+      this.$db.collection('project').doc(this.project.pid).update({
+        postit: this.postits
+      })
+      // this.postits.push(null)
+      // this.postits.pop()
       this.closeFormEditPostit(index)
     },
     closeFormEditPostit (index) {
@@ -371,11 +386,23 @@ export default {
       })  
       this.postitInEdit=''
     },
-    // createPostit2 () {
-    //   this.postits.push(this.postitIn)
-    // },
     createPostit () {
-      
+      if(this.postitIn){
+        this.$db.collection('project').doc(this.project.pid).update({
+          postit: firebase.firestore.FieldValue.arrayUnion({
+            title: this.postitIn,
+            card: []
+          })
+        })
+      } else {
+        this.$db.collection('project').doc(this.project.pid).update({
+          postit: firebase.firestore.FieldValue.arrayUnion({
+            title: 'No Title',
+            card: []
+          })
+        })
+      }
+      this.postitIn = ''
       // document.getElementById('form-input-postit').style.display='none'
     },
     timeFormat(n) {
