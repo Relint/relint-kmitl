@@ -17,6 +17,7 @@
     "firebase": "^7.13.2",
     "jquery": "^3.4.1",
     "minimist": ">=1.2.5",
+    "random-key": "^0.3.2",
     "register-service-worker": "^1.6.2",
     "vue": "^2.6.11",
     "vue-class-component": "^7.2.2",

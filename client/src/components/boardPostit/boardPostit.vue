@@ -364,11 +364,13 @@ export default {
       
     },
     saveEditPostit (index) {
-      this.postits[index].title = this.postitInEdit
-      this.postits.pop()
-      this.$db.collection('project').doc(this.project.pid).update({
-        postit: this.postits
-      })
+      if(this.postitInEdit){
+        this.postits[index].title = this.postitInEdit
+        this.postits.pop()
+        this.$db.collection('project').doc(this.project.pid).update({
+          postit: this.postits
+        })
+      }
       // this.postits.push(null)
       // this.postits.pop()
       this.closeFormEditPostit(index)
@@ -386,18 +388,33 @@ export default {
       })  
       this.postitInEdit=''
     },
+    createKey(){
+      let keys = []
+      this.postits.forEach((ele,i)=>{
+        keys.push(ele.key)
+      })
+      let key = ''
+      do{
+        key = this.$key.generate()
+      }while(keys.includes(key))
+      return key
+    },
     createPostit () {
+      const key = this.createKey()
       if(this.postitIn){
         this.$db.collection('project').doc(this.project.pid).update({
           postit: firebase.firestore.FieldValue.arrayUnion({
+            key: key,
             title: this.postitIn,
             card: []
           })
         })
       } else {
+        // console.log(this.postitIn)
         this.$db.collection('project').doc(this.project.pid).update({
           postit: firebase.firestore.FieldValue.arrayUnion({
-            title: 'No Title',
+            key: key,
+            title: 'Edit Title',
             card: []
           })
         })

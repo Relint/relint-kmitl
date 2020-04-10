@@ -25,7 +25,7 @@ const client = axios.create({ //################################################
   baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
 });
 Vue.prototype.$http = client;
-
+Vue.prototype.$key = require('random-key')
 new Vue({
   router,
   store,
