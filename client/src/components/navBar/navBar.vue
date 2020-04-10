@@ -118,9 +118,11 @@
                               </div>
                             </div>
                             <div class="chat-footer">
-                              <div class="b-message-btn" ref="bmb1" v-if="checkNewMessagePopup(project,index)"></div>
-                              <div class="n-message-btn" ref="bmb2" v-if="checkNewMessagePopup(project,index)">{{project.chatLog[project.chatLog.length-1].message}}</div>
-                              <div class="t-message-btn" ref="bmb3" v-if="checkNewMessagePopup(project,index)" @click="toNewMessage(project,index)"></div>
+                              <div ref="bmb">
+                              <div class="b-message-btn" v-if="checkNewMessagePopup(project,index)"></div>
+                              <div class="n-message-btn" v-if="checkNewMessagePopup(project,index)">{{project.chatLog[project.chatLog.length-1].message}}</div>
+                              <div class="t-message-btn" v-if="checkNewMessagePopup(project,index)" @click="toNewMessage(project,index)"></div>
+                              </div>
                               <div class="btn-wrapper">
                                 <button class="msg-send-btn noselect" @click="sendMsgWrap(project,index)">Send</button>
                                 <button class="scroll-down" ref="scrld" @click="scrollDown(project,index)">
@@ -319,10 +321,14 @@ export default {
       this.$store.commit('setUser',this.users)
     })
   },
+  beforeDestroy(){
+    this.collection()
+    this.$rtdb.ref('/status/'+this.uid).off()
+    this.$rtdb.ref('/status').off()
+    clearInterval(this.feedInterval)
+  },
   methods: {
     logout () {
-      this.$rtdb.ref('/status/'+this.uid).off()
-      this.collection()
       firebase.auth().signOut()
     },
     profile () {
@@ -343,7 +349,7 @@ export default {
     toggleFormChat(){
       if(document.getElementById('chat-form').style.display === 'none'){
         document.getElementById('chat-form').style.display = 'block'
-        this.feedInterval = setInterval(this.feedbackReadInterval,300)
+        this.feedInterval = setInterval(this.feedbackReadInterval,500)
       } else {
         if(this.$refs.bprt){
           this.$refs.bprt.forEach((ele,i)=>{
@@ -512,22 +518,12 @@ export default {
             }
           })
           if(this.$refs.prt && !this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index) && document.getElementById('chat-form').style.display === 'block'){
-            if((this.$refs.scrld && !this.$refs.scrld.some((ele,i)=>ele.style.display==='none'&&i===index)) || (ele.chatLog.length > 0 && this.checkUser(ele.chatLog[ele.chatLog.length-1].uid))){
+            if((this.$refs.scrld && this.$refs.scrld.some((ele,i)=>ele.style.display==='none'&&i===index)) || (ele.chatLog.length > 0 && this.checkUser(ele.chatLog[ele.chatLog.length-1].uid))){
               // console.log('scrolling down')
               this.scrollDown(ele,index)
             }
-            if(this.$refs.bmb1 && this.$refs.bmb2 && this.$refs.bmb3){
-              this.$refs.bmb1.forEach((ele,i)=>{
-                if(index === i){
-                  ele.style.display = 'block'
-                }
-              })
-              this.$refs.bmb2.forEach((ele,i)=>{
-                if(index === i){
-                  ele.style.display = 'block'
-                }
-              })
-              this.$refs.bmb3.forEach((ele,i)=>{
+            if(this.$refs.bmb){
+              this.$refs.bmb.forEach((ele,i)=>{
                 if(index === i){
                   ele.style.display = 'block'
                 }
@@ -562,10 +558,12 @@ export default {
           // console.log('Scrolldown button appears')
         } else {
           this.$refs.scrld[index].style.display = 'none'
-          if(this.$refs.bmb1 && this.$refs.bmb2 && this.$refs.bmb3 && this.$refs.bmb1[index] && this.$refs.bmb2[index] && this.$refs.bmb3[index]){
-            this.$refs.bmb1[index].style.display = 'none'
-            this.$refs.bmb2[index].style.display = 'none'
-            this.$refs.bmb3[index].style.display = 'none'
+          if(this.$refs.bmb){
+            this.$refs.bmb.forEach((ele,i)=>{
+              if(index === i){
+                ele.style.display = 'none'
+              }
+            })
           }
           // console.log('Nothing')
         }
@@ -616,7 +614,7 @@ export default {
         this.scrollDown(project,index)
       }
     },
-    feedbackRead(project,index,n=false){
+    feedbackRead(project,index,n='none'){
       // console.log(project)
       let allRead = true
       project.chatLog.map((value,i)=>{
@@ -632,9 +630,9 @@ export default {
         }
         return value
       })
-      if(!allRead){
+      if(!allRead || n === 'send'){
         // console.log('Feeding data to Firestore')
-        if(!n){
+        if(n==='none'){
           this.lastIndex[index] = null
         }
         new Promise(resolve=>setTimeout(resolve,50)).then(()=>{
@@ -654,7 +652,7 @@ export default {
         this.$refs.bprt.forEach((ele,i)=>{
           if(ele.style.display === 'block'){
             // console.log('Index '+i+' is opened')
-            this.feedbackRead(this.projects[i],i,true)
+            this.feedbackRead(this.projects[i],i,'interval')
           }
         })
       }
@@ -664,14 +662,13 @@ export default {
       // console.log('msg: '+this.msg[index])
       if(this.msg[index]){
         // console.log('Condition satisfied')
-        this.$db.collection('project').doc(this.projects[index].pid).update({
-          chatLog: firebase.firestore.FieldValue.arrayUnion({
-            message: this.msg[index],
-            read:[],
-            timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
-            uid: firebase.auth().currentUser.uid
-          })
+        project.chatLog.push({
+          message: this.msg[index],
+          read:[],
+          timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
+          uid: firebase.auth().currentUser.uid
         })
+        this.feedbackRead(project,index,'send')
       } else {
         // console.log('Condition unsatisfied')
       }
