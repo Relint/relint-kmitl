@@ -118,9 +118,6 @@ data () {
 
       this.closeFormSetting()
       this.$store.subscribe((mutation, state) => {
-        if(mutation.type === 'setSearchText'){
-          this.searchText = state.searchText
-        }
         if(mutation.type === 'setProject'){
           this.projects = state.project
         }

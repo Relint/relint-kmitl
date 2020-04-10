@@ -242,6 +242,7 @@ export default {
         }
       })
       this.$store.commit('setProject',this.projects)
+      // console.log(this.projects)
       new Promise(resolve=>setTimeout(resolve,50)).then(()=>{
         this.projects.map((ele,index)=>{
           if((document && document.getElementById('chat-form').style.display === 'none') || (this.$refs.prt && this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index))){
@@ -342,6 +343,7 @@ export default {
     toggleFormChat(){
       if(document.getElementById('chat-form').style.display === 'none'){
         document.getElementById('chat-form').style.display = 'block'
+        this.feedInterval = setInterval(this.feedbackReadInterval,300)
       } else {
         if(this.$refs.bprt){
           this.$refs.bprt.forEach((ele,i)=>{
@@ -351,6 +353,7 @@ export default {
           })
         }
         document.getElementById('chat-form').style.display = 'none'
+        clearInterval(this.feedInterval)
       }
     },
     inviteAccept (pid) {
@@ -613,7 +616,7 @@ export default {
         this.scrollDown(project,index)
       }
     },
-    feedbackRead(project,index){
+    feedbackRead(project,index,n=false){
       // console.log(project)
       let allRead = true
       project.chatLog.map((value,i)=>{
@@ -631,7 +634,9 @@ export default {
       })
       if(!allRead){
         // console.log('Feeding data to Firestore')
-        this.lastIndex[index] = null
+        if(!n){
+          this.lastIndex[index] = null
+        }
         new Promise(resolve=>setTimeout(resolve,50)).then(()=>{
           this.$db.collection("project").doc(project.pid).set({
             chatLog: project.chatLog
@@ -643,6 +648,16 @@ export default {
         // console.log('No need to feeding data to Firestore')
       }
       // console.log(project.chatLog)
+    },
+    feedbackReadInterval(){
+      if(this.$refs.bprt){
+        this.$refs.bprt.forEach((ele,i)=>{
+          if(ele.style.display === 'block'){
+            // console.log('Index '+i+' is opened')
+            this.feedbackRead(this.projects[i],i,true)
+          }
+        })
+      }
     },
     sendMsg(project,index){
       // console.log('Sending message of index: '+index)

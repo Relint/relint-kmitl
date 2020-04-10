@@ -8,7 +8,6 @@ export default new Vuex.Store({
   state: {
     username: '',
     uid: '',
-    searchText: '',
     pid: '',
     openChat: false,
     project: [],
@@ -18,9 +17,6 @@ export default new Vuex.Store({
     setRecord(state, n) {
       state.username = n.username;
       state.uid = n.uid;
-    },
-    setSearchText(state, n){
-      state.searchText = n;
     },
     setSelectedPID(state, n){
       state.pid = n;

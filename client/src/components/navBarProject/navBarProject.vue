@@ -60,38 +60,23 @@ export default {
       projectName: "",
       deadline: "",
       description: "",
-
-      messages: [],
-      log: [],
-      msg: "",
-      relativeScrollHeight: 0,
-      unreadIndex: [],
-      lastIndex: null,
-      leftUnread: 0
     };
-  },
-  beforeCreate() {
-    this.$db
-      .collection("project")
-      .doc(this.$store.state.pid)
-      .onSnapshot(doc => {
-        if (doc.exists) {
-          this.projectName = doc.data().title;
-          const time = doc.data().deadline.toDate();
-          this.deadline =
-            time.getDate() +
-            "-" +
-            (time.getMonth() + 1) +
-            "-" +
-            time.getFullYear();
-          this.description = doc.data().description;
-        } else {
-          this.$router.replace("/addBoard");
-        }
-      });
   },
   mounted() {
     document.getElementById("manage").style.display = "none"
+    this.$store.subscribe((mutation, state) => {
+      if(mutation.type === 'setProject'){
+        const doc = state.project.filter(ele=>ele.pid===this.$store.state.pid)[0]
+        if (doc) {
+          // console.log(doc)
+          this.projectName = doc.title;
+          this.deadline = this.analysisTime(doc.deadline)
+          this.description = doc.description;
+        } else {
+          this.$router.replace("/addBoard");
+        }
+      }
+    })
   },
   methods: {
     backToHome() {
@@ -104,6 +89,18 @@ export default {
       else {
         document.getElementById("manage").style.display = "none"
       }
+    },
+    /* eslint-disable */
+    analysisTime(timestamp,n=false){
+      const time = timestamp.toDate()
+      const now = new Date()
+      const yy = time.getFullYear()
+      const mm = time.getMonth()
+      const dd = time.getDate()
+      const ny = now.getFullYear()
+      const nm = now.getMonth()
+      const nd = now.getDate()
+      return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
     },
   }
 };

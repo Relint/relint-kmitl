@@ -25,6 +25,9 @@ hr {
 }
 .form-projectName {
   font-size: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 #iconNBP {
@@ -48,6 +51,7 @@ hr {
   padding-right: 5%;
 }
 .div-2 {
+  max-width: 50%;
   padding-right: 5%;
 }
 // .div-3 {
