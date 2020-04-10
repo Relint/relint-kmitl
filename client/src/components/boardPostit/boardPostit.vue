@@ -60,15 +60,39 @@
             </div>
         </div>
         <div v-for="(postit,i) in postits" :key="'fc'+i" :ref="'fc'" class="setting-card ">
-          <p>index:{{i}} name:{{postit.title}}  </p>
-            <input class="input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
-            <input class="input-des" type="text" placeholder="Description" v-model="dessIn"><br/>
-            <input  type="date" id="datefield" min="2000-01-01" v-model="dateIn"><br/>
-            <input class="input-as"   type="text" placeholder="Assign"  >
-            <button  class="btn-as-ok " >ok</button>
-          
+          <div class="show-index"><p>card : {{i+1}}  |  title : {{postit.title}}  </p></div>
+            <input class=" input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
+            <input  class="input-date float-r " type="date" id="datefield" min="2000-01-01" v-model="dateIn"><br/>
+            <textarea class=" input-des " type="text" placeholder="Description" v-model="dessIn"></textarea><br/>
+              <select class="status float-r " id="status" name="status">
+                <option >Australia</option>
+                <option >Canada</option>
+                <option>USA</option>
+              </select>
+              <div class="contain-assign float-l " id="assign-scroll">
+          <!-- <input class=" input-as "   type="text" placeholder="Assign"  > -->
+          <button class="btn-as-ok float-r">ok</button>
+          <select  class="assignS"  id="assign">
+            <option >Austrssssssssssalia</option>
+                <option >Canada</option>
+                <option>USA</option>
+          </select>
+          </div>
+            <div class="contain-vote float-r ">  
+                  <p>vote this card</p>
+                  <br/>
+                  <ul id="rating" class="rating">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                  </ul>  
+            </div> 
+          <div class="contain-btn-setting">
           <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
           <button  class="btn-setting-cancel" @click="closeFormCard(i)">Cancel</button>
+          </div>
           </div>
 
           <!-- <div v-for="(postit,i) in postits" :key="'xfc'+i" :ref="'xfc'">

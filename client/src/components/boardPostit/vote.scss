@@ -50,17 +50,19 @@
 
 .contain-vote {
   z-index: 2;
-  position: absolute;
+  position: relative;
   background-color:$pinkk;
-  padding-left: 8px;
-  padding-right: 8px;
+  padding-left: 29px;
+  padding-right: 29px;
   padding-top: 30px;
-  padding-bottom: 10px;
+  padding-bottom: 43px;
   border-radius: 15px;
   // float: left;
-  left:53%;
-  top:44%;
+//   left:53%;
+//   top:44%;
   text-align: center;
+  top:-320px;
+  color: rgb(156, 154, 154);
   
 }
 

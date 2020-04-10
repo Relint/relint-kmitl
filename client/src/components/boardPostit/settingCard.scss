@@ -2,19 +2,17 @@
 .wrapperCbtn{
     top: 440px;
   }
-  
   .setting-card {
     z-index: 2;
     position: absolute;
     width: 500px;
-    height: 450px;
+    min-height: 530px;
+    // height: 450px;
     display: none;
     background-color:rgb(255, 255, 255);
-    // opacity: 0;
-    // transition:all 0.75s ease;
     border: 1px solid #ccc;
     border-radius: 20px;
-    padding: 15px;
+    padding: 15px 15px 15px 15px;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
     top:51.25%;
     left: 50%;
@@ -26,15 +24,46 @@
     // width: 500px;
     // height: 450px;
   }
-  
-  
-  
-   
-    //input project des date-----------------------
-  
-  .input-title {
+  .show-index {
+    width: 480px;
+    height: 20px;
+    background-color: rgb(209, 208, 208);
+    margin-bottom: 15px;
+    border-radius: 10px;
+    padding: 10px 10px 10px 10px;
+  }
+  .contain-assign {
     position: relative;
     width: 480px;
+    height: 60px;
+    // background-color:$orange;
+    border: 1px solid  rgb(194, 194, 194);
+    border-radius: 15px;
+    padding: 25px 10px 10px 10px;
+    margin-bottom: 20px;
+    top:-45px
+  }
+  #assign-scroll{
+
+  }
+  .div-1 {
+    // margin-top:-100px;
+  }
+   
+    //input project des date-----------------------
+  .wrapperS {
+    margin-top: 10px;
+  }
+  .float-l {
+    float: left;
+  }
+  .flot-r {
+    float: right;
+  }
+
+  .input-title {
+    position: relative;
+    width: 230px;
     height: 50px;
     border-radius: 15px;
     border: 1px solid $colorFront;
@@ -44,27 +73,39 @@
    .input-des {
     position: relative;
     border-radius: 20px;
-    width: 480px;
-    height: 100px;
+    width: 230px;
+    height: 185px;
     border: 1px solid $colorFront;
-    padding: 0 0 0 20px ;
+    padding: 10px 10px 10px 10px ;
     font-size: 15px;
-    margin: 10px 0  0  0 ;
+    margin-bottom: 10px;
+    margin-right: 10px;
+    // margin: 10px 0  0  0 ;
+    // top:-10px
   }
-  
+  textarea {
+    resize: vertical;
+    // resize: none;
+    min-height: 185px;
+}
+  .input-date {
+    position: relative;
+  }
   .input-as {
     position: relative;
-    width: 180px;
-    height: 50px;
-    border-radius: 15px;
+    width: 170px;
+    height: 35px;
+    border-radius: 25px;
     border: 1px solid $colorFront;
+    background-color: white;
     padding: 0 0 0 20px ;
     font-size: 15px;
-    margin: 10px 0  0  30px ;
+    // margin: 10px 0  0  30px ;
+    // box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
   }
   .btn-as-ok {
     cursor: pointer;
-    position: absolute;
+    position: relative;
     font-size: 20px;
     color: white;
     background: $redFire;
@@ -72,27 +113,35 @@
     height: 40px;
     border-radius: 40px;
     outline: 0;
-    bottom: 100px;
-    right: 70%;
+    bottom: -5px;
+    right: 200px;
     border: none;
     box-shadow: 2px 2px 10px rgba($dark, .5);
     transition: all .5s ease-in-out;
-    &:hover {
-      background: darken($white, 5%);
-      transform: scale(1.05);
-      transition: all .3s ease-in-out;
+    // &:hover {
+    //   background: darken($white, 5%);
+    //   transform: scale(1.05);
+    //   transition: all .3s ease-in-out;
+    // }
     }
+    #assign {
+    -ms-appearance: none;
+    }
+
+    .contain-btn-setting {
+      position: relative;
+      top:130px
     }
   .btn-setting-accept {
     cursor: pointer;
-    position: absolute;
+    position: relative;
     background: $bluesky;
     font-size: 17px;
     color: white;
     width: 25%;
     height:35px;
     border-radius: 20px;
-    top: 90%;
+    // top: 90%;
     left: 20%;
     outline: 0;
     border: none;
@@ -106,15 +155,15 @@
   }
   .btn-setting-cancel {
     cursor: pointer;
-    position: absolute;
+    position: relative;
     background: $redFire;
     color: white;
     font-size: 17px;
     width: 25%;
     height:35px;
     border-radius: 20px;
-    top: 90%;
-    left: 55%;
+    // top: 90%;
+    left: 30%;
     outline: 0;
     border: none;
     box-shadow: 2px 2px 10px rgba($dark, .5);
@@ -138,45 +187,51 @@
   
   // Always display the drop down caret 
   input[type="date"]::-webkit-calendar-picker-indicator {
-    color:$colorFront;
-    font-size: 20px;
-    padding: 0 30px 0 0 ;
-   
+    opacity: 0.1;
   }
   // styles  date inputs 
   input[type="date"] {
+    position: relative;
     appearance: none;
     -webkit-appearance: none;
     padding:5px;
     display: inline-block !important;
     visibility: visible !important;
     border-radius: 15px;
-    width: 180px;
+    width: 170px;
     height: 50px;
     border: 1px solid $colorFront;
-    padding: 0 0 0 20px ;
+    padding: 0 30px 0 30px ;
     font-size: 15px;
-    margin: 10px 0  0  30px ;
+    // margin: 10px 0  0  30px ;
+    top:-52px;
+    color: rgb(122, 122, 122);
   }
+  input[type="date"]{
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  85% 50% no-repeat ;
+  
+}
   // style
   .contain-selector {
     position: absolute;
   }
   select {
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    -ms-appearance: none;
-    appearance: none;
-    border-style: none; ;
+    // -webkit-appearance: none;
+    // -moz-appearance: none;
+    // -ms-appearance: none;
+    // appearance: none;
+    outline: none;
+    border-style: none; 
     border-radius: 15px;
     outline: 0;
     box-shadow: none;
     background: $redFire;
-    width: 180px;
+    width: 232px;
     height: 50px;
     // padding-left: 20px;
     font-size: 15px;
     // margin: 15px 0  0  20px ;
+    
   }
   //style select option-------------------------
   // /* Remove IE arrow 
@@ -190,4 +245,12 @@
       color: #fff;
       cursor: pointer;
     }
-  
+  .status {
+    position: relative;
+    top:-220px
+  }
+
+  #assignS {
+    // position: relative;
+    // margin-top: -30px;
+  }
