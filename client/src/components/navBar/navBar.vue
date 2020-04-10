@@ -325,7 +325,8 @@ export default {
     this.collection()
     this.$rtdb.ref('/status/'+this.uid).off()
     this.$rtdb.ref('/status').off()
-    clearInterval(this.feedInterval)
+    this.feedbackReadInterval()
+    // clearInterval(this.feedInterval)
   },
   methods: {
     logout () {
@@ -349,7 +350,7 @@ export default {
     toggleFormChat(){
       if(document.getElementById('chat-form').style.display === 'none'){
         document.getElementById('chat-form').style.display = 'block'
-        this.feedInterval = setInterval(this.feedbackReadInterval,1000)
+        // this.feedInterval = setInterval(this.feedbackReadInterval,1000)
       } else {
         if(this.$refs.bprt){
           this.$refs.bprt.forEach((ele,i)=>{
@@ -359,7 +360,7 @@ export default {
           })
         }
         document.getElementById('chat-form').style.display = 'none'
-        clearInterval(this.feedInterval)
+        // clearInterval(this.feedInterval)
       }
     },
     inviteAccept (pid) {
