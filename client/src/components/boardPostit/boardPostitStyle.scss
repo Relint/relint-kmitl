@@ -1,4 +1,7 @@
 @import "@/components/Login/mixin.scss";
+@import "./card.scss";
+@import "./settingCard.scss";
+@import "./vote.scss";
 $greenSeaweed: rgba(2, 128, 144, 1);
 $blueQueen: rgba(69, 105, 144, 1);
 $redFire: rgba(244, 91, 105, 1);
@@ -14,16 +17,19 @@ $fontAsap: "Asap", sans-serif;
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
+.center-icon {
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
 .contain-boardPostit {
   position: absolute;
-  // background-color: $blueQueen;
   left: 0px;
   width: 100%;
   height: 100%;
-  // opacity: 0.5;
 }
 
-//scroll bar board
 .form-scroll-postit {
   width: 90%;
   height: 80%;
@@ -32,7 +38,6 @@ $fontAsap: "Asap", sans-serif;
   // background-color: yellow;
   overflow-y: hidden;
   scrollbar-width: thin;
-  
 }
 #postit-scroll::-webkit-scrollbar {
   width: 8px;
@@ -50,7 +55,6 @@ $fontAsap: "Asap", sans-serif;
 }
 
 
-
 // form-postit
 .contain-show-postit {
   position: absolute;
@@ -62,8 +66,6 @@ $fontAsap: "Asap", sans-serif;
   position: absolute;
   width: 290px;
   max-height: 630px;
-  // top: 5px;
-  // background-color:white;
   border-style: 5px solid rgb(83, 83, 83);
   overflow-y: scroll;
   overflow-x: hidden;
@@ -71,7 +73,6 @@ $fontAsap: "Asap", sans-serif;
   padding-bottom: 30px;
   border-radius: 15px;
 }
-
 #postit-scroll::-webkit-scrollbar {
   background-color: transparent;
   width: 4px;
@@ -82,12 +83,13 @@ $fontAsap: "Asap", sans-serif;
 }
 
 
+
+
 // input postit
 .form-input-postit {
   position: relative;
   top: 10px;
 }
-
 .input-postit {
   width: 250px;
   height: 50px;
@@ -96,7 +98,6 @@ $fontAsap: "Asap", sans-serif;
   border-style: none;
   border-radius: 20px;
   box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
-
 }
 // +
 .btn-create-postit {
@@ -117,12 +118,11 @@ $fontAsap: "Asap", sans-serif;
   }
 }
 
-.center-icon {
-  position: absolute;
-  top:50%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
+
+
+
+
+
 
 // edit input postit
 .input-edit-postit {
@@ -161,7 +161,6 @@ $fontAsap: "Asap", sans-serif;
   transition: all .5s ease-in-out;
   &:hover {
     background: darken($white, 5%);
-    // transform: scale(1.05);
     transition: all .3s ease-in-out;
   }
 }
@@ -181,7 +180,6 @@ $fontAsap: "Asap", sans-serif;
   transition: all .5s ease-in-out;
   &:hover {
     background: darken($white, 5%);
-    // transform: scale(1.05);
     transition: all .3s ease-in-out;
   }
 }
@@ -201,7 +199,6 @@ $fontAsap: "Asap", sans-serif;
   }
 }
 .btn-move {
-  // float:left;
   position: relative;
  top: -20px;
   cursor: pointer;
@@ -213,7 +210,6 @@ $fontAsap: "Asap", sans-serif;
   opacity: 0.5;
   &:hover {
     opacity: 1;
-    // transition: all .3s ease-in-out;
   }
 }
 .disabled{
@@ -268,359 +264,4 @@ $fontAsap: "Asap", sans-serif;
 
 
 
-// card
-.from-card {
-  position: relative;
-  width: 247px;
-  height: 100%;
-  background-color:white;
-  border-radius: 10px;
-  margin-left: 12px;
-  margin-top: 10px;
-  padding: 10px 10px 10px 10px;
-  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
-}
-.opa-card {
-  z-index: 1;
-  position: absolute;
-  width: 267px;
-  height: 100%;
-  background-color:white;
-  border-radius: 10px;
-  margin-left: -10px;
-  margin-top: -10px;
-  opacity: 0.1;
-}
-.btn-add-card {
-  cursor: pointer;
-  margin-bottom: 10px;
-  margin-top: 5px;
-  position: relative;
-  width: 290px;
-  height: 30px;
-  border-radius: 7px;
-  border: none;
-  outline: none;
-  opacity: 0.5;
-  // top:7px;
-  font-size: 16px;
-  background-color: white;
-  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
-  &:hover{
-    background: rgb(238, 238, 238);
-    transition: all .3s ease-in-out;
-    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
-  }
-}
 
-.wrapperC {
-  margin-top: -5px;
-  
-}
-.btn-remove-card {
-  z-index: 2;
-  margin-top: -125px;
-  position: relative;
-  width: 20px;
-  height: 20px;
-  background-color:white;
-  border: none;
-  outline: none;
-  opacity: 0.3;
-  cursor: pointer;
-  &:hover{
-    opacity: 1;
-    transition: all .3s ease-in-out;
-  }
-}
-.btn-edit-card {
-  z-index: 2;
- margin-top: -110px;
- width: 20px;
- height: 20px;
- position: relative;
-  background-color:white;
-  border: none;
-  outline: none;
-  opacity: 0.3;
-  cursor: pointer;
-  &:hover{
-    opacity: 1;
-    transition: all .3s ease-in-out;
-  }
-}
-h5 {
-  color: $redFire;
-}
-
-// setting
-.wrapperCbtn{
-  top: 440px;
-}
-
-.setting-card {
-  z-index: 2;
-  position: absolute;
-  width: 500px;
-  height: 450px;
-  display: none;
-  background-color:rgb(255, 255, 255);
-  // opacity: 0;
-  // transition:all 0.75s ease;
-  border: 1px solid #ccc;
-  border-radius: 20px;
-  padding: 15px;
-  box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
-  top:51.25%;
-  left: 50%;
-  transform: translate(-50%,-50%);
-}
-.setting-card.show{
-  display: block;
-  // opacity: 1;
-  // width: 500px;
-  // height: 450px;
-}
-
-
-
- 
-  //input project des date-----------------------
-
-.input-title {
-  position: relative;
-  width: 480px;
-  height: 50px;
-  border-radius: 15px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-}
- .input-des {
-  position: relative;
-  border-radius: 20px;
-  width: 480px;
-  height: 100px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 10px 0  0  0 ;
-}
-
-.input-as {
-  position: relative;
-  width: 180px;
-  height: 50px;
-  border-radius: 15px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 10px 0  0  30px ;
-}
-.btn-as-ok {
-  cursor: pointer;
-  position: absolute;
-  font-size: 20px;
-  color: white;
-  background: $redFire;
-  width: 40px;
-  height: 40px;
-  border-radius: 40px;
-  outline: 0;
-  bottom: 100px;
-  right: 70%;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-  }
-.btn-setting-accept {
-  cursor: pointer;
-  position: absolute;
-  background: $bluesky;
-  font-size: 17px;
-  color: white;
-  width: 25%;
-  height:35px;
-  border-radius: 20px;
-  top: 90%;
-  left: 20%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-.btn-setting-cancel {
-  cursor: pointer;
-  position: absolute;
-  background: $redFire;
-  color: white;
-  font-size: 17px;
-  width: 25%;
-  height:35px;
-  border-radius: 20px;
-  top: 90%;
-  left: 55%;
-  outline: 0;
-  border: none;
-  box-shadow: 2px 2px 10px rgba($dark, .5);
-  transition: all .5s ease-in-out;
-  &:hover {
-    background: darken($white, 5%);
-    transform: scale(1.05);
-    transition: all .3s ease-in-out;
-  }
-}
-
-//style date---------------------------------------------
-// Removes  clear button 
-input[type="date"]::-webkit-clear-button {
-  display: none;
-}
-// Removes  spin button 
-input[type="date"]::-webkit-inner-spin-button { 
-  display: none;
-}
-
-// Always display the drop down caret 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  color:$colorFront;
-  font-size: 20px;
-  padding: 0 30px 0 0 ;
- 
-}
-// styles  date inputs 
-input[type="date"] {
-  appearance: none;
-  -webkit-appearance: none;
-  padding:5px;
-  display: inline-block !important;
-  visibility: visible !important;
-  border-radius: 15px;
-  width: 180px;
-  height: 50px;
-  border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-  font-size: 15px;
-  margin: 10px 0  0  30px ;
-}
-// style
-.contain-selector {
-  position: absolute;
-}
-select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
-  border-style: none; ;
-  border-radius: 15px;
-  outline: 0;
-  box-shadow: none;
-  background: $redFire;
-  width: 180px;
-  height: 50px;
-  // padding-left: 20px;
-  font-size: 15px;
-  // margin: 15px 0  0  20px ;
-}
-//style select option-------------------------
-// /* Remove IE arrow 
-  select::-ms-expand {
-    display: none;
-  }
-
-  select {
-    flex: 1;
-    padding: 10px 10px 10px 20px;
-    color: #fff;
-    cursor: pointer;
-  }
-
-
-
-/* Rating */
-.rating{
-	margin: 0;
-	padding: 0;
-	float: left;
-	list-style: none;
-}
-
-.rating li{
-  z-index: 3;
-	width: 30px;
-	height: 30px;
-	// line-height: 32px;
-	border-radius: 15px;
-	text-align: center;
-	background: #ffffff;
-	float: right;
-	cursor: pointer;
-	color: white;
-	margin-right: 5px;
-
-	/* Transitions */
-	-webkit-transition: all .3s ease;
-	-moz-transition: all .3s ease;
-	-o-transition: all .3s ease;
-	-ms-transition: all .3s ease;
-	transition: all .3s ease;
-}
-
-// .rating li.current,
-// .rating li.current ~ li,
-// .rating li:focus,
-// .rating li:focus ~ li{
-// 	background: #c93d3d;
-// }
-
-// .rating:hover li.current,
-// .rating:hover li.current ~ li{
-// 	background: #c3c3c3;
-// }
-
-.rating li:hover,
-.rating li:hover ~ li{
-	background:$redFire !important;
-}
-
-.rating li:focus{
-	color: red;
-}
-
-.contain-vote {
-  z-index: 2;
-  position: absolute;
-  background-color:$pinkk;
-  padding-left: 8px;
-  padding-right: 8px;
-  padding-top: 30px;
-  padding-bottom: 10px;
-  border-radius: 15px;
-  // float: left;
-  left:53%;
-  top:44%;
-  text-align: center;
-  
-}
-
-
-.card-ghost {
-  transition: transform 0.18s ease;
-  transform: rotateZ(5deg)
-}
-
-.card-ghost-drop{
-  transition: transform 0.18s ease-in-out;
-  transform: rotateZ(0deg)
-}

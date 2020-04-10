@@ -1,0 +1,88 @@
+// card
+.from-card {
+    position: relative;
+    width: 247px;
+    height: 100%;
+    background-color:white;
+    border-radius: 10px;
+    margin-left: 12px;
+    margin-top: 10px;
+    padding: 10px 10px 10px 10px;
+    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  }
+  .opa-card {
+    z-index: 1;
+    position: absolute;
+    width: 267px;
+    height: 100%;
+    background-color:white;
+    border-radius: 10px;
+    margin-left: -10px;
+    margin-top: -10px;
+    opacity: 0.1;
+  }
+  .btn-add-card {
+    cursor: pointer;
+    margin-bottom: 10px;
+    margin-top: 5px;
+    position: relative;
+    width: 290px;
+    height: 30px;
+    border-radius: 7px;
+    border: none;
+    outline: none;
+    opacity: 0.5;
+    // top:7px;
+    font-size: 16px;
+    background-color: white;
+    box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+    &:hover{
+      background: rgb(238, 238, 238);
+      transition: all .3s ease-in-out;
+      box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+    }
+  }
+  
+  .wrapperC {
+    margin-top: -5px;
+    
+  }
+  .btn-remove-card {
+    z-index: 2;
+    margin-top: -125px;
+    position: relative;
+    width: 20px;
+    height: 20px;
+    background-color:white;
+    border: none;
+    outline: none;
+    opacity: 0.3;
+    cursor: pointer;
+    &:hover{
+      opacity: 1;
+      transition: all .3s ease-in-out;
+    }
+  }
+  .btn-edit-card {
+    z-index: 2;
+   margin-top: -110px;
+   width: 20px;
+   height: 20px;
+   position: relative;
+    background-color:white;
+    border: none;
+    outline: none;
+    opacity: 0.3;
+    cursor: pointer;
+    &:hover{
+      opacity: 1;
+      transition: all .3s ease-in-out;
+    }
+  }
+  h5 {
+    color: $redFire;
+  }
+  
+  
+  
+  

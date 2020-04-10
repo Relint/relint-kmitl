@@ -1,0 +1,76 @@
+/* Rating */
+.rating{
+	margin: 0;
+	padding: 0;
+	float: left;
+	list-style: none;
+}
+
+.rating li{
+  z-index: 3;
+	width: 30px;
+	height: 30px;
+	// line-height: 32px;
+	border-radius: 15px;
+	text-align: center;
+	background: #ffffff;
+	float: right;
+	cursor: pointer;
+	color: white;
+	margin-right: 5px;
+
+	/* Transitions */
+	-webkit-transition: all .3s ease;
+	-moz-transition: all .3s ease;
+	-o-transition: all .3s ease;
+	-ms-transition: all .3s ease;
+	transition: all .3s ease;
+}
+
+// .rating li.current,
+// .rating li.current ~ li,
+// .rating li:focus,
+// .rating li:focus ~ li{
+// 	background: #c93d3d;
+// }
+
+// .rating:hover li.current,
+// .rating:hover li.current ~ li{
+// 	background: #c3c3c3;
+// }
+
+.rating li:hover,
+.rating li:hover ~ li{
+	background:blue !important;
+}
+
+.rating li:focus{
+	color: red;
+}
+
+.contain-vote {
+  z-index: 2;
+  position: absolute;
+  background-color:$pinkk;
+  padding-left: 8px;
+  padding-right: 8px;
+  padding-top: 30px;
+  padding-bottom: 10px;
+  border-radius: 15px;
+  // float: left;
+  left:53%;
+  top:44%;
+  text-align: center;
+  
+}
+
+
+.card-ghost {
+  transition: transform 0.18s ease;
+  transform: rotateZ(5deg)
+}
+
+.card-ghost-drop{
+  transition: transform 0.18s ease-in-out;
+  transform: rotateZ(0deg)
+}

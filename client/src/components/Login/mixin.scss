@@ -18,35 +18,37 @@ $secondary: #99DBB4;
   padding: 0px;
   font-family: $fontAsap; 
 }
-
-// translate
-@mixin translate ($x, $y) {
-    @include transform(translate($x, $y));
+*:focus {
+  outline: none;
 }
-//transform origin
-  @mixin transform-origin ($origin) {
-    moz-transform-origin: $origin;
-       -o-transform-origin: $origin;
-      -ms-transform-origin: $origin;
-  -webkit-transform-origin: $origin;
-          transform-origin: $origin;
-}
-  // generic transform
-@mixin transform($transforms) {
-    -moz-transform: $transforms;
-      -o-transform: $transforms;
-     -ms-transform: $transforms;
-  -webkit-transform: $transforms;
-         transform: $transforms;
-  }
-@mixin transition($transition...) {
-    -moz-transition:    $transition;
-    -o-transition:      $transition;
-    -webkit-transition: $transition;
-    transition:         $transition;
-  }
-@keyframes rotate {
-    from { transform: rotate(0deg); }
-    from { transform: rotate(360deg); }
-}
+// // translate
+// @mixin translate ($x, $y) {
+//     @include transform(translate($x, $y));
+// }
+// //transform origin
+//   @mixin transform-origin ($origin) {
+//     moz-transform-origin: $origin;
+//        -o-transform-origin: $origin;
+//       -ms-transform-origin: $origin;
+//   -webkit-transform-origin: $origin;
+//           transform-origin: $origin;
+// }
+//   // generic transform
+// @mixin transform($transforms) {
+//     -moz-transform: $transforms;
+//       -o-transform: $transforms;
+//      -ms-transform: $transforms;
+//   -webkit-transform: $transforms;
+//          transform: $transforms;
+//   }
+// @mixin transition($transition...) {
+//     -moz-transition:    $transition;
+//     -o-transition:      $transition;
+//     -webkit-transition: $transition;
+//     transition:         $transition;
+//   }
+// @keyframes rotate {
+//     from { transform: rotate(0deg); }
+//     from { transform: rotate(360deg); }
+// }
 

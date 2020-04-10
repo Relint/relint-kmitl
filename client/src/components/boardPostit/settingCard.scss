@@ -1,0 +1,193 @@
+// setting
+.wrapperCbtn{
+    top: 440px;
+  }
+  
+  .setting-card {
+    z-index: 2;
+    position: absolute;
+    width: 500px;
+    height: 450px;
+    display: none;
+    background-color:rgb(255, 255, 255);
+    // opacity: 0;
+    // transition:all 0.75s ease;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 15px;
+    box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
+    top:51.25%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+  .setting-card.show{
+    display: block;
+    // opacity: 1;
+    // width: 500px;
+    // height: 450px;
+  }
+  
+  
+  
+   
+    //input project des date-----------------------
+  
+  .input-title {
+    position: relative;
+    width: 480px;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid $colorFront;
+    padding: 0 0 0 20px ;
+    font-size: 15px;
+  }
+   .input-des {
+    position: relative;
+    border-radius: 20px;
+    width: 480px;
+    height: 100px;
+    border: 1px solid $colorFront;
+    padding: 0 0 0 20px ;
+    font-size: 15px;
+    margin: 10px 0  0  0 ;
+  }
+  
+  .input-as {
+    position: relative;
+    width: 180px;
+    height: 50px;
+    border-radius: 15px;
+    border: 1px solid $colorFront;
+    padding: 0 0 0 20px ;
+    font-size: 15px;
+    margin: 10px 0  0  30px ;
+  }
+  .btn-as-ok {
+    cursor: pointer;
+    position: absolute;
+    font-size: 20px;
+    color: white;
+    background: $redFire;
+    width: 40px;
+    height: 40px;
+    border-radius: 40px;
+    outline: 0;
+    bottom: 100px;
+    right: 70%;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+    }
+  .btn-setting-accept {
+    cursor: pointer;
+    position: absolute;
+    background: $bluesky;
+    font-size: 17px;
+    color: white;
+    width: 25%;
+    height:35px;
+    border-radius: 20px;
+    top: 90%;
+    left: 20%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  .btn-setting-cancel {
+    cursor: pointer;
+    position: absolute;
+    background: $redFire;
+    color: white;
+    font-size: 17px;
+    width: 25%;
+    height:35px;
+    border-radius: 20px;
+    top: 90%;
+    left: 55%;
+    outline: 0;
+    border: none;
+    box-shadow: 2px 2px 10px rgba($dark, .5);
+    transition: all .5s ease-in-out;
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  
+  //style date---------------------------------------------
+  // Removes  clear button 
+  input[type="date"]::-webkit-clear-button {
+    display: none;
+  }
+  // Removes  spin button 
+  input[type="date"]::-webkit-inner-spin-button { 
+    display: none;
+  }
+  
+  // Always display the drop down caret 
+  input[type="date"]::-webkit-calendar-picker-indicator {
+    color:$colorFront;
+    font-size: 20px;
+    padding: 0 30px 0 0 ;
+   
+  }
+  // styles  date inputs 
+  input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    padding:5px;
+    display: inline-block !important;
+    visibility: visible !important;
+    border-radius: 15px;
+    width: 180px;
+    height: 50px;
+    border: 1px solid $colorFront;
+    padding: 0 0 0 20px ;
+    font-size: 15px;
+    margin: 10px 0  0  30px ;
+  }
+  // style
+  .contain-selector {
+    position: absolute;
+  }
+  select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    -ms-appearance: none;
+    appearance: none;
+    border-style: none; ;
+    border-radius: 15px;
+    outline: 0;
+    box-shadow: none;
+    background: $redFire;
+    width: 180px;
+    height: 50px;
+    // padding-left: 20px;
+    font-size: 15px;
+    // margin: 15px 0  0  20px ;
+  }
+  //style select option-------------------------
+  // /* Remove IE arrow 
+    select::-ms-expand {
+      display: none;
+    }
+  
+    select {
+      flex: 1;
+      padding: 10px 10px 10px 20px;
+      color: #fff;
+      cursor: pointer;
+    }
+  

@@ -66,22 +66,12 @@
             <input  type="date" id="datefield" min="2000-01-01" v-model="dateIn"><br/>
             <input class="input-as"   type="text" placeholder="Assign"  >
             <button  class="btn-as-ok " >ok</button>
-            <div class="contain-vote ">  
-              <p>vote this card</p>
-              <br/>
-              <ul id="rating" class="rating">
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-                <li></li>
-              </ul>  
-            </div> 
+          
           <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
           <button  class="btn-setting-cancel" @click="closeFormCard(i)">Cancel</button>
           </div>
 
-          <div v-for="(postit,i) in postits" :key="'xfc'+i" :ref="'xfc'">
+          <!-- <div v-for="(postit,i) in postits" :key="'xfc'+i" :ref="'xfc'">
             <div v-for="(card,j) in postit.card" :key="'efc'+i+'-'+j" :ref="'efc'+i" class="setting-card ">
               <p>index:{{j}} name:{{card.title}}  </p>
                 <input class="input-title" type="text" placeholder="Title"  > <br/>
@@ -104,7 +94,7 @@
               <button class="btn-setting-accept" @click="saveCard(i)" >Save</button>
               <button  class="btn-setting-cancel" @click="closeEditFormCard(i)">Cancel</button>
             </div>
-          </div>
+          </div> -->
 
       </div>
     </div>
