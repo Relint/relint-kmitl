@@ -34,8 +34,8 @@
                 <div id="postit-scroll" class="contain-show-card">
                 <Container 
                     group-name="col"
-                    @drop="(e) => onCardDrop(postit.title, e)"
-                    :get-child-payload="getCardPayload(postit.title)"
+                    @drop="(e) => onCardDrop(index, e)"
+                    :get-child-payload="getCardPayload(index)"
                     drag-class="card-ghost"
                     drop-class="card-ghost-drop"
                   >
@@ -230,7 +230,8 @@ export default {
         if (doc) {
           // console.log(this.postits)
           this.project = doc
-          this.postits = doc.postit
+          // this.postits = doc.postit
+          this.postits = this.temp1
           this.postits.push({createBox:true,card:[]})
         }
       }
@@ -246,25 +247,20 @@ export default {
     },
     onCardDrop(columnId, dropResult) {
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
-        
-        if (dropResult.addedIndex !== null){
-          let found = this.postits.filter(p => p.title === columnId)[0];
-          found.card.splice(dropResult.addedIndex, 0, dropResult.payload)
-        }
-
         if(dropResult.removedIndex !== null){
-          let found = this.postits.filter(p => p.title === columnId)[0];
+          let found = this.postits.filter((p,i) => i === columnId)[0];
           found.card.splice(dropResult.removedIndex, 1);
+        }
+        if (dropResult.addedIndex !== null){
+          let found = this.postits.filter((p,i) => i === columnId)[0];
+          found.card.splice(dropResult.addedIndex, 0, dropResult.payload)
         }
       }
     },
-     getCardPayload(id){
+    getCardPayload(id){
       let that = this;
       return function(index) {
-        let found = that.postits.filter(p => p.title === id)[0].card[
-          index
-        ];
-
+        let found = that.postits.filter((p,i) => i  === id)[0].card[index];
         return found;
       }
     },
@@ -382,7 +378,7 @@ export default {
       
       // document.getElementById('form-input-postit').style.display='none'
     },
-     timeFormat(n) {
+    timeFormat(n) {
       const time = n.toDate()
       const hours =
         time.getHours() < 10 ? "0" + time.getHours() : time.getHours()
@@ -420,16 +416,18 @@ export default {
     keyupCallback(e){
       e = e || window.event
       // console.log(e.keyCode)
-      this.$refs.epsti.forEach((ele,i)=>{
-        if(ele.style.display === 'block'){
-          if(e.keyCode === 27){ //esc
-            this.closeFormEditPostit(i)
+      if(this.$refs.epsti){
+        this.$refs.epsti.forEach((ele,i)=>{
+          if(ele.style.display === 'block'){
+            if(e.keyCode === 27){ //esc
+              this.closeFormEditPostit(i)
+            }
+            if(e.keyCode === 13){ //enter
+              this.saveEditPostit(i)
+            }
           }
-          if(e.keyCode === 13){ //enter
-            this.saveEditPostit(i)
-          }
-        }
-      })
+        })
+      } 
     },
   }
 }
