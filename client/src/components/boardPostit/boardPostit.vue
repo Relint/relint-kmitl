@@ -119,14 +119,15 @@ export default {
   },
   data() {
     return {
+      project:[],
+      postits:[],
+      cards:[],
+
       cardTiltleIn:'',
       dessIn:'',
       dateIn:'',
-      pid:'',
       postitIn:'',
       postitInEdit:'',
-      postits:[],
-      cards:[],
       temp0:[],
       temp1:[
         {
@@ -182,19 +183,30 @@ export default {
             ],
     };
   },
-  beforeCreate(){
-      new Promise(resolve=>setTimeout(resolve,50)).then(()=>{      
-        this.postits = this.temp1
-        this.postits.push({createBox:true,card:[]})
-        // console.log(this.postits)
-      })
-    },
+  // this.postits.push({createBox:true,card:[]})
   mounted () {
-    this.pid = this.$store.state.pid
+    this.vuexUnsubscribe = this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      if(mutation.type === 'setProject'){
+        const doc = state.project.filter(ele=>ele.pid===this.$store.state.pid)[0]
+        if (doc) {
+          // console.log(this.postits)
+          this.project = doc
+          this.postits = doc.postit
+          this.postits.push({createBox:true,card:[]})
+        }
+      }
+    })
     document.addEventListener('keyup',this.keyupCallback)
   },
+  beforeDestroy(){
+    this.vuexUnsubscribe()
+  },
   methods: {
-     onCardDrop(columnId, dropResult) {
+    feedbackPostit(){
+
+    },
+    onCardDrop(columnId, dropResult) {
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
         
         if (dropResult.addedIndex !== null){

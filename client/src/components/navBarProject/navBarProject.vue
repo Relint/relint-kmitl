@@ -64,7 +64,7 @@ export default {
   },
   mounted() {
     document.getElementById("manage").style.display = "none"
-    this.$store.subscribe((mutation, state) => {
+    this.vuexUnsubscribe = this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'setProject'){
         const doc = state.project.filter(ele=>ele.pid===this.$store.state.pid)[0]
         if (doc) {
@@ -77,6 +77,9 @@ export default {
         }
       }
     })
+  },
+  beforeDestroy(){
+    this.vuexUnsubscribe()
   },
   methods: {
     backToHome() {

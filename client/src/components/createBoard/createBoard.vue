@@ -79,51 +79,52 @@ export default {
   components: {
     navBarProject,
   },
-data () {
-        return {
-            projectNameIn:'',
-            descriptionIn:'',
-            deadlineIn:'',
-            
-            projects :[],
+  data () {
+    return {
+      projectNameIn:'',
+      descriptionIn:'',
+      deadlineIn:'',
+      
+      projects :[],
 
-            emailIn:'',
-            authority:0,
-            invites: [],
+      emailIn:'',
+      authority:0,
+      invites: [],
 
-            opts: [
-              { value: 0, text: '-Choose Member Type-'},
-              { value: 1, text: 'Co-Admin' },
-              { value: 2, text: 'Member' },
-            ],
-            priorityMap: [
-              'Admin',
-              'Co-Admin',
-              'Member'
-            ],
+      opts: [
+        { value: 0, text: '-Choose Member Type-'},
+        { value: 1, text: 'Co-Admin' },
+        { value: 2, text: 'Member' },
+      ],
+      priorityMap: [
+        'Admin',
+        'Co-Admin',
+        'Member'
+      ],
 
-            searchText: ''
+      searchText: ''
+    }
+  },
+  mounted () {
+    let today = new Date()
+    let dd = today.getDate()
+    let mm = today.getMonth()+1
+    let yyyy = today.getFullYear()
+    if(dd < 10) dd = '0'+dd
+    if(mm < 10) mm = '0'+mm
+    today = yyyy+'-'+mm+'-'+dd
+    document.getElementById('datefield').setAttribute('min', today)
 
-        }
-    },
-    mounted () {
-      let today = new Date()
-      let dd = today.getDate()
-      let mm = today.getMonth()+1
-      let yyyy = today.getFullYear()
-      if(dd < 10) dd = '0'+dd
-      if(mm < 10) mm = '0'+mm
-      today = yyyy+'-'+mm+'-'+dd
-      document.getElementById('datefield').setAttribute('min', today)
-
-      this.closeFormSetting()
-      this.$store.subscribe((mutation, state) => {
-        if(mutation.type === 'setProject'){
-          this.projects = state.project
-        }
-      })
-    },
-  
+    this.closeFormSetting()
+    this.vuexUnsubscribe = this.$store.subscribe((mutation, state) => {
+      if(mutation.type === 'setProject'){
+        this.projects = state.project
+      }
+    })
+  },
+  beforeDestroy(){
+    this.vuexUnsubscribe()
+  },
   methods: {
     //eventMouse U -D
     eventMouseUD () {
@@ -193,7 +194,8 @@ data () {
               priority: 0
           }],
           invite:this.invites.map(ele => ele.data),
-          chatLog: []
+          chatLog: [],
+          postit: [],
         }
         ref.doc(pid).set(obj)
         ref.doc('pindex').set({
