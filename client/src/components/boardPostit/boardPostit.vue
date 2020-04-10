@@ -183,24 +183,6 @@ export default {
     };
   },
   beforeCreate(){
-      let collection = this.$db.collection('project').onSnapshot(snapshot => {
-          this.project = []
-          snapshot.forEach(doc => {
-            if(doc.data().member){
-              let proj = doc.data().member.filter(value => {
-                return value.uid === this.$store.state.uid
-              })
-              if(proj.length !== 0){
-                let obj = doc.data()
-                obj.pid = doc.id
-                obj.permission = !proj[0].priority
-                this.project.push(obj)
-              }
-            }
-          });
-        })
-
-
       new Promise(resolve=>setTimeout(resolve,50)).then(()=>{      
         this.postits = this.temp1
         this.postits.push({createBox:true,card:[]})
