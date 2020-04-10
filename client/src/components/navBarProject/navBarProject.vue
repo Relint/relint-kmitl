@@ -38,7 +38,7 @@
       
       
       <div class="contain-input-edit" style="display:none;left:160px;" id="editP">
-        <input id="einput"  class="input-edit-postit" type="text" v-model="projectNameIn" placeholder="Edit a title..."> 
+        <input id="einput"  class="input-edit-postit" type="text" v-model="projectNameIn" placeholder="Edit a title..."  v-on:keyup.enter="saveProjectName"> 
         
         <div class="contain-btn-edit">
           <button @click="saveProjectName" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="contain-input-edit" style="display:none;left:275px;" id="editT">
-          <input id="einput"  class="input-edit-postit" type="date" v-model="deadlineIn" placeholder="Edit a title..."> 
+          <input id="einput"  class="input-edit-postit" type="date" v-model="deadlineIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDeadline"> 
          
          <div class="contain-btn-edit">
             <button @click="saveDeadline" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
@@ -54,7 +54,7 @@
           </div>
       </div>
       <div class="contain-input-edit" style="display:none;left:430px;" id="editD">
-          <input id="einput"  class="input-edit-postit" type="text" v-model="descriptionIn" placeholder="Edit a title..."> 
+          <input id="einput"  class="input-edit-postit" type="text" v-model="descriptionIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDescription"> 
          
          <div class="contain-btn-edit">
             <button @click="saveDescription" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
@@ -119,8 +119,8 @@ export default {
 
       projectName: "",
       deadline: "",
+      deadlineDateFormat: "",
       description: "",
-      projects :[],
 
       emailIn:'',
       authority:0,
@@ -149,75 +149,46 @@ export default {
         }
       }
     })
+    document.addEventListener('keyup',this.keyupCallback)
+  },
+  beforeDestroy(){
+    this.vuexUnsubscribe()
   },
   methods: {
     saveProjectName () {
-      this.projectName=this.projectNameIn
-      this.projectNameIn=''
-      // const ref = this.$db.collection('project')
-      // ref.doc('pindex').get().then(doc => {
-      //   const pindex = doc.data()
-      //   const pid = 'P' + pindex.count
-      //   const obj = {
-      //     title: this.projectNameIn,
-      //     status: false,
-      //   }
-      //   ref.doc(pid).set(obj)
-      //   ref.doc('pindex').set({
-      //     count: pindex.count+1,
-      //     total: pindex.total+1
-      //   },{merge: true})
-      //   this.projectNameIn=''
-      // })
-        
+      if(this.projectNameIn && this.projectNameIn != this.projectName){
+        this.$db.collection('project').doc(this.$store.state.pid).update({
+          title: this.projectNameIn
+        }).then(()=>{
+          this.projectNameIn=''
+        })
+      }
       document.getElementById('editP').style.display='none'
       document.getElementById('btnP').disabled = false;
       document.getElementById('btnD').disabled = false;
       document.getElementById('btnT').disabled = false;
     },
     saveDeadline () {
-      this.deadline=this.deadlineIn
-      this.deadlineIn=''
-      // const ref = this.$db.collection('project')
-      // ref.doc('pindex').get().then(doc => {
-      //   this.deadlineIn = firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T00:00:00+07:00'))
-      //   const pindex = doc.data()
-      //   const pid = 'P' + pindex.count
-      //   const obj = {
-      //     deadline: this.deadlineIn,
-      //     status: false
-      //   }
-      //   ref.doc(pid).set(obj)
-      //   ref.doc('pindex').set({
-      //     count: pindex.count+1,
-      //     total: pindex.total+1
-      //   },{merge: true})
-      //   this.deadlineIn=''
-      // })
-       
+      if(this.deadlineIn){
+        this.$db.collection('project').doc(this.$store.state.pid).update({
+          deadline: firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T23:59:59+07:00'))
+        }).then(()=>{
+          this.deadlineIn=''
+        })
+      }
       document.getElementById('editT').style.display='none'
       document.getElementById('btnP').disabled = false;
       document.getElementById('btnD').disabled = false;
       document.getElementById('btnT').disabled = false;
     },
     saveDescription () {
-      this.description=this.descriptionIn
-      this.descriptionIn=''
-      // const ref = this.$db.collection('project')
-      // ref.doc('pindex').get().then(doc => {
-      //   const pindex = doc.data()
-      //   const pid = 'P' + pindex.count
-      //   const obj = {
-      //     description: this.descriptionIn,
-      //     status: false,
-      //   }
-      //   ref.doc(pid).set(obj)
-      //   ref.doc('pindex').set({
-      //     count: pindex.count+1,
-      //     total: pindex.total+1
-      //   },{merge: true})
-      //   this.descriptionIn=''
-      // })
+      if(this.descriptionIn && this.descriptionIn != this.description){
+        this.$db.collection('project').doc(this.$store.state.pid).update({
+          description: this.descriptionIn
+        }).then(()=>{
+          this.descriptionIn=''
+        })
+      }
       document.getElementById('editD').style.display='none'
       document.getElementById('btnP').disabled = false;
       document.getElementById('btnD').disabled = false;
@@ -228,7 +199,7 @@ export default {
       document.getElementById('editP').style.display='block'
       document.getElementById('btnT').disabled = true;
       document.getElementById('btnD').disabled = true;
-      
+      this.projectNameIn = this.projectName
     },
     closeEditPro () {
       document.getElementById('editP').style.display='none'
@@ -237,20 +208,20 @@ export default {
       document.getElementById('btnP').disabled = false;
       document.getElementById('btnD').disabled = false;
       document.getElementById('btnT').disabled = false;
-      
     },
     editDeadline () {
-       document.getElementById('btnT').disabled = false;
-       document.getElementById('editT').style.display='block'
-       document.getElementById('btnP').disabled = true;
-       document.getElementById('btnD').disabled = true;
-        
+      document.getElementById('btnT').disabled = false;
+      document.getElementById('editT').style.display='block'
+      document.getElementById('btnP').disabled = true;
+      document.getElementById('btnD').disabled = true;
+      this.deadlineIn = this.deadlineDateFormat
     },
     editDescription () {
       document.getElementById('btnD').disabled = true;
       document.getElementById('editD').style.display='block'
       document.getElementById('btnT').disabled = true;
       document.getElementById('btnP').disabled = true;
+      this.descriptionIn = this.description
     },
     backToHome() {
       this.$router.push("/addBoard");
@@ -265,7 +236,12 @@ export default {
     },
     /* eslint-disable */
     analysisTime(timestamp,n=false){
-      const time = timestamp.toDate()
+      let time = ''
+      if(!n){
+        time = timestamp.toDate()
+      } else {
+        time = timestamp
+      }
       const now = new Date()
       const yy = time.getFullYear()
       const mm = time.getMonth()
@@ -273,7 +249,15 @@ export default {
       const ny = now.getFullYear()
       const nm = now.getMonth()
       const nd = now.getDate()
+      this.deadlineDateFormat = yy + '-' + (mm+1<10?'0'+(mm+1):mm+1) + '-' + (dd<10?'0'+dd:dd)
       return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
+    },
+    keyupCallback(e){
+      e = e || window.event
+      // console.log(e.keyCode)
+      if(e.keyCode === 27){ //esc
+        this.closeEditPro()
+      }
     },
   }
 };

@@ -474,15 +474,19 @@ export default {
       e = e || window.event
       if(e.keyCode === 27){
         if(this.$refs.prt && this.$refs.bprt){
-          this.$refs.prt.forEach((ele,i)=>{
-            ele.style.backgroundColor = "white"
-          })
-          this.$refs.bprt.forEach((ele,i)=>{
-            if(ele.style.display === 'block'){
-              this.feedbackRead(this.projects[i],i)
-            }
-            ele.style.display = 'none'
-          })
+          if(this.$refs.bprt.some((ele,i)=>ele.style.display==='block')){
+            this.$refs.prt.forEach((ele,i)=>{
+              ele.style.backgroundColor = "white"
+            })
+            this.$refs.bprt.forEach((ele,i)=>{
+              if(ele.style.display === 'block'){
+                this.feedbackRead(this.projects[i],i)
+              }
+              ele.style.display = 'none'
+            })
+          } else if(document && document.getElementById('chat-form').style.display === 'block'){
+            this.toggleFormChat()
+          }
         }
       }
       if(this.$refs['input-msg']){

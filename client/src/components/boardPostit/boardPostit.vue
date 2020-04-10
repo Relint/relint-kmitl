@@ -361,10 +361,10 @@ export default {
           ele.style.display='block'
         }
       })
-      
+      this.postitInEdit = this.postits[index].title
     },
     saveEditPostit (index) {
-      if(this.postitInEdit){
+      if(this.postitInEdit && this.postitInEdit != this.postits[index].title){
         this.postits[index].title = this.postitInEdit
         this.postits.pop()
         this.$db.collection('project').doc(this.project.pid).update({

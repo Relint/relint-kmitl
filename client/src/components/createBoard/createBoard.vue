@@ -180,7 +180,7 @@ export default {
           alert('Please select deadline')
           return
         }
-        this.deadlineIn = firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T00:00:00+07:00'))
+        this.deadlineIn = firebase.firestore.Timestamp.fromDate(new Date(this.deadlineIn+'T23:59:59+07:00'))
         let pindex = doc.data()
         let pid = 'P' + pindex.count
         let obj = {
