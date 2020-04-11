@@ -118,11 +118,11 @@
     border: none;
     box-shadow: 2px 2px 10px rgba($dark, .5);
     transition: all .5s ease-in-out;
-    // &:hover {
-    //   background: darken($white, 5%);
-    //   transform: scale(1.05);
-    //   transition: all .3s ease-in-out;
-    // }
+    &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
     }
     #assign {
     -ms-appearance: none;
@@ -227,9 +227,9 @@
     box-shadow: none;
     background: $redFire;
     width: 232px;
-    height: 50px;
+    height: 60px;
     // padding-left: 20px;
-    font-size: 15px;
+    font-size: 20px;
     // margin: 15px 0  0  20px ;
     
   }
@@ -244,13 +244,84 @@
       padding: 10px 10px 10px 20px;
       color: #fff;
       cursor: pointer;
+      top:-20px
     }
   .status {
     position: relative;
     top:-220px
   }
 
+
+//   select:focus {
+//     min-width: 100px;
+//     width: auto;
+    
+// }
   #assignS {
     // position: relative;
     // margin-top: -30px;
   }
+
+
+
+  
+
+.dropbtn-assi {
+  height: 35px;
+  width: 220px;
+  background-color: $redFire;
+  border-style: none;
+  z-index: 2;
+  outline: none;
+  cursor: pointer;
+  margin-left: 10px;
+  border-radius: 15px;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  text-align: center;
+  padding-top: 15px;
+  font-size: 20px;
+  color: white;
+}
+
+.dropdown-content-assi {
+  display: none;
+  width: 200px;
+  height: 200px;
+  position: absolute;
+  background-color: #ebebeb;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  z-index: 2;
+  border-radius: 15px;
+  top: 80px;
+  right: 270px;
+  // margin-right: 13.5%;
+  overflow-y:auto;
+  scrollbar-width: thin;
+  word-wrap: break-word;
+}
+.dropdown-content-assi.showAs{
+  display: block;
+}
+#dd-content-assi::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  background-color: transparent;
+}
+#dd-content-assi::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background-color: rgb(172, 171, 171);
+}
+.dropdown-content-assi a {
+  position: relative;
+  color:$dark;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 16px;
+  cursor: pointer; &:hover{
+    background-color: rgb(202, 199, 199);
+    color: white;
+  }
+}

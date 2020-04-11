@@ -65,19 +65,21 @@
             <input  class="input-date float-r " type="date" id="datefield" min="2000-01-01" v-model="dateIn"><br/>
             <textarea class=" input-des " type="text" placeholder="Description" v-model="dessIn"></textarea><br/>
               <select class="status float-r " id="status" name="status">
-                <option >Australia</option>
-                <option >Canada</option>
-                <option>USA</option>
+                <option  v-for="(opt, indexOs) in optsStatus" :key="indexOs" :value="opt.value">
+                      {{ opt.status }}
+                </option>
               </select>
-              <div class="contain-assign float-l " id="assign-scroll">
-          <!-- <input class=" input-as "   type="text" placeholder="Assign"  > -->
-          <button class="btn-as-ok float-r">ok</button>
-          <select  class="assignS"  id="assign">
-            <option >Austrssssssssssalia</option>
-                <option >Canada</option>
-                <option>USA</option>
-          </select>
-          </div>
+            <div class="contain-assign float-l " id="assign-scroll">
+              <button class="btn-as-ok float-r">ok</button>
+              <div class="drop-des">
+                  <div @click="assignMember(i)" class="dropbtn-assi noselect">{{assignName}}</div>        
+                    <div id="dd-content-assi" class="dropdown-content-assi" ref="copm" >
+                      <div v-for="(opt, indexOp) in optsMember" :key="indexOp"  >
+                        <a @click="selectMember(indexOp)" >{{indexOp}} :  {{ opt.name }}</a>
+                        </div>
+                    </div> 
+              </div>
+            </div>
             <div class="contain-vote float-r ">  
                   <p>vote this card</p>
                   <br/>
@@ -90,10 +92,10 @@
                   </ul>  
             </div> 
           <div class="contain-btn-setting">
-          <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
-          <button  class="btn-setting-cancel" @click="closeFormCard(i)">Cancel</button>
+            <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
+            <button  class="btn-setting-cancel" @click="closeFormCard(i)">Cancel</button>
           </div>
-          </div>
+        </div>
 
           <div v-for="(postit,i) in postits" :key="'xfc'+i" :ref="'xfc'">
             <div v-for="(card,j) in postit.card" :key="'efc'+i+'-'+j" :ref="'efc'+i" class="setting-card ">
@@ -110,9 +112,11 @@
           <!-- <input class=" input-as "   type="text" placeholder="Assign"  > -->
           <button class="btn-as-ok float-r">ok</button>
           <select  class="assignS"  id="assign">
-            <option >Austrssssssssssalia</option>
-                <option >Canada</option>
-                <option>USA</option>
+            <optgroup label="status">
+            <option  v-for="(opt, indexOs) in optsStatus" :key="indexOs" :value="opt.value">
+                  {{ opt.status }}
+            </option>
+            </optgroup>
           </select>
           </div>
             <div class="contain-vote float-r ">  
@@ -210,14 +214,26 @@ export default {
                ],
         }
       ],
-      opts: [
-              { value: 0, text: 'Menber in this board'},
-              { value: 1, text: 'Fai' },
-              { value: 2, text: 'Karn' },
-              { value: 3, text: 'Ming' },
-              { value: 4, text: 'Donaut' },
-              { value: 5, text: 'Jade' },
-              { value: 6, text: 'Punpun' },
+      optsStatus:[
+        {value:0,status:'start'},
+        {value:1,status:'doing'},
+        {value:2,status:'done'}
+      ],
+      assignName:'Assign',
+      optsMember: [
+              {  name: 'oraa'},
+              {  name: 'Fai' },
+              {  name: 'Karn' },
+              {  name: 'Ming' },
+              {  name: 'Donaut' },
+              {  name: 'Jade' },
+              {  name: 'Punpun' },
+              {  name: 'Fai' },
+              {  name: 'Karn' },
+              {  name: 'Ming' },
+              {  name: 'Donaut' },
+              {  name: 'Jade' },
+              {  name: 'Punpun' },
             ],
     };
   },
@@ -241,6 +257,16 @@ export default {
     this.vuexUnsubscribe()
   },
   methods: {
+    selectMember(index) {
+    },
+    assignMember (index) {
+      this.$refs.copm[index].classList.toggle('showAs')
+       this.$refs.copm.forEach((ele,i)=>{
+        if(i !== index){
+          ele.classList.remove('showAs')
+        }
+      })
+    },
     feedbackPostit(){
 
     },
