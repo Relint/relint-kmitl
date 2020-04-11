@@ -34,8 +34,8 @@
     <div @click="openFormSetting" class="dd-button noselect"><a class="center-icon">+</a></div>
     <div class="dd-menu" id="form-setting"  >
       <div class="parent-setting">
-        <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name"  v-model="projectNameIn"> </div>
-        <div class="div2-s" ><input class="input-box-setting-des" type="text" placeholder="Description" v-model="descriptionIn"></div>
+        <div class="div1-s" ><input class="input-box-setting-pid" type="text" placeholder="Project Name (15 character)"  v-model="projectNameIn" maxlength="15"> </div>
+        <div class="div2-s" ><textarea id="scroll-des" class="input-box-setting-des" type="text" placeholder="Description (150 character)" v-model="descriptionIn" maxlength="150"></textarea></div>
         <div class="div3-s" ><input class="input-box-setting-date" type="date" id="datefield" min="2000-01-01" v-model="deadlineIn"></div>
         <div class="div4-s" > 
         <div class="container-setting" id="style-scroll">
