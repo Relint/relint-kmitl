@@ -1,88 +1,152 @@
 // card
-.from-card {
-    position: relative;
-    width: 247px;
-    height: 100%;
-    background-color:white;
-    border-radius: 10px;
-    margin-left: 12px;
-    margin-top: 10px;
-    padding: 10px 10px 10px 10px;
-    box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+.form-card {
+  position: relative;
+  width: 266px;
+  background-color:white;
+  border-radius: 10px;
+  margin-left: 12px;
+  margin-top: 10px;
+  padding: 10px 10px 10px 10px;
+  box-shadow: 0px 0px 3px 0px rgba(0, 0, 0, 0.2);
+  z-index: 0;
+}
+.opa-card h3{
+  width: 190px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.opa-card .ellipsis{
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.card-checkbox{
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+  border: 1px solid whitesmoke;
+  border-radius: 5px;
+  outline: none;
+  &:hover{
+    border: 1px solid rgb(189, 189, 189);
   }
-  .opa-card {
-    z-index: 1;
-    position: absolute;
-    width: 267px;
-    height: 100%;
-    background-color:white;
-    border-radius: 10px;
-    margin-left: -10px;
-    margin-top: -10px;
-    opacity: 0.1;
-  }
-  .btn-add-card {
-    cursor: pointer;
-    margin-bottom: 10px;
-    margin-top: 5px;
-    position: relative;
-    width: 290px;
-    height: 30px;
-    border-radius: 7px;
-    border: none;
-    outline: none;
-    opacity: 0.5;
-    // top:7px;
-    font-size: 16px;
-    background-color: white;
+  cursor: pointer;
+}
+.btn-add-card {
+  cursor: pointer;
+  margin-bottom: 10px;
+  margin-top: 5px;
+  position: relative;
+  width: 290px;
+  height: 30px;
+  border-radius: 7px;
+  border: none;
+  outline: none;
+  opacity: 0.5;
+  // top:7px;
+  font-size: 16px;
+  background-color: white;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+  &:hover{
+    background: rgb(238, 238, 238);
+    transition: all .3s ease-in-out;
     box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
-    &:hover{
-      background: rgb(238, 238, 238);
-      transition: all .3s ease-in-out;
-      box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
-    }
   }
+}
+
+.wrapperC {
+  margin-top: -5px;
   
-  .wrapperC {
-    margin-top: -5px;
-    
+}
+.btn-remove-card {
+  z-index: 2;
+  // margin-top: -90px;
+  // margin-top: -135%;
+  position: relative;
+  width: 20px;
+  height: 20px;
+  background-color:white;
+  border: none;
+  outline: none;
+  opacity: 0.3;
+  cursor: pointer;
+  &:hover{
+    opacity: 1;
+    transition: all .3s ease-in-out;
   }
-  .btn-remove-card {
-    z-index: 2;
-    margin-top: -125px;
-    position: relative;
-    width: 20px;
-    height: 20px;
-    background-color:white;
-    border: none;
-    outline: none;
-    opacity: 0.3;
-    cursor: pointer;
-    &:hover{
-      opacity: 1;
-      transition: all .3s ease-in-out;
-    }
+}
+.btn-edit-card {
+  z-index: 2;
+  //  margin-top: -80px;
+  // margin-top: -127%;
+  width: 20px;
+  height: 20px;
+  position: relative;
+  background-color:white;
+  border: none;
+  outline: none;
+  opacity: 0.3;
+  cursor: pointer;
+  &:hover{
+    opacity: 1;
+    transition: all .3s ease-in-out;
   }
-  .btn-edit-card {
-    z-index: 2;
-   margin-top: -110px;
-   width: 20px;
-   height: 20px;
-   position: relative;
-    background-color:white;
-    border: none;
-    outline: none;
-    opacity: 0.3;
-    cursor: pointer;
-    &:hover{
-      opacity: 1;
-      transition: all .3s ease-in-out;
-    }
-  }
-  h5 {
-    color: $redFire;
-  }
-  
+}
+h5 {
+  color: $redFire;
+}
+
+.show-assignee-container{
+  height: 49px;
+  width: 100%;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+}
+.show-assignee-container::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+  border-radius: 30px;
+  // display: none;
+}
+.show-assignee-container::-webkit-scrollbar-thumb {
+  border-radius: 30px;
+  background-color: $bluesky;
+  scrollbar-width: thin;
+  // display: none;
+}
+.show-assi-p{
+  display: block;
+}
+.show-assi {
+  height: 35px;
+  width: 35px;
+  background-color: $bluesky;
+  border-style: none;
+  outline: none;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 100%;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  color: rgb(0, 0, 0);
+  text-align: center;
+}
+.name-show-assi{
+  margin-left: 2px;
+  font-size: 12px;
+  width: 51px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+hr{
+  border: 0.5px solid rgb(199, 199, 199);
+  opacity: 0.8;
+  width: 98%;
+  margin-left: 1%;
+}
   
   
   

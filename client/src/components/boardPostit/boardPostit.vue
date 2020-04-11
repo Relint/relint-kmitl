@@ -39,20 +39,47 @@
                     drag-class="card-ghost"
                     drop-class="card-ghost-drop"
                   >
-                  <Draggable  v-for="(card , index2) in postit.card" :key="'kc'+index+'-'+index2" :ref="'rc'+index" >
-                    <div ref="card" class="from-card" id="form-card" >
-                      <div class="opa-card" @click="cardSetting(index,index2)"></div>
-                      <h3>{{card.title}}</h3>
-                      <h5>{{analysisTime(card.duedate,true)+' '+ timeFormat(card.duedate)}}</h5><br/>
-                     {{card.description}}<br/>{{card.status}}
-                      <br/><br/>
-                      difficulty : {{card.difficulty}}<br/>
-                      
-                      <button class="wrapperC btn-remove-card float-r " ><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.5'></b-icon></button> <br/>
-                      <button class="wrapperC btn-edit-card float-r" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
-                      
+                  <Draggable  v-for="(card , index2) in postit.card" :key="'kc'+index+'-'+index2" :ref="'rc'+index" class="form-card">
+                    <div class="opa-card">
+                      <div class="float-l">
+                        <div>
+                          <div class="card-checkbox float-l" @click="completeCard(index,index2)">
+                            <img src="./check.png" alt="check" width="20" height="20" v-if="card.status==='Completed'">
+                          </div>
+                          <h3 class="float-l" @click="cardSetting(index,index2)">{{card.title?card.title:'Untitled'}}</h3>
+                        </div>
+                        <h5 @click="cardSetting(index,index2)">{{analysisTime(card.duedate,true)}}</h5>
+                      </div>
+                      <div class="float-l" @click="cardSetting(index,index2)" style="padding-left: 9px;">
+                        <button class="wrapperC btn-remove-card" style="margin-bottom: 5px;"><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.5'></b-icon></button>
+                        <br/>
+                        <button class="wrapperC btn-edit-card" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
+                      </div>
+                      <div class="float-l" style="padding-top: 10px;" @click="cardSetting(index,index2)">
+                        <div>{{card.description?card.description:' '}}</div><br/>
+                        {{card.status}}<br/>
+                        <ul id="rating" class="rating small"  style="margin-top: 5px; margin-bottom: 5px;" >
+                          <li v-if="card.difficulty > 4" class="fill-s"></li>
+                          <li v-else class="fill-w"></li>
+                          <li v-if="card.difficulty > 3" class="fill-s"></li>
+                          <li v-else class="fill-w"></li>
+                          <li v-if="card.difficulty > 2" class="fill-s"></li>
+                          <li v-else class="fill-w"></li>
+                          <li v-if="card.difficulty > 1" class="fill-s"></li>
+                          <li v-else class="fill-w"></li>
+                          <li v-if="card.difficulty > 0" class="fill-s"></li>
+                          <li v-else class="fill-w"></li>
+                        </ul><br/><hr style="margin-bottom: 5px;">
+                        <div class="show-assignee-container float-l">
+                          <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
+                            <div class="show-assi noselecct">
+                              <b-icon class="show-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                            </div>
+                            <div class="name-show-assi greytext noselect">{{assignee.displayName}}</div>
+                          </div>
+                        </div><br/><br/><br/>
+                      </div>
                     </div>
-                    
                   </Draggable>
                 </Container>
                 </div>
@@ -60,37 +87,51 @@
             </div>
         </div>
         <div v-for="(postit,i) in postits" :key="'fc'+i" :ref="'fc'" class="setting-card ">
-          <div class="show-index"><p>card : {{i+1}}  |  title : {{postit.title}}  </p></div>
-            <input class=" input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
-            <input  class="input-date float-r " type="date" id="datefield" min="2000-01-01" v-model="dateIn"><br/>
-            <textarea class=" input-des " type="text" placeholder="Description" v-model="dessIn"></textarea><br/>
-              <select class="status float-r " id="status" name="status">
-                <option  v-for="(opt, indexOs) in optsStatus" :key="indexOs" :value="opt.value">
-                      {{ opt.status }}
-                </option>
-              </select>
-            <div class="contain-assign float-l " id="assign-scroll">
-              <button class="btn-as-ok float-r">ok</button>
-              <div class="drop-des">
-                  <div @click="assignMember(i)" class="dropbtn-assi noselect">{{assignName}}</div>        
-                    <div id="dd-content-assi" class="dropdown-content-assi" ref="copm" >
-                      <div v-for="(opt, indexOp) in optsMember" :key="indexOp"  >
-                        <a @click="selectMember(indexOp)" >{{indexOp}} :  {{ opt.name }}</a>
-                        </div>
-                    </div> 
+          <div class="show-index"><p>card : {{postit.card.length+1}}  |  title : {{postit.title}}  </p></div>
+          <input class=" input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
+          <input  class="input-date float-r " type="date" ref="datefield" min="2000-01-01" v-model="dateIn"><br/>
+          <textarea class=" input-des " type="text" placeholder="Description" v-model="dessIn"></textarea><br/>
+          <select class="status float-r" ref="status" name="status" @change='onChange'>
+            <option  v-for="(opt, indexOs) in optsStatus" :key="indexOs" :value="opt.value">
+                  {{ opt.status }}
+            </option>
+          </select>
+          <a class="greytext noselect">Assign</a>
+          <div class="contain-assign float-l " id="assign-scroll">
+            <div class="drop-des">
+              <div @click="assignMember(i)" class="dropbtn-assi noselect float-l"><a>+</a></div>   
+              <div class="assignee-container float-l">
+                <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee" :key="'ase-'+i+'-'+indexAs">     
+                  <div class="select-assi noselecct" @click="removeAssignee(assignee,indexAs)">
+                    <b-icon class="select-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                    <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
+                  </div>
+                  <div class="name-select-assi greytext noselect">{{assignee.displayName}}</div>
+                </div>
               </div>
+              <div id="dd-content-assi" class="dropdown-content-assi" ref="copm" >
+                <div v-for="(opt, indexOp) in members.filter(ele=>!temporaryAssignee.includes(ele))" :key="'opt-'+indexOp"  >
+                  <a @click="selectMember(opt)" >{{ opt.displayName }}</a>
+                </div>
+              </div> 
             </div>
-            <div class="contain-vote float-r ">  
-                  <p>vote this card</p>
-                  <br/>
-                  <ul id="rating" class="rating">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>  
-            </div> 
+          </div>
+          <div class="contain-vote float-r ">  
+                <p>vote this card</p>
+                <br/>
+                <ul id="rating" class="rating large">
+                  <li v-if="voteIn > 4" class="fill-s" @click="setCrate(5)"></li>
+                  <li v-else class="fill-w" @click="setCrate(5)"></li>
+                  <li v-if="voteIn > 3" class="fill-s" @click="setCrate(4)"></li>
+                  <li v-else class="fill-w" @click="setCrate(4)"></li>
+                  <li v-if="voteIn > 2" class="fill-s" @click="setCrate(3)"></li>
+                  <li v-else class="fill-w" @click="setCrate(3)"></li>
+                  <li v-if="voteIn > 1" class="fill-s" @click="setCrate(2)"></li>
+                  <li v-else class="fill-w" @click="setCrate(2)"></li>
+                  <li v-if="voteIn > 0" class="fill-s" @click="setCrate(1)"></li>
+                  <li v-else class="fill-w" @click="setCrate(1)"></li>
+                </ul>  
+          </div> 
           <div class="contain-btn-setting">
             <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
             <button  class="btn-setting-cancel" @click="closeFormCard(i)">Cancel</button>
@@ -99,45 +140,57 @@
 
           <div v-for="(postit,i) in postits" :key="'xfc'+i" :ref="'xfc'">
             <div v-for="(card,j) in postit.card" :key="'efc'+i+'-'+j" :ref="'efc'+i" class="setting-card ">
-              <p>index:{{j}} name:{{card.title}}  </p>
-               <input class=" input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
-            <input  class="input-date float-r " type="date" id="datefield" min="2000-01-01" v-model="dateIn"><br/>
-            <textarea class=" input-des " type="text" placeholder="Description" v-model="dessIn"></textarea><br/>
-              <select class="status float-r " id="status" name="status">
-                <option >Australia</option>
-                <option >Canada</option>
-                <option>USA</option>
+              <div class="show-index"><p>card : {{j}}  |  title : {{postit.title}}  </p></div>
+              <input class=" input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
+              <input  class="input-date float-r " type="date" ref="datefield" min="2000-01-01" v-model="dateIn"><br/>
+              <textarea class=" input-des " type="text" placeholder="Description" v-model="dessIn"></textarea><br/>
+              <select class="status float-r" :ref="'status'+i" name="status" @change='onChange'>
+                <option  v-for="(opt, indexOs) in optsStatus" :key="indexOs" :value="opt.value">
+                      {{ opt.status }}
+                </option>
               </select>
+              <a class="greytext noselect">Assign</a>
               <div class="contain-assign float-l " id="assign-scroll">
-          <!-- <input class=" input-as "   type="text" placeholder="Assign"  > -->
-          <button class="btn-as-ok float-r">ok</button>
-          <select  class="assignS"  id="assign">
-            <optgroup label="status">
-            <option  v-for="(opt, indexOs) in optsStatus" :key="indexOs" :value="opt.value">
-                  {{ opt.status }}
-            </option>
-            </optgroup>
-          </select>
-          </div>
-            <div class="contain-vote float-r ">  
-                  <p>vote this card</p>
-                  <br/>
-                  <ul id="rating" class="rating">
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                  </ul>  
-            </div> 
-          <div class="contain-btn-setting">
-          <button class="btn-setting-accept" @click="saveCard(i)" >Save</button>
-              <button  class="btn-setting-cancel" @click="closeEditFormCard(i)">Cancel</button>
-          </div>
-              
+                <div class="drop-des">
+                  <div @click="assignMember2(i,j)" class="dropbtn-assi noselect float-l"><a>+</a></div>   
+                  <div class="assignee-container float-l">
+                    <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee2" :key="'ase-'+i+'-'+indexAs">     
+                      <div class="select-assi noselecct" @click="removeAssignee2(assignee,indexAs)">
+                        <b-icon class="select-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                        <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
+                      </div>
+                      <div class="name-select-assi greytext noselect">{{assignee.displayName}}</div>
+                    </div>
+                  </div>
+                  <div id="dd-content-assi" class="dropdown-content-assi" :ref="'copm'+i" >
+                    <div v-for="(opt, indexOp) in members.filter(ele=>!temporaryAssignee2.map(ele2=>ele2.uid).includes(ele.uid))" :key="'opt-'+indexOp"  >
+                      <a @click="selectMember2(i,opt)" >{{ opt.displayName }}</a>
+                    </div>
+                  </div> 
+                </div>
+              </div>
+              <div class="contain-vote float-r ">  
+                    <p>vote this card</p>
+                    <br/>
+                    <ul id="rating" class="rating large">
+                      <li v-if="voteIn > 4" class="fill-s" @click="setCrate(5)"></li>
+                      <li v-else class="fill-w" @click="setCrate(5)"></li>
+                      <li v-if="voteIn > 3" class="fill-s" @click="setCrate(4)"></li>
+                      <li v-else class="fill-w" @click="setCrate(4)"></li>
+                      <li v-if="voteIn > 2" class="fill-s" @click="setCrate(3)"></li>
+                      <li v-else class="fill-w" @click="setCrate(3)"></li>
+                      <li v-if="voteIn > 1" class="fill-s" @click="setCrate(2)"></li>
+                      <li v-else class="fill-w" @click="setCrate(2)"></li>
+                      <li v-if="voteIn > 0" class="fill-s" @click="setCrate(1)"></li>
+                      <li v-else class="fill-w" @click="setCrate(1)"></li>
+                    </ul>  
+              </div> 
+              <div class="contain-btn-setting">
+                <button class="btn-setting-accept" @click="saveCard(i,j)" >Save</button>
+                <button  class="btn-setting-cancel" @click="closeEditFormCard(i)">Cancel</button>
+              </div>
             </div>
           </div>
-
       </div>
     </div>
   </div>
@@ -162,79 +215,27 @@ export default {
   data() {
     return {
       project:[],
+      members:[],
       postits:[],
       cards:[],
+
+      temporaryAssignee:[],
+      temporaryAssignee2:[],
 
       cardTiltleIn:'',
       dessIn:'',
       dateIn:'',
+      statusIn:0,
+      voteIn:0,
+
       postitIn:'',
       postitInEdit:'',
-      temp0:[],
-      temp1:[
-        {
-          title:'test1',
-          card:[]
-        },
-        { 
-          title:'test2',
-          card:[{description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date('5-20-20')) ,
-                  status:"complete",title:'card1'}],
-        },
-        {
-          title:'test3',
-          card:[{description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card1'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card2'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card3'},
-               ],
-        },
-        {
-          title:'test4',
-          card:[{description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card1'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card2'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card3'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card4'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card5'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card6'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card7'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card8'},
-                {description:'test',difficulty:3,duedate:firebase.firestore.Timestamp.fromDate(new Date()) ,
-                  status:"complete",title:'card9'},
-               ],
-        }
-      ],
+      
       optsStatus:[
-        {value:0,status:'start'},
-        {value:1,status:'doing'},
-        {value:2,status:'done'}
+        {value:0,status:'Not started'},
+        {value:1,status:'In progress'},
+        {value:2,status:'Completed'}
       ],
-      assignName:'Assign',
-      optsMember: [
-              {  name: 'oraa'},
-              {  name: 'Fai' },
-              {  name: 'Karn' },
-              {  name: 'Ming' },
-              {  name: 'Donaut' },
-              {  name: 'Jade' },
-              {  name: 'Punpun' },
-              {  name: 'Fai' },
-              {  name: 'Karn' },
-              {  name: 'Ming' },
-              {  name: 'Donaut' },
-              {  name: 'Jade' },
-              {  name: 'Punpun' },
-            ],
     };
   },
   // this.postits.push({createBox:true,card:[]})
@@ -251,24 +252,62 @@ export default {
         }
       }
     })
+    this.vuexUnsubscribe2 = this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      if(mutation.type === 'setUser'){
+        this.members = state.user.filter((ele,i)=>{
+          if(this.project.member){
+            return this.project.member.map(data=>data.uid).includes(ele.uid)
+          }
+        })
+      }
+    })
     document.addEventListener('keyup',this.keyupCallback)
   },
   beforeDestroy(){
     this.vuexUnsubscribe()
+    this.vuexUnsubscribe2()
   },
   methods: {
-    selectMember(index) {
+    selectMember(memberPayload) {
+      this.temporaryAssignee.push(memberPayload)
+      this.$refs.copm.forEach((ele,i)=>{
+          ele.classList.remove('showAs')
+      })
+    },
+    selectMember2(index,memberPayload) {
+      this.temporaryAssignee2.push(memberPayload)
+      this.$refs['copm'+index].forEach((ele,i)=>{
+          ele.classList.remove('showAs')
+      })
+    },
+    removeAssignee(memberPayload,removedIndex){
+      this.temporaryAssignee.splice(removedIndex,1)
+    },
+    removeAssignee2(memberPayload,removedIndex){
+      this.temporaryAssignee2.splice(removedIndex,1)
     },
     assignMember (index) {
       this.$refs.copm[index].classList.toggle('showAs')
-       this.$refs.copm.forEach((ele,i)=>{
+      this.$refs.copm.forEach((ele,i)=>{
         if(i !== index){
           ele.classList.remove('showAs')
         }
       })
     },
+    assignMember2 (index,index2) {
+      this.$refs['copm'+index][index2].classList.toggle('showAs')
+      this.$refs['copm'+index].forEach((ele,i)=>{
+        if(i !== index2){
+          ele.classList.remove('showAs')
+        }
+      })
+    },
     feedbackPostit(){
-
+      this.postits.pop()
+      this.$db.collection('project').doc(this.project.pid).update({
+        postit: this.postits
+      })
     },
     onCardDrop(columnId, dropResult) {
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
@@ -295,31 +334,77 @@ export default {
     },
     movLeft (index) {
       this.postits= this.swap(this.postits,index,index-1)
-      this.postits.pop()
-      this.$db.collection('project').doc(this.project.pid).update({
-        postit: this.postits
-      })
+      this.feedbackPostit()
     },
     movRight (index) {
       this.postits= this.swap(this.postits,index,index+1)
-      this.postits.pop()
-      this.$db.collection('project').doc(this.project.pid).update({
-        postit: this.postits
-      })
+      this.feedbackPostit()
     },
     removeCard(index,index2) {
       this.postits[index].card = this.postits[index].card.filter((ele,i) => {
         return i !== index2
       })
+      this.feedbackPostit()
     },
     cardSetting (index,indexC) {
+      this.closeFormCard(index)
+      for(let j = 0; j < this.postits.length; j+=1){
+        if(this.$refs['status'+j]){
+          this.$refs['status'+j].forEach((ele,k)=>{
+            ele.selectedIndex = 0
+          })
+        }
+        if(this.$refs['copm'+j]){
+          this.$refs['copm'+j].forEach((ele,i)=>{
+              ele.classList.remove('showAs')
+          })
+        }
+      }
       this.$refs['efc'+index].forEach((ele,i)=>{
         if(i != indexC){
           ele.classList.remove('show')
+          this.temporaryAssignee = []
+          this.cardTiltleIn = ''
+          this.dessIn = ''
+          this.dateIn = ''
+          this.statusIn = 0
+          this.voteIn = 0
         } else {
           ele.classList.add('show')
+          const time = isNaN(this.postits[index].card[indexC].duedate.seconds)?null:this.postits[index].card[indexC].duedate.toDate()
+          let yy='',mm='',dd=''
+          if(time){
+            yy = time.getFullYear()
+            mm = time.getMonth()
+            dd = time.getDate()
+          }
+          this.temporaryAssignee2 = this.postits[index].card[indexC].assignee.filter(ele=>ele)
+          this.cardTiltleIn = this.postits[index].card[indexC].title
+          this.dessIn = this.postits[index].card[indexC].description
+          this.dateIn = time?(yy + '-' + (mm+1<10?'0'+(mm+1):mm+1) + '-' + (dd<10?'0'+dd:dd)):''
+          this.statusIn = this.optsStatus.findIndex(ele=>this.postits[index].card[indexC].status===ele.status)
+          if(this.$refs['status'+index]){
+            this.$refs['status'+index].forEach((ele,k)=>{
+              if(indexC === k){
+                ele.selectedIndex = this.statusIn
+              }
+            })
+          }
+          this.voteIn = this.postits[index].card[indexC].difficulty
+          this.postits.push(null)
+          this.postits.pop()
         }
       })
+      let today = new Date()
+      let dd = today.getDate()
+      let mm = today.getMonth()+1
+      let yyyy = today.getFullYear()
+      if(dd < 10) dd = '0'+dd
+      if(mm < 10) mm = '0'+mm
+      today = yyyy+'-'+mm+'-'+dd
+      if(this.$refs.datefield){
+        this.$refs.datefield.forEach((ele,i)=>{ele.setAttribute('min',today)})
+      }
       this.$refs['xfc'].forEach((ele,i)=>{
         if(i!=index){
           ele.style.display='none'
@@ -328,49 +413,102 @@ export default {
         }
       })
     },
-    saveCard (index) {
-      this.cards=[]
-      this.temp1.forEach(element => {
-        this.cards.push(element)
-      });
-      this.$refs['efc'+index].style.display='none'
+    saveCard (index,index2) {
+      this.postits[index].card[index2] = {
+        description: this.dessIn,
+        difficulty: this.voteIn,
+        duedate: this.dateIn?firebase.firestore.Timestamp.fromDate(new Date(this.dateIn+'T23:59:59+07:00')):'',
+        status: this.optsStatus[this.statusIn].status,
+        title: this.cardTiltleIn,
+        assignee: this.temporaryAssignee2
+      }
+      // console.log(this.postits[index].card[index2])
+      this.feedbackPostit()
+      this.closeEditFormCard(index)
     },
     closeEditFormCard (index) {
-      let temp = ''
       this.$refs['efc'+index].forEach((ele,i)=>{
         ele.classList.remove('show')
-        temp = ele
+        this.temporaryAssignee = []
+        this.cardTiltleIn = ''
+        this.dessIn = ''
+        this.dateIn = ''
+        this.statusIn = 0
+        this.voteIn = 0
+        for(let j = 0; j < this.postits.length; j+=1){
+          if(this.$refs['status'+j]){
+            this.$refs['status'+j].forEach((ele,k)=>{
+              ele.selectedIndex = 0
+            })
+          }
+          if(this.$refs['copm'+j]){
+            this.$refs['copm'+j].forEach((ele,i)=>{
+                ele.classList.remove('showAs')
+            })
+          }
+        }
       })
-      
     },
     toggleFormCard(index) {
+      this.closeEditFormCard(index)
       this.$refs.fc[index].classList.toggle('show')
       this.$refs.fc.forEach((ele,i)=>{
         if(i !== index){
           ele.classList.remove('show')
+          this.temporaryAssignee = []
+          this.cardTiltleIn = ''
+          this.dessIn = ''
+          this.dateIn = ''
+          this.statusIn = 0
+          this.voteIn = 0
+          this.$refs.status.forEach((ele,k)=>{
+            ele.selectedIndex = 0
+          })
         }
       })
+
+      let today = new Date()
+      let dd = today.getDate()
+      let mm = today.getMonth()+1
+      let yyyy = today.getFullYear()
+      if(dd < 10) dd = '0'+dd
+      if(mm < 10) mm = '0'+mm
+      today = yyyy+'-'+mm+'-'+dd
+      if(this.$refs.datefield){
+        this.$refs.datefield.forEach((ele,i)=>{ele.setAttribute('min',today)})
+      }
     },
     closeFormCard(index) {
       this.$refs.fc.forEach((ele,i)=>{
         ele.classList.remove('show')
+        this.temporaryAssignee = []
+        this.cardTiltleIn = ''
+        this.dessIn = ''
+        this.dateIn = ''
+        this.statusIn = 0
+        this.voteIn = 0
+        this.$refs['status'].forEach((ele,k)=>{
+          ele.selectedIndex = 0
+        })
       })
     },
     createCard (index) {
-      this.cards=[]
-      this.temp1.forEach(element => {
-        this.cards.push(element)
-      });
-      this.$refs.settingCard[index].style.display='none'
+      this.postits[index].card.push({
+        description: this.dessIn,
+        difficulty: this.voteIn,
+        duedate: this.dateIn?firebase.firestore.Timestamp.fromDate(new Date(this.dateIn+'T23:59:59+07:00')):'',
+        status: this.optsStatus[this.statusIn].status,
+        title: this.cardTiltleIn,
+        assignee: this.temporaryAssignee
+      })
+      this.feedbackPostit()
+      this.closeFormCard(index)
     },
     deletePostit (index) {
       this.postits = this.postits.filter((ele,i) => {
         return i !== index 
       })
-      this.postits.pop()
-      this.$db.collection('project').doc(this.project.pid).update({
-        postit: this.postits
-      })
+      this.feedbackPostit()
     },
     editPostit (index) {
       this.$refs.epsti.forEach((ele,i)=>{
@@ -429,7 +567,7 @@ export default {
       const key = this.createKey()
       if(this.postitIn){
         this.$db.collection('project').doc(this.project.pid).update({
-          postit: firebase.firestore.FieldValue.arrayUnion({
+            postit: firebase.firestore.FieldValue.arrayUnion({
             key: key,
             title: this.postitIn,
             card: []
@@ -438,7 +576,7 @@ export default {
       } else {
         // console.log(this.postitIn)
         this.$db.collection('project').doc(this.project.pid).update({
-          postit: firebase.firestore.FieldValue.arrayUnion({
+            postit: firebase.firestore.FieldValue.arrayUnion({
             key: key,
             title: 'Edit Title',
             card: []
@@ -449,6 +587,9 @@ export default {
       // document.getElementById('form-input-postit').style.display='none'
     },
     timeFormat(n) {
+      if(!n || isNaN(n.seconds)){
+        return ''
+      }
       const time = n.toDate()
       const hours =
         time.getHours() < 10 ? "0" + time.getHours() : time.getHours()
@@ -457,6 +598,9 @@ export default {
       return hours + ":" + minutes
     },
     analysisTime(timestamp,n=false){
+      if(!timestamp || isNaN(timestamp.seconds)){
+        return 'No duedate'
+      }
       const time = timestamp.toDate()
       const now = new Date()
       const yy = time.getFullYear()
@@ -499,6 +643,26 @@ export default {
         })
       } 
     },
+    onChange(e) {
+      let index = e.target.selectedIndex;
+      this.statusIn = index
+    },
+    setCrate(vote){
+      if(vote != this.voteIn){
+        this.voteIn = vote
+      } else {
+        this.voteIn = 0
+      }
+    },
+    completeCard(index,index2){
+      // console.log(index + ' ' + index2)
+      if(this.postits[index].card[index2].status != 'Completed'){
+        this.postits[index].card[index2].status = 'Completed'
+      } else {
+        this.postits[index].card[index2].status = 'Not started'
+      }
+      this.feedbackPostit()
+    }
   }
 }
 </script>

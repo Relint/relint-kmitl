@@ -6,7 +6,7 @@
     z-index: 2;
     position: absolute;
     width: 500px;
-    min-height: 530px;
+    height: 485px;
     // height: 450px;
     display: none;
     background-color:rgb(255, 255, 255);
@@ -14,7 +14,7 @@
     border-radius: 20px;
     padding: 15px 15px 15px 15px;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
-    top:51.25%;
+    top:54%;
     left: 50%;
     transform: translate(-50%,-50%);
   }
@@ -35,20 +35,38 @@
   .contain-assign {
     position: relative;
     width: 480px;
-    height: 60px;
+    height: 48px;
     // background-color:$orange;
     border: 1px solid  rgb(194, 194, 194);
     border-radius: 15px;
-    padding: 25px 10px 10px 10px;
+    padding: 10px 10px 10px 10px;
     margin-bottom: 20px;
-    top:-45px
+    top:-40px;
   }
-  #assign-scroll{
+  .assignee-container{
+    height: 49px;
+    width: 420px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+  }
+  .assignee-container::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+    border-radius: 30px;
+    // display: none;
+  }
+  .assignee-container::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background-color: $bluesky;
+    scrollbar-width: thin;
+    // display: none;
+  }
+  // #assign-scroll{
 
-  }
-  .div-1 {
-    // margin-top:-100px;
-  }
+  // }
+  // .div-1 {
+  //   // margin-top:-100px;
+  // }
    
     //input project des date-----------------------
   .wrapperS {
@@ -80,8 +98,21 @@
     font-size: 15px;
     margin-bottom: 10px;
     margin-right: 10px;
+    outline: none;
+    resize: none;
     // margin: 10px 0  0  0 ;
     // top:-10px
+  }
+  .input-des::-webkit-scrollbar {
+    width: 12px;
+    border-radius: 30px;
+    display: none;
+  }
+  .input-des::-webkit-scrollbar-thumb {
+    border-radius: 30px;
+    background-color: $bluesky;
+    scrollbar-width: thin;
+    display: none;
   }
   textarea {
     resize: vertical;
@@ -130,7 +161,7 @@
 
     .contain-btn-setting {
       position: relative;
-      top:130px
+      top: 80px;
     }
   .btn-setting-accept {
     cursor: pointer;
@@ -244,11 +275,12 @@
       padding: 10px 10px 10px 20px;
       color: #fff;
       cursor: pointer;
-      top:-20px
+      top:-20px;
     }
   .status {
     position: relative;
-    top:-220px
+    top:-220px;
+    font-size: 16px;
   }
 
 
@@ -257,10 +289,10 @@
 //     width: auto;
     
 // }
-  #assignS {
-    // position: relative;
-    // margin-top: -30px;
-  }
+  // #assignS {
+  //   // position: relative;
+  //   // margin-top: -30px;
+  // }
 
 
 
@@ -268,32 +300,79 @@
 
 .dropbtn-assi {
   height: 35px;
-  width: 220px;
+  width: 35px;
   background-color: $redFire;
   border-style: none;
   z-index: 2;
   outline: none;
   cursor: pointer;
   margin-left: 10px;
-  border-radius: 15px;
+  margin-right: 10px;
+  border-radius: 100%;
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
-  text-align: center;
-  padding-top: 15px;
-  font-size: 20px;
   color: white;
+  text-align: center;
+  &:hover {
+      background: darken($white, 5%);
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
 }
-
+.dropbtn-assi a{
+  font-size: 31px;
+}
+.select-assi-x{
+  display: none;
+}
+.select-assi-p{
+  display: block;
+}
+.select-assi {
+  height: 35px;
+  width: 35px;
+  background-color: $bluesky;
+  border-style: none;
+  z-index: 2;
+  outline: none;
+  cursor: pointer;
+  margin-left: 15px;
+  margin-right: 15px;
+  border-radius: 100%;
+  box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  &:hover .select-assi-p{
+    display: none;
+  }
+  &:hover .select-assi-x{
+    display: block;
+    color: grey;
+  }
+  &:hover{
+    background-color: rgb(188, 214, 219);
+  }
+}
+.name-select-assi{
+  margin-left: 2px;
+  font-size: 12px;
+  width: 61px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .dropdown-content-assi {
   display: none;
-  width: 200px;
-  height: 200px;
+  width: 150px;
+  max-height: 150px;
   position: absolute;
   background-color: #ebebeb;
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   z-index: 2;
-  border-radius: 15px;
-  top: 80px;
-  right: 270px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
+  top: 50px;
+  // right: 270px;
   // margin-right: 13.5%;
   overflow-y:auto;
   scrollbar-width: thin;
@@ -303,13 +382,13 @@
   display: block;
 }
 #dd-content-assi::-webkit-scrollbar {
-  width: 4px;
-  height: 4px;
+  width: 2px;
   background-color: transparent;
 }
 #dd-content-assi::-webkit-scrollbar-thumb {
   border-radius: 30px;
   background-color: rgb(172, 171, 171);
+  // display: none;
 }
 .dropdown-content-assi a {
   position: relative;
@@ -317,11 +396,16 @@
   padding: 12px 16px;
   text-decoration: none;
   display: block;
-  border-radius: 15px;
+  border-top-left-radius: 15px;
+  border-bottom-left-radius: 15px;
   padding: 10px;
   font-size: 16px;
   cursor: pointer; &:hover{
     background-color: rgb(202, 199, 199);
-    color: white;
+    // color: white;
   }
+}
+
+.greytext{
+  color: rgb(94, 94, 94);
 }

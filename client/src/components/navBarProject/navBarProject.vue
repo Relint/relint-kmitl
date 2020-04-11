@@ -46,7 +46,7 @@
         </div>
       </div>
       <div class="contain-input-edit" style="display:none;left:275px;" id="editT">
-          <input id="einput"  class="input-edit-postit" type="date" v-model="deadlineIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDeadline"> 
+          <input id="einput" ref="dinput" class="input-edit-postit" type="date" min="2000-01-01" v-model="deadlineIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDeadline"> 
          
          <div class="contain-btn-edit">
             <button @click="saveDeadline" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
@@ -210,6 +210,14 @@ export default {
       document.getElementById('btnT').disabled = false;
     },
     editDeadline () {
+      let today = new Date()
+      let dd = today.getDate()
+      let mm = today.getMonth()+1
+      const yyyy = today.getFullYear()
+      if(dd < 10) dd = '0'+dd
+      if(mm < 10) mm = '0'+mm
+      today = yyyy+'-'+mm+'-'+dd
+      this.$refs.dinput.setAttribute('min',today)
       document.getElementById('btnT').disabled = false;
       document.getElementById('editT').style.display='block'
       document.getElementById('btnP').disabled = true;
