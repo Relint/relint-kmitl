@@ -87,6 +87,7 @@ $secondary: #99DBB4;
   white-space: nowrap;
 }
 .dd-button {
+  cursor: pointer;
   z-index: 1;
   position: absolute;
   right: 25%;
@@ -105,6 +106,7 @@ $secondary: #99DBB4;
   }
 }
 .dd-button a{
+  cursor: pointer;
   font-size: 4vw;
 }
 .center-icon {
@@ -142,15 +144,15 @@ $secondary: #99DBB4;
     position: relative;
     // text-align: center;
     width: 180px;
-    height: 50px;
+    height: 40px;
     background-color: $bluesky;
     border-radius: 7px;
-    padding-top: 10px;
-    padding-left: 10px;
+    padding: 10px 10px 10px 10px;
     color: white;
     font-size:15px;
   }
   .remove-invite {
+    cursor: pointer;
     position: absolute;
     background: $orange;
     font-size: 15px;
@@ -202,34 +204,58 @@ $secondary: #99DBB4;
 
 .input-box-setting-pid {
   border-radius: 20px;
-  width: 180px;
-  height: 50px;
-  border-radius: 40px;
+  width: 205px;
+  height: 30px;
+  border-radius: 20px;
   border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
+  padding: 10px 10px 10px 10px ;
   font-size: 15px;
+  margin: 10px 0  0  20px ;
 }
  .input-box-setting-des {
   border-radius: 20px;
-  width: 180px;
-  height: 160px;
+  width: 210px;
+  max-height: 400px;
   border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
+  // padding: 0 0 0 20px ;
   font-size: 15px;
-  margin: 5px 0  0  0 ;
+  margin: 10px 0  0  20px ;
+
 }
+textarea {
+  resize: vertical;
+  // resize: none;
+  min-height: 180px;
+  padding: 10px 5px 10px 10px  ;
+}
+// #scroll-des::-webkit-scrollbar
+// {
+//   width: 12px;
+//   background-color: #F5F5F5;
+//   border-radius: 30px;
+//    display: none;
+// }
+// #scroll-des::-webkit-scrollbar-thumb
+// {
+//   border-radius: 30px;
+//   -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+//   background-color: #555;
+//    display: none;
+// }
+
 
 .input-box-setting-inv {
   border-radius: 20px;
-  width: 160px;
+  width: 180px;
   height: 50px;
-  border-radius: 40px;
+  border-radius: 20px;
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
    margin: 5px 0  0  5px ;
   font-size: 15px;
 }
 .btn-invite-ok {
+  cursor: pointer;
   position: relative;
   font-size: 20px;
   color: white;
@@ -250,6 +276,7 @@ $secondary: #99DBB4;
   }
   }
 .btn-setting-accept {
+  cursor: pointer;
   position: relative;
   background: $bluesky;
   font-size: 17px;
@@ -270,6 +297,7 @@ $secondary: #99DBB4;
   }
 }
 .btn-setting-cancel {
+  cursor: pointer;
   background: $redFire;
   color: white;
   font-size: 17px;
@@ -302,31 +330,39 @@ input[type="date"]::-webkit-inner-spin-button {
 // Always display the drop down caret 
 input[type="date"]::-webkit-calendar-picker-indicator {
   color:$colorFront;
-  font-size: 20px;
+  font-size: 30px;
   padding: 0 30px 0 0 ;
+  opacity: 0.1;
+  cursor: pointer;
  
 }
 // styles  date inputs 
 input[type="date"] {
+  cursor: pointer;
+  position: relative;
   appearance: none;
   -webkit-appearance: none;
   padding:5px;
   display: inline-block !important;
   visibility: visible !important;
-  border-radius: 30px;
-  width: 180px;
+  border-radius: 20px;
+  width: 205px;
   height: 50px;
   border: 1px solid $colorFront;
   padding: 0 0 0 20px ;
   font-size: 15px;
-  margin: 5px 0  0  0 ;
+  margin: 5px 0  0  20px ;
+}
+input[type="date"]{
+  background:#fff url(https://cdn1.iconfinder.com/data/icons/cc_mono_icon_set/blacks/16x16/calendar_2.png)  85% 50% no-repeat ;
+  
 }
 // style
 select {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  -ms-appearance: none;
-  appearance: none;
+  // -webkit-appearance: none;
+  // -moz-appearance: none;
+  // -ms-appearance: none;
+  // appearance: none;
   -webkit-border-radius: 20px;
   -moz-border-radius: 20px;
   border-style: none; ;
@@ -334,9 +370,9 @@ select {
   outline: 0;
   box-shadow: none;
   background: $redFire;
-  width: 180px;
+  width: 200px;
   height: 50px;
-  padding: 0 0 0 0px ;
+  padding: 0 0 0 20px ;
   font-size: 15px;
    margin: 15px 0  0  7px ;
 }
@@ -516,6 +552,7 @@ select {
     left: 57%;
   }
   .button-box {
+    cursor: pointer;
     position: absolute;
     background: $bluesky;
     width: 25%;
@@ -535,6 +572,7 @@ select {
 
 
   .button-box1 {
+    cursor: pointer;
     position: absolute;
     background: $orange;
     width: 25%;

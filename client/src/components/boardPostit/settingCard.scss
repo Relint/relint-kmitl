@@ -188,6 +188,7 @@
   // Always display the drop down caret 
   input[type="date"]::-webkit-calendar-picker-indicator {
     opacity: 0.1;
+    cursor: pointer;
   }
   // styles  date inputs 
   input[type="date"] {

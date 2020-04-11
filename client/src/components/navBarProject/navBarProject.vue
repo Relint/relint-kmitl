@@ -12,6 +12,14 @@
            <button @click="editProjectName" id="btnP" > <img src="./pen.png" alt="pen" style="width:20px;hight:20px"></button><br>
            {{projectName}}
         </div>
+        <div class="contain-input-edit" style="display:none; top:1px" id="editP">
+          <input id="einput"  class="input-edit-postit" type="text" v-model="projectNameIn" placeholder="Edit a title..."  v-on:keyup.enter="saveProjectName"> 
+          
+          <div class="contain-btn-edit">
+            <button @click="saveProjectName" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
+            <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
+          </div>
+      </div>
       </div>
       <div class="wrapper float-l div-3">
         <div class="form-deadline">
@@ -19,13 +27,37 @@
           <button id="btnT" @click="editDeadline"> <img src="./pen.png" alt="pen" style="width:20px;hight:20px"></button><br>
           {{deadline}}
         </div>
+        <div class="contain-input-edit" style="display:none; top:1px;" id="editT">
+          <input id="einput"  class="input-edit-postit" type="date" v-model="deadlineIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDeadline"> 
+         
+         <div class="contain-btn-edit">
+            <button @click="saveDeadline" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
+            <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
+          </div>
+      </div>
       </div>
       <div class="wrapper float-l div-4">
         <div class="form-des">
           <h5 class="noselect float-l">Description</h5>
           <button id="btnD" @click="editDescription"> <img src="./pen.png" alt="pen" style="width:20px;hight:20px"></button><br>
-          {{description}}
+         
+          <div class="drop-des">
+          <footer class="rect2"></footer>
+          <div class="dropbtn"> <b-icon id="iconNBP" icon="book" font-scale="1.5"></b-icon> </div>        
+          <div class="dropdown-content-des">
+              <a >{{description}}</a>
+            </div> 
+          </div>
         </div>
+
+        <div class="contain-input-edit" style="display:none;top:1px;" id="editD">
+          <input id="einput"  class="input-edit-postit" type="text" v-model="descriptionIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDescription"> 
+         
+         <div class="contain-btn-edit">
+            <button @click="saveDescription" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
+            <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
+          </div>
+      </div>
       </div>
       
       <div class="wrapper float-r div-5">
@@ -37,30 +69,9 @@
 
       
       
-      <div class="contain-input-edit" style="display:none;left:160px;" id="editP">
-        <input id="einput"  class="input-edit-postit" type="text" v-model="projectNameIn" placeholder="Edit a title..."  v-on:keyup.enter="saveProjectName"> 
-        
-        <div class="contain-btn-edit">
-          <button @click="saveProjectName" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
-          <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
-        </div>
-      </div>
-      <div class="contain-input-edit" style="display:none;left:275px;" id="editT">
-          <input id="einput"  class="input-edit-postit" type="date" v-model="deadlineIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDeadline"> 
-         
-         <div class="contain-btn-edit">
-            <button @click="saveDeadline" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
-            <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
-          </div>
-      </div>
-      <div class="contain-input-edit" style="display:none;left:430px;" id="editD">
-          <input id="einput"  class="input-edit-postit" type="text" v-model="descriptionIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDescription"> 
-         
-         <div class="contain-btn-edit">
-            <button @click="saveDescription" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
-            <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
-          </div>
-      </div>
+      
+      
+      
 
        
 
@@ -70,10 +81,8 @@
           <footer class="rect2"></footer>
           <div class="dropbtn"><b-icon font-scale="3" id="iconNBP" icon="gear-fill" ></b-icon></div>        
           <div class="dropdown-content-des">
-              <a ><textarea type="text" placeholder="Edit Project Name..."></textarea></a>
-              <a ><textarea type="text" placeholder="Edit DEscription..."></textarea></a>
-              <a ><input type="date" placeholder="Edit Deadline..."></a>
-              <a > <button>save</button><button>cancel</button></a>
+              <a ></a>
+             
             </div> 
           </div>
         </div> -->
