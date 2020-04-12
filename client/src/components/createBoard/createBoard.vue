@@ -5,15 +5,26 @@
         <div class="from-createBoard">
           <div v-for="(project,index) in projects.filter(ele=>ele).sort((a,b)=>sortByStatus(a,b))" :key="project.pid"  > 
             <div id="container-Board" v-bind:style="{left: (index%2)*250+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
-              <p class="pid-show">{{project.pid}}</p>
+            <p class="pid-show">{{project.pid}}</p>
               <div class="dot two"></div>
-              <div class="face">
-                <div class="eye"></div>
-                <div class="eye right"></div>
-                <div class="mouth happy"></div>
+
+              <div v-if="project.status===false">
+                <div class="inactive"></div>
+                <div  class="face chang-colorS">
+                  <div class="eye"></div>
+                  <div class="eye right"></div>
+                  <div  class="mouth sad"></div>
+                </div>
+              </div>
+              <div v-else>
+                <div class="active"></div>
+                <div  class="face chang-color" >
+                  <div class="eye"></div>
+                  <div class="eye right"></div>
+                  <div class="mouth happy"></div>
+                </div>
               </div>
               <div class="shadow scale"></div>
-
               <div class="show-message">
                   <h1>{{project.title}}</h1>
                   <p> {{project.description}}</p><br class="noselect"> 

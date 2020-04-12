@@ -58,6 +58,36 @@
       </div>
       
       <div class="wrapper float-r div-5">
+        
+        <div id="container  ">
+          <div class="toggle ">
+            <input type="checkbox" name="toggle" class="check-checkbox" id="mytoggle" v-model="status">
+            <label class="check-label" for="mytoggle">
+              <div id="background"></div>
+              <span @click="toggleStatus" class="face">
+                <span class="face-container">
+                  <span class="eye left"></span>
+                  <span class="eye right"></span>
+                  <span class="mouth"></span>
+                </span>
+              </span>
+            </label>
+          </div>
+        </div>
+        <div v-if="status===false">
+          <div class="status-iac">
+              Inactive
+          </div>
+        </div>
+        <div v-else>
+          <div class="status-ac">
+              Active
+          </div>
+        </div>
+
+
+
+                   
         <img   src="./threeman.png" alt="pen" style="width:50px;hight:50px;cursor: pointer;" @click="openFormMa">
         
         <!-- <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon> -->
