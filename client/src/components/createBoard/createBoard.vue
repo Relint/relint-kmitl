@@ -10,7 +10,7 @@
 
               <div v-if="project.status===false">
                 <div class="inactive"></div>
-                <div  class="face">
+                <div  class="face chang-colorS">
                   <div class="eye"></div>
                   <div class="eye right"></div>
                   <div  class="mouth sad"></div>

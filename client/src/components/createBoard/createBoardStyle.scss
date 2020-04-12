@@ -487,7 +487,10 @@ select {
     animation: bounce 1s ease-in infinite;
   }
   .chang-color {
-    background: $pinkk;
+    background: rgb(255, 255, 255);
+  }
+  .chang-colorS {
+    background: rgb(224, 224, 224);
   }
   .eye {
     position: absolute;
