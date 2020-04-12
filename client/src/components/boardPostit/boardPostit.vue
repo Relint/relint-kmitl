@@ -3,7 +3,7 @@
     <div class="contain-boardPostit">
       <div class="form-scroll-postit" id="postit-scroll">
         <div class="from-boardPostit">
-            <div v-for="(postit , index) in postits" :key="'pt-'+index" :ref="'psti'"  class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
+            <div v-for="(postit , index) in postits.concat([{createBox:true,card:[]}])" :key="'pt-'+index" :ref="'psti'"  class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
               <div v-if="postit.createBox">
                   <div class="form-input-postit">
                     <input class="input-postit" type="text" placeholder="add post-it" v-model="postitIn" v-on:keyup.enter="createPostit">
@@ -55,9 +55,11 @@
                         <br/>
                         <button class="wrapperC btn-edit-card" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
                       </div>
-                      <div class="float-l" style="padding-top: 10px;" @click="cardSetting(index,index2)">
-                        <div>{{card.description?card.description:' '}}</div><br/>
-                        {{card.status}}<br/>
+                      <div class="float-l" style="padding-top: 10px;width: 246px" @click="cardSetting(index,index2)">
+                        <div :ref="'rcdes'" style="white-space: pre-wrap;">{{card.description?card.description:' '}}</div>
+                        <br/>
+                        {{card.status}}
+                        <br/>
                         <ul id="rating" class="rating small"  style="margin-top: 5px; margin-bottom: 5px;" >
                           <li v-if="card.difficulty > 4" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
@@ -70,14 +72,14 @@
                           <li v-if="card.difficulty > 0" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
                         </ul><br/><hr style="margin-bottom: 5px;">
-                        <div class="show-assignee-container float-l">
+                        <div class="show-assignee-container float-l" v-if="card.assignee.length > 0">
                           <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
                             <div class="show-assi noselecct">
                               <b-icon class="show-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
                             </div>
                             <div class="name-show-assi greytext noselect">{{assignee.displayName}}</div>
-                          </div>
-                        </div><br/><br/><br/>
+                          </div><br/><br/><br/>
+                        </div>
                       </div>
                     </div>
                   </Draggable>
@@ -236,6 +238,8 @@ export default {
         {value:1,status:'In progress'},
         {value:2,status:'Completed'}
       ],
+
+      notMove:false,
     };
   },
   // this.postits.push({createBox:true,card:[]})
@@ -247,7 +251,7 @@ export default {
         if (doc) {
           // console.log(this.postits)
           this.project = doc
-          this.postits = doc.postit.concat([{createBox:true,card:[]}])
+          this.postits = doc.postit
           // this.postits = this.temp1
         }
       }
@@ -304,13 +308,17 @@ export default {
       })
     },
     feedbackPostit(){
-      this.postits.pop()
+      // this.postits.pop()
       this.$db.collection('project').doc(this.project.pid).update({
         postit: this.postits
       })
     },
     onCardDrop(columnId, dropResult) {
       if (dropResult.removedIndex !== null || dropResult.addedIndex !== null) {
+        // clearTimeout(this.timeO)
+        if(dropResult.removedIndex === dropResult.addedIndex){
+          this.notMove = true
+        }
         if(dropResult.removedIndex !== null){
           let found = this.postits.filter((p,i) => i === columnId)[0];
           found.card.splice(dropResult.removedIndex, 1);
@@ -319,6 +327,16 @@ export default {
           let found = this.postits.filter((p,i) => i === columnId)[0];
           found.card.splice(dropResult.addedIndex, 0, dropResult.payload)
         }
+      }
+      if (columnId === this.postits.length-1  && this.notMove) {
+        // console.log('notMove = true')
+        this.notMove = false
+      }
+      else if(columnId === this.postits.length-1){
+        // new Promise(resolve => this.timeO = setTimeout(resolve,50)).then(()=>{
+          this.feedbackPostit()
+          // console.log('feed')
+        // })
       }
     },
     getCardPayload(id){
@@ -363,12 +381,6 @@ export default {
       this.$refs['efc'+index].forEach((ele,i)=>{
         if(i != indexC){
           ele.classList.remove('show')
-          this.temporaryAssignee = []
-          this.cardTiltleIn = ''
-          this.dessIn = ''
-          this.dateIn = ''
-          this.statusIn = 0
-          this.voteIn = 0
         } else {
           ele.classList.add('show')
           const time = isNaN(this.postits[index].card[indexC].duedate.seconds)?null:this.postits[index].card[indexC].duedate.toDate()
@@ -427,27 +439,30 @@ export default {
       this.closeEditFormCard(index)
     },
     closeEditFormCard (index) {
-      this.$refs['efc'+index].forEach((ele,i)=>{
-        ele.classList.remove('show')
-        this.temporaryAssignee = []
-        this.cardTiltleIn = ''
-        this.dessIn = ''
-        this.dateIn = ''
-        this.statusIn = 0
-        this.voteIn = 0
-        for(let j = 0; j < this.postits.length; j+=1){
-          if(this.$refs['status'+j]){
-            this.$refs['status'+j].forEach((ele,k)=>{
-              ele.selectedIndex = 0
-            })
+      if(this.$refs['efc'+index]){
+        this.$refs['efc'+index].forEach((ele,i)=>{
+          ele.classList.remove('show')
+          this.temporaryAssignee = []
+          this.cardTiltleIn = ''
+          this.dessIn = ''
+          this.dateIn = ''
+          this.statusIn = 0
+          this.voteIn = 0
+          for(let j = 0; j < this.postits.length; j+=1){
+            if(this.$refs['status'+j]){
+              this.$refs['status'+j].forEach((ele,k)=>{
+                ele.selectedIndex = 0
+              })
+            }
+            if(this.$refs['copm'+j]){
+              this.$refs['copm'+j].forEach((ele,i)=>{
+                  ele.classList.remove('showAs')
+              })
+            }
           }
-          if(this.$refs['copm'+j]){
-            this.$refs['copm'+j].forEach((ele,i)=>{
-                ele.classList.remove('showAs')
-            })
-          }
-        }
-      })
+        })
+      }
+      
     },
     toggleFormCard(index) {
       this.closeEditFormCard(index)
@@ -530,10 +545,7 @@ export default {
     saveEditPostit (index) {
       if(this.postitInEdit && this.postitInEdit != this.postits[index].title){
         this.postits[index].title = this.postitInEdit
-        this.postits.pop()
-        this.$db.collection('project').doc(this.project.pid).update({
-          postit: this.postits
-        })
+        this.feedbackPostit()
       }
       // this.postits.push(null)
       // this.postits.pop()
