@@ -322,6 +322,7 @@ export default {
     })
   },
   beforeDestroy(){
+    document.removeEventListener('keyup', this.keyupCallback)
     this.collection()
     this.$rtdb.ref('/status/'+this.uid).off()
     this.$rtdb.ref('/status').off()

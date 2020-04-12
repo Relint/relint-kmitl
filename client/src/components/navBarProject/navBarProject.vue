@@ -182,9 +182,10 @@ export default {
         }
       }
     })
-    document.addEventListener('keyup',this.keyupCallback)
+    document.addEventListener('keyup',this.keyupCallbackNavProj)
   },
   beforeDestroy(){
+    document.removeEventListener('keyup',this.keyupCallbackNavProj)
     this.vuexUnsubscribe()
   },
   methods: {
@@ -285,7 +286,7 @@ export default {
       this.deadlineDateFormat = yy + '-' + (mm+1<10?'0'+(mm+1):mm+1) + '-' + (dd<10?'0'+dd:dd)
       return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
     },
-    keyupCallback(e){
+    keyupCallbackNavProj(e){
       e = e || window.event
       // console.log(e.keyCode)
       if(e.keyCode === 27){ //esc

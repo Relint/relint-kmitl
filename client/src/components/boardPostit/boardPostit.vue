@@ -293,9 +293,10 @@ export default {
         })
       }
     })
-    document.addEventListener('keyup',this.keyupCallback)
+    document.addEventListener('keyup',this.keyupCallbackBoardPostit)
   },
   beforeDestroy(){
+    document.removeEventListener('keyup',this.keyupCallbackBoardPostit)
     this.vuexUnsubscribe()
     this.vuexUnsubscribe2()
   },
@@ -704,7 +705,7 @@ export default {
         return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
       }
     },
-    keyupCallback(e){
+    keyupCallbackBoardPostit(e){
       e = e || window.event
       // console.log(e.keyCode)
       if(this.$refs.epsti){
