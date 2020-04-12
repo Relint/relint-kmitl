@@ -56,8 +56,13 @@
                         <button class="wrapperC btn-edit-card" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
                       </div>
                       <div class="float-l" style="padding-top: 10px;width: 246px" @click="cardSetting(index,index2)">
-                        <div :ref="'rcdes'" style="white-space: pre-wrap;">{{card.description?card.description:' '}}</div>
-                        <br/>
+                        <div v-if="card.description && card.status !== 'Completed'">
+                          <div :ref="'rcdes'" style="white-space: pre-wrap;">{{card.description}}</div>
+                          <br/>
+                        </div>
+                        <div v-else-if="card.description" style="font-size:12px;color:grey;">
+                          [Hidden]
+                        </div>
                         {{card.status}}
                         <br/>
                         <ul id="rating" class="rating small"  style="margin-top: 5px; margin-bottom: 5px;" >
@@ -72,13 +77,16 @@
                           <li v-if="card.difficulty > 0" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
                         </ul><br/><hr style="margin-bottom: 5px;">
-                        <div class="show-assignee-container float-l" v-if="card.assignee.length > 0">
+                        <div class="show-assignee-container float-l" v-if="card.assignee.length > 0 && card.status !== 'Completed'">
                           <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
                             <div class="show-assi noselecct">
                               <b-icon class="show-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
                             </div>
                             <div class="name-show-assi greytext noselect">{{assignee.displayName}}</div>
                           </div><br/><br/><br/>
+                        </div>
+                        <div v-else-if="card.assignee.length > 0" style="font-size:12px;color:grey;">
+                          [Hidden]
                         </div>
                       </div>
                     </div>

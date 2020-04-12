@@ -3,7 +3,7 @@
     <div class="contain-show-project">
       <div class="form-scroll-createBoard" id="board-scroll"  @click="eventMouseUD" >
         <div class="from-createBoard">
-          <div v-for="(project,index) in projects" :key="project.pid"  > 
+          <div v-for="(project,index) in projects.filter(ele=>ele).sort((a,b)=>sortByStatus(a,b))" :key="project.pid"  > 
             <div id="container-Board" v-bind:style="{left: (index%2)*250+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
               <p class="pid-show">{{project.pid}}</p>
               <div class="dot two"></div>
@@ -17,7 +17,7 @@
               <div class="show-message">
                   <h1>{{project.title}}</h1>
                   <p> {{project.description}}</p><br class="noselect"> 
-                  <p> {{project.deadline.toDate().getDate() + "-" + (project.deadline.toDate().getMonth() + 1) + "-" + project.deadline.toDate().getFullYear()}}</p><br class="noselect">
+                  <p> {{analysisTime(project.deadline)}}</p><br class="noselect">
               </div>
               <div  v-if="project.permission">
                 <button class="button-box left" @click="goBoardPostit(project.pid)"><p class="green noselect" >join</p></button>
@@ -86,6 +86,7 @@ export default {
       deadlineIn:'',
       
       projects :[],
+      users: [],
 
       emailIn:'',
       authority:0,
@@ -121,9 +122,16 @@ export default {
         this.projects = state.project
       }
     })
+    this.vuexUnsubscribe2 = this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      if(mutation.type === 'setUser'){
+        this.users = state.user
+      }
+    })
   },
   beforeDestroy(){
     this.vuexUnsubscribe()
+    this.vuexUnsubscribe2()
   },
   methods: {
     //eventMouse U -D
@@ -254,52 +262,50 @@ export default {
     openFormInvite () {
       document.getElementById('form-invite').style.display="block"
     },
+    verifyMember(email){
+      const matched = this.users.filter((ele,i)=>{
+        return ele.email === email
+      })
+      return matched[0]
+    },
     addMember () {
-        if(!this.authority){
-          alert('Please Choose Member Type')
-          return
-        } 
-
-        this.$http({
-          method: "get",
-          url: "/invite",
-          headers:{
-            email: this.emailIn
-          }
-        }).then(res=> {
-          if(res.data === firebase.auth().currentUser.uid){
-            alert('You invited yourself.')
-            this.emailIn = ''
-            document.getElementById('selector').selectedIndex = 0
-            this.authority=0
-            return
-          }
-          let check = this.invites.filter(ele => ele.data.uid === res.data)
-          if(check.length !== 0){
-            alert('Duplicate user invited')
-            this.emailIn = ''
-            document.getElementById('selector').selectedIndex = 0
-            this.authority=0
-            return
-          }
-          this.invites.push({ 
-                            data:{
-                                  priority:this.authority,
-                                  uid: res.data,
-                                  timestamp: firebase.firestore.Timestamp.fromDate(new Date())
-                                 },
-                            email:this.emailIn
-                          })
+      if(!this.authority){
+        alert('Please Choose Member Type')
+        return
+      } 
+      const res = this.verifyMember(this.emailIn)
+      if(res){
+        if(res.uid === firebase.auth().currentUser.uid){
+          alert('You invited yourself.')
           this.emailIn = ''
           document.getElementById('selector').selectedIndex = 0
           this.authority=0
-        }).catch(err=> {
-          alert('User doesn\'t exist')
+          return
+        }
+        let check = this.invites.filter(ele => ele.data.uid === res.uid)
+        if(check.length !== 0){
+          alert('Duplicate user invited')
+          this.emailIn = ''
           document.getElementById('selector').selectedIndex = 0
           this.authority=0
-        })
-
-        
+          return
+        }
+        this.invites.push({ 
+                          data:{
+                                priority:this.authority,
+                                uid: res.uid,
+                                timestamp: firebase.firestore.Timestamp.fromDate(new Date())
+                                },
+                          email:this.emailIn
+                        })
+        this.emailIn = ''
+        document.getElementById('selector').selectedIndex = 0
+        this.authority=0
+      }else{
+        alert('User doesn\'t exist')
+        document.getElementById('selector').selectedIndex = 0
+        this.authority=0
+      }
     },
     removeMenber (uid) {
          this.invites = this.invites.filter(invite => {
@@ -309,6 +315,36 @@ export default {
     onChange(e) {
       let index = e.target.selectedIndex;
       this.authority = index
+    },
+    sortByStatus(a,b){
+      const as = a.status
+      const bs = b.status
+      if ( as && bs ){
+        if(a.pid.substring(1,a.pid.length) > b.pid.substring(1,b.pid.length)) return 1
+        if(a.pid.substring(1,a.pid.length) < b.pid.substring(1,b.pid.length)) return -1
+      }else if(as || bs){
+        if(as) return 1
+        if(bs) return -1
+      }
+      return 0
+    },
+    /* eslint-disable */
+    analysisTime(timestamp,n=false){
+      let time = ''
+      if(!n){
+        time = timestamp.toDate()
+      } else {
+        time = timestamp
+      }
+      const now = new Date()
+      const yy = time.getFullYear()
+      const mm = time.getMonth()
+      const dd = time.getDate()
+      const ny = now.getFullYear()
+      const nm = now.getMonth()
+      const nd = now.getDate()
+      this.deadlineDateFormat = yy + '-' + (mm+1<10?'0'+(mm+1):mm+1) + '-' + (dd<10?'0'+dd:dd)
+      return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
     },
   }
   

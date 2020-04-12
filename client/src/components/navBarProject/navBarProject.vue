@@ -127,6 +127,7 @@ export default {
       deadline: "",
       deadlineDateFormat: "",
       description: "",
+      status: "",
 
       emailIn:'',
       authority:0,
@@ -150,6 +151,7 @@ export default {
           this.projectName = doc.title;
           this.deadline = this.analysisTime(doc.deadline)
           this.description = doc.description;
+          this.status = doc.status
         } else {
           this.$router.replace("/addBoard");
         }
@@ -265,6 +267,11 @@ export default {
         this.closeEditPro()
       }
     },
+    toggleStatus(){
+      this.$db.collection('project').doc(this.$store.state.pid).update({
+          status: !this.status
+        })
+    }
   }
 };
 </script>
