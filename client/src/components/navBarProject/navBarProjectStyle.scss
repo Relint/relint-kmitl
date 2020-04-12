@@ -406,8 +406,12 @@ $blueQueen: rgba(69, 105, 144, 1);
   overflow: auto;
   // height: 100%;
   // width: 100%;
-  background-color: green;
-  margin: 10px 10px 10px 10px;
+  background-color:$bluesky;
+  // border: 1px solid rgb(175, 174, 174);
+  margin: 20px 00px 20px 20px;
+  z-index: 1;
+  border-radius: 15px;
+  box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
 }
 .stage-right {
   float: right;
@@ -416,7 +420,7 @@ $blueQueen: rgba(69, 105, 144, 1);
   overflow: hidden;
   // height: 100%;
   // width: 100%;
-  background-color: palevioletred;
+  // background-color: palevioletred;
 }
 
 .div5 {

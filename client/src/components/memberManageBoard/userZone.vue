@@ -9,18 +9,22 @@
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+@import "../Login/mixin.scss";
 .user-parent {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  background-color: darkblue;
+  //  background-color: darkblue; 
   /* margin: 5%; */
   /* max-height: 700px; */
-   height: 500px;
+   height: 490px;
    width: 100%;
+   z-index: 3;
+  border-radius: 15px;
+  // box-shadow: 0px 3px 3px 0px rgba(0,0,0,0.2);
 }
 
 .member-top {

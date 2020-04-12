@@ -2,7 +2,7 @@
   <div class="task-parent">
     <div class="user1">
       <div v-for="(member,index) in members" :key="index">
-        <div class="slide-horizontal" v-bind:style="{left:90+(index)*500+(index)*30 + 'px',top:40+'px' }">
+        <div class="slide-horizontal" v-bind:style="{left:20+(index)*400+(index)*30 + 'px',top:33+'px' }">
           <!-- {{member.userName}} -->
           <div id="aUser">
             <taskList :uName="member.userName" :prior="member.priority" :jobs="member.jobs" />
@@ -13,7 +13,8 @@
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+@import "../Login/mixin.scss";
 .task-parent {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -21,7 +22,7 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   background-color: chocolate;
-  margin: 5%;
+  // margin: 5%;
   /* height: 300px; */
   position: relative;
 }

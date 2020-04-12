@@ -15,20 +15,27 @@
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+@import "../Login/mixin.scss";
 .userBox-parent {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  background-color: rgb(255, 0, 200);
+  background-color: $pinkk;
+  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
   margin-right: 1%;
   margin-left: 1%;
   margin-top: 1%;
   overflow: auto;
   height: 100px;
-  
+  padding-left: 20px;
+   padding-right: 20px;
+  padding-top:20px;
+  font-size: 22px;
+  z-index: 3;
   
 }
 

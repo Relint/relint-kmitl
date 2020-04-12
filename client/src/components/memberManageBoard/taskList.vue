@@ -13,15 +13,18 @@
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+@import "../Login/mixin.scss";
 .list-parent {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: 1fr 4fr;
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  background-color: blueviolet;
-  margin: 5%;
+  border: 1px solid rgb(175, 174, 174);
+  box-shadow: 0px 2px 3px 0px rgba(0, 0, 0, 0.2);
+  border-radius: 15px;
+  // margin: 5%;
   height: 600px;
   position: absolute;
   width: 400px;
@@ -29,6 +32,7 @@
 
 .userBox {
   grid-area: 1 / 1 / 2 / 2;
+  // background-color:red;
 }
 .taskBar {
   grid-area: 2 / 1 / 3 / 2;

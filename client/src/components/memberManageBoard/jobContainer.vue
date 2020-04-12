@@ -10,15 +10,16 @@
   </div>
 </template>
 
-<style>
+<style scoped lang="scss">
+@import "../Login/mixin.scss";
 .container-parent {
   display: grid;
   grid-template-columns: 1fr;
   /* grid-template-rows: repeat(3, 1fr); */
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  background-color: grey;
-  margin: 5%;
+  // background-color: grey;
+  margin: 1% 5% 5% 5%;
   height: 400px;
   overflow: auto;
 }

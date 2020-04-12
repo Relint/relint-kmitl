@@ -66,30 +66,9 @@
 
       
       
-      <div class="contain-input-edit" style="display:none;left:160px;" id="editP">
-        <input id="einput"  class="input-edit-postit" type="text" v-model="projectNameIn" placeholder="Edit a title..."  v-on:keyup.enter="saveProjectName"> 
-        
-        <div class="contain-btn-edit">
-          <button @click="saveProjectName" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
-          <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
-        </div>
-      </div>
-      <div class="contain-input-edit" style="display:none;left:275px;" id="editT">
-          <input id="einput" ref="dinput" class="input-edit-postit" type="date" min="2000-01-01" v-model="deadlineIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDeadline"> 
-         
-         <div class="contain-btn-edit">
-            <button @click="saveDeadline" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
-            <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
-          </div>
-      </div>
-      <div class="contain-input-edit" style="display:none;left:430px;" id="editD">
-          <input id="einput"  class="input-edit-postit" type="text" v-model="descriptionIn" placeholder="Edit a title..."  v-on:keyup.enter="saveDescription"> 
-         
-         <div class="contain-btn-edit">
-            <button @click="saveDescription" class="btn-check " ><b-icon icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
-            <button @click="closeEditPro" class="btn-x  " ><b-icon icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
-          </div>
-      </div>
+      
+      
+      
 
        
 
@@ -237,14 +216,6 @@ export default {
       document.getElementById('btnT').disabled = false;
     },
     editDeadline () {
-      let today = new Date()
-      let dd = today.getDate()
-      let mm = today.getMonth()+1
-      const yyyy = today.getFullYear()
-      if(dd < 10) dd = '0'+dd
-      if(mm < 10) mm = '0'+mm
-      today = yyyy+'-'+mm+'-'+dd
-      this.$refs.dinput.setAttribute('min',today)
       document.getElementById('btnT').disabled = false;
       document.getElementById('editT').style.display='block'
       document.getElementById('btnP').disabled = true;
