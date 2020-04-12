@@ -516,8 +516,13 @@ select {
     border: 2px solid;
     border-color: transparent $dark $dark transparent;
     transform: rotate(45deg);
-    
   }
+   .sad {
+    border: 2px solid;
+    border-color: transparent $dark $dark transparent;
+    transform: rotate(225deg);
+    top:30px
+   }
   shadow {
     position: absolute;
     width: 21%;

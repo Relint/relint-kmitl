@@ -13,7 +13,7 @@
                 <div  class="face">
                   <div class="eye"></div>
                   <div class="eye right"></div>
-                  <div class="mouth happy"></div>
+                  <div  class="mouth sad"></div>
                 </div>
               </div>
               <div v-else>
