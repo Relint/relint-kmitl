@@ -59,7 +59,7 @@
                       </div>
                       <div class="float-l" style="padding-top: 10px;width: 246px" @click="cardSetting(index,index2)">
                         <div v-if="card.description && card.status !== 'Completed'">
-                          <div :ref="'rcdes'" style="white-space: pre-wrap;">{{card.description}}</div>
+                          <div :ref="'rcdes'+index" class="card-des lock">{{card.description}}</div>
                           <br/>
                         </div>
                         <div v-else-if="card.description" style="font-size:12px;color:grey;">
@@ -78,18 +78,25 @@
                           <li v-else class="fill-w"></li>
                           <li v-if="card.difficulty > 0" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
-                        </ul><br/><hr style="margin-bottom: 5px;">
+                        </ul><hr>
                         <div class="show-assignee-container float-l" v-if="card.assignee.length > 0 && card.status !== 'Completed'">
                           <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
                             <div class="show-assi noselecct">
                               <b-icon class="show-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
                             </div>
                             <div class="name-show-assi greytext noselect">{{assignee.displayName}}</div>
-                          </div><br/><br/><br/>
+                          </div>
                         </div>
-                        <div v-else-if="card.assignee.length > 0" style="font-size:12px;color:grey;">
+                        <div v-else-if="card.assignee.length > 0" class="float-l" style="font-size:12px;color:grey;">
                           [Hidden]
                         </div>
+                      </div><br>
+                      <div class="float-l">
+                        <div v-if="card.description && card.status !== 'Completed' && temporaryPostits[index] && temporaryPostits[index][index2]" class="collapse-card-btn" @click="toggleLockCard(index,index2)">
+                          <b-icon :ref="'sm'+index" class="center-icon" style="display:block;" icon="chevron-compact-down" font-scale="1.5"></b-icon>
+                          <b-icon :ref="'sl'+index" class="center-icon" style="display:none;" icon="chevron-compact-up" font-scale="1.5"></b-icon>
+                        </div>
+                        <div v-else class="blank-card-btn"></div>
                       </div>
                     </div>
                   </Draggable>
@@ -231,6 +238,8 @@ export default {
       postits:[],
       cards:[],
 
+      temporaryPostits:[],
+
       temporaryAssignee:[],
       temporaryAssignee2:[],
 
@@ -252,7 +261,6 @@ export default {
       notMove:false,
     };
   },
-  // this.postits.push({createBox:true,card:[]})
   mounted () {
     this.vuexUnsubscribe = this.$store.subscribe((mutation, state) => {
       // console.log(mutation.type)
@@ -262,7 +270,16 @@ export default {
           // console.log(this.postits)
           this.project = doc
           this.postits = doc.postit
-          // this.postits = this.temp1
+          this.temporaryPostits = []
+          doc.postit.forEach((ele,i)=>{
+            this.temporaryPostits.push([])
+            if(doc.postit.card){
+              doc.postit.card.forEach((ele2,j)=>{
+                this.temporaryPostits[i].push(null)
+              })
+            }
+          })
+          this.analysisContentCard()
         }
       }
     })
@@ -283,6 +300,44 @@ export default {
     this.vuexUnsubscribe2()
   },
   methods: {
+    analysisContentCard(){
+      new Promise(resolve=>setTimeout(resolve,10)).then(()=>{
+        for(let c = 0; c < this.temporaryPostits.length; c+=1){
+          if(this.$refs['rcdes'+c]){
+            this.$refs['rcdes'+c].forEach((ele,i)=>{
+              if(ele.scrollHeight > 80){
+                this.temporaryPostits[c][i] = true
+              }else{
+                this.temporaryPostits[c][i] = false
+              }
+            })
+          }
+        }
+        this.postits.push(null)
+        this.postits.pop()
+      })
+    },
+    toggleLockCard(index,index2){
+      if(this.$refs['sm'+index] && this.$refs['sl'+index] && this.$refs['rcdes'+index]){
+        this.$refs['sm'+index].forEach((ele,i)=>{
+          if(i === index2){
+            if(ele.style.display === 'block'){ele.style.display = 'none'}
+            else {ele.style.display = 'block'}
+          }
+        })
+        this.$refs['sl'+index].forEach((ele,i)=>{
+          if(i === index2){
+            if(ele.style.display === 'block'){ele.style.display = 'none'}
+            else {ele.style.display = 'block'}
+          }
+        })
+        this.$refs['rcdes'+index].forEach((ele,i)=>{
+          if(i === index2){
+            ele.classList.toggle('lock')
+          }
+        })
+      }
+    },
     selectMember(memberPayload) {
       this.temporaryAssignee.push(memberPayload)
       this.$refs.copm.forEach((ele,i)=>{

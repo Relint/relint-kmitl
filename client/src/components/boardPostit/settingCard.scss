@@ -7,22 +7,18 @@
     position: absolute;
     width: 500px;
     height: 485px;
-    // height: 450px;
     display: none;
     background-color:rgb(255, 255, 255);
     border: 1px solid #ccc;
     border-radius: 20px;
     padding: 15px 15px 15px 15px;
     box-shadow: 0 5px 5px 0 rgba(0,0,0,0.1);
-    top:54%;
+    top:50%;
     left: 50%;
     transform: translate(-50%,-50%);
   }
   .setting-card.show{
     display: block;
-    // opacity: 1;
-    // width: 500px;
-    // height: 450px;
   }
   .show-index {
     width: 480px;

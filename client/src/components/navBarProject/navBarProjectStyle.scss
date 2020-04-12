@@ -333,6 +333,7 @@ $blueQueen: rgba(69, 105, 144, 1);
 
 #manage {
   position: absolute;
+  z-index: 3;
   background-color: #f9f9f9;
   box-shadow: 0px 5px 5px 0px rgba(0, 0, 0, 0.2);
   border-radius: 15px;
