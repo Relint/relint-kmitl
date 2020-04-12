@@ -2,40 +2,32 @@
 
 .status-iac {
     position: absolute;
-    right: 153px;
-    top:25px;
+    margin-top: 1px;
+    margin-left: 63px;
+    // right: 132px;
+    // top:15px;
     font-size: 12px;
+    font-weight: bold;
 }
 .status-ac {
     position: absolute;
-    right: 200px;
-    top:25px;
+    margin-top: 15px;
+    margin-left: 13px;
+    // right: 190px;
+    // top:30px;
     font-size: 12px;
+    font-weight: bold;
 }
-#container {
-   position: absolute;
-    width: 100px;
-    height:50px;
-    // margin: 0;
-    grid-area: main;
-    -ms-flex-item-align: center;
-    -ms-grid-row-align: center;
-    align-self: center;
-    -ms-grid-column-align: center;
-    justify-self: center;
-    // background-color: red;
-    right: 150px;
-  }
   
   .toggle {
     position: absolute;
+    margin-left: 20px;
     width: 90px;
     // background-color: blue;
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    right: 150px;
   }
   
   [type="checkbox"] {
@@ -44,8 +36,8 @@
   
   .check-label {
     display: block;
-    width: 90px;
-    height: 40px;
+    width: 70px;
+    height: 30px;
     border: none;
     border-radius: 3rem;
     background: #d7d7d7;
@@ -55,7 +47,7 @@
       display: block;
       position: absolute;
       content: '';
-      top: 0rem;
+      top: -0.2rem;
       bottom: 0;
       right: 3.0rem;
       width: 2.5rem;
@@ -79,10 +71,10 @@
       height: inherit;
       border: none;
       border-radius: inherit;
-      background: -webkit-gradient(linear, right top, left top, from(#f39ab6), to(#f39af3));
-      background: -webkit-linear-gradient(right, #f39ab6, #f39af3);
-      background: -o-linear-gradient(right, #f39ab6, #f39af3);
-      background: linear-gradient(to left, #f39ab6, #f39af3);
+      background: -webkit-gradient(linear, right top, left top, from(#2ec748), to(#71f158));
+      background: -webkit-linear-gradient(right, #2ec748, #71f158);
+      background: -o-linear-gradient(right, #2ec748, #71f158);
+      background: linear-gradient(to left, #2ec748, #71f158);
       opacity: 0;
       -webkit-transition: all 0.45s ease-in-out;
       -o-transition: all 0.45s ease-in-out;
@@ -132,8 +124,8 @@
   [type="checkbox"] {
     &:checked {
       + .check-label .face {
-          top:-0rem;
-        right: 0.1rem;
+          top:-0.5rem;
+          right: 1.2rem;
         .face-container {
           -webkit-animation: rotateElement forwards 0.3s;
           animation: rotateElement forwards 0.3s;

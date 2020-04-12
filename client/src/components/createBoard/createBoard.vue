@@ -7,8 +7,7 @@
             <div id="container-Board" v-bind:style="{left: (index%2)*250+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
             <p class="pid-show">{{project.pid}}</p>
               <div class="dot two"></div>
-
-              <div v-if="project.status===false">
+              <div v-if="project.status">
                 <div class="inactive"></div>
                 <div  class="face chang-colorS">
                   <div class="eye"></div>

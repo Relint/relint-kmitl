@@ -457,22 +457,24 @@ select {
   }
  .active {
    position: relative;
-   width: 12px;
-   height: 12px;
+   width: 15px;
+   height: 15px;
    border-radius: 100%;
    background-color: green;
    float: right;
-   right: 10px;
+   margin-right: 10px;
+   margin-top: 10px;
  }
  .inactive {
   position: relative;
-  width: 10px;
-  height: 10px;
+  width: 13px;
+  height: 13px;
   border-radius: 100%;
   border: 1px solid grey;
   // background-color: rgb(5, 12, 49);
   float: right;
-  right: 10px;
+   margin-right: 10px;
+   margin-top: 10px;
 }
   .face {
     position: absolute;
@@ -566,6 +568,8 @@ select {
     white-space: nowrap;
   }
   .pid-show{
+    float: left;
+    width: 20px;
     margin-top: 5px;
     margin-left: 10px;
     font-size: 10px;

@@ -57,42 +57,35 @@
         </div>
       </div>
       
-      <div class="wrapper float-r div-5">
-        
-        <div id="container  ">
-          <div class="toggle ">
-            <input type="checkbox" name="toggle" class="check-checkbox" id="mytoggle" v-model="status">
-            <label class="check-label" for="mytoggle">
-              <div id="background"></div>
-              <span @click="toggleStatus" class="face">
-                <span class="face-container">
-                  <span class="eye left"></span>
-                  <span class="eye right"></span>
-                  <span class="mouth"></span>
-                </span>
+      <div class="wrapper float-r div-5">     
+        <img   src="./threeman.png" alt="pen" style="width:50px;hight:50px;cursor: pointer;" @click="openFormMa">
+        <!-- <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon> -->
+      </div>
+      <div class="wrapper div-6 float-r">
+        <div class="toggle ">
+          <input type="checkbox" name="toggle" class="check-checkbox" id="mytoggle" v-model="dummyStatus">
+          <label class="check-label" for="mytoggle" @click="toggleStatus" >
+            <div id="background"></div>
+            <span class="face">
+              <span class="face-container">
+                <span class="eye left"></span>
+                <span class="eye right"></span>
+                <span class="mouth"></span>
               </span>
-            </label>
-          </div>
+            </span>
+          </label>
         </div>
-        <div v-if="status===false">
-          <div class="status-iac">
+        <div v-if="status">
+          <div class="status-iac noselect" style="cursor:pointer;">
               Inactive
           </div>
         </div>
         <div v-else>
-          <div class="status-ac">
+          <div class="status-ac noselect" style="cursor:pointer;">
               Active
           </div>
         </div>
-
-
-
-                   
-        <img   src="./threeman.png" alt="pen" style="width:50px;hight:50px;cursor: pointer;" @click="openFormMa">
-        
-        <!-- <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon> -->
       </div>
-
 
       
       
@@ -158,6 +151,7 @@ export default {
       deadlineDateFormat: "",
       description: "",
       status: "",
+      dummyStatus: "",
 
       emailIn:'',
       authority:0,
@@ -182,6 +176,7 @@ export default {
           this.deadline = this.analysisTime(doc.deadline)
           this.description = doc.description;
           this.status = doc.status
+          this.dummyStatus = !this.status
         } else {
           this.$router.replace("/addBoard");
         }
