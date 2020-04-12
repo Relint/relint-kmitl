@@ -2,32 +2,34 @@
   <div>
     <div class="contain-boardPostit">
       <div class="form-scroll-postit" id="postit-scroll">
-        <div class="from-boardPostit">
-            <div v-for="(postit , index) in postits.concat([{createBox:true,card:[]}])" :key="'pt-'+index" :ref="'psti'"  class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
-              <div v-if="postit.createBox">
+        <!-- <div class="from-boardPostit"> -->
+            <div v-for="(postit , index) in postits.concat([{createBox:true,card:[]}])" :key="'pt-'+index" :ref="'psti'">
+              <div v-if="postit.createBox" class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
                   <div class="form-input-postit">
                     <input class="input-postit" type="text" placeholder="add post-it" v-model="postitIn" v-on:keyup.enter="createPostit">
                     <div @click="createPostit" class="btn-create-postit"><b-icon class="center-icon" icon="plus" font-scale="3" ></b-icon></div>
                   </div>
               </div>
-              <div v-else>
-                
+              <div v-else class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
                 <div class="form-show-postit">
-                  <div ref="epsti" style="display:none">
+                  <div ref="epsti" style="height:43px;width:100%;display:none">
                     <div class="contain-input-edit">
                       <input id="einput"  class="input-edit-postit" type="text" v-model="postitInEdit" placeholder="Edit a title..."> 
                       <button class="btn-check " @click="saveEditPostit(index)"><b-icon icon="check" id="mov-l" font-scale='1.5'></b-icon></button>
                       <button class="btn-x " @click="closeFormEditPostit(index)"><b-icon icon="x" id="mov-r" font-scale='1.5'></b-icon></button>
                     </div>
                   </div>
-                  <div ref="npsti">
-                  <div class="show-postit-title" @click="editPostit(index)">{{postit.title}}</div>
-                  <button class="btn-x-postit " @click="deletePostit(index)"><b-icon icon="x" font-scale="2"></b-icon></button><br/>
-                  <button class=" btn-move float-l  " v-if="index!=0" @click="movLeft(index)"><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
-                  <button class="disabled float-l " v-else><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
-                  <button class="btn-move float-r" v-if="index<postits.length-2" @click="movRight(index)"><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
-                  <button class=" disabled float-r " v-else><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
-                 
+                  <div ref="npsti" style="height:100%;width:100%;display:block">
+                    <div style="height:43px;width:100%;">
+                      <div class="show-postit-title float-l" @click="editPostit(index)">{{postit.title}}</div>
+                      <button class="btn-x-postit float-r" @click="deletePostit(index)"><b-icon class="center-icon" icon="x" font-scale="2"></b-icon></button><br/>
+                    </div>
+                    <div style="height:27px;width:100%;">
+                      <button class=" btn-move float-l  " v-if="index!=0" @click="movLeft(index)"><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
+                      <button class="disabled float-l " v-else><b-icon icon="chevron-compact-left" id="mov-l" font-scale='1.5'></b-icon></button>
+                      <button class="btn-move float-r" v-if="index<postits.length-2" @click="movRight(index)"><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
+                      <button class=" disabled float-r " v-else><b-icon icon="chevron-compact-right" id="mov-r" font-scale='1.5'></b-icon></button>
+                    </div>
                   </div>
                 </div>
                 <button class="btn-add-card" @click="toggleFormCard(index)">add card...</button>
@@ -95,7 +97,7 @@
                 </div>
               </div>
             </div>
-        </div>
+        <!-- </div> -->
         <div v-for="(postit,i) in postits" :key="'fc'+i" :ref="'fc'" class="setting-card ">
           <div class="show-index"><p>card : {{postit.card.length+1}}  |  title : {{postit.title}}  </p></div>
           <input class=" input-title" type="text" placeholder="Title" v-model="cardTiltleIn"  > <br/>
