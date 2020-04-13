@@ -28,6 +28,10 @@
   max-height: 80px;
   overflow-y: scroll;
 }
+.card-des.hidden{
+  height: 0px;
+  overflow: hidden;
+}
 .lock::-webkit-scrollbar {
   width: 1px;
   height: 1px;

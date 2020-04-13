@@ -75,14 +75,14 @@
             </span>
           </label>
         </div>
-        <div v-if="status">
-          <div class="status-iac noselect" style="cursor:pointer;">
-              Inactive
+        <div v-if="dummyStatus">
+          <div class="status-ac noselect" style="cursor:pointer;">
+              Active
           </div>
         </div>
         <div v-else>
-          <div class="status-ac noselect" style="cursor:pointer;">
-              Active
+          <div class="status-iac noselect" style="cursor:pointer;">
+              Inactive
           </div>
         </div>
       </div>

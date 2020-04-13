@@ -63,8 +63,10 @@
                           <br/>
                         </div>
                         <div v-else-if="card.description" style="font-size:12px;color:grey;">
+                          <div :ref="'rcdes'+index" class="card-des hidden">{{card.description}}</div>
                           [Hidden]
                         </div>
+                        <div :ref="'rcdes'+index" v-else></div>
                         {{card.status}}
                         <br/>
                         <ul id="rating" class="rating small"  style="margin-top: 5px; margin-bottom: 5px;" >
@@ -92,11 +94,11 @@
                         </div>
                       </div><br>
                       <div class="float-l">
-                        <div v-if="card.description && card.status !== 'Completed' && temporaryPostits[index] && temporaryPostits[index][index2]" class="collapse-card-btn" @click="toggleLockCard(index,index2)">
+                        <div v-if="card.description && card.status !== 'Completed' && card.foldable" class="collapse-card-btn" @click="toggleLockCard(index,index2)">
                           <b-icon :ref="'sm'+index" class="center-icon" style="display:block;" icon="chevron-compact-down" font-scale="1.5"></b-icon>
                           <b-icon :ref="'sl'+index" class="center-icon" style="display:none;" icon="chevron-compact-up" font-scale="1.5"></b-icon>
                         </div>
-                        <div v-else class="blank-card-btn"></div>
+                        <div v-else class="blank-card-btn"><div :ref="'sm'+index"></div><div :ref="'sl'+index"></div></div>
                       </div>
                     </div>
                   </Draggable>
@@ -270,15 +272,6 @@ export default {
           // console.log(this.postits)
           this.project = doc
           this.postits = doc.postit
-          this.temporaryPostits = []
-          doc.postit.forEach((ele,i)=>{
-            this.temporaryPostits.push([])
-            if(doc.postit.card){
-              doc.postit.card.forEach((ele2,j)=>{
-                this.temporaryPostits[i].push(null)
-              })
-            }
-          })
           this.analysisContentCard()
         }
       }
@@ -302,14 +295,14 @@ export default {
   },
   methods: {
     analysisContentCard(){
-      new Promise(resolve=>setTimeout(resolve,10)).then(()=>{
-        for(let c = 0; c < this.temporaryPostits.length; c+=1){
+      new Promise(resolve=>setTimeout(resolve,50)).then(()=>{
+        for(let c = 0; c < this.postits.length; c+=1){
           if(this.$refs['rcdes'+c]){
             this.$refs['rcdes'+c].forEach((ele,i)=>{
               if(ele.scrollHeight > 80){
-                this.temporaryPostits[c][i] = true
+                this.postits[c].card[i].foldable = true
               }else{
-                this.temporaryPostits[c][i] = false
+                this.postits[c].card[i].foldable = false
               }
             })
           }
@@ -319,6 +312,7 @@ export default {
       })
     },
     toggleLockCard(index,index2){
+      console.log(index + ' ' + index2)
       if(this.$refs['sm'+index] && this.$refs['sl'+index] && this.$refs['rcdes'+index]){
         this.$refs['sm'+index].forEach((ele,i)=>{
           if(i === index2){
@@ -374,7 +368,6 @@ export default {
       })
     },
     feedbackPostit(){
-      // this.postits.pop()
       this.$db.collection('project').doc(this.project.pid).update({
         postit: this.postits
       })
@@ -580,7 +573,8 @@ export default {
         duedate: this.dateIn?firebase.firestore.Timestamp.fromDate(new Date(this.dateIn+'T23:59:59+07:00')):'',
         status: this.optsStatus[this.statusIn].status,
         title: this.cardTiltleIn,
-        assignee: this.temporaryAssignee
+        assignee: this.temporaryAssignee,
+        foldable: false,
       })
       this.feedbackPostit()
       this.closeFormCard(index)
