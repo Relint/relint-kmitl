@@ -240,16 +240,26 @@ button.btnSubmit-login {
 
 // form-contain
 .contain-form-login {
+  z-index: 2;
   position: absolute;
-  left:60%;
-  top:30%
+  right: 13%;
+  // left:60%;
+  top:25%
 }
 .contain-form-regis {
+  z-index: 2;
   position: absolute;
-  left:60%;
-  top:30%
+  right: 13%;
+  // left:60%;
+  top:25%
 }
 
+.float-l {
+  float: left;
+}
+.float-r {
+  float: right;
+}
 // contain-logoball
 
 .contain-logoball {
@@ -261,7 +271,6 @@ button.btnSubmit-login {
   border-radius: 100%;
   padding-top: 8%;
   margin: 300px 0 0 -2%; 
-  
   left: 10%;
 }
 .div-0-cylinder {

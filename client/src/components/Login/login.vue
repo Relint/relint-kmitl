@@ -12,7 +12,14 @@
         <div class="contain-BGball div-2-BG-ball"> </div>
         <div class="contain-BGball div-3-BG-ball"> </div>
         <div class="contain-BGball div-4-BG-ball"> </div>
-
+      <div style="position:absolute;width:100%;height:100%">
+        <div class="contain-logoball div-0-cylinder"> </div>
+        <div class="contain-logoball div-1-ball"> </div>
+        <div class="contain-logoball div-2-ball"> </div>
+        <div class="contain-logoball div-3-ball"> </div>
+        <div class="contain-logoball div-4-ball"> </div>
+        <div class="contain-logoball logoName-ball noselect">RELINT</div>
+      </div>
       <!-- login -->
       <div class="contain-form-login">
           <div class="from-login" id='form-login'>
@@ -50,13 +57,6 @@
           </div> 
         </div>
     </div>    
-    
-        <div class="contain-logoball div-0-cylinder"> </div>
-        <div class="contain-logoball div-1-ball"> </div>
-        <div class="contain-logoball div-2-ball"> </div>
-        <div class="contain-logoball div-3-ball"> </div>
-        <div class="contain-logoball div-4-ball"> </div>
-        <div class="contain-logoball logoName-ball noselect">RELINT</div>
 
         <div id="waiting-login">
             <div class="lds-wrapper"></div>
