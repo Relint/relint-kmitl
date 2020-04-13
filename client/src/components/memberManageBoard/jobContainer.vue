@@ -1,6 +1,6 @@
 <template>
-  <div class="container-parent">
-    <div class="job1">
+  <div class="container-parent" >
+    <div class="job1" id="scroll-job">
       <div v-for="(job,index) in jobs" :key="index">
         <!-- {{job.jobName}}
         {{job.date}} -->
@@ -19,16 +19,32 @@
   grid-column-gap: 0px;
   grid-row-gap: 0px;
   // background-color: grey;
-  margin: 1% 5% 5% 5%;
+  margin: 1% 3% 5% 5%;
   height: 400px;
   overflow: auto;
+ 
 }
 
 .job1 {
   grid-area: 1 / 1 / 2 / 2;
   /* height: 550px; */
-  overflow: auto;
+  overflow: auto; 
+  overflow-y: scroll;
+    scrollbar-width: thin;
 }
+
+  #scroll-job::-webkit-scrollbar
+  {
+    width: 5px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+    // display: none;
+  }
+  #scroll-job::-webkit-scrollbar-thumb
+  {
+    border-radius: 30px;
+    background-color: rgb(177, 177, 177);
+  }
 /* .job2 {
   grid-area: 2 / 1 / 3 / 2;
   overflow: auto;

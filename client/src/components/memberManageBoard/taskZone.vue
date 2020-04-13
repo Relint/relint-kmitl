@@ -2,7 +2,7 @@
   <div class="task-parent">
     <div class="user1">
       <div v-for="(member,index) in members" :key="index">
-        <div class="slide-horizontal" v-bind:style="{left:20+(index)*400+(index)*30 + 'px',top:33+'px' }">
+        <div class="slide-horizontal" v-bind:style="{left:20+(index)*400+(index)*30 + 'px',top:20+'px' }">
           <!-- {{member.userName}} -->
           <div id="aUser">
             <taskList :uName="member.userName" :prior="member.priority" :jobs="member.jobs" />
