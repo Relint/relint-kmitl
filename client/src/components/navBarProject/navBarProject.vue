@@ -110,10 +110,10 @@
 
      <div id="manage" style="display:none;">
        <div class="stage-parent">
-                    <div class="stage-left">
+                    <div class="stage-left" id="scroll-task">
                       <taskZone />
                     </div>
-                    <div class="stage-right">
+                    <div class="stage-right" >
                       <userZone />
                     </div>
                   </div>

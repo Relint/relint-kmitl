@@ -1,7 +1,7 @@
 <template>
-  <div class="userCotainer-parent">
+  <div class="userCotainer-parent" id="scroll-member">
     <!-- upper -->
-    <div class="box1">
+    <div class="box1" >
       <div v-for="(member,index) in members" :key="index">
         <userBoxInMember :userName="member.userName" :priority="member.priority" />
       </div>
@@ -14,51 +14,64 @@
     </div>-->
   </div>
 </template>
+<style >
+/* $greenSeaweed: rgba(2, 128, 144, 1);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgba(244, 91, 105, 1);
+$pinkk :#FFCFD2;
+$orange: #f7a79d;
+$bluesky : #a6d4d8; 
+$colorFront : #707070;
+$fontAsap: 'Asap', sans-serif;
 
-<style scoped lang="scss">
-@import "../Login/mixin.scss";
+$white: #FCFCFC;
+$gray: #CBCDD3;
+$dark: #777777;
+$orange: #FFC39E;
+$success: #B0DB7D;
+$secondary: #99DBB4; */
 .userBox-parent {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-rows: repeat(2, 1fr);
   grid-column-gap: 0px;
   grid-row-gap: 0px;
-  background-color: $pinkk;
-  box-shadow: 0px 3px 3px 0px rgba(0, 0, 0, 0.2);
-  border-radius: 15px;
-  margin-right: 1%;
-  margin-left: 1%;
-  margin-top: 1%;
+  background-color: #FFCFD2;
+  margin: 2%;
   overflow: auto;
-  height: 100px;
-  padding-left: 20px;
-   padding-right: 20px;
-  padding-top:20px;
-  font-size: 22px;
-  z-index: 3;
-  
+  box-shadow: 0px 3px 3px 0px rgb(185, 185, 185);
 }
 
 .box1 {
   grid-area: 1 / 1 / 2 / 2;
   overflow: auto;
-  height: 450px;
-  /* padding-top:20px */
-  
+  /* max-height: 450px; */
 }
 /* .box2 {
   grid-area: 2 / 1 / 3 / 2;
   overflow: auto;
 } */
 .userCotainer-parent {
-  height: 450px;
-  margin: 3%;
-  /* padding-top: 15px; */
-  /* margin-bottom: 15px; */
+  max-height: 450px;
+  /* background-color:red; */
+   overflow-y: scroll;
+    scrollbar-width: thin;
 }
-
+  #scroll-member::-webkit-scrollbar
+  {
+    width: 5px;
+    background-color: #F5F5F5;
+    border-radius: 30px;
+     /* display: none; */
+  }
+  #scroll-member::-webkit-scrollbar-thumb
+  {
+    border-radius: 30px;
+    
+    background-color: rgb(177, 177, 177);
+     /* display: none; */
+  }
 </style>
-
 <script>
 import userBoxInMember from "./userBoxInMember";
 export default {
