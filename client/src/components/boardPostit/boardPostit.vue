@@ -58,15 +58,16 @@
                         <button class="wrapperC btn-edit-card" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
                       </div>
                       <div class="float-l" style="padding-top: 10px;width: 246px" @click="cardSetting(index,index2)">
-                        <div v-if="card.description && card.status !== 'Completed'">
-                          <div :ref="'rcdes'+index" class="card-des lock">{{card.description}}</div>
-                          <br/>
+                        <div :ref="'rcdes'+index">
+                          <div v-if="card.description && card.status !== 'Completed'">
+                            <div class="card-des lock">{{card.description}}</div>
+                            <br/>
+                          </div>
+                          <div v-else-if="card.description" style="font-size:12px;color:grey;">
+                            <div class="card-des hidden">{{card.description}}</div>
+                            [Hidden]
+                          </div>
                         </div>
-                        <div v-else-if="card.description" style="font-size:12px;color:grey;">
-                          <div :ref="'rcdes'+index" class="card-des hidden">{{card.description}}</div>
-                          [Hidden]
-                        </div>
-                        <div :ref="'rcdes'+index" v-else></div>
                         {{card.status}}
                         <br/>
                         <ul id="rating" class="rating small"  style="margin-top: 5px; margin-bottom: 5px;" >
@@ -95,10 +96,10 @@
                       </div><br>
                       <div class="float-l">
                         <div v-if="card.description && card.status !== 'Completed' && card.foldable" class="collapse-card-btn" @click="toggleLockCard(index,index2)">
-                          <b-icon :ref="'sm'+index" class="center-icon" style="display:block;" icon="chevron-compact-down" font-scale="1.5"></b-icon>
-                          <b-icon :ref="'sl'+index" class="center-icon" style="display:none;" icon="chevron-compact-up" font-scale="1.5"></b-icon>
+                          <b-icon v-if="card.fold" class="center-icon" icon="chevron-compact-down" font-scale="1.5"></b-icon>
+                          <b-icon v-else class="center-icon" icon="chevron-compact-up" font-scale="1.5"></b-icon>
                         </div>
-                        <div v-else class="blank-card-btn"><div :ref="'sm'+index"></div><div :ref="'sl'+index"></div></div>
+                        <div v-else class="blank-card-btn"></div>
                       </div>
                     </div>
                   </Draggable>
@@ -299,10 +300,13 @@ export default {
         for(let c = 0; c < this.postits.length; c+=1){
           if(this.$refs['rcdes'+c]){
             this.$refs['rcdes'+c].forEach((ele,i)=>{
-              if(ele.scrollHeight > 80){
-                this.postits[c].card[i].foldable = true
-              }else{
-                this.postits[c].card[i].foldable = false
+              if(ele.children[0] && ele.children[0].children[0]){
+                if(ele.children[0].children[0].scrollHeight > 80){
+                  this.postits[c].card[i].foldable = true
+                }else{
+                  this.postits[c].card[i].foldable = false
+                }
+                this.postits[c].card[i].fold = true
               }
             })
           }
@@ -312,25 +316,20 @@ export default {
       })
     },
     toggleLockCard(index,index2){
-      console.log(index + ' ' + index2)
-      if(this.$refs['sm'+index] && this.$refs['sl'+index] && this.$refs['rcdes'+index]){
-        this.$refs['sm'+index].forEach((ele,i)=>{
-          if(i === index2){
-            if(ele.style.display === 'block'){ele.style.display = 'none'}
-            else {ele.style.display = 'block'}
-          }
-        })
-        this.$refs['sl'+index].forEach((ele,i)=>{
-          if(i === index2){
-            if(ele.style.display === 'block'){ele.style.display = 'none'}
-            else {ele.style.display = 'block'}
-          }
-        })
+      // console.log(index + ' ' + index2)
+      if(this.$refs['rcdes'+index]){
         this.$refs['rcdes'+index].forEach((ele,i)=>{
           if(i === index2){
-            ele.classList.toggle('lock')
+            // console.log(ele.innerHTML)
+            if(ele.children[0] && ele.children[0].children[0]){
+              ele.children[0].children[0].classList.toggle('lock')
+            }
           }
         })
+        // console.log(this.postits[index].card[index2].fold)
+        this.postits[index].card[index2].fold = !this.postits[index].card[index2].fold
+        this.postits.push(null)
+        this.postits.pop()
       }
     },
     selectMember(memberPayload) {
@@ -368,6 +367,12 @@ export default {
       })
     },
     feedbackPostit(){
+      this.postits.forEach((ele,i)=>{
+        ele.card.forEach((ele2,j)=>{
+          ele2.fold = true
+        })
+      })
+      // console.log(this.postits)
       this.$db.collection('project').doc(this.project.pid).update({
         postit: this.postits
       })
@@ -575,6 +580,7 @@ export default {
         title: this.cardTiltleIn,
         assignee: this.temporaryAssignee,
         foldable: false,
+        fold: true,
       })
       this.feedbackPostit()
       this.closeFormCard(index)
