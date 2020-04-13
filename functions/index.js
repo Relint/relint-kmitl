@@ -47,16 +47,4 @@ app.get('/reg', (req, res) => {
         res.status(500).send(error);
     })
 })
-
-app.get('/invite', (req, res) => {
-    let email = req.headers.email
-    admin.auth().getUserByEmail(email).then(userRecord=>{
-        console.log('User Exists')
-        res.send(userRecord.uid)
-    }).catch(err=>{
-        console.log('User doesn\'t exist')
-        res.status(400).send(err)
-    })
-})
-
 exports.app = functions.https.onRequest(app);
