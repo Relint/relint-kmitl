@@ -29,7 +29,7 @@
                   <p> {{project.description}}</p><br class="noselect"> 
                   <p> {{analysisTime(project.deadline)}}</p><br class="noselect">
               </div>
-              <div  v-if="project.permission">
+              <div  v-if="project.permission === 0">
                 <button class="button-box left" @click="goBoardPostit(project.pid)"><p class="green noselect" >join</p></button>
                 <button class="button-box1 right" @click="deleteBoard(project.pid)"><p class="green noselect" >delete</p></button>
               </div>

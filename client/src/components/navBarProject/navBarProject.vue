@@ -61,7 +61,7 @@
         <img   src="./threeman.png" alt="pen" style="width:50px;hight:50px;cursor: pointer;" @click="openFormMa">
         <!-- <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon> -->
       </div>
-      <div class="wrapper div-6 float-r">
+      <div class="wrapper div-6 float-r" v-if="permission === 0">
         <div class="toggle ">
           <input type="checkbox" name="toggle" class="check-checkbox" id="mytoggle" v-model="dummyStatus">
           <label class="check-label" for="mytoggle" @click="toggleStatus" >
@@ -145,6 +145,7 @@ export default {
       projectNameIn: "",
       deadlineIn: "",
       descriptionIn: "",
+      permission: "",
 
       projectName: "",
       deadline: "",
@@ -175,6 +176,7 @@ export default {
           this.projectName = doc.title;
           this.deadline = this.analysisTime(doc.deadline)
           this.description = doc.description;
+          this.permission = doc.permission
           this.status = doc.status
           this.dummyStatus = !this.status
         } else {

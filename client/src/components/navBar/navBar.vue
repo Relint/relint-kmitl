@@ -238,7 +238,7 @@ export default {
           if(projmem.length !== 0){
             let obj = doc.data()
             obj.pid = doc.id
-            obj.permission = !projmem[0].priority
+            obj.permission = projmem[0].priority
             this.projects.push(obj)
           }
         }
