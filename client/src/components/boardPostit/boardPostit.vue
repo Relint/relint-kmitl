@@ -50,9 +50,9 @@
                           </div>
                           <h3 class="float-l" @click="cardSetting(index,index2)">{{card.title?card.title:'Untitled'}}</h3>
                         </div>
-                        <div @click="cardSetting(index,index2)" v-if="(((analysisTime(card.duedate,true) === 'No duedate') || (card.duedate.toDate() >= new Date())) && analysisTime(card.duedate,true) !== 'Today') || (card.status === 'Completed')" class="normal-duedate normal">{{analysisTime(card.duedate,true)}}</div>
-                        <div @click="cardSetting(index,index2)" v-else-if="analysisTime(card.duedate,true) === 'Today'" class="normal-duedate">{{analysisTime(card.duedate,true)}}</div>
-                        <div @click="cardSetting(index,index2)" v-else class="normal-duedate late">{{analysisTime(card.duedate,true)}}</div>
+                        <div @click="cardSetting(index,index2)" v-if="(((analysisTime(card.duedate,true) === 'No duedate') || (card.duedate.toDate() >= new Date())) && analysisTime(card.duedate,true) !== 'Today') || (card.status === 'Completed')" class="c-duedate normal">{{analysisTime(card.duedate,true)}}</div>
+                        <div @click="cardSetting(index,index2)" v-else-if="analysisTime(card.duedate,true) === 'Today'" class="c-duedate">{{analysisTime(card.duedate,true)}}</div>
+                        <div @click="cardSetting(index,index2)" v-else class="c-duedate late">{{analysisTime(card.duedate,true)}}</div>
                      </div>
                       <div class="float-l" @click="cardSetting(index,index2)" style="padding-left: 9px;">
                         <button class="wrapperC btn-remove-card" style="margin-bottom: 5px;"><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.5'></b-icon></button>

@@ -116,7 +116,7 @@
     transition: all .3s ease-in-out;
   }
 }
-.opa-card .normal-duedate{
+.opa-card .c-duedate{
   position: relative;
   height: 15px;
   font-size: 13px;
@@ -125,11 +125,11 @@
   background-color: #ffa51d;
   border-radius: 5px;
 }
-.opa-card .normal-duedate.normal{
+.opa-card .c-duedate.normal{
   color: $redFire;
   background-color: white;
 }
-.opa-card .normal-duedate.late{
+.opa-card .c-duedate.late{
   color: #f3f3f3;
   background-color: #ff284b;
 }

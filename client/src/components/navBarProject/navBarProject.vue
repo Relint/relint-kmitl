@@ -9,7 +9,9 @@
       <div class="wrapper float-l div-2">
         <div class="form-projectName">
           <h5 class="noselect float-l">Title</h5>
-           <button @click="editProjectName" id="btnP" > <img src="./pen.png" alt="pen" style="width:20px;hight:20px"></button><br>
+          <button @click="editProjectName" id="btnP" v-if="permission === 0"> <img src="./pen.png" alt="pen" style="width:20px;"></button>
+          <button id="btnP-h" v-else></button>
+          <br>
            {{projectName}}
         </div>
         <div class="contain-input-edit" style="display:none; top:1px" id="editP">
@@ -24,8 +26,12 @@
       <div class="wrapper float-l div-3">
         <div class="form-deadline">
           <h5 class="noselect float-l">Deadline</h5>
-          <button id="btnT" @click="editDeadline"> <img src="./pen.png" alt="pen" style="width:20px;hight:20px"></button><br>
-          {{deadline}}
+          <button id="btnT" @click="editDeadline" v-if="permission === 0"> <img src="./pen.png" alt="pen" style="width:20px;"></button>
+          <button id="btnT-h" v-else></button>
+          <br>
+          <div v-if="(((analysisTime2(rawDeadline,true) === 'No duedate') || (rawDeadline.toDate() >= new Date())) && analysisTime2(rawDeadline,true) !== 'Today') || (status === 'Completed')" class="c-deadline normal">{{deadline}}</div>
+          <div v-else-if="analysisTime2(rawDeadline,true) === 'Today'" class="c-deadline">{{deadline}}</div>
+          <div v-else class="c-deadline late">{{deadline}}</div>
         </div>
         <div class="contain-input-edit" style="display:none; top:1px;" id="editT">
           <input id="einput"  class="input-edit-postit" type="date" v-model="deadlineIn"   v-on:keyup.enter="saveDeadline"> 
@@ -39,7 +45,9 @@
       <div class="wrapper float-l div-4">
         <div class="form-des">
           <h5 class="noselect float-l">Description</h5>
-          <button id="btnD" @click="editDescription"> <img src="./pen.png" alt="pen" style="width:20px;hight:20px"></button><br>
+          <button id="btnD" @click="editDescription" v-if="permission === 0"> <img src="./pen.png" alt="pen" style="width:20px;"></button>
+          <button id="btnD-h" v-else></button>
+          <br>
           <div class="drop-des">
           <footer class="rect2"></footer>
           <div class="dropbtn"> <b-icon id="iconNBP" icon="book" font-scale="1.5"></b-icon> </div>        
@@ -145,7 +153,9 @@ export default {
       projectNameIn: "",
       deadlineIn: "",
       descriptionIn: "",
+
       permission: "",
+      rawDeadline: "",
 
       projectName: "",
       deadline: "",
@@ -175,6 +185,7 @@ export default {
           // console.log(doc)
           this.projectName = doc.title;
           this.deadline = this.analysisTime(doc.deadline)
+          this.rawDeadline = doc.deadline
           this.description = doc.description;
           this.permission = doc.permission
           this.status = doc.status
@@ -293,6 +304,36 @@ export default {
       // console.log(e.keyCode)
       if(e.keyCode === 27){ //esc
         this.closeEditPro()
+      }
+    },
+    analysisTime2(timestamp,n=false){
+      if(!timestamp || isNaN(timestamp.seconds)){
+        return 'No duedate'
+      }
+      const time = timestamp.toDate()
+      const now = new Date()
+      const yy = time.getFullYear()
+      const mm = time.getMonth()
+      const dd = time.getDate()
+      const ny = now.getFullYear()
+      const nm = now.getMonth()
+      const nd = now.getDate()
+      if(yy === ny && mm === nm && dd === nd){
+        if(n){
+          return 'Today'
+        } else {
+          return this.timeFormat(timestamp)
+        }
+      } else if(yy === ny && mm === nm && nd - dd === 1){
+        return 'Yesterday'
+      } else if(yy === ny) {
+        if(n){
+          return time.toString().substring(4,8) + ' ' + dd + '(' + time.toString().substring(0,3) + ')'
+        } else {
+          return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
+        }
+      } else {
+        return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
       }
     },
     toggleStatus(){
