@@ -14,7 +14,7 @@
                     <h5 class="contain-showName">Hello, </h5>
                     <div class="showName" v-html="username" ></div>
                     <hr >
-                    <a>Profile</a>
+                    <a @click="openFormProfile">Profile</a>
                     <a v-on:click="logout">Logout</a>
                   </div> 
                 </div>
@@ -170,7 +170,10 @@
                 </div>
               </div>
           </div>
-      </div>     
+      </div>    
+      <div id="form-profile">
+      <profile/>
+      </div>
   </div>
 </template>
 <script>
@@ -179,9 +182,11 @@ import firebase from "firebase"
 import { isOfflineForDatabase, isOnlineForDatabase} from '../../db presets/presets'
 import createBoard from '../createBoard/createBoard'
 import boardPostit from '../boardPostit/boardPostit'
+import profile from './profile'
 export default {
   name: 'navBar',
   components: {
+    profile
   },
    data (){
     return {
@@ -284,6 +289,7 @@ export default {
     })
   },
   mounted () {
+    document.getElementById('form-profile').style.display='none'
     document.addEventListener('keyup', this.keyupCallback)
     document.getElementById('chat-form').style.display = "none"
     this.username = this.$store.state.username
@@ -330,6 +336,9 @@ export default {
     // clearInterval(this.feedInterval)
   },
   methods: {
+    openFormProfile (){
+        document.getElementById('form-profile').style.display='block'
+    },
     logout () {
       firebase.auth().signOut()
     },
