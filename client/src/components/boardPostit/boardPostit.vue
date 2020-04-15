@@ -43,15 +43,17 @@
                   >
                   <Draggable  v-for="(card , index2) in postit.card" :key="'kc'+index+'-'+index2" :ref="'rc'+index" class="form-card">
                     <div class="opa-card">
-                      <div class="float-l">
-                        <div>
+                      <div class="float-l" style="height: 39px;">
+                        <div style="height:24px;">
                           <div class="card-checkbox float-l" @click="completeCard(index,index2)">
                             <img src="./check.png" alt="check" width="20" height="20" v-if="card.status==='Completed'">
                           </div>
                           <h3 class="float-l" @click="cardSetting(index,index2)">{{card.title?card.title:'Untitled'}}</h3>
                         </div>
-                        <h5 @click="cardSetting(index,index2)">{{analysisTime(card.duedate,true)}}</h5>
-                      </div>
+                        <div @click="cardSetting(index,index2)" v-if="(((analysisTime(card.duedate,true) === 'No duedate') || (card.duedate.toDate() >= new Date())) && analysisTime(card.duedate,true) !== 'Today') || (card.status === 'Completed')" class="normal-duedate normal">{{analysisTime(card.duedate,true)}}</div>
+                        <div @click="cardSetting(index,index2)" v-else-if="analysisTime(card.duedate,true) === 'Today'" class="normal-duedate">{{analysisTime(card.duedate,true)}}</div>
+                        <div @click="cardSetting(index,index2)" v-else class="normal-duedate late">{{analysisTime(card.duedate,true)}}</div>
+                     </div>
                       <div class="float-l" @click="cardSetting(index,index2)" style="padding-left: 9px;">
                         <button class="wrapperC btn-remove-card" style="margin-bottom: 5px;"><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.5'></b-icon></button>
                         <br/>
