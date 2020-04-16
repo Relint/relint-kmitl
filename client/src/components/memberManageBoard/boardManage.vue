@@ -20,7 +20,15 @@
             </div>
         </div>
         <div class="stage-r">
+             <div class="scroll-member">
 
+             </div>
+             <input type="text" placeholder="invite">
+             <br>
+             <select name="prioity" id="prioity">
+                 <option>55</option>
+             </select>
+             <button>Ok</button>
         </div>
         </div>
      </div>
