@@ -1,0 +1,100 @@
+@import "@/components/Login/mixin.scss";
+$greenSeaweed: rgba(2, 128, 144, 1);
+$blueQueen: rgba(69, 105, 144, 1);
+$redFire: rgba(244, 91, 105, 1);
+$orange: #f7a79d;
+$bluesky: #a6d4d8;
+$fontAsap: "Asap", sans-serif;
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Old versions of Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome, Opera and Firefox */
+  }
+.center-icon {
+    position: absolute;
+    top:50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+  }
+
+.contain-profile {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    // background-color: rgb(221, 221, 221);
+    // opacity: 0.5;
+    z-index: 3;
+    top:62%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.form-profile {
+    position: absolute;
+    width: 90%;
+    height: 70%;
+    background-color: white;
+    z-index:3 ;
+    border-radius: 15px;
+    box-shadow: 2px 16px 32px -16px rgba(0,0,0,0.2);
+    top:40%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+.stage-l {
+    position: absolute;
+    width: 63%;
+    height: 95%;
+    background-color:pink;
+    overflow: hidden;
+    overflow-x: scroll;
+    scrollbar-width: thin;
+    // float: left;
+    margin: 20px 20px 20px  20px;
+}
+
+#scroll-task::-webkit-scrollbar
+{
+  width: 8px;
+  background-color: #F5F5F5;
+  border-radius: 30px;
+//    display: none;
+}
+#scroll-task::-webkit-scrollbar-thumb
+{
+  border-radius: 30px;
+  // -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,.3);
+  background-color: #555;
+//    display: none;
+}
+.stage-r {
+    position: relative;
+    width: 35%;
+    height: 100%;
+    background-color:rgb(219, 10, 45);
+    float: right;
+    // margin: 10px 10px 10px  10px;
+}
+
+
+
+.member-task {
+    position: absolute;
+    width: 400px;
+    height: 80px;
+    background-color: blue;
+    overflow: hidden;
+}
+.member-jobs {
+    position: relative;
+    top:120px;
+    width: 400px;
+    height: 50px;
+    background-color: white;
+    margin-top:10px;
+}
+
+

@@ -117,15 +117,18 @@
 
 
      <div id="manage" style="display:none;">
-       <div class="stage-parent">
+       <boardManage/>
+       <!-- <div class="stage-parent">
                     <div class="stage-left" id="scroll-task">
                       <taskZone />
                     </div>
                     <div class="stage-right" >
                       <userZone />
                     </div>
-                  </div>
+                  </div> -->
       </div>
+
+
       <br />
       <hr />
     </div>
@@ -140,13 +143,15 @@
 <script>
 // eslint-disable-next-line 
 import firebase from "firebase";
-import taskZone from "../memberManageBoard/taskZone";
-import userZone from "../memberManageBoard/userZone";
+import boardManage from "../memberManageBoard/boardManage"
+// import taskZone from "../memberManageBoard/taskZone";
+// import userZone from "../memberManageBoard/userZone";
 export default {
   name: "navBarProject",
   components: {
-    taskZone,
-    userZone
+    boardManage
+    // taskZone,
+    // userZone
   },
   data() {
     return {
