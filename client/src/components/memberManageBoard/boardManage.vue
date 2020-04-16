@@ -1,181 +1,169 @@
+
 <template>
-<div>
+  <!-- eslint-disable -->
+  <div>
     <div class="contain-profile">
-        <div class="form-profile"  >
-          <div class="stage-l" id="scroll-task">
-            <div v-for="(task,indexT) in temp0" :key="task">
-                <div class="member-task" v-bind:style="{left:5+(indexT)*400+(indexT)*30 + 'px',top:20+'px' }">
-                    {{task.userName}}<br>
-                    {{task.priority}}
-                
-                <div class="scroll-jobs" >
-                    <div v-for="job in temp0.jobs" :key="job">
-                        <div class="member-jobs"  >
-                            {{job.jobName}} 
-                            {{job.date}}
-                         </div>
+      <div class="form-profile">
+        <div class="stage-l" id="scroll-task">
+          <div v-if="project">
+            <div v-for="(task,indexT) in members" :key="'task'+indexT" :ref="'task'">
+              <!-- .some -->
+              <div
+                class="member-task"
+                v-bind:style="{left:5+(indexT)*400+(indexT)*30 + 'px',top:20+'px' }"
+              >
+                <div class="userBoxInTask-parent">
+                  <div class="top">
+                    <h3 id="userName">{{task.displayName}}</h3>
+                  </div>
+                  <div id="email">
+                    <p>{{task.email}}</p>
+                  </div>
+
+                  <br />
+                  <div class="bot">
+                    <p
+                      id="priority"
+                    >{{priorityStatus[project.member.filter(ele=>ele.uid===task.uid)[0].priority].status}}</p>
+                  </div>
+                </div>
+
+                <div class="scroll-jobs">
+                  <div
+                    v-for="(job,indexJ) in cards.filter(ele=>ele.assignee.some(val=>val.uid===task.uid))"
+                    :key="'job-'+indexT+'-'+indexJ"
+                    :ref="'job'+indexT"
+                  >
+                    <div class="jobBox-parent">
+                      <div class="checkBox">
+                        <!-- <input type="checkbox" id="isFinished?" name="Jobname" value="finish" /> -->
+                        {{job.status}}
+                      </div>
+                      <div class="jobName">{{job.title}}</div>
+                      <div class="date">{{job.date}}</div>
                     </div>
+                  </div>
                 </div>
-                </div>
+              </div>
             </div>
+          </div>
         </div>
         <div class="stage-r">
-             <div class="scroll-member">
-
-             </div>
-             <input type="text" placeholder="invite">
-             <br>
-             <select name="prioity" id="prioity">
-                 <option>55</option>
-             </select>
-             <button>Ok</button>
+          <div v-if="project">
+            <div class="scroll-member">
+              <div class="member-tab" @click="toggleDropMember">Members({{members.length}})</div>
+              <div id="showMem">
+                <div v-for="(member,index) in members" :key="'member'+index">
+                  <div class="userBox-parent">
+                    <div class="userName">{{member.displayName}}</div>
+                    <div class="email">{{member.email}}</div>
+                    <div
+                      class="priority"
+                    >{{priorityStatus[project.member.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
+                    <button class="removeBtn">remove</button>
+                  </div>
+                </div>
+              </div>
+              <div class="invite-tab" @click="toggleDropInvite">Invites({{project.invite.length}})</div>
+              <div id="showInvite">
+                <div v-for="(member,index) in project.invite" :key="'invite'+index">
+                  <div class="userBox-parent">
+                    <div class="email">{{members.filter(ele=>ele.uid===member.uid)[0].email}}</div>
+                    <div
+                      class="priority"
+                    >{{priorityStatus[project.member.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
+                    <button class="removeBtn">remove</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="invite-parent">
+              <div class="textBox">
+                <input class="input-invite" type="text" id="email" placeholder="Invite" />
+              </div>
+              <div class="bottom">
+                <div class="setPriority">
+                  <select id="Priority">
+                    <option value="co-admin">co-admin</option>
+                    <option value="member">member</option>
+                  </select>
+                </div>
+                <div>
+                  <button class="okBtn">OK</button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-        </div>
-     </div>
-</div>
+      </div>
+    </div>
+  </div>
 </template>
 <script>
+/* eslint-disable */
+import firebase from "firebase";
 export default {
-    name:'boardManage',
-    data () {
-        return {
-            task:[],
-            member:[],
-            temp0:[
-                {
-                    userName: "U1",
-                    priority: "Admin",
-                    jobs: []
-                },
-                {
-                userName: "U2",
-                priority: "Co-Admin",
-                jobs: [
-                        {
-                        jobName: "Backend",
-                        date: "32/13/2000"
-                        },
-                        {
-                        jobName: "Server",
-                        date: "42/46/2484"
-                        },
-                    ]
-                },
-                {
-                userName: "U3",
-                priority: "member",
-                jobs: [
-                        {
-                        jobName: "Hunt a girl",
-                        date: "32/13/2000"
-                        },
-                        {
-                        jobName: "Take she/he home",
-                        date: "42/46/2484"
-                        },
-                        {
-                        jobName: "Eat her things",
-                        date: "01/01/2020"
-                        },
-                        {
-                        jobName: "gave",
-                        date: "25/03/2020"
-                        },
-                        {
-                        jobName: "Hunt a man",
-                        date: "32/13/2000"
-                        },
-                        {
-                        jobName: "Eat him",
-                        date: "42/46/2484"
-                        },
-                        {
-                        jobName: "Angry",
-                        date: "01/01/2020"
-                        }
-                    ]
-                },
-                {
-                userName: "U4",
-                priority: "Member",
-                jobs: [
-                        {
-                        jobName: "Plaing ROV",
-                        date: "32/13/2000"
-                        },
-                        {
-                        jobName: "In Love",
-                        date: "42/46/2484"
-                        },
-                        {
-                        jobName: "Take bath",
-                        date: "01/01/2020"
-                        },
-                        {
-                        jobName: "Plaing CSGO",
-                        date: "25/03/2020"
-                        }
-                    ]
-                },
-                {
-                userName: "U5",
-                priority: "Member",
-                jobs: [
-                        {
-                        jobName: "Angry",
-                        date: "32/13/2000"
-                        },
-                        {
-                        jobName: "Shout",
-                        date: "42/46/2484"
-                        },
-                        {
-                        jobName: "Watching YouTube",
-                        date: "01/01/2020"
-                        },
-                    ]
-                },
-                {
-                userName: "U6",
-                priority: "Member",
-                jobs: [
-                        {
-                        jobName: "Angry",
-                        date: "32/13/2000"
-                        },
-                    ]
-                },
-                {
-                userName: "U7",
-                priority: "Member",
-                jobs: [
-                        {
-                        jobName: "Angry",
-                        date: "32/13/2000"
-                        },
-                        {
-                        jobName: "Shout",
-                        date: "42/46/2484"
-                        },
-                        {
-                        jobName: "Watching YouTube",
-                        date: "01/01/2020"
-                        },
-                        {
-                        jobName: "Make a gun",
-                        date: "25/03/2020"
-                        },
-                        {
-                        jobName: "Kill Pun",
-                        date: "30/04/2020"
-                        }
-                    ]
-                },
-        
-             ]
+  name: "boardManage",
+  mounted() {
+    this.vuexUnsubscribe3 = this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      if (mutation.type === "setProject") {
+        const doc = state.project.filter(
+          ele => ele.pid === this.$store.state.pid
+        )[0];
+        if (doc) {
+          // console.log(this.postits)
+          this.project = doc;
+          this.postits = doc.postit;
+          this.cards = [];
+          this.postits.forEach(ele => {
+            ele.card.forEach(ele2 => {
+              this.cards.push(ele2);
+            });
+          });
+          //   console.log(this.cards)
+          //   console.log(this.project);
         }
+      }
+    });
+    this.vuexUnsubscribe4 = this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      if (mutation.type === "setUser") {
+        this.members = state.user.filter((ele, i) => {
+          if (this.project.member) {
+            return this.project.member.map(data => data.uid).includes(ele.uid);
+          }
+        });
+      }
+    });
+  },
+  beforeDestroy() {
+    this.vuexUnsubscribe3();
+    this.vuexUnsubscribe4();
+  },
+  data() {
+    return {
+      task: [],
+      members: [],
+      project: null,
+      postits: [],
+      cards: [],
+      priorityStatus: [
+        { value: 0, status: "Admin" },
+        { value: 1, status: "Co-admin" },
+        { value: 2, status: "Member" }
+      ]
+    };
+  },
+  methods: {
+    toggleDropMember() {
+      document.getElementById("showMem").classList.toggle("hide");
+    },
+    toggleDropInvite() {
+      document.getElementById("showInvite").classList.toggle("hide");
     }
-}
+  }
+};
 </script>
 <style scoped lang="scss">
 @import "./boardManage.scss";
