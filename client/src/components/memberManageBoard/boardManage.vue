@@ -28,7 +28,7 @@
                   </div>
                 </div>
 
-                <div class="scroll-jobs">
+                <div class="scroll-jobs" id="scroll-jobs">
                   <div
                     v-for="(job,indexJ) in cards.filter(ele=>ele.assignee.some(val=>val.uid===task.uid))"
                     :key="'job-'+indexT+'-'+indexJ"
@@ -50,8 +50,9 @@
         </div>
         <div class="stage-r">
           <div v-if="project">
-            <div class="scroll-member">
+            
               <div class="member-tab" @click="toggleDropMember">Members({{members.length}})</div>
+              <div class="scroll-member">
               <div id="showMem">
                 <div v-for="(member,index) in members" :key="'member'+index">
                   <div class="userBox-parent">

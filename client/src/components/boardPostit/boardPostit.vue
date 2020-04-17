@@ -258,7 +258,7 @@ export default {
       postitInEdit:'',
       
       optsStatus:[
-        {value:0,status:'Ming Inw'},
+        {value:0,status:'Not started'},
         {value:1,status:'In progress'},
         {value:2,status:'Completed'}
       ],

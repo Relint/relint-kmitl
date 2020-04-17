@@ -49,16 +49,7 @@ $fontAsap: "Asap", sans-serif;
     box-shadow: 0 3px 5px 0 rgba(0,0,0,0.2);
    
 }
-.image-profile {
-    width: 210px;
-    height: 210px;
-    border-radius:100%;
-    background-color:blue;
-    position: absolute;
-    top:27%;
-    left: 50%;
-    transform: translate(-50%,-50%);
-}
+
 .username {
     font-size: 30px;
     font-weight: bold;
@@ -200,4 +191,33 @@ $fontAsap: "Asap", sans-serif;
     &:hover{
         opacity: 0.5;
     }
+}
+.image-profile {
+  width: 210px;
+  height: 210px;
+  border-radius:100%;
+  background: rgb(180,254,255);
+background: linear-gradient(0deg, rgba(180,254,255,1) 0%, rgba(255,205,219,1) 100%);
+  position: absolute;
+  top:27%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.show-defalut-img {
+position: absolute;
+width: 150px;
+height: 150px;
+top:10%;
+left: 14%;
+}
+img.preview-edit {
+  width: 50px;
+}
+
+img.preview {
+  width: 200px;
+  height: 200px;
+  top:10%;
+left: 14%;
+position: absolute;
 }
