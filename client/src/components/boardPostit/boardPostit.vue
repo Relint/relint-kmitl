@@ -84,7 +84,7 @@
                           <li v-if="card.difficulty.some(ele=>ele.uid===$store.state.uid) && card.difficulty.filter(ele=>ele.uid===$store.state.uid)[0].vote > 0" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
                         </ul>
-                        <div class="float-r" style="font-size:14px; margin-right:5px">Avg. {{card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum)/card.difficulty.length}}</div>
+                        <div class="contain-show-avg-card float-r" style="font-size:14px; margin-right:5px">Avg. <div class="show-avg-card">{{card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum)/card.difficulty.length}}</div></div>
                         <hr>
                         <div class="show-assignee-container float-l" v-if="card.assignee.length > 0 && card.status !== 'Completed'">
                           <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
@@ -197,7 +197,7 @@
               </div>
               <div class="contain-vote float-r ">  
                 <p>Vote this card</p>
-                <div class="" style="font-size:13px;">Average: {{analysisEstimatedVote(card)}}</div>
+                <div class="contain-show-avg-sett" style="font-size:13px;">Average:  <div class="average-setting "> {{analysisEstimatedVote(card)}}</div></div>
                 <br/>
                 <ul id="rating" class="rating large">
                   <li v-if="voteIn > 4" class="fill-s" @click="setCrate(5)"></li>

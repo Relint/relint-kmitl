@@ -15,16 +15,17 @@
 
     <div class="form-edit-profile  center-icon" id="form-edit">
          <div @click="changeProfile" class="image-profile-edit ">
-            <img class="preview" :src="picture">
+                <img   class="preview" :src="picture">
              <img class="camera" src="./camera.png"> 
-             <input class="up-file" type="file" @change="previewImage(e)" accept="imageProfile/*" >
+             <input class="up-file" ref="fileInput" type="file" @change="previewImageUpload" accept="imageProfile/*" >
             
-            <!-- <p class="progress-num">Progress: {{uploadValue.toFixed()+"%"}}<br>
-             <progress id="progress" :value="uploadValue" max="100" ></progress>  
-             </p> -->
+            
         </div> 
-        <button class="btn-upload" @click="onUpload">Upload</button>
-        <button class="btn-remove" >remove</button>
+        <p class="progress-num">Progress: {{uploadValue.toFixed()+"%"}}<br>
+             <progress id="progress" :value="uploadValue" max="100" ></progress>  
+        </p>
+        <button class="btn-upload" @click="deleteimage">delete in storage</button>
+        <!-- <button class="btn-remove" >remove</button> -->
         <div class="edit">
             <input class="input-form" type="text" placeholder="username"><br><br>
             <input class="input-form" type="text" placeholder="email"><br><br>
@@ -52,13 +53,17 @@ export default {
     }
   },
   methods: { 
-      onUpload(){
-
-        // var name="123"+Date.now(); 
-        // var storageRef = firebase.storage().ref('/images/'+ name); 
-  
-
+      deleteimage () {
+        const desertRef = firebase.storage().ref("imageProfile").child(`${this.imageData.name}`)
+        desertRef.delete().then(function() {
+            // successfully
+        })
+      },
+    previewImageUpload(event) {
+      this.uploadValue=0;
       this.picture=null;
+      this.imageData = event.target.files[0];
+      
       const storageRef = firebase.storage().ref("imageProfile").child(`${this.imageData.name}`).put(this.imageData);
       storageRef.on(`state_changed`,snapshot=>{
         this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
@@ -71,13 +76,6 @@ export default {
         });
       }
       );
-    },
-    previewImage(e) {
-      this.uploadValue=0;
-      this.picture=null;
-      this.imageData = event.target.files[0];
-      
-
     },
     changeProfile () {
         // console.log('yes');

@@ -406,3 +406,26 @@
 .greytext{
   color: rgb(94, 94, 94);
 }
+.contain-show-avg-sett {
+  position: relative;
+  text-align: center;
+  // background-color :yellow;
+  float: left;
+  left: 47px;
+}
+.average-setting {
+  // background-color:red;
+  float: right;
+  width: 25px;
+  overflow: hidden;
+}
+
+.contain-show-avg-card {
+  position: relative;
+}
+.show-avg-card {
+  width: 27px;
+  float: right;
+  // background-color:red;
+  overflow: hidden;
+}

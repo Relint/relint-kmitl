@@ -254,6 +254,7 @@ p.progress-num {
   height: 80px;
   top:30%;
   left: 25%;
+  opacity: 0.5;
 }
 .up-file {
   width: 170px;
@@ -272,9 +273,9 @@ p.progress-num {
   left: 40%;
   transform: translate(-50%,-50%);
 }
-.btn-remove {
-  position: absolute;
-  top:40%;
-  left: 60%;
-  transform: translate(-50%,-50%);
-}
+// .btn-remove {
+//   position: absolute;
+//   top:40%;
+//   left: 60%;
+//   transform: translate(-50%,-50%);
+// }
