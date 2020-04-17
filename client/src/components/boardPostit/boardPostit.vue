@@ -72,18 +72,20 @@
                         </div>
                         {{card.status}}
                         <br/>
-                        <ul id="rating" class="rating small"  style="margin-top: 5px; margin-bottom: 5px;" >
-                          <li v-if="card.difficulty > 4" class="fill-s"></li>
+                        <ul id="rating" class="rating small float-l"  style="margin-top: 5px; margin-bottom: 5px;" >
+                          <li v-if="card.difficulty.some(ele=>ele.uid===$store.state.uid) && card.difficulty.filter(ele=>ele.uid===$store.state.uid)[0].vote > 4" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
-                          <li v-if="card.difficulty > 3" class="fill-s"></li>
+                          <li v-if="card.difficulty.some(ele=>ele.uid===$store.state.uid) && card.difficulty.filter(ele=>ele.uid===$store.state.uid)[0].vote > 3" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
-                          <li v-if="card.difficulty > 2" class="fill-s"></li>
+                          <li v-if="card.difficulty.some(ele=>ele.uid===$store.state.uid) && card.difficulty.filter(ele=>ele.uid===$store.state.uid)[0].vote > 2" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
-                          <li v-if="card.difficulty > 1" class="fill-s"></li>
+                          <li v-if="card.difficulty.some(ele=>ele.uid===$store.state.uid) && card.difficulty.filter(ele=>ele.uid===$store.state.uid)[0].vote > 1" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
-                          <li v-if="card.difficulty > 0" class="fill-s"></li>
+                          <li v-if="card.difficulty.some(ele=>ele.uid===$store.state.uid) && card.difficulty.filter(ele=>ele.uid===$store.state.uid)[0].vote > 0" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
-                        </ul><hr>
+                        </ul>
+                        <div class="float-r" style="font-size:14px; margin-right:5px">Avg. {{card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum)/card.difficulty.length}}</div>
+                        <hr>
                         <div class="show-assignee-container float-l" v-if="card.assignee.length > 0 && card.status !== 'Completed'">
                           <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
                             <div class="show-assi noselecct">
@@ -141,7 +143,7 @@
             </div>
           </div>
           <div class="contain-vote float-r ">  
-                <p>vote this card</p>
+                <p>Vote this card</p>
                 <br/>
                 <ul id="rating" class="rating large">
                   <li v-if="voteIn > 4" class="fill-s" @click="setCrate(5)"></li>
@@ -154,7 +156,7 @@
                   <li v-else class="fill-w" @click="setCrate(2)"></li>
                   <li v-if="voteIn > 0" class="fill-s" @click="setCrate(1)"></li>
                   <li v-else class="fill-w" @click="setCrate(1)"></li>
-                </ul>  
+                </ul>
           </div> 
           <div class="contain-btn-setting">
             <button class="btn-setting-accept" @click="createCard(i)" >Create</button>
@@ -194,20 +196,21 @@
                 </div>
               </div>
               <div class="contain-vote float-r ">  
-                    <p>vote this card</p>
-                    <br/>
-                    <ul id="rating" class="rating large">
-                      <li v-if="voteIn > 4" class="fill-s" @click="setCrate(5)"></li>
-                      <li v-else class="fill-w" @click="setCrate(5)"></li>
-                      <li v-if="voteIn > 3" class="fill-s" @click="setCrate(4)"></li>
-                      <li v-else class="fill-w" @click="setCrate(4)"></li>
-                      <li v-if="voteIn > 2" class="fill-s" @click="setCrate(3)"></li>
-                      <li v-else class="fill-w" @click="setCrate(3)"></li>
-                      <li v-if="voteIn > 1" class="fill-s" @click="setCrate(2)"></li>
-                      <li v-else class="fill-w" @click="setCrate(2)"></li>
-                      <li v-if="voteIn > 0" class="fill-s" @click="setCrate(1)"></li>
-                      <li v-else class="fill-w" @click="setCrate(1)"></li>
-                    </ul>  
+                <p>Vote this card</p>
+                <div class="" style="font-size:13px;">Average: {{analysisEstimatedVote(card)}}</div>
+                <br/>
+                <ul id="rating" class="rating large">
+                  <li v-if="voteIn > 4" class="fill-s" @click="setCrate(5)"></li>
+                  <li v-else class="fill-w" @click="setCrate(5)"></li>
+                  <li v-if="voteIn > 3" class="fill-s" @click="setCrate(4)"></li>
+                  <li v-else class="fill-w" @click="setCrate(4)"></li>
+                  <li v-if="voteIn > 2" class="fill-s" @click="setCrate(3)"></li>
+                  <li v-else class="fill-w" @click="setCrate(3)"></li>
+                  <li v-if="voteIn > 1" class="fill-s" @click="setCrate(2)"></li>
+                  <li v-else class="fill-w" @click="setCrate(2)"></li>
+                  <li v-if="voteIn > 0" class="fill-s" @click="setCrate(1)"></li>
+                  <li v-else class="fill-w" @click="setCrate(1)"></li>
+                </ul>  
               </div> 
               <div class="contain-btn-setting">
                 <button class="btn-setting-accept" @click="saveCard(i,j)" >Save</button>
@@ -253,6 +256,7 @@ export default {
       dateIn:'',
       statusIn:0,
       voteIn:0,
+      voteVal: 0,
 
       postitIn:'',
       postitInEdit:'',
@@ -468,7 +472,7 @@ export default {
               }
             })
           }
-          this.voteIn = this.postits[index].card[indexC].difficulty
+          this.voteIn = this.postits[index].card[indexC].difficulty.filter(ele=>ele.uid===firebase.auth().currentUser.uid)[0]?this.postits[index].card[indexC].difficulty.filter(ele=>ele.uid===firebase.auth().currentUser.uid)[0].vote:0
           this.postits.push(null)
           this.postits.pop()
         }
@@ -492,9 +496,19 @@ export default {
       })
     },
     saveCard (index,index2) {
+      let diff = this.postits[index].card[index2].difficulty
+      if(diff.some(ele=>ele.uid===firebase.auth().currentUser.uid)){
+        diff.forEach(ele=>{
+          if(ele.uid === firebase.auth().currentUser.uid){
+            ele.vote = this.voteIn
+          }
+        })
+      } else {
+        diff.push({vote:this.voteIn,uid:firebase.auth().currentUser.uid})
+      }
       this.postits[index].card[index2] = {
         description: this.dessIn,
-        difficulty: this.voteIn,
+        difficulty: diff,
         duedate: this.dateIn?firebase.firestore.Timestamp.fromDate(new Date(this.dateIn+'T23:59:59+07:00')):'',
         status: this.optsStatus[this.statusIn].status,
         title: this.cardTiltleIn,
@@ -576,13 +590,14 @@ export default {
     createCard (index) {
       this.postits[index].card.push({
         description: this.dessIn,
-        difficulty: this.voteIn,
+        difficulty: [{vote:this.voteIn,uid:firebase.auth().currentUser.uid}],
         duedate: this.dateIn?firebase.firestore.Timestamp.fromDate(new Date(this.dateIn+'T23:59:59+07:00')):'',
         status: this.optsStatus[this.statusIn].status,
         title: this.cardTiltleIn,
         assignee: this.temporaryAssignee,
         foldable: false,
         fold: true,
+        key: this.createKey()
       })
       this.feedbackPostit()
       this.closeFormCard(index)
@@ -636,6 +651,9 @@ export default {
       let keys = []
       this.postits.forEach((ele,i)=>{
         keys.push(ele.key)
+        ele.card.forEach(ele2=>{
+          keys.push(ele2.key)
+        })
       })
       let key = ''
       do{
@@ -742,6 +760,13 @@ export default {
         this.postits[index].card[index2].status = 'Not started'
       }
       this.feedbackPostit()
+    },
+    analysisEstimatedVote(card){
+      if(card.difficulty.some(ele=>ele.uid===this.$store.state.uid)){
+        return (card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum) - card.difficulty.filter(ele=>ele.uid===this.$store.state.uid)[0].vote + this.voteIn)/card.difficulty.length
+      } else {
+        return (card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum) + this.voteIn)/(card.difficulty.length + 1)
+      }
     }
   }
 }
