@@ -22,9 +22,7 @@
 
                   <br />
                   <div class="bot">
-                    <p
-                      id="priority"
-                    >{{priorityStatus[project.member.filter(ele=>ele.uid===task.uid)[0].priority].status}}</p>
+                    <p id="priority" v-if="project.member.filter(ele=>ele.uid===task.uid)[0]">{{priorityStatus[project.member.filter(ele=>ele.uid===task.uid)[0].priority].status}}</p>
                   </div>
                 </div>
 
@@ -51,28 +49,24 @@
         <div class="stage-r">
           <div v-if="project">
             
-              <div class="member-tab" @click="toggleDropMember">Members({{members.length}})</div>
+              <div class="member-tab" @click="toggleDropMember">Members ({{members.length}})</div>
               <div class="scroll-member">
               <div id="showMem">
                 <div v-for="(member,index) in members" :key="'member'+index">
                   <div class="userBox-parent">
                     <div class="userName">{{member.displayName}}</div>
                     <div class="email">{{member.email}}</div>
-                    <div
-                      class="priority"
-                    >{{priorityStatus[project.member.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
+                    <div class="priority" v-if="project.member.filter(ele=>ele.uid===member.uid)[0]">{{priorityStatus[project.member.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
                     <button class="removeBtn">remove</button>
                   </div>
                 </div>
               </div>
-              <div class="invite-tab" @click="toggleDropInvite">Invites({{project.invite.length}})</div>
+              <div class="invite-tab" @click="toggleDropInvite">Invites ({{project.invite.length}})</div>
               <div id="showInvite">
                 <div v-for="(member,index) in project.invite" :key="'invite'+index">
                   <div class="userBox-parent">
-                    <div class="email">{{members.filter(ele=>ele.uid===member.uid)[0].email}}</div>
-                    <div
-                      class="priority"
-                    >{{priorityStatus[project.member.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
+                    <div class="email" v-if="users.filter(ele=>ele.uid===member.uid)[0]">{{users.filter(ele=>ele.uid===member.uid)[0].email}}</div>
+                    <div class="priority" v-if="project.invite.filter(ele=>ele.uid===member.uid)[0]">{{priorityStatus[project.invite.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
                     <button class="removeBtn">remove</button>
                   </div>
                 </div>
@@ -131,10 +125,11 @@ export default {
       // console.log(mutation.type)
       if (mutation.type === "setUser") {
         this.members = state.user.filter((ele, i) => {
-          if (this.project.member) {
+          if (this.project) {
             return this.project.member.map(data => data.uid).includes(ele.uid);
           }
         });
+        this.users = state.user
       }
     });
   },
@@ -146,6 +141,7 @@ export default {
     return {
       task: [],
       members: [],
+      users: [],
       project: null,
       postits: [],
       cards: [],
