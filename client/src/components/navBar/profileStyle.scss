@@ -180,21 +180,22 @@ $fontAsap: "Asap", sans-serif;
 }
 
 .image-profile-edit {
-    width: 210px;
-    height: 210px;
+    width: 170px;
+    height: 170px;
     border-radius:100%;
     background-color:rgb(180, 180, 180);
     position: absolute;
-    top:27%;
+    top:23%;
     left: 50%;
     transform: translate(-50%,-50%);
+    overflow: hidden;
     &:hover{
         opacity: 0.5;
     }
 }
 .image-profile {
-  width: 210px;
-  height: 210px;
+  width: 190px;
+  height: 190px;
   border-radius:100%;
   background: rgb(180,254,255);
 background: linear-gradient(0deg, rgba(180,254,255,1) 0%, rgba(255,205,219,1) 100%);
@@ -202,6 +203,9 @@ background: linear-gradient(0deg, rgba(180,254,255,1) 0%, rgba(255,205,219,1) 10
   top:27%;
   left: 50%;
   transform: translate(-50%,-50%);
+  padding: 10px 10px 10px 10px;
+  overflow: hidden;
+
 }
 .show-defalut-img {
 position: absolute;
@@ -211,13 +215,66 @@ top:10%;
 left: 14%;
 }
 img.preview-edit {
-  width: 50px;
+  width: 210px;
+  height: 210px;
+  top:0%;
+left: 0%;
+position: absolute;
+object-fit: cover;
 }
 
 img.preview {
-  width: 200px;
-  height: 200px;
-  top:10%;
-left: 14%;
+  width: 170px;
+  height: 170px;
+  top:0%;
+  left: 0%;
 position: absolute;
+object-fit: cover;
+z-index: -1;
+}
+
+progress {
+  position: absolute;
+  width: 170px;
+  border-radius: 20px;
+  
+}
+p.progress-num {
+  position: relative;
+  font-size: 15px;
+  // top:120%;
+  // left: 50%;
+  top:0%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+}
+.camera {
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  top:30%;
+  left: 25%;
+}
+.up-file {
+  width: 170px;
+  height: 170px;
+  opacity: 0;
+  // background-color: red;
+  border-radius: 100%;
+  position: absolute;
+  top:0%;
+  left: 0%;
+  // transform: translate(-50%,-50%);
+}
+.btn-upload {
+  position: absolute;
+  top:40%;
+  left: 40%;
+  transform: translate(-50%,-50%);
+}
+.btn-remove {
+  position: absolute;
+  top:40%;
+  left: 60%;
+  transform: translate(-50%,-50%);
 }

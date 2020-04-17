@@ -14,13 +14,17 @@
     </div>
 
     <div class="form-edit-profile  center-icon" id="form-edit">
-        <div @click="changeProfile" class="image-profile-edit ">
-             <input type="file" @change="previewImage" accept="imageProfile/*" >
-             <p>Progress: {{uploadValue.toFixed()+"%"}}
-             <progress id="progress" :value="uploadValue" max="100" ></progress>  </p>
-             <img class="preview" :src="picture">
-             <button @click="onUpload">Upload</button>
-        </div>
+         <div @click="changeProfile" class="image-profile-edit ">
+            <img class="preview" :src="picture">
+             <img class="camera" src="./camera.png"> 
+             <input class="up-file" type="file" @change="previewImage(e)" accept="imageProfile/*" >
+            
+            <!-- <p class="progress-num">Progress: {{uploadValue.toFixed()+"%"}}<br>
+             <progress id="progress" :value="uploadValue" max="100" ></progress>  
+             </p> -->
+        </div> 
+        <button class="btn-upload" @click="onUpload">Upload</button>
+        <button class="btn-remove" >remove</button>
         <div class="edit">
             <input class="input-form" type="text" placeholder="username"><br><br>
             <input class="input-form" type="text" placeholder="email"><br><br>
@@ -68,10 +72,12 @@ export default {
       }
       );
     },
-    previewImage(event) {
+    previewImage(e) {
       this.uploadValue=0;
       this.picture=null;
       this.imageData = event.target.files[0];
+      
+
     },
     changeProfile () {
         // console.log('yes');
