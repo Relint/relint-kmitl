@@ -14,23 +14,24 @@
     </div>
 
     <div class="form-edit-profile  center-icon" id="form-edit">
+        
          <div @click="changeProfile" class="image-profile-edit ">
-                <img   class="preview" :src="picture">
+              <img class="preview"  :src="preview" />  
              <img class="camera" src="./camera.png"> 
-             <input class="up-file" ref="fileInput" type="file" @change="previewImageUpload" accept="imageProfile/*" >
-            
-            
+             <input class="up-file" type="file" @change="previewImage" accept="imageProfile/*" >
         </div> 
+
         <p class="progress-num">Progress: {{uploadValue.toFixed()+"%"}}<br>
-             <progress id="progress" :value="uploadValue" max="100" ></progress>  
+            <progress id="progress" :value="uploadValue" max="100" ></progress>  
         </p>
-        <button class="btn-upload" @click="deleteimage">delete in storage</button>
-        <!-- <button class="btn-remove" >remove</button> -->
+
+        <button class="btn-upload" @click="onUpload">Upload in storage</button>
+        <button class="btn-remove" @click="deleteimage">remove in storage</button>
         <div class="edit">
-            <input class="input-form" type="text" placeholder="username"><br><br>
-            <input class="input-form" type="text" placeholder="email"><br><br>
-            <input class="input-form" type="text" placeholder="password"><br><br>
-            <input class="input-form" type="text" placeholder="confirm password">
+            <input class="input-form" type="text" placeholder="username" v-model="usernameIn"><br><br>
+            <input class="input-form" type="text" placeholder="email" v-model="emailIn"><br><br>
+            <input class="input-form" type="text" placeholder="password" v-model="pwIn"><br><br>
+            <input class="input-form" type="text" placeholder="confirm password" v-model="cpwIn">
         </div>
         <button @click="saveFormEdit" class="btn-form-save " >save</button>
         <button  @click="closeFormEdit" class="btn-cancel-edit ">cancel</button>
@@ -44,26 +45,30 @@ export default {
   name: 'profile',
   data (){
     return {
+        usernameIn:'',
+        emailIn:'',
+        pwIn:'',
+        cpwIn:'',
+
         username:'FFFFFFFAI',
         email:'fai@gmail.com',
+
         imageData: null,
         picture: null,
         uploadValue: 0,
-        pictureDefalut:null
+        preview: null,
+
     }
   },
   methods: { 
-      deleteimage () {
+       deleteimage () {
         const desertRef = firebase.storage().ref("imageProfile").child(`${this.imageData.name}`)
         desertRef.delete().then(function() {
-            // successfully
+            // success
         })
       },
-    previewImageUpload(event) {
-      this.uploadValue=0;
+      onUpload(){
       this.picture=null;
-      this.imageData = event.target.files[0];
-      
       const storageRef = firebase.storage().ref("imageProfile").child(`${this.imageData.name}`).put(this.imageData);
       storageRef.on(`state_changed`,snapshot=>{
         this.uploadValue = (snapshot.bytesTransferred/snapshot.totalBytes)*100;
@@ -77,8 +82,12 @@ export default {
       }
       );
     },
-    changeProfile () {
-        // console.log('yes');
+    previewImage(e) {
+      this.uploadValue=0;
+      this.picture=null;
+      const file = event.target.files[0];
+      this.preview = URL.createObjectURL(file);
+      this.imageData = event.target.files[0];
     },
     saveFormEdit () {
         document.getElementById('form-edit').style.display="none"
