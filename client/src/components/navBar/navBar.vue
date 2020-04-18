@@ -9,7 +9,12 @@
               <div class="wrapper float-r div-4" >
                 <div class="drop-profile">
                   <footer class="rect2"></footer>
-                  <button class="dropbtn"><b-icon icon="person" font-scale="3"></b-icon></button>        
+                  <button class="dropbtn default" v-if="!photoURL">
+                    <b-icon icon="person" font-scale="3"></b-icon>
+                  </button>    
+                  <button class="dropbtn trans" v-else>
+                    <img class="preview-profile-nav" :src="photoURL">
+                  </button>          
                   <div class="dropdown-content-profile">
                     <h5 class="contain-showName">Hello, </h5>
                     <div class="showName" v-html="username" ></div>
@@ -82,8 +87,11 @@
                                   <div class="msg-prompt2">Unread message below</div>
                                 </div>
                                 <div v-if="!checkUser(message.uid)" class="msg-border-min">
-                                  <button class="user-profile-left">
+                                  <button class="user-profile-left default" v-if="!analysisSender('photo',message.uid)">
                                     <b-icon icon="person" font-scale="2.5"></b-icon>
+                                  </button>
+                                  <button class="user-profile-left trans" v-else>
+                                    <img class="preview-profile" :src="analysisSender('photo',message.uid)">
                                   </button>
                                   <div class="float-l">
                                     <b  style="margin-right:2px">{{ analysisSender('name',message.uid) + '' }}</b>
@@ -100,8 +108,11 @@
                                   <br class="noselect">
                                 </div>
                                 <div v-else class="msg-border-min">
-                                  <button class="user-profile-right">
+                                  <button class="user-profile-right default-r" v-if="!analysisSender('photo',message.uid)">
                                     <b-icon icon="person" font-scale="2.5"></b-icon>
+                                  </button>
+                                  <button class="user-profile-right trans" v-else>
+                                    <img class="preview-profile" :src="analysisSender('photo',message.uid)">
                                   </button>
                                   <div class="float-r">
                                     <span>
@@ -188,10 +199,11 @@ export default {
   components: {
     profile
   },
-   data (){
+  data (){
     return {
       username: '',
       uid: '',
+      photoURL: '',
       notifications:[],
 
       projects:[],
@@ -208,12 +220,11 @@ export default {
     }
   },
   
-  
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
       if (!user) {    
-        this.$rtdb.ref('/status/'+this.uid).off();
-        this.$rtdb.ref('/status/'+this.uid).update(isOfflineForDatabase);
+        this.$rtdb.ref('/status/'+this.$store.state.uid).off();
+        this.$rtdb.ref('/status/'+this.$store.state.uid).update(isOfflineForDatabase);
         this.$router.replace('/');
       }
     });
@@ -292,9 +303,19 @@ export default {
     document.getElementById('form-profile').style.display='none'
     document.addEventListener('keyup', this.keyupCallback)
     document.getElementById('chat-form').style.display = "none"
+    this.vuexUnsubscribeUser = this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      if(mutation.type === 'setRecord'){
+        this.username = state.username
+        this.uid = state.uid
+        this.photoURL = state.photoURL
+        // console.log(this.username)
+      }
+    })
     this.username = this.$store.state.username
     this.uid = this.$store.state.uid
-    const userStatusDatabaseRef = this.$rtdb.ref('/status/' + this.uid)
+    this.photoURL = this.$store.state.photoURL
+    const userStatusDatabaseRef = this.$rtdb.ref('/status/' + this.$store.state.uid)
     this.$rtdb.ref('.info/connected').on('value', snapshot => {
       if (snapshot.val() === false) {
         return
@@ -328,9 +349,10 @@ export default {
     })
   },
   beforeDestroy(){
+    this.vuexUnsubscribeUser()
     document.removeEventListener('keyup', this.keyupCallback)
     this.collection()
-    this.$rtdb.ref('/status/'+this.uid).off()
+    this.$rtdb.ref('/status/'+this.$store.state.uid).off()
     this.$rtdb.ref('/status').off()
     this.feedbackReadInterval()
     // clearInterval(this.feedInterval)
@@ -378,14 +400,14 @@ export default {
       projectRef.get().then(doc => {
         if(doc.exists){
           let data = doc.data()
-          let inviteRecord = data.invite.filter(ele=>ele.uid === this.uid)
+          let inviteRecord = data.invite.filter(ele=>ele.uid === this.$store.state.uid)
           inviteRecord = {
             priority: inviteRecord[0].priority,
             uid: inviteRecord[0].uid
           }
           data.member.push(inviteRecord)
           projectRef.update({
-            invite: data.invite.filter(ele => ele.uid !== this.uid),
+            invite: data.invite.filter(ele => ele.uid !== this.$store.state.uid),
             member: data.member,
           }).then(()=>{
             this.notifications = this.notifications.filter(noti => {
@@ -401,7 +423,7 @@ export default {
         if(doc.exists) {
           let data = doc.data()
           projectRef.update({
-            invite: data.invite.filter(ele => ele.uid !== this.uid)
+            invite: data.invite.filter(ele => ele.uid !== this.$store.state.uid)
           }).then(()=>{
             this.notifications = this.notifications.filter(noti => {
               return noti.pid !== pid
@@ -702,6 +724,8 @@ export default {
         } else if(type === 'status'){
           // console.log(sender.displayName + ' online: ' + sender.online)
           return sender.online
+        } else if(type === 'photo'){
+          return sender.photoURL
         }
       }
       return null

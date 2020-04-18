@@ -320,14 +320,23 @@
 }
 .select-assi-x{
   display: none;
+  z-index: 3;
 }
 .select-assi-p{
   display: block;
+
+}
+.trans{
+  background-color: transparent;
+}
+.default{
+  background-color: $bluesky;
 }
 .select-assi {
+  position: relative;
+  overflow: hidden;
   height: 35px;
   width: 35px;
-  background-color: $bluesky;
   border-style: none;
   z-index: 2;
   outline: none;
@@ -338,6 +347,9 @@
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   color: rgb(0, 0, 0);
   text-align: center;
+  &:hover .preview-sel{
+    opacity: 0.1;
+  }
   &:hover .select-assi-p{
     display: none;
   }
@@ -348,6 +360,17 @@
   &:hover{
     background-color: rgb(188, 214, 219);
   }
+}
+.preview-sel {
+  width: 35px;
+  height: 35px;
+  top:0%;
+  left: 0%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 3;
+  opacity: 1;
+  transition: all 0.25s ease;
 }
 .name-select-assi{
   margin-left: 2px;

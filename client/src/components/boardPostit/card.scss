@@ -158,6 +158,8 @@
   display: block;
 }
 .show-assi {
+  position: relative;
+  overflow: hidden;
   height: 35px;
   width: 35px;
   background-color: $bluesky;
@@ -169,6 +171,20 @@
   box-shadow: 0px 5px 5px 0px rgba(0,0,0,0.2);
   color: rgb(0, 0, 0);
   text-align: center;
+}
+.trans{
+  background-color: transparent;
+}
+.show-preview-sel {
+  width: 35px;
+  height: 35px;
+  top:0%;
+  left: 0%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 3;
+  opacity: 1;
+  transition: all 0.25s ease;
 }
 .name-show-assi{
   margin-left: 2px;

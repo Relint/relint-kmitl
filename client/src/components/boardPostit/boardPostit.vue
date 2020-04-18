@@ -84,12 +84,15 @@
                           <li v-if="card.difficulty.some(ele=>ele.uid===$store.state.uid) && card.difficulty.filter(ele=>ele.uid===$store.state.uid)[0].vote > 0" class="fill-s"></li>
                           <li v-else class="fill-w"></li>
                         </ul>
-                        <div class="contain-show-avg-card float-r" style="font-size:14px; margin-right:5px">Avg. <div class="show-avg-card">{{card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum)/card.difficulty.length}}</div></div>
+                        <div class="contain-show-avg-card float-r" style="font-size:14px; margin-right:5px">Avg.&nbsp;{{(card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum)/card.difficulty.length).toFixed(2)}}</div>
                         <hr>
                         <div class="show-assignee-container float-l" v-if="card.assignee.length > 0 && card.status !== 'Completed'">
                           <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
-                            <div class="show-assi noselecct">
+                            <div class="show-assi noselect" v-if="!analysisSender('photo',assignee.uid)">
                               <b-icon class="show-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                            </div>
+                            <div class="show-assi noselect trans" v-else>
+                              <img class="show-preview-sel" :src="analysisSender('photo',assignee.uid)">
                             </div>
                             <div class="name-show-assi greytext noselect">{{assignee.displayName}}</div>
                           </div>
@@ -127,9 +130,13 @@
             <div class="drop-des">
               <div @click="assignMember(i)" class="dropbtn-assi noselect float-l"><a>+</a></div>   
               <div class="assignee-container float-l">
-                <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee" :key="'ase-'+i+'-'+indexAs">     
-                  <div class="select-assi noselecct" @click="removeAssignee(assignee,indexAs)">
+                <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee" :key="'ase-'+i+'-'+indexAs">   
+                  <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)">
                     <b-icon class="select-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                    <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
+                  </div>
+                  <div class="select-assi noselect trans " v-else>
+                    <img class="preview-sel" :src="analysisSender('photo',assignee.uid)">
                     <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                   </div>
                   <div class="name-select-assi greytext noselect">{{assignee.displayName}}</div>
@@ -181,8 +188,12 @@
                   <div @click="assignMember2(i,j)" class="dropbtn-assi noselect float-l"><a>+</a></div>   
                   <div class="assignee-container float-l">
                     <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee2" :key="'ase-'+i+'-'+indexAs">     
-                      <div class="select-assi noselecct" @click="removeAssignee2(assignee,indexAs)">
+                      <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)">
                         <b-icon class="select-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                        <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
+                      </div>
+                      <div class="select-assi noselect trans" v-else>
+                        <img class="preview-sel" :src="analysisSender('photo',assignee.uid)">
                         <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                       </div>
                       <div class="name-select-assi greytext noselect">{{assignee.displayName}}</div>
@@ -197,7 +208,7 @@
               </div>
               <div class="contain-vote float-r ">  
                 <p>Vote this card</p>
-                <div class="contain-show-avg-sett" style="font-size:13px;">Average:  <div class="average-setting "> {{analysisEstimatedVote(card)}}</div></div>
+                <div class="contain-show-avg-sett" style="font-size:13px;">Average:&nbsp;{{analysisEstimatedVote(card).toFixed(2)}}</div>
                 <br/>
                 <ul id="rating" class="rating large">
                   <li v-if="voteIn > 4" class="fill-s" @click="setCrate(5)"></li>
@@ -767,6 +778,21 @@ export default {
       } else {
         return (card.difficulty.map(val=>val.vote).reduce((sum,val)=>val+sum) + this.voteIn)/(card.difficulty.length + 1)
       }
+    },
+    analysisSender(type,uid){
+      let sender = this.members.filter(ele=>ele.uid === uid)
+      if(sender.length > 0){
+        sender = sender[0]
+        if(type === 'name'){
+          return sender.displayName
+        } else if(type === 'status'){
+          // console.log(sender.displayName + ' online: ' + sender.online)
+          return sender.online
+        } else if(type === 'photo'){
+          return sender.photoURL
+        }
+      }
+      return null
     }
   }
 }

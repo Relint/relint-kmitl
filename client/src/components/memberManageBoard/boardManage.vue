@@ -38,7 +38,7 @@
                         {{job.status}}
                       </div>
                       <div class="jobName">{{job.title}}</div>
-                      <div class="date">{{job.date}}</div>
+                      <div class="date">{{analysisTime(job.duedate,true)}}</div>
                     </div>
                   </div>
                 </div>
@@ -158,7 +158,37 @@ export default {
     },
     toggleDropInvite() {
       document.getElementById("showInvite").classList.toggle("hide");
-    }
+    },
+    analysisTime(timestamp,n=false){
+      if(!timestamp || isNaN(timestamp.seconds)){
+        return 'No duedate'
+      }
+      const time = timestamp.toDate()
+      const now = new Date()
+      const yy = time.getFullYear()
+      const mm = time.getMonth()
+      const dd = time.getDate()
+      const ny = now.getFullYear()
+      const nm = now.getMonth()
+      const nd = now.getDate()
+      if(yy === ny && mm === nm && dd === nd){
+        if(n){
+          return 'Today'
+        } else {
+          return this.timeFormat(timestamp)
+        }
+      } else if(yy === ny && mm === nm && nd - dd === 1){
+        return 'Yesterday'
+      } else if(yy === ny) {
+        if(n){
+          return time.toString().substring(4,8) + ' ' + dd + '(' + time.toString().substring(0,3) + ')'
+        } else {
+          return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
+        }
+      } else {
+        return time.toString().substring(4,8) + ' ' + dd + ', ' + yy
+      }
+    },
   }
 };
 </script>

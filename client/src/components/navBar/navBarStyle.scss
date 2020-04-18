@@ -260,9 +260,14 @@ h5 {
   height: 50px;
   z-index: 1;
 }
+.trans{
+  background-color: transparent;
+}
+.default{
+  background-color:$bluesky;
+}
 .dropbtn {
   position: relative;
-  background-color:$bluesky;
   border-radius: 100%;
   height: 44px;
   width: 44px;
@@ -270,6 +275,7 @@ h5 {
   z-index: 2;
   outline: none;
   cursor: pointer;
+  overflow: hidden;
 }
 .contain-profile {
   position: relative;
@@ -588,7 +594,9 @@ h5 {
 }
 
 .user-profile-left {
-  background-color: #a6d4d8;
+  position: relative;
+  overflow: hidden;
+  // background-color: #a6d4d8;
   border-radius: 70px;
   width: 40px;
   height: 40px;
@@ -599,7 +607,9 @@ h5 {
 }
 
 .user-profile-right {
-  background-color: #d8a6d5;
+  position: relative;
+  overflow: hidden;
+  // background-color: #d8a6d5;
   border-radius: 70px;
   width: 40px;
   height: 40px;
@@ -607,7 +617,9 @@ h5 {
   float: right;
   margin-left: 2px;
 }
-
+.default{
+  background-color:#d8a6d5;
+}
 .margin-left {
   margin-left: 5px;
 }
@@ -726,4 +738,27 @@ h5 {
 
 
 //profile
+img.preview-profile-nav {
+  width: 44px;
+  height: 44px;
+  top:0%;
+  left: 0%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1;
+  transition: all 0.25s ease;
 
+}
+
+img.preview-profile {
+  width: 40px;
+  height: 40px;
+  top:0%;
+  left: 0%;
+  position: absolute;
+  object-fit: cover;
+  z-index: 0;
+  opacity: 1;
+  transition: all 0.25s ease;
+}
