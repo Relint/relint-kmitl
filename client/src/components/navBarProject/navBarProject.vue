@@ -15,7 +15,7 @@
            {{projectName}}
         </div>
         <div class="contain-input-edit" style="display:none; top:1px" id="editP">
-          <input id="einput"  class="input-edit-postit" type="text" v-model="projectNameIn" placeholder="Edit a title..."  v-on:keyup.enter="saveProjectName" maxlength="15"> 
+          <input class="input-edit-postit" type="text" v-model="projectNameIn" placeholder="Edit a title..."  v-on:keyup.enter="saveProjectName" maxlength="15"> 
           <div class="contain-btn-edit">
             <button @click="saveProjectName" class="btn-check " ><b-icon class="center-icon" icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
             <button @click="closeEditPro" class="btn-x  " ><b-icon class="center-icon" icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
@@ -34,7 +34,7 @@
           <div v-else class="c-deadline late">{{deadline}}</div>
         </div>
         <div class="contain-input-edit" style="display:none; top:1px;" id="editT">
-          <input id="einput"  class="input-edit-postit" type="date" v-model="deadlineIn"   v-on:keyup.enter="saveDeadline"> 
+          <input id="datefield"  class="input-edit-postit" type="date" v-model="deadlineIn" min="2000-01-01" v-on:keyup.enter="saveDeadline"> 
          <div class="contain-btn-edit">
             <button @click="saveDeadline" class="btn-check " ><b-icon class="center-icon" icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
             <button @click="closeEditPro" class="btn-x  " ><b-icon class="center-icon" icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
@@ -57,7 +57,7 @@
           </div>
         </div>
         <div class="contain-input-edit" style="display:none;top:1px;" id="editD">
-          <input id="einput"  class="input-edit-postit" type="text" v-model="descriptionIn" placeholder="Edit a Description..."  v-on:keyup.enter="saveDescription" maxlength="150"> 
+          <input class="input-edit-postit" type="text" v-model="descriptionIn" placeholder="Edit a Description..."  v-on:keyup.enter="saveDescription" maxlength="150"> 
          <div class="contain-btn-edit">
             <button @click="saveDescription" class="btn-check " ><b-icon class="center-icon" icon="check" id="mov-l" font-scale='1.25'></b-icon></button><br>
             <button @click="closeEditPro" class="btn-x  " ><b-icon class="center-icon" icon="x" id="mov-r" font-scale='1.25'></b-icon></button>
@@ -151,6 +151,15 @@ export default {
     };
   },
   mounted() {
+    let today = new Date()
+    let dd = today.getDate()
+    let mm = today.getMonth()+1
+    const yyyy = today.getFullYear()
+    if(dd < 10) dd = '0'+dd
+    if(mm < 10) mm = '0'+mm
+    today = yyyy+'-'+mm+'-'+dd
+    document.getElementById('datefield').setAttribute('min', today)
+
     document.getElementById("manage").style.display = "none"
     this.vuexUnsubscribe = this.$store.subscribe((mutation, state) => {
       if(mutation.type === 'setProject'){
