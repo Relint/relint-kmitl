@@ -179,37 +179,15 @@ export default {
       if (alertWaiting){
         alertWaiting.style.display = "block"
       }
-      if((!this.email.match(/^([\x20-\x7E])+$/i))||(!this.password.match(/^([\x20-\x7E])+$/i))){
-          if (!this.email.match(/^([\x20-\x7E])+$/i)) {
-              this.errorMessageLogin='Invalid email'
-              this.email=''
-           }
-          else if (!this.password.match(/^([\x20-\x7E])+$/i)) {
-              this.errorMessageLogin='Invalid password'
-              this.password=''
-           }
-           if(alertErrorLogin){
-             alertErrorLogin.style.display= "block"
-           }
-          if (alertWaiting){
+      firebase.auth().signInWithEmailAndPassword(this.email, this.password).catch(err => {
+        this.errorMessageLogin=err.message
+        if(alertErrorLogin){
+          alertErrorLogin.style.display= "block"
+        }
+        if (alertWaiting){
           alertWaiting.style.display = "none"
-          }
-      }
-      else {
-        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
-          // this.errorMessageLogin='Authentication Completed'
-          // alert('Authentication Completed');
-        }).catch(err => {
-          this.errorMessageLogin=err
-          if(alertErrorLogin){
-            alertErrorLogin.style.display= "block"
-          }
-          if (alertWaiting){
-          alertWaiting.style.display = "none"
-          }
-          // alert(err);
-        });
-      }
+        }
+      });
     },
     register(e) {  
       const alertWaiting = document.getElementById('waiting-login')
