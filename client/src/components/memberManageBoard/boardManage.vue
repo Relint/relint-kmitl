@@ -25,9 +25,9 @@
                     <p id="priority" v-if="project.member.filter(ele=>ele.uid===task.uid)[0]">{{priorityStatus[project.member.filter(ele=>ele.uid===task.uid)[0].priority].status}}</p>
                   </div>
                 </div>
-
-                <div class="scroll-jobs" id="scroll-jobs">
-                  <div
+                  
+                <div class="scroll-jobs" id="scroll-jobs"  >
+                  <div 
                     v-for="(job,indexJ) in cards.filter(ele=>ele.assignee.some(val=>val.uid===task.uid))"
                     :key="'job-'+indexT+'-'+indexJ"
                     :ref="'job'+indexT"
@@ -71,9 +71,20 @@
                   </div>
                 </div>
               </div>
+
+
             </div>
             <div class="invite-parent">
-              <div class="textBox">
+              <!-- <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
+              <br class="noselect">
+              <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
+                <option  v-for="(opt, index) in priorityStatus" :key="index" :value="priorityStatus.value">
+                  {{ opt.status }}
+                </option>
+              </select><br class="noselect">
+              <button  class="btn-invite-ok noselect" v-on:click="addMember">ok</button> -->
+              
+              <!-- <div class="textBox">
                 <input class="input-invite" type="text" id="email" placeholder="Invite" />
               </div>
               <div class="bottom">
@@ -86,7 +97,7 @@
                 <div>
                   <button class="okBtn">OK</button>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
@@ -145,14 +156,70 @@ export default {
       project: null,
       postits: [],
       cards: [],
+      emailIn:'',
+      authority:0,
       priorityStatus: [
         { value: 0, status: "Admin" },
         { value: 1, status: "Co-admin" },
         { value: 2, status: "Member" }
-      ]
+      ],
+      priorityMap: [
+        'Admin',
+        'Co-Admin',
+        'Member'
+      ],
     };
   },
   methods: {
+     verifyMember(email){
+      const matched = this.users.filter((ele,i)=>{
+        return ele.email === email
+      })
+      return matched[0]
+    },
+    addMember () {
+      if(!this.authority){
+        alert('Please Choose Member Type')
+        return
+      } 
+      const res = this.verifyMember(this.emailIn)
+      if(res){
+        if(res.uid === firebase.auth().currentUser.uid){
+          alert('You invited yourself.')
+          this.emailIn = ''
+          document.getElementById('selector').selectedIndex = 0
+          this.authority=0
+          return
+        }
+        let check = this.project.invite.filter(ele => ele.data.uid === res.uid)
+        if(check.length !== 0){
+          alert('Duplicate user invited')
+          this.emailIn = ''
+          document.getElementById('selector').selectedIndex = 0
+          this.authority=0
+          return
+        }
+        this.project.invite.push({ 
+                          data:{
+                                priority:this.authority,
+                                uid: res.uid,
+                                timestamp: firebase.firestore.Timestamp.fromDate(new Date())
+                                },
+                          email:this.emailIn
+                        })
+        this.emailIn = ''
+        document.getElementById('selector').selectedIndex = 0
+        this.authority=0
+      }else{
+        alert('User doesn\'t exist')
+        document.getElementById('selector').selectedIndex = 0
+        this.authority=0
+      }
+    },
+     onChange(e) {
+      let index = e.target.selectedIndex;
+      this.authority = index
+    },
     toggleDropMember() {
       document.getElementById("showMem").classList.toggle("hide");
     },
