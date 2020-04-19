@@ -94,7 +94,7 @@
                             <div class="show-assi noselect trans" v-else>
                               <img class="show-preview-sel" :src="analysisSender('photo',assignee.uid)">
                             </div>
-                            <div class="name-show-assi greytext noselect">{{assignee.displayName}}</div>
+                            <div class="name-show-assi greytext noselect">{{analysisSender('name',assignee.uid)}}</div>
                           </div>
                         </div>
                         <div v-else-if="card.assignee.length > 0" class="float-l" style="font-size:12px;color:grey;">
@@ -131,15 +131,15 @@
               <div @click="assignMember(i)" class="dropbtn-assi noselect float-l"><a>+</a></div>   
               <div class="assignee-container float-l">
                 <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee" :key="'ase-'+i+'-'+indexAs">   
-                  <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)">
+                  <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)" @click="removeAssignee(assignee,indexAs)">
                     <b-icon class="select-assi-p" icon="person" font-scale="1.75" shift-h="1.8" shift-v="-1.5"></b-icon>
                     <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                   </div>
-                  <div class="select-assi noselect trans " v-else>
+                  <div class="select-assi noselect trans " v-else @click="removeAssignee(assignee,indexAs)">
                     <img class="preview-sel" :src="analysisSender('photo',assignee.uid)">
                     <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                   </div>
-                  <div class="name-select-assi greytext noselect">{{assignee.displayName}}</div>
+                  <div class="name-select-assi greytext noselect">{{analysisSender('name',assignee.uid)}}</div>
                 </div>
               </div>
               <div id="dd-content-assi" class="dropdown-content-assi" ref="copm" >
@@ -188,15 +188,15 @@
                   <div @click="assignMember2(i,j)" class="dropbtn-assi noselect float-l"><a>+</a></div>   
                   <div class="assignee-container float-l">
                     <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee2" :key="'ase-'+i+'-'+indexAs">     
-                      <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)">
+                      <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)" @click="removeAssignee2(assignee,indexAs)">
                         <b-icon class="select-assi-p" icon="person" font-scale="1.75" shift-h="1.8" shift-v="-1.5"></b-icon>
                         <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                       </div>
-                      <div class="select-assi noselect trans" v-else>
+                      <div class="select-assi noselect trans" v-else @click="removeAssignee2(assignee,indexAs)">
                         <img class="preview-sel" :src="analysisSender('photo',assignee.uid)">
                         <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                       </div>
-                      <div class="name-select-assi greytext noselect">{{assignee.displayName}}</div>
+                      <div class="name-select-assi greytext noselect">{{analysisSender('name',assignee.uid)}}</div>
                     </div>
                   </div>
                   <div id="dd-content-assi" class="dropdown-content-assi" :ref="'copm'+i" >
