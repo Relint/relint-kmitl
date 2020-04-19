@@ -86,8 +86,11 @@ export default {
   beforeCreate () {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
-        this.$store.commit('setRecord', {username: user.displayName, uid: user.uid, photoURL: user.photoURL});
-        this.$router.replace('addBoard')
+        this.$store.commit('setRecord', {user: user, uid: user.uid});
+        this.$router.replace('addBoard').catch(err=>{
+          // eslint-disable-next-line
+          console.log(err.message)
+        })
       }
     });
   },
@@ -112,7 +115,6 @@ export default {
       passwordRE: '',
       passwordREE: '',
       usernameRE: '',
-      regis: '',
     }
   },
   methods: {
@@ -131,8 +133,7 @@ export default {
     //acceptSEnd
     acceptSend(e) {
       const alertWaiting = document.getElementById('waiting-login')
-      firebase.auth()
-        .sendPasswordResetEmail(this.emailpWS).then(() => {
+      firebase.auth().sendPasswordResetEmail(this.emailpWS).then(() => {
           if (alertWaiting){
             alertWaiting.style.display = "block"
           }
@@ -195,14 +196,10 @@ export default {
           }
       }
       else {
-        firebase.auth()
-        .signInWithEmailAndPassword(this.email, this.password)
-        .then(() => {
-           this.regis = false;
+        firebase.auth().signInWithEmailAndPassword(this.email, this.password).then(() => {
           // this.errorMessageLogin='Authentication Completed'
           // alert('Authentication Completed');
-        })
-        .catch(err => {
+        }).catch(err => {
           this.errorMessageLogin=err
           if(alertErrorLogin){
             alertErrorLogin.style.display= "block"
@@ -239,25 +236,18 @@ export default {
         alertWaiting.style.display = "block"
       }
       if(this.passwordRE === this.passwordREE){
-        this.$http({
-          method: "get",
-          url: "/reg",
-          headers: {
-            email: this.emailRE,
-            password: this.passwordRE,
-            username: this.usernameRE.charAt(0).toUpperCase()+this.usernameRE.substring(1).toLowerCase(),
-          }
-        }).then(() => {
+        firebase.auth().createUserWithEmailAndPassword(this.emailRE,this.passwordRE).then(userCred => {
           // alert('Registration Completed')
-          this.email = this.emailRE;
-          this.password = this.passwordRE;
-          this.login(e);
+          this.$rtdb.ref('/status/'+userCred.user.uid).update({
+            email: userCred.user.email,
+            displayName: this.usernameRE.charAt(0).toUpperCase()+this.usernameRE.substring(1).toLowerCase(),
+          })
         }).catch(error => {
-            this.errorMessage=error.response.data.message
-            document.getElementById('alert-error').style.display = "block"
-            if (alertWaiting){
-              alertWaiting.style.display = "none"
-            }
+          this.errorMessage= error.message
+          document.getElementById('alert-error').style.display = "block"
+          if (alertWaiting){
+            alertWaiting.style.display = "none"
+          }
         });
       } else {
         this.errorMessage='Password does not matched';

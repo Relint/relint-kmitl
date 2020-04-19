@@ -39,7 +39,6 @@ hr {
 }
 #iconNBP {
   position: relative;
-  margin-top: -10px;
 }
 
 .wrapper {
@@ -69,6 +68,7 @@ hr {
 .div-5 {
   margin-left: 1%;
   padding-right: 5%;
+  margin-top: 17px;
 }
 .div-6 {
   padding-top: 5px;
@@ -385,13 +385,6 @@ $blueQueen: rgba(69, 105, 144, 1);
   border-radius: 15px;
   padding: 20px;
 }
-
-.dropbtn {
-  // position: static;
-  bottom: 0px;
-  left: -50px;
-  border-style: none;
-}
 .contain-prof-relative {
   position: relative;
   // background-color: yellow;
@@ -451,12 +444,14 @@ $blueQueen: rgba(69, 105, 144, 1);
 
 
 .dropbtn {
-  height: 44px;
-  width: 44px;
+  position: absolute;
   border-style: none;
-  z-index: 2;
+  z-index: 1;
   outline: none;
   cursor: pointer;
+  top: 36px;
+  width: 40px;
+  height: 40px;
 }
 // .dropdown-content-des a:hover {background-color: #f1f1f1;}
 .drop-des:hover .dropdown-content-des{
@@ -527,7 +522,7 @@ $blueQueen: rgba(69, 105, 144, 1);
   margin-top: 8px;
   // opacity: 0.5;
   position: absolute;
-  z-index: 1;
+  z-index: 2;
   width: 290px;
   height: 50px;
   background-color: #fff;

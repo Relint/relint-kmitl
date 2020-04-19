@@ -9,15 +9,15 @@
               <div class="wrapper float-r div-4" >
                 <div class="drop-profile">
                   <footer class="rect2"></footer>
-                  <button class="dropbtn default" v-if="!photoURL">
-                    <b-icon icon="person" font-scale="3"></b-icon>
+                  <button class="dropbtn default" v-if="!analysisSender('photo',$store.state.uid)">
+                    <b-icon icon="person" font-scale="2.5"></b-icon>
                   </button>    
                   <button class="dropbtn trans" v-else>
-                    <img class="preview-profile-nav" :src="photoURL">
+                    <img class="preview-profile-nav" :src="analysisSender('photo',$store.state.uid)">
                   </button>          
                   <div class="dropdown-content-profile">
                     <h5 class="contain-showName">Hello, </h5>
-                    <div class="showName" v-html="username" ></div>
+                    <div class="showName">{{analysisSender('name',$store.state.uid)}}</div>
                     <hr >
                     <a @click="openFormProfile">Profile</a>
                     <a v-on:click="logout">Logout</a>
@@ -32,7 +32,7 @@
                     {{notifications.length>=99?'99+':notifications.length}}
                   </div>                  
                   <footer class="rect"></footer>
-                  <button class="dropbtn-noti float-l"><b-icon icon="bell" font-scale="2.5"  ></b-icon></button>
+                  <button class="dropbtn-noti float-l"><b-icon icon="bell" font-scale="2"  ></b-icon></button>
                   <footer class="dropdown-content-noti">
                     <div v-if="notifications.length === 0"><a><center>No notification</center></a></div>
                     <div v-else-if="notifications.length === 1"><a><center>1 notification</center></a></div>
@@ -44,8 +44,8 @@
                         <p>{{noti.description}}</p>
                         <p class="float-l">{{noti.timestamp}}</p><br>
                         <div class="contain-btnNoti float-r">
-                          <button class="btn-T" @click="inviteAccept(noti.pid)"><b-icon class="center-icon" icon="check" font-scale="1.5"  ></b-icon></button>
-                          <button class="btn-F" @click="inviteDecline(noti.pid)"><b-icon class="center-icon" icon="x" font-scale="1.5"  ></b-icon></button>
+                          <button class="btn-T" @click="inviteAccept(noti.pid)"><b-icon class="center-icon" icon="check" font-scale="1"  ></b-icon></button>
+                          <button class="btn-F" @click="inviteDecline(noti.pid)"><b-icon class="center-icon" icon="x" font-scale="1"  ></b-icon></button>
                         </div>
                       </a><hr>
                     </div>
@@ -58,7 +58,7 @@
                   <div v-if="anaylysisNumber(unread).ans1" class="notification float-l noselect">
                     {{anaylysisNumber(unread).ans2}}
                   </div>    
-                  <button class="dropbtn-chat float-l" @click="toggleFormChat"><b-icon class="center-icon" icon="chat" font-scale="2.5"></b-icon></button>
+                  <button class="dropbtn-chat float-l" @click="toggleFormChat"><b-icon class="center-icon" icon="chat" font-scale="2"></b-icon></button>
                   <div class="dropdown-content-chat" id="chat-form">
                     <div class="chat-box float-r">
                       <li class="chat-brand noselect">RELINT</li>
@@ -201,9 +201,6 @@ export default {
   },
   data (){
     return {
-      username: '',
-      uid: '',
-      photoURL: '',
       notifications:[],
 
       projects:[],
@@ -225,7 +222,9 @@ export default {
       if (!user) {    
         this.$rtdb.ref('/status/'+this.$store.state.uid).off();
         this.$rtdb.ref('/status/'+this.$store.state.uid).update(isOfflineForDatabase);
-        this.$router.replace('/');
+        this.$router.replace('/').catch(err=>{
+          console.log(err.message)
+        })
       }
     });
     this.collection = this.$db.collection('project').onSnapshot(snapshot => {
@@ -266,7 +265,7 @@ export default {
           if((document && document.getElementById('chat-form').style.display === 'none') || (this.$refs.prt && this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index))){
             let count = 0
             ele.chatLog.forEach((ele2,index2)=>{
-              if(ele2.uid != firebase.auth().currentUser.uid && !ele2.read.includes(firebase.auth().currentUser.uid)){
+              if(ele2.uid != this.$store.state.uid && !ele2.read.includes(this.$store.state.uid)){
                 count+=1
               }
             })
@@ -303,18 +302,6 @@ export default {
     document.getElementById('form-profile').style.display='none'
     document.addEventListener('keyup', this.keyupCallback)
     document.getElementById('chat-form').style.display = "none"
-    this.vuexUnsubscribeUser = this.$store.subscribe((mutation, state) => {
-      // console.log(mutation.type)
-      if(mutation.type === 'setRecord'){
-        this.username = state.username
-        this.uid = state.uid
-        this.photoURL = state.photoURL
-        // console.log(this.username)
-      }
-    })
-    this.username = this.$store.state.username
-    this.uid = this.$store.state.uid
-    this.photoURL = this.$store.state.photoURL
     const userStatusDatabaseRef = this.$rtdb.ref('/status/' + this.$store.state.uid)
     this.$rtdb.ref('.info/connected').on('value', snapshot => {
       if (snapshot.val() === false) {
@@ -349,7 +336,6 @@ export default {
     })
   },
   beforeDestroy(){
-    this.vuexUnsubscribeUser()
     document.removeEventListener('keyup', this.keyupCallback)
     this.collection()
     this.$rtdb.ref('/status/'+this.$store.state.uid).off()
@@ -363,9 +349,6 @@ export default {
     },
     logout () {
       firebase.auth().signOut()
-    },
-    profile () {
-      alert(this.$store.state.uid + '\n' + this.$store.state.username);
     },
     closeFormHome () {
       document.getElementById("from-home").style.display = "none"
@@ -547,7 +530,7 @@ export default {
         this.projects.map((ele,index)=>{
           ele.currentIndex = null
           ele.chatLog.forEach((ele2,index2)=>{
-            if(ele2.uid != firebase.auth().currentUser.uid && !ele2.read.includes(firebase.auth().currentUser.uid)){
+            if(ele2.uid != this.$store.state.uid && !ele2.read.includes(this.$store.state.uid)){
               const closed = this.$refs.prt.some((ele,i)=>ele.style.backgroundColor==='white'&&i===index) || document.getElementById('chat-form').style.display === 'none'
               if(!ele.currentIndex && closed) {
                 ele.currentIndex = index2
@@ -572,7 +555,7 @@ export default {
       })
     },
     checkUser(uid) {
-      return uid === firebase.auth().currentUser.uid;
+      return uid === this.$store.state.uid;
     },
     timeFormat(n) {
       const time = n.toDate()
@@ -618,7 +601,7 @@ export default {
       this.wheelCallback(project,index)
     },
     checkNewMessagePopup(project,index){
-      if(project.chatLog.length > 0 && !project.chatLog[project.chatLog.length-1].read.includes(firebase.auth().currentUser.uid) && !this.checkUser(project.chatLog[project.chatLog.length-1].uid)){
+      if(project.chatLog.length > 0 && !project.chatLog[project.chatLog.length-1].read.includes(this.$store.state.uid) && !this.checkUser(project.chatLog[project.chatLog.length-1].uid)){
         return true
       }
       return false
@@ -661,8 +644,8 @@ export default {
         delete value['height']
         delete value['relativeHeightTop']
         delete value['relativeHeightBottom']
-        if(!value.read.includes(firebase.auth().currentUser.uid) && !this.checkUser(value.uid)){
-          value.read.push(firebase.auth().currentUser.uid)
+        if(!value.read.includes(this.$store.state.uid) && !this.checkUser(value.uid)){
+          value.read.push(this.$store.state.uid)
           allRead = false
         }
         return value
@@ -703,7 +686,7 @@ export default {
           message: this.msg[index],
           read:[],
           timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
-          uid: firebase.auth().currentUser.uid
+          uid: this.$store.state.uid
         })
         this.feedbackRead(project,index,'send')
       } else {

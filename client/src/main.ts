@@ -22,8 +22,7 @@ Vue.prototype.$rtdb = rtdb;
 const st = firebase.storage();
 Vue.prototype.$st = st
 /* eslint-disable */
-const client = axios.create({ //############################################################# change here before build
-  // baseURL: "http://localhost:5001/relint-kmitl/us-central1/app",
+const client = axios.create({
   baseURL: "https://us-central1-relint-kmitl.cloudfunctions.net/app",
 });
 Vue.prototype.$http = client;

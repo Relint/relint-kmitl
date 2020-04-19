@@ -24,27 +24,6 @@ admin.initializeApp({
 
 const db = admin.firestore();
 const rtdb = admin.database();
+// app.get('/something', (request, response) => ...)
 
-app.get('/reg', (req, res) => {
-    let email = req.headers.email
-    let password = req.headers.password
-    let displayName = req.headers.username
-    admin.auth().createUser({
-        email: email,
-        emailVerified: false,
-        password: password,
-        displayName: displayName,
-        disabled: false
-    }).then(userRecord => {
-        console.log('Succesfully created new user: ', userRecord);
-        rtdb.ref('/status/'+userRecord.uid).update({
-            email: userRecord.email,
-            displayName: userRecord.displayName,
-        })
-        res.send(userRecord);
-    }).catch(error => {
-        console.log('Error creating new user: ', error);
-        res.status(500).send(error);
-    })
-})
 exports.app = functions.https.onRequest(app);

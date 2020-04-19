@@ -54,10 +54,10 @@
                         <div @click="cardSetting(index,index2)" v-else-if="analysisTime(card.duedate,true) === 'Today'" class="c-duedate">{{analysisTime(card.duedate,true)}}</div>
                         <div @click="cardSetting(index,index2)" v-else class="c-duedate late">{{analysisTime(card.duedate,true)}}</div>
                      </div>
-                      <div class="float-l" @click="cardSetting(index,index2)" style="padding-left: 9px;">
-                        <button class="wrapperC btn-remove-card" style="margin-bottom: 5px;"><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.5'></b-icon></button>
+                      <div class="float-l" @click="cardSetting(index,index2)" style="padding-left: 9px; height:39px;">
+                        <button class="wrapperC btn-remove-card" style="margin-bottom: 5px;"><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.25'></b-icon></button>
                         <br/>
-                        <button class="wrapperC btn-edit-card" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.5'></b-icon></button>
+                        <button class="wrapperC btn-edit-card" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.25'></b-icon></button>
                       </div>
                       <div class="float-l" style="padding-top: 10px;width: 246px" @click="cardSetting(index,index2)">
                         <div :ref="'rcdes'+index">
@@ -89,7 +89,7 @@
                         <div class="show-assignee-container float-l" v-if="card.assignee.length > 0 && card.status !== 'Completed'">
                           <div class="float-l" v-for="(assignee,indexAs) in card.assignee" :key="'case-'+index+'-'+index2+'-'+indexAs">     
                             <div class="show-assi noselect" v-if="!analysisSender('photo',assignee.uid)">
-                              <b-icon class="show-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                              <b-icon class="show-assi-p" icon="person" font-scale="1.75" shift-h="1.8" shift-v="-1.5"></b-icon>
                             </div>
                             <div class="show-assi noselect trans" v-else>
                               <img class="show-preview-sel" :src="analysisSender('photo',assignee.uid)">
@@ -132,7 +132,7 @@
               <div class="assignee-container float-l">
                 <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee" :key="'ase-'+i+'-'+indexAs">   
                   <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)">
-                    <b-icon class="select-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                    <b-icon class="select-assi-p" icon="person" font-scale="1.75" shift-h="1.8" shift-v="-1.5"></b-icon>
                     <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                   </div>
                   <div class="select-assi noselect trans " v-else>
@@ -189,7 +189,7 @@
                   <div class="assignee-container float-l">
                     <div class="float-l" v-for="(assignee,indexAs) in temporaryAssignee2" :key="'ase-'+i+'-'+indexAs">     
                       <div class="select-assi noselect default" v-if="!analysisSender('photo',assignee.uid)">
-                        <b-icon class="select-assi-p" icon="person" font-scale="2" shift-h="0.65"></b-icon>
+                        <b-icon class="select-assi-p" icon="person" font-scale="1.75" shift-h="1.8" shift-v="-1.5"></b-icon>
                         <b-icon class="select-assi-x" icon="x" font-scale="2" shift-h="0.65" shift-v="-0.65"></b-icon>
                       </div>
                       <div class="select-assi noselect trans" v-else>

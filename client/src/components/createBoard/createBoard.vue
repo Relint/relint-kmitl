@@ -230,7 +230,9 @@ export default {
     },
     goBoardPostit (pid) {
       this.$store.commit('setSelectedPID',pid)
-      this.$router.push('/addBoardPostit')
+      this.$router.push('/addBoardPostit').catch(err=>{
+        console.log(err.message)
+      })
     },
     deleteBoard (pid) {
       let ref = this.$db.collection('project')
