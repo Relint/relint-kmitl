@@ -58,7 +58,7 @@
                   <div v-if="anaylysisNumber(unread).ans1" class="notification float-l noselect">
                     {{anaylysisNumber(unread).ans2}}
                   </div>    
-                  <button class="dropbtn-chat float-l" @click="toggleFormChat"><b-icon class="center-icon" icon="chat" font-scale="2"></b-icon></button>
+                  <button class="dropbtn-chat float-l" @click="toggleFormChat"><b-icon class="center-icon" icon="chat" font-scale="2" shift-v="1"></b-icon></button>
                   <div class="dropdown-content-chat" id="chat-form">
                     <div class="chat-box float-r">
                       <li class="chat-brand noselect">RELINT</li>
