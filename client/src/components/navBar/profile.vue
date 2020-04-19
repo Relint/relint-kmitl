@@ -6,11 +6,11 @@
           <img class="show-defalut-img" src="./defalutImage.png" v-if="!user.photoURL">
           <img class="preview-edit" :src="user.photoURL">
         </div>
-        <div class="username">{{refreshKey?user.displayName:''}}</div>
-        <div class="email">{{refreshKey?user.email:''}}</div>
+        <div class="username">{{user.displayName}}</div>
+        <div class="email">{{user.email}}</div>
         
-        <button @click="openFormEdit" class="btn-form-edit noselect ">edit</button>
-        <button  @click="closeFormProfile" class="btn-cancel-profile noselect ">cancel</button>
+        <button @click="openFormEdit" class="btn-form-edit noselect ">Edit</button>
+        <button  @click="closeFormProfile" class="btn-cancel-profile noselect ">Close</button>
     </div>
 
     <div class="form-edit-profile  center-icon" id="form-edit">
@@ -25,14 +25,17 @@
             <input class="up-file" type="file" @change="previewImage" accept="image/*">
           </div>
         </div>
-        <div class="btn-remove" @click="deleteimage" v-if="preview"><b-icon icon="x" font-scale="3"></b-icon></div>
+        <div style="font-size:12px; color:grey; margin-bottom:3px; text-align:center; margin-top:38px;">Profile Picture</div>
+        <div class="btn-remove" @click="deleteimage" v-if="preview"><b-icon icon="x" font-scale="2.5"></b-icon></div>
         <div class="edit">
             <div class="alert-error" > {{errorMessage}}</div><br class="noselect">
-            <input class="input-form " type="text" placeholder="Username" v-model="usernameIn" maxlength="15"><br class="noselect"><br class="noselect">
-            <input class="input-form " type="password" placeholder="Confirm password" v-model="pwIn" v-on:keyup.enter="saveFormEdit"><br class="noselect"><br class="noselect">
+            <div style="font-size:12px; color:grey; margin-bottom:3px; text-align:center;">Display Name</div>
+            <input class="input-form " type="text" :placeholder="user.displayName" v-model="usernameIn" maxlength="15"><br class="noselect"><br class="noselect">
+            <div style="font-size:12px; color:grey; margin-bottom:3px; text-align:center;">Confirm Password</div>
+            <input class="input-form " type="password" placeholder="Password" v-model="pwIn" v-on:keyup.enter="saveFormEdit"><br class="noselect"><br class="noselect">
         </div>
-        <button @click="saveFormEdit" class="btn-form-save noselect " >save</button>
-        <button  @click="closeFormEdit" class="btn-cancel-edit noselect ">cancel</button>
+        <button @click="saveFormEdit" class="btn-form-save noselect " >Save</button>
+        <button  @click="closeFormEdit" class="btn-cancel-edit noselect ">Cancel</button>
     </div>
 
 </div>
@@ -45,8 +48,6 @@ export default {
   data (){
     return {
       user: '',
-
-      refreshKey: true,
 
       usernameIn:'',
       emailIn:'',
@@ -61,17 +62,15 @@ export default {
     }
   },
   mounted(){
-    document.querySelector(".alert-error").style.display="none"
-    new Promise(resolve=>{
-      const interval = setInterval(()=>{
-        if(firebase.auth().currentUser){
-          this.user = firebase.auth().currentUser
-          // console.log(this.user)
-          clearInterval(interval)
-          resolve()
-        }
-      },100)
+    this.vuexUnsubscribeCurrentUser = this.$store.subscribe((mutation, state) => {
+      // console.log(mutation.type)
+      if(mutation.type === 'setUser'){
+        this.user = state.user.filter(ele=>ele.uid === state.uid)[0]
+      }
     })
+  },
+  beforeDestroyed(){
+    this.vuexUnsubscribeCurrentUser()
   },
   methods: { 
     deleteimage () {
@@ -86,7 +85,7 @@ export default {
           res.items.forEach((ele,i)=>{
             ele.getDownloadURL().then(url=>{
               if(url !== this.user.photoURL){
-                ele.delete()
+                ele.delete().catch(err=>console.log(err.message))
               }
             })
           })
@@ -137,47 +136,19 @@ export default {
         return
       }
       const credential = firebase.auth.EmailAuthProvider.credential(this.user.email,this.pwIn)
-      this.user.reauthenticateWithCredential(credential).then(()=>{
-        // console.log('fuck')
+      firebase.auth().currentUser.reauthenticateWithCredential(credential).then(()=>{
          if(this.usernameIn && !(this.usernameIn.match(/^([\x20-\x7E])+$/i))){
           this.errorMessage='Invalid username'
           this.usernameIn=''
           document.querySelector(".alert-error").style.display="block"
           return
         }
-        if(this.preview && this.usernameIn){
-          // console.log('f1')
-          this.user.updateProfile({
-            displayName: this.usernameIn.charAt(0).toUpperCase()+this.usernameRE.substring(1).toLowerCase(),
-            photoURL: this.preview
-          }).then(()=>{
-            this.deleteimage()
-          }).catch(err=>{
-            console.log(err.message)
-          })
-        } else if (this.preview) {
-          // console.log('f2')
-          this.user.updateProfile({
-            photoURL: this.preview
-          }).then(()=>{
-            this.deleteimage()
-          }).catch(err=>{
-            console.log(err.message)
-          })
-        } else if(this.usernameIn){
-          // console.log('f3')
-          this.user.updateProfile({
-            displayName: this.usernameIn.charAt(0).toUpperCase()+this.usernameIn.substring(1).toLowerCase()
-          }).catch(err=>{
-            console.log(err.message)
-          })
-        }
+        this.updateUserProfile()
+
         this.pwIn = ''
         this.usernameIn = ''
         document.querySelector(".alert-error").style.display="none"
         document.getElementById('form-edit').style.display="none"
-        this.rerender()
-        this.commitContainerUser()
       }).catch(err=>{
         this.errorMessage='Incorrect password'
         document.querySelector(".alert-error").style.display="block"
@@ -197,21 +168,31 @@ export default {
     closeFormProfile () {
       document.getElementById('form-profile').style.display="none"
     },
-    rerender(){
-      this.refreshKey = false
-      new Promise(resolve=>setTimeout(resolve,1000)).then(()=>{
-        this.refreshKey = true
-      })
-    },
-    commitContainerUser(){
-      new Promise(resolve=>setTimeout(resolve,1000)).then(()=>{
-        // console.log(this.user.displayName)
-        this.$store.commit('setRecord', {username: this.user.displayName, uid: this.user.uid, photoURL: this.user.photoURL})
+    updateUserProfile(){
+      if(this.preview && this.usernameIn){
         this.$rtdb.ref('/status/'+this.user.uid).update({
-            displayName: this.user.displayName,
-            photoURL: this.user.photoURL
+          displayName: this.usernameIn.charAt(0).toUpperCase()+this.usernameIn.substring(1).toLowerCase(),
+          photoURL: this.preview
+        }).then(()=>{
+          this.deleteimage()
+        }).catch(err=>{
+          console.log(err.message)
         })
-      })
+      } else if (this.preview) {
+        this.$rtdb.ref('/status/'+this.user.uid).update({
+          photoURL: this.preview
+        }).then(()=>{
+          this.deleteimage()
+        }).catch(err=>{
+          console.log(err.message)
+        })
+      } else if(this.usernameIn){
+        this.$rtdb.ref('/status/'+this.user.uid).update({
+          displayName: this.usernameIn.charAt(0).toUpperCase()+this.usernameIn.substring(1).toLowerCase()
+        }).catch(err=>{
+          console.log(err.message)
+        })
+      }
     }
   }
 }

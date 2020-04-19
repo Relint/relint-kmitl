@@ -6,9 +6,8 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    username: '',
+    userRecord: '',
     uid: '',
-    photoURL: '',
     pid: '',
     openChat: false,
     project: [],
@@ -16,9 +15,8 @@ export default new Vuex.Store({
   },
   mutations: {
     setRecord(state, n) {
-      state.username = n.username;
-      state.uid = n.uid;
-      state.photoURL = n.photoURL
+      state.userRecord = n.user
+      state.uid = n.uid
     },
     setSelectedPID(state, n){
       state.pid = n;

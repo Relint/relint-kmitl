@@ -172,10 +172,11 @@ $fontAsap: "Asap", sans-serif;
 
 .input-form {
     width: 300px;
-    height: 40px;
+    height: 50px;
     padding-left: 10px;
-    border-radius: 15px;
+    border-radius: 20px;
     border: 1px solid gray ;
+    font-size: 16px;
 }
 
 .image-profile-edit {
@@ -298,6 +299,7 @@ progress {
   top: 50%;
   left: 50%;
   width: 120px;
+  height: 8px;
   border: 0;
   border-radius: 20px;
   transform: translate(-50%,-50%);
@@ -306,17 +308,17 @@ progress {
 #progress-b::-webkit-progress-bar {
     border: 0;
     border-radius: 20px;
-    background-color: transparent;
+    background-color: white;
 }
 #progress-b::-webkit-progress-value {
     border: 0;
     border-radius: 20px;
-    background: white;
+    background: $blueQueen;
 }
 #progress-b::-moz-progress-bar {
     border: 0;
     border-radius: 20px;
-    background-color: transparent;
+    background-color: white;
 }
 p.progress-num {
   position: relative;
@@ -371,4 +373,5 @@ p.progress-num {
   border-radius: 8px;
   text-align: center;
   word-wrap: break-word;
+  display: none;
 }
