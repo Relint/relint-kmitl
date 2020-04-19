@@ -222,7 +222,9 @@ export default {
       if (!user) {    
         this.$rtdb.ref('/status/'+this.$store.state.uid).off();
         this.$rtdb.ref('/status/'+this.$store.state.uid).update(isOfflineForDatabase);
-        this.$router.replace('/');
+        this.$router.replace('/').catch(err=>{
+          console.log(err.message)
+        })
       }
     });
     this.collection = this.$db.collection('project').onSnapshot(snapshot => {

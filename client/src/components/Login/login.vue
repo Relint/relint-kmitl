@@ -87,7 +87,10 @@ export default {
     firebase.auth().onAuthStateChanged((user) => {
       if (user) {
         this.$store.commit('setRecord', {user: user, uid: user.uid});
-        this.$router.replace('addBoard')
+        this.$router.replace('addBoard').catch(err=>{
+          // eslint-disable-next-line
+          console.log(err.message)
+        })
       }
     });
   },

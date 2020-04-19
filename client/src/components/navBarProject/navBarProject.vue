@@ -165,7 +165,10 @@ export default {
           this.status = doc.status
           this.dummyStatus = !this.status
         } else {
-          this.$router.replace("/addBoard");
+          this.$router.replace("/addBoard").catch(err=>{
+            // eslint-disable-next-line
+            console.log(err.message)
+          })
         }
       }
     })
@@ -245,7 +248,10 @@ export default {
       this.descriptionIn = this.description
     },
     backToHome() {
-      this.$router.push("/addBoard");
+      this.$router.push("/addBoard").catch(err=>{
+        // eslint-disable-next-line
+        console.log(err.message)
+      })
     },
     openFormMa() {
       if (document.getElementById("manage").style.display === "none") {
