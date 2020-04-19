@@ -95,8 +95,8 @@
                                   </button>
                                   <div class="float-l">
                                     <b  style="margin-right:2px">{{ analysisSender('name',message.uid) + '' }}</b>
-                                    <b-icon v-if="analysisSender('status',message.uid)" style="color:green; margin-right:5px" icon="circle-fill" font-scale="0.45" shift-v="-1"></b-icon>
-                                    <b-icon v-else style="color:#cccccc; margin-right:5px" icon="circle-fill" font-scale="0.45" shift-v="-1"></b-icon>
+                                    <b-icon v-if="analysisSender('status',message.uid)" style="color:green; margin-right:5px" icon="circle-fill" font-scale="0.4"></b-icon>
+                                    <b-icon v-else style="color:#cccccc; margin-right:5px" icon="circle-fill" font-scale="0.4"></b-icon>
                                     <span>
                                       <font size="1">{{timeFormat(message.timestamp)}}</font>
                                     </span>
