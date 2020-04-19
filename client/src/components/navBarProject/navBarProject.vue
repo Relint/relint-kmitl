@@ -179,6 +179,14 @@ export default {
     this.vuexUnsubscribe()
   },
   methods: {
+    closeDropdownInManage(){
+      document.querySelectorAll(".drop-permission").forEach(ele=>{
+        ele.classList.remove('show')
+      })
+      document.querySelectorAll("#pri").forEach(ele=>{
+        ele.classList.remove('hide')
+      })
+    },
     saveProjectName () {
       if(this.projectNameIn && this.projectNameIn != this.projectName){
         this.$db.collection('project').doc(this.$store.state.pid).update({
@@ -259,6 +267,7 @@ export default {
       }
       else {
         document.getElementById("manage").style.display = "none"
+        this.closeDropdownInManage()
       }
     },
     /* eslint-disable */

@@ -143,8 +143,8 @@
                 </div>
               </div>
               <div id="dd-content-assi" class="dropdown-content-assi" ref="copm" >
-                <div v-for="(opt, indexOp) in members.filter(ele=>!temporaryAssignee.includes(ele))" :key="'opt-'+indexOp"  >
-                  <a @click="selectMember(opt)" >{{ opt.displayName }}</a>
+                <div v-for="(opt, indexOp) in project.member.filter(ele=>!temporaryAssignee.includes(ele))" :key="'opt-'+indexOp"  >
+                  <a @click="selectMember(opt)" >{{ analysisSender('name',opt.uid) }}</a>
                 </div>
               </div> 
             </div>
@@ -200,8 +200,8 @@
                     </div>
                   </div>
                   <div id="dd-content-assi" class="dropdown-content-assi" :ref="'copm'+i" >
-                    <div v-for="(opt, indexOp) in members.filter(ele=>!temporaryAssignee2.map(ele2=>ele2.uid).includes(ele.uid))" :key="'opt-'+indexOp"  >
-                      <a @click="selectMember2(i,opt)" >{{ opt.displayName }}</a>
+                    <div v-for="(opt, indexOp) in project.member.filter(ele=>!temporaryAssignee2.map(ele2=>ele2.uid).includes(ele.uid))" :key="'opt-'+indexOp"  >
+                      <a @click="selectMember2(i,opt)" >{{ analysisSender('name',opt.uid) }}</a>
                     </div>
                   </div> 
                 </div>
@@ -253,7 +253,7 @@ export default {
   data() {
     return {
       project:[],
-      members:[],
+      users:[],
       postits:[],
       cards:[],
 
@@ -297,11 +297,7 @@ export default {
     this.vuexUnsubscribe2 = this.$store.subscribe((mutation, state) => {
       // console.log(mutation.type)
       if(mutation.type === 'setUser'){
-        this.members = state.user.filter((ele,i)=>{
-          if(this.project.member){
-            return this.project.member.map(data=>data.uid).includes(ele.uid)
-          }
-        })
+        this.users = state.user
       }
     })
     document.addEventListener('keyup',this.keyupCallbackBoardPostit)
@@ -780,7 +776,7 @@ export default {
       }
     },
     analysisSender(type,uid){
-      let sender = this.members.filter(ele=>ele.uid === uid)
+      let sender = this.users.filter(ele=>ele.uid === uid)
       if(sender.length > 0){
         sender = sender[0]
         if(type === 'name'){

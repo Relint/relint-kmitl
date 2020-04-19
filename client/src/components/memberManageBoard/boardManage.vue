@@ -6,7 +6,7 @@
       <div class="form-profile">
         <div class="stage-l" id="scroll-task">
           <div v-if="project">
-            <div v-for="(task,indexT) in members" :key="'task'+indexT" :ref="'task'">
+            <div v-for="(task,indexT) in project.member" :key="'task'+indexT" :ref="'task'">
               <!-- .some -->
               <div
                 class="member-task"
@@ -14,15 +14,15 @@
               >
                 <div class="userBoxInTask-parent">
                   <div class="top">
-                    <h3 id="userName">{{task.displayName}}</h3>
+                    <h3 id="userName">{{analysisSender('name',task.uid)}}</h3>
                   </div>
                   <div id="email">
-                    <p>{{task.email}}</p>
+                    <p>{{analysisSender('email',task.uid)}}</p>
                   </div>
 
                   <br />
                   <div class="bot">
-                    <p id="priority" v-if="project.member.filter(ele=>ele.uid===task.uid)[0]">{{priorityStatus[project.member.filter(ele=>ele.uid===task.uid)[0].priority].status}}</p>
+                    <p id="priority" v-if="project.member.filter(ele=>ele.uid===task.uid)[0]">{{priorityMap[project.member.filter(ele=>ele.uid===task.uid)[0].priority]}}</p>
                   </div>
                 </div>
                   
@@ -49,57 +49,56 @@
         <div class="stage-r">
           <div v-if="project">
             
-              <div class="member-tab" @click="toggleDropMember">Members ({{members.length}})</div>
+              <div class="member-tab" @click="toggleDropMember">Members ({{project.member.length}})</div>
               <div class="scroll-member">
               <div id="showMem">
-                <div v-for="(member,index) in members" :key="'member'+index">
+                <div v-for="(member,index) in project.member" :key="'member'+index">
                   <div class="userBox-parent">
-                    <div class="userName">{{member.displayName}}</div>
-                    <div class="email">{{member.email}}</div>
-                    <div class="priority" v-if="project.member.filter(ele=>ele.uid===member.uid)[0]">{{priorityStatus[project.member.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
-                    <button class="removeBtn">remove</button>
+                    <div class="userName">{{ analysisSender('name',member.uid)}}</div>
+                    <div class="email">{{analysisSender('email',member.uid)}}</div>
+                    <div @click="dropEditPermission(member.uid,index)" id="pri" class="priority noselect cursorPointer" v-if="project.member.filter(ele=>ele.uid===member.uid)[0] && analysisSender('permission',member.uid) !==0 && member.uid != $store.state.uid && project.permission===0">{{priorityMap[project.member.filter(ele=>ele.uid===member.uid)[0].priority]}}<b-icon icon="caret-down" shift-v="-4"></b-icon></div>
+                    <div id="pri" class="priority noselect" v-else-if="project.member.filter(ele=>ele.uid===member.uid)[0]">{{priorityMap[project.member.filter(ele=>ele.uid===member.uid)[0].priority]}}</div>
+                    <div class="drop-permission noselect">
+                      <div v-if="analysisSender('permission',member.uid) == 1">
+                        <a @click="selPri(member.uid,index,1)"><div class="bold ">Co-Admin</div></a>
+                        <a @click="selPri(member.uid,index,2)">Member</a>
+                      </div>
+                      <div v-else-if="analysisSender('permission',member.uid) == 2">
+                        <a @click="selPri(member.uid,index,2)"><div class="bold">Member</div></a>
+                        <a @click="selPri(member.uid,index,1)">Co-admin</a>
+                      </div>
+                    </div>
+                    <br class="noselect">
+                    <button v-if="analysisSender('permission',member.uid) > project.permission" class="removeBtn" @click="removeMember(member.uid)">remove</button>
+                    <button v-else-if="member.uid===$store.state.uid && project.permission!=0" class="removeBtn" @click="leave(member.uid)">leave</button> 
                   </div>
                 </div>
+                
               </div>
+              
               <div class="invite-tab" @click="toggleDropInvite">Invites ({{project.invite.length}})</div>
               <div id="showInvite">
                 <div v-for="(member,index) in project.invite" :key="'invite'+index">
                   <div class="userBox-parent">
                     <div class="email" v-if="users.filter(ele=>ele.uid===member.uid)[0]">{{users.filter(ele=>ele.uid===member.uid)[0].email}}</div>
-                    <div class="priority" v-if="project.invite.filter(ele=>ele.uid===member.uid)[0]">{{priorityStatus[project.invite.filter(ele=>ele.uid===member.uid)[0].priority].status}}</div>
-                    <button class="removeBtn">remove</button>
+                    <div  class="priority" v-if="project.invite.filter(ele=>ele.uid===member.uid)[0]">{{priorityMap[project.invite.filter(ele=>ele.uid===member.uid)[0].priority]}}</div>
+                    <button v-if="project.permission!=2 ||member.uid===$store.state.uid" class="removeBtn" @click="removeInvite(member.uid)">remove</button>
                   </div>
                 </div>
               </div>
-
-
             </div>
-            <div class="invite-parent">
-              <!-- <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
+            <div class="invite-parent" v-if="project.permission!=2">
+              <input  class="input-box-setting-inv" type="email" placeholder="invite" v-model="emailIn" >
               <br class="noselect">
               <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
-                <option  v-for="(opt, index) in priorityStatus" :key="index" :value="priorityStatus.value">
-                  {{ opt.status }}
+                <option  v-for="(opt, index) in priorityStatus.filter(ele=>ele.value===0||ele.value>project.permission)" :key="index" :value="opt.value">
+                    {{ opt.status }}
                 </option>
               </select><br class="noselect">
-              <button  class="btn-invite-ok noselect" v-on:click="addMember">ok</button> -->
-              
-              <!-- <div class="textBox">
-                <input class="input-invite" type="text" id="email" placeholder="Invite" />
-              </div>
-              <div class="bottom">
-                <div class="setPriority">
-                  <select id="Priority">
-                    <option value="co-admin">co-admin</option>
-                    <option value="member">member</option>
-                  </select>
-                </div>
-                <div>
-                  <button class="okBtn">OK</button>
-                </div>
-              </div> -->
+              <button  class="btn-invite-ok noselect" @click="addMember">ok</button>
             </div>
           </div>
+          
         </div>
       </div>
     </div>
@@ -135,11 +134,6 @@ export default {
     this.vuexUnsubscribe4 = this.$store.subscribe((mutation, state) => {
       // console.log(mutation.type)
       if (mutation.type === "setUser") {
-        this.members = state.user.filter((ele, i) => {
-          if (this.project) {
-            return this.project.member.map(data => data.uid).includes(ele.uid);
-          }
-        });
         this.users = state.user
       }
     });
@@ -151,7 +145,6 @@ export default {
   data() {
     return {
       task: [],
-      members: [],
       users: [],
       project: null,
       postits: [],
@@ -159,7 +152,7 @@ export default {
       emailIn:'',
       authority:0,
       priorityStatus: [
-        { value: 0, status: "Admin" },
+        { value: 0, status: "-Choose Member Type-" },
         { value: 1, status: "Co-admin" },
         { value: 2, status: "Member" }
       ],
@@ -171,13 +164,62 @@ export default {
     };
   },
   methods: {
-     verifyMember(email){
+    selPri (uid,index,permission) {
+      this.project.member.forEach((ele,i)=>{
+        if(ele.uid === uid){
+          ele.priority = permission
+        }
+      })
+      this.$db.collection('project').doc(this.project.pid).update({
+        member: this.project.member,
+      }).catch(err=>{
+        console.log(err.message)
+      })
+      this.dropEditPermission(uid,index)
+    },
+    dropEditPermission (uid,index) {
+      document.querySelectorAll("#pri")[index].classList.toggle('hide')
+      document.querySelectorAll(".drop-permission")[index].classList.toggle('show')
+      document.querySelectorAll(".drop-permission").forEach((ele,i)=>{
+        if(i!==index){
+          ele.classList.remove('show')
+        }
+      })
+      document.querySelectorAll("#pri").forEach((ele,i)=>{
+        if(i!==index){
+          ele.classList.remove('hide')
+        }
+      })
+    },
+    leave (uid) {
+      if(confirm('You are about to leave this board. Proceed?')){
+        this.removeMember(uid)
+      }
+    },
+    removeMember (uid) {
+      this.postits.forEach((ele,i)=>{
+        ele.card.forEach((ele2,j)=>{
+          ele2.assignee = ele2.assignee.filter(ele3=>ele3.uid!==uid)
+        })
+      })
+      this.$db.collection('project').doc(this.project.pid).update({
+          member: this.project.member.filter(ele=>ele.uid!==uid),
+          postit: this.postits
+        }) 
+    },
+    removeInvite (uid) {
+       this.$db.collection('project').doc(this.project.pid).update({
+          invite: this.project.invite.filter(ele=>ele.uid!==uid)
+        }) 
+    },
+    verifyMember(email){
       const matched = this.users.filter((ele,i)=>{
         return ele.email === email
       })
       return matched[0]
     },
     addMember () {
+      // console.log("d")
       if(!this.authority){
         alert('Please Choose Member Type')
         return
@@ -191,34 +233,63 @@ export default {
           this.authority=0
           return
         }
-        let check = this.project.invite.filter(ele => ele.data.uid === res.uid)
-        if(check.length !== 0){
+        if (this.project.invite.some(ele=>ele.uid===res.uid)) {
           alert('Duplicate user invited')
           this.emailIn = ''
           document.getElementById('selector').selectedIndex = 0
           this.authority=0
           return
         }
+
+        if (this.project.member.some(ele=>ele.uid===res.uid)) {
+          alert('Duplicate member invited')
+          this.emailIn = ''
+          document.getElementById('selector').selectedIndex = 0
+          this.authority=0
+          return
+        }
         this.project.invite.push({ 
-                          data:{
-                                priority:this.authority,
-                                uid: res.uid,
-                                timestamp: firebase.firestore.Timestamp.fromDate(new Date())
-                                },
-                          email:this.emailIn
-                        })
+            priority:this.authority,
+            uid: res.uid,
+            timestamp: firebase.firestore.Timestamp.fromDate(new Date()),
+        })
+        this.$db.collection('project').doc(this.project.pid).update({
+          invite: this.project.invite
+        })                
         this.emailIn = ''
         document.getElementById('selector').selectedIndex = 0
         this.authority=0
-      }else{
+      }
+      else {
         alert('User doesn\'t exist')
         document.getElementById('selector').selectedIndex = 0
         this.authority=0
       }
+
     },
-     onChange(e) {
-      let index = e.target.selectedIndex;
+    onChange(e) {
+      let index = e.target.value;
       this.authority = index
+    },
+    analysisSender(type,uid){
+      let sender = this.users.filter(ele=>ele.uid === uid)
+      if(sender.length > 0){
+        sender = sender[0]
+        if(type === 'name'){
+          return sender.displayName
+        } else if(type === 'status'){
+          // console.log(sender.displayName + ' online: ' + sender.online)
+          return sender.online
+        } else if(type === 'photo'){
+          return sender.photoURL
+        } else if(type === 'email'){
+          return sender.email
+        } else if(type === 'permission'){
+          // console.log(this.project.member.filter(ele=>ele.uid===uid))
+          return this.project.member.filter(ele=>ele.uid===uid)[0]?this.project.member.filter(ele=>ele.uid===uid)[0].priority:''
+        }
+      }
+      return null
     },
     toggleDropMember() {
       document.getElementById("showMem").classList.toggle("hide");

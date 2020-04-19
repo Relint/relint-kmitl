@@ -294,6 +294,7 @@ export default {
           this.authority=0
           return
         }
+        
         let check = this.invites.filter(ele => ele.data.uid === res.uid)
         if(check.length !== 0){
           alert('Duplicate user invited')
