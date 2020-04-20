@@ -51,7 +51,7 @@
             
               <div class="member-tab" @click="toggleDropMember">Members ({{project.member.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
               <div class="scroll-member">
-              <div v-if="project.member.length" id="showMem">
+              <div v-if="project.member.length>0" id="showMem">
                 <div v-for="(member,index) in project.member" :key="'member'+index">
                   <div   class="userBox-parent" id="userBox-parent">
                     <div class="userName">{{ analysisSender('name',member.uid)}}</div>
@@ -77,9 +77,9 @@
                 </div>
                 
               </div>
-              
-              <div  class="invite-tab" @click="toggleDropInvite">Invites ({{project.invite.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
-              <div v-if="project.invite.length" id="showInvite">
+              <div v-if="project.invite.length==0" class="invite-tab divDisable" @click="toggleDropInvite" >Invites ({{project.invite.length}}) </div>
+              <div v-else class="invite-tab" @click="toggleDropInvite">Invites ({{project.invite.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
+              <div v-if="project.invite.length>0" id="showInvite">
                 <div v-for="(member,index) in project.invite" :key="'invite'+index">
                   <div  class="userBox-parentIn">
                     <div class="userName">{{ analysisSender('name',member.uid)}}</div>

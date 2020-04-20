@@ -184,7 +184,8 @@ $fontAsap: "Asap", sans-serif;
 }
 .drop-permission {
   position: relative;
-  background-color:rgba(247, 247, 247, 0.219);
+  // background-color:rgba(247, 247, 247, 0.219);
+  background-color: white;
   width: 150px;
   // margin-left: 11%;
   // margin-top: -13%;
@@ -201,8 +202,9 @@ $fontAsap: "Asap", sans-serif;
 .closeX {
   position: relative;
  float: right;
-//  top:-5px
-font-size: 22px;
+ top:0px;
+right: 2px;
+font-size: 18px;
 background-color:rgb(255, 255, 255);
 color: rgb(184, 184, 184);
 border-radius: 100%;
@@ -318,6 +320,10 @@ cursor: pointer;
     background-color: rgb(224, 223, 223);
     opacity: 0.8;
   }
+}
+
+.divDisable {
+  pointer-events: none;
 }
 #showInvite {
   border: 1px solid grey;
