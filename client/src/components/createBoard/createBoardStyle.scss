@@ -118,11 +118,12 @@ $secondary: #99DBB4;
 //invite//------------------------------------------------------------
   .container-setting {
     width: 210px;
-    height: 255px;
+    max-height: 150px;
     //  background-color:red;
     overflow-y: scroll;
     scrollbar-width: thin;
     padding: 5px 0 0 20px;
+    margin-top: 10px;
   }
 
   #style-scroll::-webkit-scrollbar
@@ -144,11 +145,19 @@ $secondary: #99DBB4;
     position: relative;
     // text-align: center;
     width: 180px;
-    height: 40px;
+    min-height: 40px;
     background-color: $bluesky;
     border-radius: 7px;
     padding: 10px 10px 10px 10px;
     color: white;
+    font-size:18px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    word-wrap: break-word;
+    box-shadow: 0 2px 2px 0 rgba($dark, .5);
+  }
+  .pri {
+    color: $redFire;
     font-size:15px;
   }
   .remove-invite {
@@ -160,7 +169,7 @@ $secondary: #99DBB4;
     width: 40%;
     height:25px;
     border-radius: 20px;
-    top: 47%;
+    top: 53%;
     left: 58%;
     outline: 0;
     border: none;
@@ -250,8 +259,8 @@ textarea {
   height: 50px;
   border-radius: 20px;
   border: 1px solid $colorFront;
-  padding: 0 0 0 20px ;
-   margin: 5px 0  0  5px ;
+  padding: 0 10px 0 10px ;
+   margin: 10px 0  0  18px ;
   font-size: 15px;
 }
 .btn-invite-ok {
@@ -265,7 +274,7 @@ textarea {
   border-radius: 40px;
   outline: 0;
   bottom: -20px;
-  left: 35%;
+  left: 39%;
   border: none;
   box-shadow: 2px 2px 10px rgba($dark, .5);
   transition: all .5s ease-in-out;
@@ -278,14 +287,14 @@ textarea {
 .btn-setting-accept {
   cursor: pointer;
   position: relative;
-  background: $bluesky;
+  background: $redFire;
   font-size: 17px;
   color: white;
   width: 25%;
   height:35px;
   border-radius: 20px;
   top: 73%;
-  left: 52%;
+  left: 54%;
   outline: 0;
   border: none;
   box-shadow: 2px 2px 10px rgba($dark, .5);
@@ -298,14 +307,14 @@ textarea {
 }
 .btn-setting-cancel {
   cursor: pointer;
-  background: $redFire;
+  background: $bluesky;
   color: white;
   font-size: 17px;
   width: 25%;
   height:35px;
   border-radius: 20px;
   top: 73%;
-  left: 48%;
+  // left: 40%;
   outline: 0;
   border: none;
   box-shadow: 2px 2px 10px rgba($dark, .5);
@@ -374,7 +383,7 @@ select {
   height: 50px;
   padding: 0 0 0 20px ;
   font-size: 15px;
-   margin: 15px 0  0  7px ;
+   margin: 15px 0  0  18px ;
 }
 //style select option-------------------------
 // /* Remove IE arrow 
@@ -643,5 +652,86 @@ select {
 
 
 
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) 
+{ 
+
+  .dd-button {
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    right: 46.2%;
+    top: 12.5%;
+    width: 7.75%;
+    padding-top: 7.75%;
+    border-radius: 100%;
+    border-style: none;
+    background-color: $redFire;
+    color: white;
+    cursor: default;
+    &:hover {
+      background: $bluesky;
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  .dd-menu {
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 15px;
+    top: 25%;
+    right: 16%;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    
+    background-color: white;
+    list-style-type: none;
+  }
+  
+
+}
+
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) 
+{ 
+  .dd-button {
+    cursor: pointer;
+    z-index: 1;
+    position: absolute;
+    right: 10%;
+    top: 15.5%;
+    width: 7.75%;
+    padding-top: 7.75%;
+    border-radius: 100%;
+    border-style: none;
+    background-color: $redFire;
+    color: white;
+    cursor: default;
+    &:hover {
+      background: $bluesky;
+      transform: scale(1.05);
+      transition: all .3s ease-in-out;
+    }
+  }
+  .dd-menu {
+    position: absolute;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    padding: 15px;
+    top: 30%;
+    right: 5%;
+    box-shadow: 0 0 6px 0 rgba(0,0,0,0.1);
+    
+    background-color: white;
+    list-style-type: none;
+  }
+  
+
+}
 
 

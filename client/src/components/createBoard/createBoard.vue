@@ -51,13 +51,20 @@
         <div class="container-setting" id="style-scroll">
         <div v-for="invite in invites" :key="invite.uid" > 
           <div> 
-            <div class="contain-obj-invite">{{ invite.email  }} <br>{{priorityMap[invite.data.priority] }}
-            <button class="remove-invite" v-on:click="removeMenber(invite.uid)">remove</button></div>
+            <div class="contain-obj-invite">
+              {{ invite.email  }} 
+              <br class="noselect">
+               <div class="pri">{{priorityMap[invite.data.priority] }}</div>
+              
+              <button class="remove-invite" v-on:click="removeMenber(invite.uid)">remove</button>
+            <br class="noselect">
+            </div>
           </div> 
-        </div>  
+        </div> 
+        </div> 
           <div  id="form-invite" >
             <div >
-              <input  class="input-box-setting-inv" type="text" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
+              <input  class="input-box-setting-inv" type="email" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
               <br class="noselect">
               <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
                 <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">
@@ -67,12 +74,12 @@
               <button  class="btn-invite-ok noselect" v-on:click="addMember">ok</button>
             </div>
           </div> 
-        </div>
+        
       </div> 
     </div>
       <li>
-        <button class="btn-setting-accept noselect" @click='createMainBoard' >Create</button>
-        <button  class="btn-setting-cancel noselect" @click='closeFormSetting'>Cancel</button>
+        <button class="btn-setting-accept noselect" @click='closeFormSetting' >Cancel</button>
+        <button  class="btn-setting-cancel noselect" @click='createMainBoard'>Create</button>
       </li>
     </div>            
   </div>
