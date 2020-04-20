@@ -21,18 +21,18 @@ $fontAsap: "Asap", sans-serif;
   transform: translate(-50%, -50%);
 }
 
-.contain-profile {
+.contain-manage {
   position: fixed;
   width: 100%;
   height: 100%;
-  // background-color: rgb(221, 221, 221);
+  // background-color: rgb(119, 119, 119);
   // opacity: 0.5;
   z-index: 3;
   top: 62%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
-.form-profile {
+.form-manage {
   position: absolute;
   width: 80%;
   // max-height: 70%;
@@ -41,6 +41,18 @@ $fontAsap: "Asap", sans-serif;
   border-radius: 15px;
   box-shadow: 2px 16px 32px -16px rgba(0, 0, 0, 0.2);
   top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.bgTrans {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(177, 176, 176);
+  opacity: 0.5;
+  z-index: 0;
+  top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
 }
@@ -156,7 +168,7 @@ $fontAsap: "Asap", sans-serif;
   position: relative;
   background-color: #a6d4d8;
   border-radius: 10px;
-  padding: 10px 10px 20px 10px;
+  padding: 10px 10px 40px 10px;
   margin: 0% 10% 5% 10%;
   // width: 80%;
   word-wrap: break-word;
@@ -190,7 +202,7 @@ $fontAsap: "Asap", sans-serif;
   position: relative;
   // background-color:rgba(247, 247, 247, 0.219);
   background-color: white;
-  width: 150px;
+  width: 120px;
   // margin-left: 11%;
   // margin-top: -13%;
   margin-top:0.5%;
@@ -252,6 +264,7 @@ cursor: pointer;
   border-radius: 15px;
   padding: 5px 5px 5px 5px;
   margin-top: -5%;
+  
   // margin-right: 15px;
   // left: 70%;
   outline: 0;
@@ -304,7 +317,7 @@ cursor: pointer;
 #showMem {
   border: 1px solid grey;
   margin-left: 5px;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 3px;
   border-radius: 15px;
 }
@@ -332,7 +345,7 @@ cursor: pointer;
 #showInvite {
   border: 1px solid grey;
   margin-left: 5px;
-  padding-top: 20px;
+  padding-top: 10px;
   padding-bottom: 3px;
   border-radius: 15px;
 }

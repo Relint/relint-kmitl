@@ -2,8 +2,9 @@
 <template>
   <!-- eslint-disable -->
   <div>
-    <div class="contain-profile">
-      <div class="form-profile">
+    <div class="contain-manage">
+      <div class="bgTrans"></div>
+      <div class="form-manage">
         <div  class="stage-l" id="scroll-task">
           <div v-if="project">
             <div v-for="(task,indexT) in project.member" :key="'task'+indexT" :ref="'task'">
@@ -48,7 +49,6 @@
         </div>
         <div  class="stage-r">
           <div v-if="project">
-            
               <div class="member-tab" @click="toggleDropMember">Members ({{project.member.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
               <div class="scroll-member">
               <div v-if="project.member.length>0" id="showMem">
@@ -71,11 +71,10 @@
                       </div>
                     </div>
                     <br class="noselect">
-                    <button v-if="analysisSender('permission',member.uid) > project.permission" class="removeBtn" @click="removeMember(member.uid)">Remove</button>
-                    <button v-else-if="member.uid===$store.state.uid && project.permission!=0" class="removeBtn" @click="leave(member.uid)">Leave</button> 
+                    <button v-if="analysisSender('permission',member.uid) > project.permission" class="removeBtn topBtn" @click="removeMember(member.uid)">Remove</button>
+                    <button v-else-if="member.uid===$store.state.uid && project.permission!=0" class="removeBtn topBtn" @click="leave(member.uid)">Leave</button> 
                   </div>
                 </div>
-                
               </div>
               <div v-if="project.invite.length==0" class="invite-tab divDisable" @click="toggleDropInvite" >Invites ({{project.invite.length}}) </div>
               <div v-else class="invite-tab" @click="toggleDropInvite">Invites ({{project.invite.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
@@ -85,6 +84,7 @@
                     <div class="userName">{{ analysisSender('name',member.uid)}}</div>
                     <div class="email" v-if="users.filter(ele=>ele.uid===member.uid)[0]">{{users.filter(ele=>ele.uid===member.uid)[0].email}}</div>
                     <div  class="priority" v-if="project.invite.filter(ele=>ele.uid===member.uid)[0]">{{priorityMap[project.invite.filter(ele=>ele.uid===member.uid)[0].priority]}}</div>
+                     <br class="noselect">
                     <button v-if="project.permission!=2 ||member.uid===$store.state.uid" class="removeBtn topBtn" @click="removeInvite(member.uid)">Remove</button>
                   </div>
                 </div>
