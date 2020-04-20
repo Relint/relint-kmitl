@@ -344,3 +344,104 @@ button.btnSubmit-login {
 .pointer{
   cursor: pointer;
 }
+
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) 
+{ 
+  .background-login {
+    height: 100%;
+    width: 100%;
+    // background: rgb(102, 50, 64);
+    background: rgb(223,168,183);
+    background: linear-gradient(180deg, rgba(223,168,183,1) 0%, rgba(216,245,255,1) 100%);
+    position: fixed;
+  }
+  .contain-form-login {
+    z-index: 2;
+    position: absolute;
+    right: 18%;
+    // left:60%;
+    top:33%
+  }
+  .contain-form-regis {
+    z-index: 2;
+    position: absolute;
+    right: 18%;
+    // left:60%;
+    top:33%
+  }
+// contain-logoball
+
+.contain-logoball {
+  position: relative;
+  float: left;
+  // opacity:0.5;
+  width: 8%;
+  // height: 8%;
+  border-radius: 100%;
+  padding-top: 8%;
+  margin: 60px 0 0 -2%; 
+  left: 35%;
+}
+.div-0-cylinder {
+  background-color: white;
+  width: 3%;
+  padding-top: 15%;
+  border-radius: 30px;
+  margin-right: 5%;
+}
+.div-1-ball {
+  background-color:$pinkk;
+}
+.div-2-ball {
+  background-color:$bluesky; 
+}
+.div-3-ball {
+  background-color:$redFire;
+}
+.div-4-ball {
+  background-color:$orange;
+}
+.logoName-ball {
+  color: white;
+  padding-top: 10%;
+  border-radius: 30px;
+  left: 15%;
+  font-size: 40px;
+}
+
+}
+
+
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) 
+{ 
+  .background-login {
+    height: 100%;
+    width: 100%;
+    // background: rgb(102, 50, 64);
+    background: rgb(223,168,183);
+    background: linear-gradient(180deg, rgba(223,168,183,1) 0%, rgba(216,245,255,1) 100%);
+    position: fixed;
+  }
+
+  .contain-form-login {
+    z-index: 2;
+    position: absolute;
+    right: 8%;
+    // left:60%;
+    top:25%
+  }
+  .contain-form-regis {
+    z-index: 2;
+    position: absolute;
+    right: 8%;
+    // left:60%;
+    top:25%
+  }
+}
