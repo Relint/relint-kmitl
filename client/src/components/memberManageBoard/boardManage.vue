@@ -49,7 +49,7 @@
         </div>
         <div  class="stage-r">
           <div v-if="project">
-              <div class="member-tab" @click="toggleDropMember">Members ({{project.member.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
+              <div class="member-tab noselect" @click="toggleDropMember">Members ({{project.member.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
               <div class="scroll-member">
               <div v-if="project.member.length>0" id="showMem">
                 <div v-for="(member,index) in project.member" :key="'member'+index">
@@ -71,13 +71,13 @@
                       </div>
                     </div>
                     <br class="noselect">
-                    <button v-if="analysisSender('permission',member.uid) > project.permission" class="removeBtn topBtn" @click="removeMember(member.uid)">Remove</button>
-                    <button v-else-if="member.uid===$store.state.uid && project.permission!=0" class="removeBtn topBtn" @click="leave(member.uid)">Leave</button> 
+                    <button v-if="analysisSender('permission',member.uid) > project.permission" class="removeBtn topBtn noselect" @click="removeMember(member.uid)">Remove</button>
+                    <button v-else-if="member.uid===$store.state.uid && project.permission!=0" class="removeBtn topBtn noselect" @click="leave(member.uid)">Leave</button> 
                   </div>
                 </div>
               </div>
               <div v-if="project.invite.length==0" class="invite-tab divDisable" @click="toggleDropInvite" >Invites ({{project.invite.length}}) </div>
-              <div v-else class="invite-tab" @click="toggleDropInvite">Invites ({{project.invite.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
+              <div v-else class="invite-tab noselect" @click="toggleDropInvite">Invites ({{project.invite.length}}) <b-icon icon="caret-down" shift-v="-4"></b-icon></div>
               <div v-if="project.invite.length>0" id="showInvite">
                 <div v-for="(member,index) in project.invite" :key="'invite'+index">
                   <div  class="userBox-parentIn">
@@ -85,13 +85,13 @@
                     <div class="email" v-if="users.filter(ele=>ele.uid===member.uid)[0]">{{users.filter(ele=>ele.uid===member.uid)[0].email}}</div>
                     <div  class="priority" v-if="project.invite.filter(ele=>ele.uid===member.uid)[0]">{{priorityMap[project.invite.filter(ele=>ele.uid===member.uid)[0].priority]}}</div>
                      <br class="noselect">
-                    <button v-if="project.permission!=2 ||member.uid===$store.state.uid" class="removeBtn topBtn" @click="removeInvite(member.uid)">Remove</button>
+                    <button v-if="project.permission!=2 ||member.uid===$store.state.uid" class="removeBtn topBtn noselect" @click="removeInvite(member.uid)">Remove</button>
                   </div>
                 </div>
               </div>
             </div>
             <div class="contain-input-invite" v-if="project.permission!=2">
-              <input  class="input-box-setting-inv" type="email" placeholder="invite" v-model="emailIn" >
+              <input  class="input-box-setting-inv " type="email" placeholder="invite" v-model="emailIn" >
              <br class="noselect">
               <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
                 <option  v-for="(opt, index) in priorityStatus.filter(ele=>ele.value===0||ele.value>project.permission)" :key="index" :value="opt.value">

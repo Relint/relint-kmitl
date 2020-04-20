@@ -1,12 +1,12 @@
 <template>
   <div>
-    <div class="navbar-project-container">
+    <div class="navbar-project-container noselect">
       <title>{{projectName}}</title>
       <div class="wrapper float-l div-1">
         <b-icon @click="backToHome" id="iconNBP" icon="house-fill" font-scale="2.5"></b-icon>
       </div>
 
-      <div class="wrapper float-l div-2">
+      <div class="wrapper float-l div-2 noselect">
         <div class="form-projectName">
           <h5 class="noselect float-l">Title</h5>
           <button @click="editProjectName" id="btnP" v-if="permission === 0"> <img src="./pen.png" alt="pen" style="width:20px;"></button>
@@ -23,7 +23,7 @@
         </div>
       </div>
 
-      <div class="wrapper float-l div-3">
+      <div class="wrapper float-l div-3 noselect">
         <div class="form-deadline">
           <h5 class="noselect float-l">Deadline</h5>
           <button id="btnT" @click="editDeadline" v-if="permission === 0"> <img src="./pen.png" alt="pen" style="width:20px;"></button>
@@ -42,7 +42,7 @@
         </div>
       </div>
 
-      <div class="wrapper float-l div-4">
+      <div class="wrapper float-l div-4 noselect">
         <div class="form-des">
           <h5 class="noselect float-l">Description</h5>
           <button id="btnD" @click="editDescription" v-if="permission === 0"> <img src="./pen.png" alt="pen" style="width:20px;"></button>
@@ -65,7 +65,7 @@
         </div>
       </div>
       
-      <div class="wrapper float-r div-5">     
+      <div class="wrapper float-r div-5 noselect">     
         <img   src="./threeman.png" alt="pen" style="width:50px;hight:50px;cursor: pointer;" @click="openFormMa">
         <!-- <b-icon font-scale="3" id="iconNBP" icon="people-fill" @click="openFormMa"></b-icon> -->
       </div>

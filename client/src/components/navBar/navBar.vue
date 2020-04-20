@@ -12,7 +12,7 @@
                   <button class="dropbtn default" v-if="!analysisSender('photo',$store.state.uid)">
                     <b-icon icon="person" font-scale="2.5"></b-icon>
                   </button>    
-                  <button class="dropbtn trans" v-else>
+                  <button class="dropbtn trans noselect" v-else>
                     <img class="preview-profile-nav" :src="analysisSender('photo',$store.state.uid)">
                   </button>          
                   <div class="dropdown-content-profile">
