@@ -2,7 +2,9 @@
 <template>
   <!-- eslint-disable -->
   <div>
+    
     <div class="contain-manage">
+      <div class="rect"></div>
       <div class="bgTrans"></div>
       <div class="form-manage">
         <div  class="stage-l" id="scroll-task">
