@@ -4,13 +4,13 @@
   <div>
     <div class="contain-profile">
       <div class="form-profile">
-        <div class="stage-l" id="scroll-task">
+        <div  class="stage-l" id="scroll-task">
           <div v-if="project">
             <div v-for="(task,indexT) in project.member" :key="'task'+indexT" :ref="'task'">
               <!-- .some -->
               <div
                 class="member-task"
-                v-bind:style="{left:5+(indexT)*400+(indexT)*30 + 'px',top:20+'px' }"
+                v-bind:style="{left:5+(indexT)*290+(indexT)*40 + 'px',top:20+'px' }"
               >
                 <div class="userBoxInTask-parent">
                   <div class="top">
@@ -26,13 +26,13 @@
                   </div>
                 </div>
                   
-                <div class="scroll-jobs" id="scroll-jobs"  >
+                <div  class="scroll-jobs" id="scroll-jobs"  >
                   <div 
                     v-for="(job,indexJ) in cards.filter(ele=>ele.assignee.some(val=>val.uid===task.uid))"
                     :key="'job-'+indexT+'-'+indexJ"
                     :ref="'job'+indexT"
                   >
-                    <div class="jobBox-parent">
+                    <div  class="jobBox-parent">
                       <div class="checkBox">
                         <!-- <input type="checkbox" id="isFinished?" name="Jobname" value="finish" /> -->
                         {{job.status}}
@@ -90,15 +90,16 @@
                 </div>
               </div>
             </div>
-            <div class="invite-parent" v-if="project.permission!=2">
+            <div class="contain-input-invite" v-if="project.permission!=2">
               <input  class="input-box-setting-inv" type="email" placeholder="invite" v-model="emailIn" >
-              <br class="noselect">
+             <br class="noselect">
               <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
                 <option  v-for="(opt, index) in priorityStatus.filter(ele=>ele.value===0||ele.value>project.permission)" :key="index" :value="opt.value">
                     {{ opt.status }}
                 </option>
-              </select><br class="noselect">
-              <button  class="btn-invite-ok noselect" @click="addMember">Ok</button>
+              </select>
+              <!-- <br class="noselect"> -->
+               <button  class="btn-invite-ok noselect" @click="addMember">Ok</button>
             </div>
           </div>
           
