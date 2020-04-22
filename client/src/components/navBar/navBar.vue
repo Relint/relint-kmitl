@@ -323,7 +323,7 @@ export default {
       // console.log('rtdb snap!')
       this.users = []
       snapshot.forEach((user,index)=>{
-        if(user){
+        if(user && typeof user.val() !== 'boolean'){
           const uid = user.key
           user = user.val()
           user.uid = uid
