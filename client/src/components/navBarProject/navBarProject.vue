@@ -29,7 +29,7 @@
           <button id="btnT" @click="editDeadline" v-if="permission === 0"> <img src="./pen.png" alt="pen" style="width:20px;"></button>
           <button id="btnT-h" v-else></button>
           <br>
-          <div v-if="(((analysisTime2(rawDeadline,true) === 'No duedate') || (rawDeadline.toDate() >= new Date())) && analysisTime2(rawDeadline,true) !== 'Today') || (status === 'Completed')" class="c-deadline normal">{{deadline}}</div>
+          <div v-if="(((analysisTime2(rawDeadline,true) === 'No duedate') || (rawDeadline.toDate() >= new Date())) && analysisTime2(rawDeadline,true) !== 'Today') || (status)" class="c-deadline normal">{{deadline}}</div>
           <div v-else-if="analysisTime2(rawDeadline,true) === 'Today'" class="c-deadline">{{deadline}}</div>
           <div v-else class="c-deadline late">{{deadline}}</div>
         </div>
