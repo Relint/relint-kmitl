@@ -54,7 +54,7 @@
                         <div @click="cardSetting(index,index2)" v-else-if="analysisTime(card.duedate,true) === 'Today'" class="c-duedate">{{analysisTime(card.duedate,true)}}</div>
                         <div @click="cardSetting(index,index2)" v-else class="c-duedate late">{{analysisTime(card.duedate,true)}}</div>
                      </div>
-                      <div class="float-l" @click="cardSetting(index,index2)" style="padding-left: 9px; height:39px;">
+                      <div class="float-l" style="padding-left: 9px; height:39px;">
                         <button class="wrapperC btn-remove-card" style="margin-bottom: 5px;"><b-icon @click="removeCard(index,index2)" icon="trash" id="mov-r" font-scale='1.25'></b-icon></button>
                         <br/>
                         <button class="wrapperC btn-edit-card" ><b-icon @click="cardSetting(index,index2)" icon="gear" id="mov-r" font-scale='1.25'></b-icon></button>
@@ -552,7 +552,9 @@ export default {
       
     },
     toggleFormCard(index) {
-      this.closeEditFormCard(index)
+      for (let i = 0; i < this.postits.length; i++) {
+        this.closeEditFormCard(i)
+      }
       this.$refs.fc[index].classList.toggle('show')
       this.$refs.fc.forEach((ele,i)=>{
         if(i !== index){
