@@ -9,6 +9,15 @@
             user-select: none; /* Non-prefixed version, currently
                                   supported by Chrome, Opera and Firefox */
 }
+#manage {
+  position: absolute;
+  // background-color: teal;
+  width: 100%;
+  height: calc(100% - 120px);
+  top: 120px;
+  overflow: hidden;
+}
+
 .navbar-project-container {
   position: absolute;
   top: 50px;
@@ -17,9 +26,11 @@
   // background-color: teal;
 }
 hr {
+  position: absolute;
   border-style: ridge;
   width: 90%;
   margin-left: 5%;
+  top:119px
 }
 .form-deadline {
   font-size: 20px;
@@ -69,6 +80,7 @@ hr {
   margin-left: 1%;
   padding-right: 5%;
   margin-top: 17px;
+  margin-bottom: 20px;
 }
 .div-6 {
   padding-top: 5px;

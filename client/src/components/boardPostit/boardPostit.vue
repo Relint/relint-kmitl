@@ -1,7 +1,7 @@
 <template>
   <div>
     <div class="contain-boardPostit">
-      <div class="form-scroll-postit" id="postit-scroll">
+      <div class="form-scroll-postit" id="postit-scroll" >
         <!-- <div class="from-boardPostit"> -->
             <div v-for="(postit , index) in postits.concat([{createBox:true,card:[]}])" :key="'pt-'+index" :ref="'psti'">
               <div v-if="postit.createBox" class="contain-show-postit noselect" v-bind:style="{left:10+(index)*290+(index)*30 + 'px',top:0+'px'  }">
@@ -308,6 +308,52 @@ export default {
     this.vuexUnsubscribe2()
   },
   methods: {
+    //eventMouse U -D
+    eventMouseUD () {
+        const slider = document.querySelector('.form-scroll-createBoard')
+        let isClickX = false
+        let isClickY = false
+        let startX
+        let startY
+        let scrollLeft
+        let scrollTop 
+        //click 
+        if (slider){
+        slider.addEventListener('mousedown', (e) => {
+          isClickX = true;
+          isClickY = true;
+          slider.classList.add('active');
+
+          startX = e.pageX - slider.offsetLeft;
+          scrollLeft = slider.scrollLeft;
+
+          startY = e.pageY - slider.offsetTop
+          scrollTop = slider.scrollTop;
+        });
+        }
+        // clicking
+        if (slider){
+        slider.addEventListener('mousemove', (e) => {
+          if(!isClickX || !isClickY) return
+          e.preventDefault();
+          const x = e.pageX - slider.offsetLeft;
+          const Y = e.pageY - slider.offsetTop;
+          const moveX = (x - startX) * 3; //fast
+          const MoveY = (Y - startY) * 3; //fast
+          slider.scrollLeft = scrollLeft - moveX;
+          slider.scrollTop = scrollTop - MoveY;
+        });
+        }
+        // no click
+        if (slider){
+        slider.addEventListener('mouseleave', () => {
+          isClickX = false;
+          isClickY = false;
+          slider.classList.remove('active');
+        });
+        }
+        
+    },
     analysisContentCard(){
       new Promise(resolve=>setTimeout(resolve,50)).then(()=>{
         for(let c = 0; c < this.postits.length; c+=1){

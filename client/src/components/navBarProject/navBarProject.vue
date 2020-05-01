@@ -95,32 +95,30 @@
         </div>
       </div>
 
-     <div id="manage" style="display:none;">
-       <boardManage/>
-      </div>
-      <br />
-      <hr />
+      <br  />
+      
+
     </div>
  
     <!-- <div id="lds"> ห้ามลบ
       <div class="lds-wrapper"></div>
       <div class="lds-dual-ring"></div>
     </div> -->
-    
+<hr />
+    <div id="manage" >
+       <boardManage/>
+    </div>
+
   </div>
 </template>
 <script>
 // eslint-disable-next-line 
 import firebase from "firebase";
 import boardManage from "../memberManageBoard/boardManage"
-// import taskZone from "../memberManageBoard/taskZone";
-// import userZone from "../memberManageBoard/userZone";
 export default {
   name: "navBarProject",
   components: {
     boardManage
-    // taskZone,
-    // userZone
   },
   data() {
     return {

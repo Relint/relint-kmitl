@@ -1,7 +1,11 @@
 <template>
   <div>
     <div class="contain-show-project">
+     
       <div class="form-scroll-createBoard" id="board-scroll"  @click="eventMouseUD" >
+      
+      <img v-if="projects.length===0" src="./text1.png" class="text1" >
+      <img v-if="projects.length===0" src="./text3.png" class="text2" >
         <div class="from-createBoard">
           <div v-for="(project,index) in projects.filter(ele=>ele).sort((a,b)=>sortByStatus(a,b))" :key="project.pid"  > 
             <div id="container-Board" v-bind:style="{left: (index%2)*250+(index%2)*150 + 'px',top:(Math.floor(index/2))*300+70+(Math.floor(index/2))+'px'  }">
@@ -64,7 +68,7 @@
         </div> 
           <div  id="form-invite" >
             <div >
-              <input  class="input-box-setting-inv" type="email" placeholder="invite" v-model="emailIn" v-on:keyup.enter="addMember"  >
+              <input  class="input-box-setting-inv" type="email" placeholder="invite (email)" v-model="emailIn" v-on:keyup.enter="addMember"  >
               <br class="noselect">
               <select @change='onChange' id='selector'  v-on:keyup.enter="addMember"  >
                 <option  v-for="(opt, index) in opts" :key="index" :value="opt.value">

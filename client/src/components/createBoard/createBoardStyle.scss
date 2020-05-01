@@ -86,6 +86,20 @@ $secondary: #99DBB4;
   cursor: pointer;
   white-space: nowrap;
 }
+.text1 {
+  z-index: 0;
+  position: absolute;
+  top: 20%;
+  right: 35%;
+}
+.text2 {
+  z-index: 0;
+  position: absolute;
+  top: 7%;
+  right: 7%;
+  width: 16%;
+  min-width: 15%;
+}
 .dd-button {
   cursor: pointer;
   z-index: 1;
@@ -447,6 +461,10 @@ select {
   height: 100%;
   // opacity: 0.5;
 }
+.about-text {
+  position: absolute;
+  font-size: 18px;
+}
   #container-Board {
     position: absolute;
     margin: auto;
@@ -689,8 +707,21 @@ and (orientation : portrait)
     background-color: white;
     list-style-type: none;
   }
-  
-
+  .text1 {
+    z-index: 0;
+    position: absolute;
+    top: 20%;
+    right: 50%;
+    width: 250px;
+  }
+  .text2 {
+    z-index: 0;
+    position: absolute;
+    top: 6%;
+    right: 9%;
+    width: 30%;
+    min-width: 15%;
+  }
 }
 
 
@@ -731,7 +762,20 @@ and (orientation : landscape)
     list-style-type: none;
   }
   
-
+  .text1 {
+    z-index: 0;
+    position: absolute;
+    top: 20%;
+    right: 20%;
+  }
+  .text2 {
+    z-index: 0;
+    position: absolute;
+    top: 6%;
+    right: 10%;
+    width: 15%;
+    min-width: 15%;
+  }
 }
 
 
