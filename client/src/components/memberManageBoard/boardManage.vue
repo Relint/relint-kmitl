@@ -230,7 +230,7 @@ export default {
         alert('Please Choose Member Type')
         return
       } 
-      const res = this.verifyMember(this.emailIn)
+      const res = this.verifyMember(this.emailIn.toLowerCase())
       if(res){
         if(res.uid === firebase.auth().currentUser.uid){
           alert('You invited yourself.')
