@@ -33,7 +33,7 @@
                 <br class="noselect">
                 <input id="inputPassword" class="inputt-login outline-n" v-model="password" type="password"  placeholder="Password" name="psw"  v-on:keyup.enter="login" >
               
-                <span class="psw noselect"> Forgot <a id="btnForget" class="pswL" href="#" @click="openFormFOR" >password?</a></span>
+                <span class="psw noselect"><a id="btnForget" class="pswL" href="#" @click="openFormFOR" >Forgot password?</a></span>
                 <br class="noselect">
                 <button id="btnSign in" class="btnSubmit-login noselect pointer" v-on:click="login">Sign in</button>
           </div>
