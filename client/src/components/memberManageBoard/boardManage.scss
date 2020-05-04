@@ -414,6 +414,20 @@ cursor: pointer;
   // border: 1px solid $colorFront;
   // margin-left: 25%;
 }
+img.logo-invite {
+  width: 100%;
+}
+.contain-input-invite2 {
+  position: relative;
+  // background-color: rgb(211, 211, 211);
+  width: 75%;
+  margin-top:10px;
+  // margin-bottom:50px;
+  padding: 2% 0 2% 13%;
+  border-radius: 15px;
+  // border: 1px solid $colorFront;
+  // margin-left: 25%;
+}
 select {
   // position: relative;
   outline: none;
@@ -510,14 +524,13 @@ and (max-device-width : 1024px)
     position: relative;
     width: 40%;
     // height: 100%;
-    background: white;
-    // background: linear-gradient(184deg, rgba(31,168,168,1) 0%, rgba(250,159,218,1) 100%);
     // border: 1px solid grey;
     border-radius: 15px;
     float: right;
     overflow: hidden;
     padding: 1%;
     margin: 13px 0 0 0 ;
+    // background-color: red;
   }
 }
 

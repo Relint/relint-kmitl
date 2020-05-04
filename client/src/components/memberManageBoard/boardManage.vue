@@ -102,6 +102,9 @@
               <!-- <br class="noselect"> -->
                <button  class="btn-invite-ok noselect" @click="addMember">Ok</button>
             </div>
+            <div class="contain-input-invite2" v-else>
+              <img class="logo-invite" src="./logo.png"  alt="logo">
+            </div>
           </div>
           
         </div>
